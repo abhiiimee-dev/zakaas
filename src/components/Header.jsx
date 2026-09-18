@@ -17,6 +17,7 @@ export function Header({ cartCount, onCartOpen, menuOpen, setMenuOpen, onSearchO
 
   const navItems = [
     { label: 'SHOP', path: '/collections' },
+    { label: 'BUILD A BOX', path: '/builder' },
     { label: 'CHAKLI', path: '/collections?category=chakli' },
     { label: 'BHAKARWADI', path: '/collections?category=bhakarwadi' },
     { label: 'SHANKARPADA', path: '/collections?category=shankarpada' },
@@ -55,8 +56,16 @@ export function Header({ cartCount, onCartOpen, menuOpen, setMenuOpen, onSearchO
             B2B / BULK
           </button>
           <button
+            type="button"
             className={`bag-button ${bagPulse ? 'is-pulsing' : ''}`}
-            onClick={onCartOpen}
+            onClick={(e) => {
+              e.preventDefault();
+              if (typeof onCartOpen === 'function') {
+                onCartOpen();
+              } else {
+                navigate('/cart');
+              }
+            }}
             aria-label={`Shopping bag with ${cartCount} items`}
           >
             <ShoppingBag />

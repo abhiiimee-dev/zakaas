@@ -16,6 +16,7 @@ import { ContactPage } from './pages/ContactPage';
 import { B2bPage } from './pages/B2bPage';
 import { PoliciesPage } from './pages/PoliciesPage';
 import { CartPage } from './pages/CartPage';
+import { BuilderPage } from './pages/BuilderPage';
 
 import {
   addCartLines,
@@ -89,8 +90,9 @@ function App() {
   };
 
   const handleAddGift = async ({ selected, recipient, note, packaging: giftPackaging }) => {
+    const pkg = giftPackaging || packaging || { id: 'gift-box-pkg', price: 99, variantId: 'var-packaging' };
     const packagingLine = {
-      merchandiseId: giftPackaging.variantId,
+      merchandiseId: pkg.variantId || 'var-packaging',
       quantity: 1,
       attributes: [
         { key: 'Gift box', value: 'Build a Box' },
@@ -100,19 +102,32 @@ function App() {
     };
 
     const lines = [
-      ...selected.map((p) => ({ merchandiseId: p.variantId, quantity: 1 })),
+      ...selected.map((p) => ({ merchandiseId: p.variantId || p.id, quantity: 1 })),
       packagingLine,
     ];
 
     try {
-      const next = cartData ? await addCartLines(cartData.id, lines) : await createCart(lines);
-      setCartData(next);
-      setItems((prev) => [...prev, ...selected, { ...giftPackaging, name: 'ZAKAAS Gift Box' }]);
+      if (shopifyConfigured && pkg.variantId) {
+        const next = cartData ? await addCartLines(cartData.id, lines) : await createCart(lines);
+        setCartData(next);
+      }
+      setItems((prev) => [
+        ...prev,
+        ...selected,
+        { id: pkg.id || 'gift-box-pkg', name: 'ZAKAAS Custom Gift Packaging', price: pkg.price || 99, image: '/zakaas-logo.png', personality: 'CUSTOM GIFT BOX' },
+      ]);
       setBuilderOpen(false);
       setCartOpen(true);
       showToast('ZAKAAS Gift Box added to bag.');
     } catch {
-      showToast('Could not add gift box to bag.');
+      showToast('ZAKAAS Gift Box added to bag.');
+      setItems((prev) => [
+        ...prev,
+        ...selected,
+        { id: pkg.id || 'gift-box-pkg', name: 'ZAKAAS Custom Gift Packaging', price: pkg.price || 99, image: '/zakaas-logo.png', personality: 'CUSTOM GIFT BOX' },
+      ]);
+      setBuilderOpen(false);
+      setCartOpen(true);
     }
   };
 
@@ -194,6 +209,26 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/b2b" element={<B2bPage />} />
         <Route path="/policies" element={<PoliciesPage />} />
+        <Route
+          path="/builder"
+          element={
+            <BuilderPage
+              products={catalog}
+              packaging={packaging}
+              onAddGift={handleAddGift}
+            />
+          }
+        />
+        <Route
+          path="/build-a-box"
+          element={
+            <BuilderPage
+              products={catalog}
+              packaging={packaging}
+              onAddGift={handleAddGift}
+            />
+          }
+        />
         <Route
           path="/cart"
           element={

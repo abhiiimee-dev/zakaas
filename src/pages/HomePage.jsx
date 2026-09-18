@@ -129,11 +129,11 @@ function GiftingSection({ onBuildBox }) {
             <ArrowUpRight />
           </Link>
         ))}
-        <button type="button" className="gift-link" onClick={onBuildBox}>
+        <Link to="/builder" className="gift-link" aria-label="Build a ZAKAAS gift box">
           <span>04</span>
           <b>BUILD A BOX</b>
           <ArrowUpRight />
-        </button>
+        </Link>
       </div>
 
       <div className="b2b-teaser">

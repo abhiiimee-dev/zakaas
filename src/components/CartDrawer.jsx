@@ -3,8 +3,17 @@ import { useNavigate } from 'react-router-dom';
 
 export function CartDrawer({ open, items, onClose, onChange, onCheckout, checkoutReady }) {
   const navigate = useNavigate();
-  const countById = items.reduce((all, item) => ({ ...all, [item.id]: (all[item.id] || 0) + 1 }), {});
-  const unique = Object.entries(countById).map(([id, quantity]) => ({ ...items.find(item => item.id === id), quantity }));
+  const countById = items.reduce((all, item) => {
+    if (!item || item.id === undefined) return all;
+    return { ...all, [item.id]: (all[item.id] || 0) + 1 };
+  }, {});
+
+  const unique = Object.entries(countById)
+    .map(([id, quantity]) => {
+      const found = items.find((item) => item && String(item.id) === String(id));
+      return found ? { ...found, quantity } : null;
+    })
+    .filter(Boolean);
 
   const handleViewFullCart = () => {
     onClose();

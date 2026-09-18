@@ -3,11 +3,17 @@ import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 
 export function CartPage({ items = [], onChange, onCheckout, checkoutReady, cartData }) {
-  const countById = items.reduce((all, item) => ({ ...all, [item.id]: (all[item.id] || 0) + 1 }), {});
-  const uniqueItems = Object.entries(countById).map(([id, quantity]) => ({
-    ...items.find((item) => item.id === id),
-    quantity,
-  }));
+  const countById = items.reduce((all, item) => {
+    if (!item || item.id === undefined) return all;
+    return { ...all, [item.id]: (all[item.id] || 0) + 1 };
+  }, {});
+
+  const uniqueItems = Object.entries(countById)
+    .map(([id, quantity]) => {
+      const found = items.find((item) => item && String(item.id) === String(id));
+      return found ? { ...found, quantity } : null;
+    })
+    .filter(Boolean);
 
   const subtotal = uniqueItems.reduce((acc, item) => {
     const itemPrice = Number(item.price || 220);
