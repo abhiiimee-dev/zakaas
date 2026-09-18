@@ -1,19 +1,92 @@
 import { Menu, Search, ShoppingBag, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
-export function Header({ cartCount, onCartOpen, menuOpen, setMenuOpen }) {
+export function Header({ cartCount, onCartOpen, menuOpen, setMenuOpen, onSearchOpen }) {
   const [bagPulse, setBagPulse] = useState(false);
-  useEffect(() => { const pulse = () => { setBagPulse(true); window.setTimeout(() => setBagPulse(false), 450); }; window.addEventListener('zakaas:add-to-bag', pulse); return () => window.removeEventListener('zakaas:add-to-bag', pulse); }, []);
-  return <>
-    <header className="site-header">
-      <button className="header-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X/> : <Menu/>}</button>
-      <a href="#top" className="brand-mark" aria-label="ZAKAAS home"><img src="/zakaas-logo.png" alt="ZAKAAS"/></a>
-      <nav aria-label="Main navigation"><a href="#shop">Shop</a><a href="#story">Our story</a><a href="#maharashtra">Maharashtra</a><a href="#gifting">Gifting</a><a href="#business">B2B</a></nav>
-      <div className="header-actions"><button aria-label="Search"><Search/></button><button className="account-button">Account</button><button className={`bag-button ${bagPulse ? 'is-pulsing' : ''}`} onClick={onCartOpen} aria-label={`Shopping bag with ${cartCount} items`}><ShoppingBag/><span>{cartCount}</span></button></div>
-    </header>
-    <div className={`mobile-nav ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
-      {['Shop ZAKAAS','Our story','Maharashtra','Gifting','B2B'].map((item, i) => <a key={item} href={['#shop','#story','#maharashtra','#gifting','#business'][i]} onClick={() => setMenuOpen(false)}>{item}<i>0{i + 1}</i></a>)}
-      <p>MAHARASHTRA.<br/>IN EVERY BITE.</p>
-    </div>
-  </>;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const pulse = () => {
+      setBagPulse(true);
+      window.setTimeout(() => setBagPulse(false), 450);
+    };
+    window.addEventListener('zakaas:add-to-bag', pulse);
+    return () => window.removeEventListener('zakaas:add-to-bag', pulse);
+  }, []);
+
+  const navItems = [
+    { label: 'SHOP', path: '/collections' },
+    { label: 'CHAKLI', path: '/collections?category=chakli' },
+    { label: 'BHAKARWADI', path: '/collections?category=bhakarwadi' },
+    { label: 'SHANKARPADA', path: '/collections?category=shankarpada' },
+    { label: 'ABOUT US', path: '/about' },
+    { label: 'FAQ', path: '/faq' },
+  ];
+
+  return (
+    <>
+      <header className="site-header">
+        <button className="header-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+          {menuOpen ? <X /> : <Menu />}
+        </button>
+
+        <Link to="/" className="brand-mark" aria-label="ZAKAAS home">
+          <img src="/zakaas-logo.png" alt="ZAKAAS" />
+        </Link>
+
+        <nav aria-label="Main navigation">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.label}
+              to={item.path}
+              className={({ isActive }) => (isActive ? 'is-active' : '')}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="header-actions">
+          <button onClick={onSearchOpen} aria-label="Search snacks">
+            <Search />
+          </button>
+          <button className="account-button" onClick={() => navigate('/b2b')}>
+            B2B / BULK
+          </button>
+          <button
+            className={`bag-button ${bagPulse ? 'is-pulsing' : ''}`}
+            onClick={onCartOpen}
+            aria-label={`Shopping bag with ${cartCount} items`}
+          >
+            <ShoppingBag />
+            <span>{cartCount}</span>
+          </button>
+        </div>
+      </header>
+
+      <div className={`mobile-nav ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
+        <div className="mobile-nav-links">
+          {navItems.map((item, i) => (
+            <Link
+              key={item.label}
+              to={item.path}
+              onClick={() => setMenuOpen(false)}
+            >
+              {item.label} <i>0{i + 1}</i>
+            </Link>
+          ))}
+          <Link to="/contact" onClick={() => setMenuOpen(false)}>
+            CONTACT US <i>07</i>
+          </Link>
+          <Link to="/b2b" onClick={() => setMenuOpen(false)}>
+            B2B & BULK <i>08</i>
+          </Link>
+        </div>
+        <p className="mobile-tagline">
+          MAHARASHTRA.<br />IN EVERY BITE.
+        </p>
+      </div>
+    </>
+  );
 }

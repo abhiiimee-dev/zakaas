@@ -1,5 +1,7 @@
 // Shopify Storefront API adapter. Public storefront tokens are safe to use in client apps;
 // never place Admin API credentials here.
+import { products as fallbackProducts, getFallbackProductByHandle } from '../data/products';
+
 const domain = import.meta.env.VITE_SHOPIFY_STORE_DOMAIN;
 const token = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
 const apiVersion = import.meta.env.VITE_SHOPIFY_API_VERSION || '2025-01';
@@ -7,7 +9,7 @@ const apiVersion = import.meta.env.VITE_SHOPIFY_API_VERSION || '2025-01';
 export const shopifyConfigured = Boolean(domain && token);
 
 async function request(query, variables = {}) {
-  if (!shopifyConfigured) throw new Error('Shopify is not configured. Add VITE_SHOPIFY_STORE_DOMAIN and VITE_SHOPIFY_STOREFRONT_TOKEN.');
+  if (!shopifyConfigured) throw new Error('Shopify is not configured.');
   const response = await fetch(`https://${domain}/api/${apiVersion}/graphql.json`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': token },
@@ -26,30 +28,55 @@ const productFields = `
 `;
 
 function toProduct(product, index = 0) {
-  const variant = product.variants.nodes[0];
+  const variant = product.variants?.nodes?.[0];
+  const fallback = fallbackProducts[index % fallbackProducts.length] || {};
   return {
-    id: product.id,
-    handle: product.handle,
-    variantId: variant?.id,
-    name: product.title,
-    description: product.description,
-    line: product.description,
-    personality: 'MAHARASHTRA ORIGINAL',
-    price: variant?.price?.amount,
-    currencyCode: variant?.price?.currencyCode,
-    image: product.featuredImage?.url || ['/zakaas-bhakarwadi.jpg','/zakaas-chakli.jpg','/zakaas-shankarpali.jpg'][index % 3],
-    images: product.images?.nodes?.map(image => image.url).filter(Boolean) || [],
+    id: product.id || fallback.id,
+    handle: product.handle || fallback.handle,
+    variantId: variant?.id || fallback.variants?.[0]?.variantId || `var-${product.handle}-default`,
+    name: product.title || fallback.name,
+    description: product.description || fallback.description,
+    line: product.description || fallback.line,
+    personality: fallback.personality || 'MAHARASHTRA ORIGINAL',
+    price: variant?.price?.amount || fallback.price,
+    currencyCode: variant?.price?.currencyCode || fallback.currencyCode || 'INR',
+    image: product.featuredImage?.url || fallback.image || ['/zakaas-bhakarwadi.jpg','/zakaas-chakli.jpg','/zakaas-shankarpali.jpg'][index % 3],
+    images: product.images?.nodes?.map(i => i.url).filter(Boolean).length 
+      ? product.images.nodes.map(i => i.url) 
+      : (fallback.images || [fallback.image]),
+    variants: product.variants?.nodes?.map(v => ({
+      id: v.id,
+      title: v.title,
+      price: v.price?.amount,
+      currencyCode: v.price?.currencyCode || 'INR',
+      variantId: v.id,
+      availableForSale: v.availableForSale ?? true
+    })) || fallback.variants || [{ id: `var-${product.handle}-250`, title: '250g Pack', price: variant?.price?.amount || fallback.price, variantId: variant?.id }]
   };
 }
 
 export async function getProducts() {
-  const data = await request(`query Products { products(first: 30) { nodes { ${productFields} } } }`);
-  return data.products.nodes.filter(product => product.handle !== 'zakaas-gift-packaging').map(toProduct);
+  if (!shopifyConfigured) return fallbackProducts;
+  try {
+    const data = await request(`query Products { products(first: 30) { nodes { ${productFields} } } }`);
+    const shopifyItems = data.products.nodes
+      .filter(p => p.handle !== 'zakaas-gift-packaging')
+      .map((p, i) => toProduct(p, i));
+    return shopifyItems.length ? shopifyItems : fallbackProducts;
+  } catch {
+    return fallbackProducts;
+  }
 }
 
 export async function getProductByHandle(handle) {
-  const data = await request(`query ProductByHandle($handle: String!) { product(handle: $handle) { ${productFields} } }`, { handle });
-  return data.product ? toProduct(data.product) : null;
+  if (!shopifyConfigured) return getFallbackProductByHandle(handle);
+  try {
+    const data = await request(`query ProductByHandle($handle: String!) { product(handle: $handle) { ${productFields} } }`, { handle });
+    if (data.product) return toProduct(data.product);
+    return getFallbackProductByHandle(handle);
+  } catch {
+    return getFallbackProductByHandle(handle);
+  }
 }
 
 export async function createCart(lines) {

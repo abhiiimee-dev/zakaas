@@ -1,0 +1,8 @@
+{
+  "name": "ZAKAAS",
+  "description": "Maharashtra in every bite — authentic traditional snacks and delicacies storefront.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
