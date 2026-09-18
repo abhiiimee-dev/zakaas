@@ -56,8 +56,20 @@ export async function createCart(lines) {
   return data.cartCreate.cart;
 }
 
+export async function updateCartLines(cartId, lines) {
+  const data = await request(`mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) { cartLinesUpdate(cartId: $cartId, lines: $lines) { cart { id checkoutUrl totalQuantity lines(first: 30) { nodes { id quantity merchandise { ... on ProductVariant { id } } } } } userErrors { message } } }`, { cartId, lines });
+  if (data.cartLinesUpdate.userErrors.length) throw new Error(data.cartLinesUpdate.userErrors[0].message);
+  return data.cartLinesUpdate.cart;
+}
+
+export async function removeCartLines(cartId, lineIds) {
+  const data = await request(`mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!) { cartLinesRemove(cartId: $cartId, lineIds: $lineIds) { cart { id checkoutUrl totalQuantity lines(first: 30) { nodes { id quantity merchandise { ... on ProductVariant { id } } } } } userErrors { message } } }`, { cartId, lineIds });
+  if (data.cartLinesRemove.userErrors.length) throw new Error(data.cartLinesRemove.userErrors[0].message);
+  return data.cartLinesRemove.cart;
+}
+
 export async function addCartLines(cartId, lines) {
-  const data = await request(`mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) { cartLinesAdd(cartId: $cartId, lines: $lines) { cart { id checkoutUrl totalQuantity } userErrors { message } } }`, { cartId, lines });
+  const data = await request(`mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) { cartLinesAdd(cartId: $cartId, lines: $lines) { cart { id checkoutUrl totalQuantity lines(first: 30) { nodes { id quantity merchandise { ... on ProductVariant { id } } } } } userErrors { message } } }`, { cartId, lines });
   if (data.cartLinesAdd.userErrors.length) throw new Error(data.cartLinesAdd.userErrors[0].message);
   return data.cartLinesAdd.cart;
 }
