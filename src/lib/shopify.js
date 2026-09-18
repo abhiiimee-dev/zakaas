@@ -24,19 +24,94 @@ const productFields = `
   variants(first: 20) { nodes { id title availableForSale price { amount currencyCode } } }
 `;
 
+const cartFields = `
+  id
+  checkoutUrl
+  totalQuantity
+  cost {
+    subtotalAmount { amount currencyCode }
+    totalAmount { amount currencyCode }
+  }
+  lines(first: 50) {
+    nodes {
+      id
+      quantity
+      cost {
+        totalAmount { amount currencyCode }
+      }
+      merchandise {
+        ... on ProductVariant {
+          id
+          title
+          price { amount currencyCode }
+          product {
+            id
+            handle
+            title
+            featuredImage { url altText }
+          }
+        }
+      }
+      attributes {
+        key
+        value
+      }
+    }
+  }
+`;
+
+const editorialData = {
+  shankarpali: {
+    punchline: 'JUST ONE MORE.',
+    personality: 'SWEET CRUNCH DIAMONDS',
+    line: 'Light, sweet, crisp diamonds that disappear by the handful. Traditional taste, modern craving.',
+    accent: 'rose',
+    image: '/zakaas-shankarpali.jpg',
+  },
+  chakli: {
+    punchline: 'CRUNCH FIRST.',
+    personality: 'THE SPIRAL FIRECRACKER',
+    line: 'Geometric spiral perfection with cumin-spiced fire. Unapologetic Maharashtrian crunch.',
+    accent: 'ochre',
+    image: '/zakaas-chakli.jpg',
+  },
+  bhakarwadi: {
+    punchline: "THIS WON'T LAST LONG.",
+    personality: 'THE SWEET-SPICY SPIRAL',
+    line: 'Ami konala nai ghabrat. Roasted coconut, sesame, and signature Maharashtrian spice rolled tight.',
+    accent: 'clay',
+    image: '/zakaas-bhakarwadi.jpg',
+  },
+  bhakarvadi: {
+    punchline: "THIS WON'T LAST LONG.",
+    personality: 'THE SWEET-SPICY SPIRAL',
+    line: 'Ami konala nai ghabrat. Roasted coconut, sesame, and signature Maharashtrian spice rolled tight.',
+    accent: 'clay',
+    image: '/zakaas-bhakarwadi.jpg',
+  }
+};
+
 function toProduct(product, index = 0) {
-  const variant = product.variants.nodes[0];
+  const variant = product.variants?.nodes?.[0];
+  const handleKey = (product.handle || '').toLowerCase().replace(/zakaas-|-pack/g, '');
+  const editorial = editorialData[handleKey] || editorialData[Object.keys(editorialData)[index % 3]] || {};
+  
+  const fallbackImages = ['/zakaas-shankarpali.jpg', '/zakaas-chakli.jpg', '/zakaas-bhakarwadi.jpg'];
+  const image = product.featuredImage?.url || editorial.image || fallbackImages[index % 3];
+
   return {
     id: product.id,
     handle: product.handle,
     variantId: variant?.id,
     name: product.title,
-    description: product.description,
-    line: product.description,
-    personality: 'MAHARASHTRA ORIGINAL',
-    price: variant?.price?.amount,
-    currencyCode: variant?.price?.currencyCode,
-    image: product.featuredImage?.url || ['/zakaas-bhakarwadi.jpg','/zakaas-chakli.jpg','/zakaas-shankarpali.jpg'][index % 3],
+    description: product.description || editorial.line,
+    line: editorial.line || product.description,
+    punchline: editorial.punchline || 'YOU KNOW THIS ONE.',
+    personality: editorial.personality || 'MAHARASHTRA ORIGINAL',
+    accent: editorial.accent || ['rose', 'ochre', 'clay'][index % 3],
+    price: variant?.price?.amount || '180',
+    currencyCode: variant?.price?.currencyCode || 'INR',
+    image,
   };
 }
 
@@ -51,13 +126,57 @@ export async function getProductByHandle(handle) {
 }
 
 export async function createCart(lines) {
-  const data = await request(`mutation CartCreate($lines: [CartLineInput!]) { cartCreate(input: { lines: $lines }) { cart { id checkoutUrl totalQuantity lines(first: 30) { nodes { id quantity merchandise { ... on ProductVariant { id title product { title featuredImage { url altText } } } } } } } userErrors { message } } }`, { lines });
-  if (data.cartCreate.userErrors.length) throw new Error(data.cartCreate.userErrors[0].message);
+  const data = await request(
+    `mutation CartCreate($lines: [CartLineInput!]) {
+      cartCreate(input: { lines: $lines }) {
+        cart { ${cartFields} }
+        userErrors { message }
+      }
+    }`,
+    { lines }
+  );
+  if (data.cartCreate.userErrors?.length) throw new Error(data.cartCreate.userErrors[0].message);
   return data.cartCreate.cart;
 }
 
 export async function addCartLines(cartId, lines) {
-  const data = await request(`mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) { cartLinesAdd(cartId: $cartId, lines: $lines) { cart { id checkoutUrl totalQuantity } userErrors { message } } }`, { cartId, lines });
-  if (data.cartLinesAdd.userErrors.length) throw new Error(data.cartLinesAdd.userErrors[0].message);
+  const data = await request(
+    `mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+      cartLinesAdd(cartId: $cartId, lines: $lines) {
+        cart { ${cartFields} }
+        userErrors { message }
+      }
+    }`,
+    { cartId, lines }
+  );
+  if (data.cartLinesAdd.userErrors?.length) throw new Error(data.cartLinesAdd.userErrors[0].message);
   return data.cartLinesAdd.cart;
+}
+
+export async function updateCartLines(cartId, lines) {
+  const data = await request(
+    `mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+      cartLinesUpdate(cartId: $cartId, lines: $lines) {
+        cart { ${cartFields} }
+        userErrors { message }
+      }
+    }`,
+    { cartId, lines }
+  );
+  if (data.cartLinesUpdate.userErrors?.length) throw new Error(data.cartLinesUpdate.userErrors[0].message);
+  return data.cartLinesUpdate.cart;
+}
+
+export async function removeCartLines(cartId, lineIds) {
+  const data = await request(
+    `mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+      cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+        cart { ${cartFields} }
+        userErrors { message }
+      }
+    }`,
+    { cartId, lineIds }
+  );
+  if (data.cartLinesRemove.userErrors?.length) throw new Error(data.cartLinesRemove.userErrors[0].message);
+  return data.cartLinesRemove.cart;
 }

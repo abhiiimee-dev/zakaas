@@ -1,16 +1,113 @@
-import { Menu, Search, ShoppingBag, X } from 'lucide-react';
+import { Menu, ShoppingBag, X, ArrowUpRight } from 'lucide-react';
 
-export function Header({ cartCount, onCartOpen, menuOpen, setMenuOpen }) {
-  return <>
-    <header className="site-header">
-      <button className="header-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X/> : <Menu/>}</button>
-      <a href="#top" className="brand-mark" aria-label="ZAKAAS home"><img src="/zakaas-logo.png" alt="ZAKAAS"/></a>
-      <nav aria-label="Main navigation"><a href="#shop">Shop</a><a href="#story">Our story</a><a href="#maharashtra">Maharashtra</a><a href="#gifting">Gifting</a><a href="#business">B2B</a></nav>
-      <div className="header-actions"><button aria-label="Search"><Search/></button><button className="account-button">Account</button><button className="bag-button" onClick={onCartOpen} aria-label={`Shopping bag with ${cartCount} items`}><ShoppingBag/><span>{cartCount}</span></button></div>
-    </header>
-    <div className={`mobile-nav ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
-      {['Shop ZAKAAS','Our story','Maharashtra','Gifting','B2B'].map((item, i) => <a key={item} href={['#shop','#story','#maharashtra','#gifting','#business'][i]} onClick={() => setMenuOpen(false)}>{item}<i>0{i + 1}</i></a>)}
-      <p>MAHARASHTRA.<br/>IN EVERY BITE.</p>
-    </div>
-  </>;
+export function Header({ cartCount = 0, onCartOpen, menuOpen, setMenuOpen }) {
+  const navLinks = [
+    { label: 'SHOP', href: '#shop', num: '01' },
+    { label: 'STORY', href: '#story', num: '02' },
+    { label: 'GIFTING', href: '#gifting', num: '03' },
+    { label: 'B2B', href: '#business', num: '04' },
+  ];
+
+  return (
+    <>
+      <header className="site-header">
+        <div className="header-left">
+          <button
+            type="button"
+            className="header-menu-btn"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            <span className="menu-btn-label">MENU</span>
+          </button>
+
+          <a href="#top" className="brand-logo" aria-label="ZAKAAS Home">
+            <img src="/zakaas-logo.png" alt="ZAKAAS" />
+          </a>
+        </div>
+
+        <nav className="desktop-nav" aria-label="Main navigation">
+          {navLinks.map((link) => (
+            <a key={link.label} href={link.href} className="nav-link">
+              <span>{link.label}</span>
+            </a>
+          ))}
+        </nav>
+
+        <div className="header-actions">
+          <a href="#gifting" className="header-badge-link">
+            BUILD A BOX
+          </a>
+          <button
+            type="button"
+            className="bag-trigger"
+            onClick={onCartOpen}
+            aria-label={`Open bag, ${cartCount} items`}
+          >
+            <ShoppingBag size={16} />
+            <span className="bag-text">BAG</span>
+            <span className="bag-pill">{cartCount}</span>
+          </button>
+        </div>
+      </header>
+
+      <div
+        className={`mobile-menu-overlay ${menuOpen ? 'is-open' : ''}`}
+        aria-hidden={!menuOpen}
+      >
+        <div className="mobile-menu-header">
+          <div className="mobile-menu-brand">
+            <img src="/zakaas-logo.png" alt="ZAKAAS" />
+          </div>
+          <button
+            type="button"
+            className="mobile-close-btn"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <X size={24} />
+          </button>
+        </div>
+
+        <div className="mobile-menu-content">
+          <p className="mobile-menu-kicker">MAHARASHTRA, REMIXED</p>
+          <nav className="mobile-links">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="mobile-nav-item"
+                onClick={() => setMenuOpen(false)}
+              >
+                <span className="mobile-nav-num">{link.num}</span>
+                <span className="mobile-nav-text">{link.label}</span>
+                <ArrowUpRight size={22} className="mobile-nav-arrow" />
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        <div className="mobile-menu-footer">
+          <div className="mobile-menu-meta">
+            <span>MUMBAI · PUNE · NASHIK · KOLHAPUR · NAGPUR</span>
+            <p>Traditional snacks. Re-art-directed for right now.</p>
+          </div>
+          <button
+            type="button"
+            className="mobile-bag-btn"
+            onClick={() => {
+              setMenuOpen(false);
+              onCartOpen();
+            }}
+          >
+            <ShoppingBag size={18} />
+            <span>VIEW BAG ({cartCount})</span>
+          </button>
+        </div>
+      </div>
+    </>
+  );
 }
+

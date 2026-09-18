@@ -1,14 +1,164 @@
-import { Minus, Plus, X } from 'lucide-react';
+import { Minus, Plus, Trash2, X, ArrowRight, ShoppingBag } from 'lucide-react';
 
-export function CartDrawer({ open, items, onClose, onChange, onCheckout, checkoutReady }) {
-  const countById = items.reduce((all, item) => ({ ...all, [item.id]: (all[item.id] || 0) + 1 }), {});
-  const unique = Object.entries(countById).map(([id, quantity]) => ({ ...items.find(item => item.id === id), quantity }));
-  return <div className={`cart-layer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
-    <button className="cart-scrim" aria-label="Close bag" onClick={onClose}/>
-    <aside className="cart-drawer" aria-label="Shopping bag">
-      <div className="cart-head"><p>YOUR BAG <span>({items.length})</span></p><button onClick={onClose} aria-label="Close bag"><X/></button></div>
-      <div className="cart-items">{unique.length ? unique.map(item => <article key={item.id}><img src={item.image} alt=""/><div><small>{item.personality}</small><h3>{item.name}</h3><p>“{item.line}”</p></div><div className="quantity"><button onClick={() => onChange(item, -1)} aria-label={`Remove one ${item.name}`}><Minus/></button><span>{item.quantity}</span><button onClick={() => onChange(item, 1)} aria-label={`Add one ${item.name}`}><Plus/></button></div></article>) : <p className="empty-bag">Your bag is waiting for a little Maharashtra.</p>}</div>
-      <div className="cart-foot"><p>{checkoutReady ? 'Secure checkout is powered by Shopify.' : 'Preparing your Shopify checkout…'}</p><button onClick={onCheckout} disabled={!items.length || !checkoutReady} className="cart-checkout">CONTINUE TO CHECKOUT</button></div>
-    </aside>
-  </div>;
+const formatRupees = (val) =>
+  new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(Number(val || 0));
+
+export function CartDrawer({
+  open,
+  lines = [],
+  onClose,
+  onUpdateQuantity,
+  onRemoveLine,
+  onCheckout,
+  checkoutReady = false,
+  isUpdating = false,
+}) {
+  const totalQuantity = lines.reduce((sum, line) => sum + (line.quantity || 1), 0);
+  const subtotal = lines.reduce(
+    (sum, line) => sum + Number(line.price || 0) * (line.quantity || 1),
+    0
+  );
+
+  return (
+    <div className={`cart-layer ${open ? 'is-open' : ''}`} aria-hidden={!open}>
+      <button
+        type="button"
+        className="cart-scrim"
+        aria-label="Close shopping bag"
+        onClick={onClose}
+      />
+      <aside className="cart-drawer" aria-label="Shopping bag">
+        {/* Header */}
+        <div className="cart-head">
+          <div className="cart-head-title">
+            <ShoppingBag size={18} />
+            <span>YOUR BAG</span>
+            <span className="cart-badge-count">({totalQuantity})</span>
+          </div>
+          <button
+            type="button"
+            className="cart-close-btn"
+            onClick={onClose}
+            aria-label="Close shopping bag"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        {/* Free shipping / brand message */}
+        <div className="cart-banner">
+          <span>MAHARASHTRA, REMIXED</span>
+          <small>DIRECT FROM OUR KITCHEN TO YOUR TABLE</small>
+        </div>
+
+        {/* Items List */}
+        <div className="cart-items">
+          {lines.length > 0 ? (
+            lines.map((line) => (
+              <article className="cart-item-card" key={line.lineId || line.id}>
+                <div className="cart-item-thumb">
+                  <img src={line.image || '/zakaas-hero.png'} alt={line.name} />
+                </div>
+                <div className="cart-item-details">
+                  <div className="cart-item-top">
+                    <small className="cart-item-kicker">
+                      {line.personality || 'ZAKAAS ORIGINAL'}
+                    </small>
+                    <button
+                      type="button"
+                      className="cart-item-remove-btn"
+                      onClick={() => onRemoveLine(line)}
+                      disabled={isUpdating}
+                      aria-label={`Remove ${line.name} from bag`}
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  </div>
+                  <h4 className="cart-item-title">{line.name}</h4>
+                  
+                  {line.attributes && line.attributes.length > 0 && (
+                    <div className="cart-item-attrs">
+                      {line.attributes.map((attr) => (
+                        <span key={attr.key}>
+                          <b>{attr.key}:</b> {attr.value}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  <div className="cart-item-bottom">
+                    <span className="cart-item-price">
+                      {formatRupees(Number(line.price || 0) * (line.quantity || 1))}
+                    </span>
+                    <div className="cart-qty-ctrl">
+                      <button
+                        type="button"
+                        onClick={() => onUpdateQuantity(line, (line.quantity || 1) - 1)}
+                        disabled={isUpdating}
+                        aria-label={`Decrease quantity of ${line.name}`}
+                      >
+                        <Minus size={13} />
+                      </button>
+                      <span className="cart-qty-val">{line.quantity || 1}</span>
+                      <button
+                        type="button"
+                        onClick={() => onUpdateQuantity(line, (line.quantity || 1) + 1)}
+                        disabled={isUpdating}
+                        aria-label={`Increase quantity of ${line.name}`}
+                      >
+                        <Plus size={13} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))
+          ) : (
+            <div className="empty-cart-state">
+              <div className="empty-cart-stamp">ZAKAAS</div>
+              <h3>YOUR BAG IS EMPTY.</h3>
+              <p>Nothing here yet. Pick a pack of Shankarpali, Chakli, or Bhakarvadi to start.</p>
+              <a href="#shop" className="empty-cart-btn" onClick={onClose}>
+                EXPLORE THE ORIGINALS <ArrowRight size={16} />
+              </a>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        {lines.length > 0 && (
+          <div className="cart-foot">
+            <div className="cart-summary-row">
+              <span>ESTIMATED SUBTOTAL</span>
+              <b>{formatRupees(subtotal)}</b>
+            </div>
+            <p className="cart-foot-note">
+              Shipping and applicable taxes calculated securely at Shopify checkout.
+            </p>
+            <button
+              type="button"
+              className="cart-checkout-btn"
+              onClick={onCheckout}
+              disabled={!checkoutReady || isUpdating}
+            >
+              {isUpdating ? (
+                'UPDATING BAG…'
+              ) : checkoutReady ? (
+                <>
+                  CHECKOUT WITH SHOPIFY <ArrowRight size={16} />
+                </>
+              ) : (
+                'PREPARING SHOPIFY CHECKOUT…'
+              )}
+            </button>
+          </div>
+        )}
+      </aside>
+    </div>
+  );
 }
+
