@@ -21,6 +21,7 @@ async function request(query, variables = {}) {
 const productFields = `
   id handle title description
   featuredImage { url altText }
+  images(first: 5) { nodes { url altText } }
   variants(first: 20) { nodes { id title availableForSale price { amount currencyCode } } }
 `;
 
@@ -37,6 +38,7 @@ function toProduct(product, index = 0) {
     price: variant?.price?.amount,
     currencyCode: variant?.price?.currencyCode,
     image: product.featuredImage?.url || ['/zakaas-bhakarwadi.jpg','/zakaas-chakli.jpg','/zakaas-shankarpali.jpg'][index % 3],
+    images: product.images?.nodes?.map(image => image.url).filter(Boolean) || [],
   };
 }
 
