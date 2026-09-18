@@ -1,0 +1,6 @@
+import { ArrowUpRight, Plus } from 'lucide-react';
+import { products as fallbackProducts } from '../data/products';
+
+export function ProductSection({ onAdd, products = fallbackProducts, live = false }) {
+  return <section className="products-section" id="shop"><div className="section-intro"><p className="kicker">01 / PICK YOUR PACK {live && '· LIVE FROM SHOPIFY'}</p><h2>WHAT’S YOUR<br/><em>ZAKAAS?</em></h2><p>Three Maharashtra classics. One very loud snack table. Pick your mood, tear it open, pass it around.</p></div><div className="product-rail">{products.slice(0,3).map((product, index) => <article className={`product-feature ${product.accent || ['clay','ochre','rose'][index]}`} key={product.id}><div className="product-top"><span>0{index + 1} / ZAKAAS ORIGINAL</span><button disabled={!product.variantId} onClick={() => onAdd(product)}>ADD <Plus/></button></div><div className="product-visual"><img src={product.image} alt={`${product.name} ZAKAAS pack`}/></div><div className="product-copy"><small>{product.personality || 'MAHARASHTRA ORIGINAL'}</small><h3>{product.name}</h3><p>“{product.line || product.description || 'A little taste of home.'}”</p><a href="#story">DISCOVER THE STORY <ArrowUpRight/></a></div></article>)}</div></section>;
+}
