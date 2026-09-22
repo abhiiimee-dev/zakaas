@@ -1,0 +1,1035 @@
+/* ZAKAAS PDP — REDESIGNED CONVERSION & TRUST SUITE */
+
+/* Breadcrumbs */
+.pdp-breadcrumbs {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 20px 5vw 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 11px 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666;
+}
+
+.pdp-breadcrumbs a:hover {
+  color: var(--clay);
+}
+
+.crumb-separator {
+  width: 13px;
+  height: 13px;
+  opacity: 0.5;
+}
+
+/* PDP Main Container */
+.page-product-detail {
+  padding-top: 80px;
+  background: var(--khadi);
+  min-height: 100vh;
+}
+
+.pdp-container {
+  padding: 30px 5vw 70px;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 50px;
+  max-width: 1320px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* Gallery Column */
+.pdp-gallery-col {
+  position: sticky;
+  top: 95px;
+}
+
+.zakaas-pdp-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.zakaas-pdp-main-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 580px;
+  border: 2px solid var(--charcoal);
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 6px 6px 0 rgba(42, 38, 34, 0.1);
+}
+
+.zakaas-pdp-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.zakaas-pdp-main-image:hover img {
+  transform: scale(1.03);
+}
+
+.zakaas-personality-tag {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  padding: 6px 14px;
+  background: var(--khadi);
+  border: 1px solid var(--charcoal);
+  font: 10px 'DM Mono', monospace;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  box-shadow: 2px 2px 0 var(--charcoal);
+}
+
+.zakaas-pdp-thumbnails {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.zakaas-pdp-thumb {
+  width: 82px;
+  height: 82px;
+  flex-shrink: 0;
+  border: 2px solid rgba(42, 38, 34, 0.3);
+  padding: 0;
+  background: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.zakaas-pdp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zakaas-pdp-thumb.is-active {
+  border-color: var(--clay);
+  box-shadow: 0 0 0 1px var(--clay);
+  transform: translateY(-2px);
+}
+
+.zakaas-pdp-thumb:hover {
+  border-color: var(--charcoal);
+}
+
+/* Info Column */
+.pdp-info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.pdp-meta-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.pdp-origin-pill {
+  font: 9px 'DM Mono', monospace;
+  padding: 4px 10px;
+  border: 1px solid var(--charcoal);
+  background: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.pdp-title {
+  font-size: clamp(38px, 4.5vw, 68px);
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  margin: 0 0 8px;
+  color: var(--charcoal);
+  font-weight: 800;
+}
+
+.pdp-quote {
+  font: 20px 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: var(--clay);
+  margin: 0 0 20px;
+  line-height: 1.35;
+}
+
+/* Price Block */
+.zakaas-pdp-price-block {
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(42, 38, 34, 0.2);
+}
+
+.zakaas-price-primary-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.zakaas-selling-price {
+  font-size: clamp(34px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--charcoal);
+  line-height: 1;
+}
+
+.zakaas-mrp-price {
+  font-size: 20px;
+  color: #777;
+  text-decoration: line-through;
+  font-family: 'DM Mono', monospace;
+}
+
+.zakaas-savings-badge {
+  background: var(--clay);
+  color: #fff;
+  font: 11px 'DM Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.zakaas-tax-notice {
+  font: 11px 'DM Mono', monospace;
+  color: #666;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.bullet-sep {
+  opacity: 0.5;
+}
+
+/* Trust / Value Strip */
+.zakaas-trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 14px;
+  background: rgba(42, 38, 34, 0.04);
+  border: 1px solid rgba(42, 38, 34, 0.15);
+  margin-bottom: 22px;
+  border-radius: 2px;
+}
+
+.zakaas-trust-pill {
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--charcoal);
+  font-weight: 600;
+}
+
+.trust-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--clay);
+}
+
+/* Short Description */
+.zakaas-short-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0 0 24px;
+}
+
+/* Highlights Grid */
+.zakaas-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 18px;
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid rgba(42, 38, 34, 0.18);
+  margin-bottom: 26px;
+  box-shadow: 2px 2px 0 rgba(42, 38, 34, 0.05);
+}
+
+.zakaas-highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.zakaas-highlight-icon-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(168, 72, 46, 0.1);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--clay);
+}
+
+.zakaas-highlight-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.zakaas-highlight-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--charcoal);
+  line-height: 1.35;
+}
+
+/* Pack Selector Section */
+.zakaas-pack-selector-section {
+  margin-bottom: 26px;
+}
+
+.zakaas-pack-selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.zakaas-section-label {
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.zakaas-pack-effective-rate {
+  font: 11px 'DM Mono', monospace;
+  color: #777;
+}
+
+.zakaas-pack-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.zakaas-pack-card {
+  position: relative;
+  border: 1.5px solid rgba(42, 38, 34, 0.25);
+  background: #fff;
+  padding: 22px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  border-radius: 2px;
+}
+
+.zakaas-pack-card:hover {
+  border-color: var(--charcoal);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(42, 38, 34, 0.08);
+}
+
+.zakaas-pack-card.is-selected {
+  border-color: var(--charcoal);
+  border-width: 2px;
+  background: #fffefb;
+  box-shadow: 4px 4px 0 var(--charcoal);
+  transform: translateY(-2px);
+}
+
+.zakaas-pack-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font: 9px 'DM Mono', monospace;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.badge-bestseller {
+  background: var(--clay);
+  color: #fff;
+}
+
+.badge-stockup {
+  background: var(--charcoal);
+  color: var(--khadi);
+}
+
+.zakaas-pack-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.zakaas-pack-card-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.zakaas-pack-count {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--charcoal);
+}
+
+.zakaas-pack-weight {
+  font: 10px 'DM Mono', monospace;
+  color: #666;
+  margin-top: 2px;
+}
+
+.zakaas-radio-indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(42, 38, 34, 0.4);
+  display: grid;
+  place-items: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.zakaas-radio-indicator.is-checked {
+  border-color: var(--charcoal);
+  background: var(--charcoal);
+  color: #fff;
+}
+
+.radio-check-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.zakaas-pack-card-pricing {
+  margin-top: auto;
+  border-top: 1px dashed rgba(42, 38, 34, 0.2);
+  padding-top: 10px;
+}
+
+.zakaas-pack-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.zakaas-pack-mrp {
+  font: 11px 'DM Mono', monospace;
+  color: #888;
+  text-decoration: line-through;
+}
+
+.zakaas-pack-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--charcoal);
+}
+
+.zakaas-pack-savings {
+  font: 10px 'DM Mono', monospace;
+  font-weight: 700;
+  color: var(--clay);
+  margin-top: 3px;
+  letter-spacing: 0.5px;
+}
+
+/* Actions Wrap (Quantity + Add to Bag) */
+.pdp-actions-wrap {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.pdp-quantity-picker {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--charcoal);
+  background: #fff;
+  height: 52px;
+  box-shadow: 3px 3px 0 var(--charcoal);
+}
+
+.pdp-quantity-picker button {
+  width: 44px;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--charcoal);
+  transition: background 0.15s;
+}
+
+.pdp-quantity-picker button:hover {
+  background: rgba(42, 38, 34, 0.08);
+}
+
+.pdp-quantity-picker span {
+  font: 14px 'DM Mono', monospace;
+  padding: 0 12px;
+  font-weight: 800;
+  min-width: 24px;
+  text-align: center;
+}
+
+.pdp-add-btn {
+  flex: 1;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--charcoal);
+  color: var(--khadi);
+  font: 12px 'DM Mono', monospace;
+  letter-spacing: 1px;
+  font-weight: 800;
+  border: 2px solid var(--charcoal);
+  box-shadow: 4px 4px 0 var(--clay);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.pdp-add-btn:hover {
+  background: var(--clay);
+  border-color: var(--clay);
+  color: #fff;
+  box-shadow: 4px 4px 0 var(--charcoal);
+  transform: translateY(-1px);
+}
+
+.pdp-add-btn.is-added {
+  background: #2b7a4b;
+  border-color: #2b7a4b;
+  color: #fff;
+}
+
+/* Buy Now Button */
+.pdp-buy-now-btn {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--clay);
+  color: #fff;
+  border: 2px solid var(--clay);
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 26px;
+  box-shadow: 3px 3px 0 var(--charcoal);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.pdp-buy-now-btn:hover {
+  background: var(--charcoal);
+  border-color: var(--charcoal);
+  transform: translateY(-1px);
+}
+
+/* Delivery Trust Strip (3-column) */
+.zakaas-delivery-trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid rgba(42, 38, 34, 0.2);
+  margin-bottom: 18px;
+}
+
+.zakaas-trust-col {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.zakaas-trust-icon-box {
+  width: 32px;
+  height: 32px;
+  background: rgba(168, 72, 46, 0.08);
+  border: 1px solid rgba(168, 72, 46, 0.2);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--clay);
+  border-radius: 2px;
+}
+
+.zakaas-trust-icon {
+  width: 17px;
+  height: 17px;
+}
+
+.zakaas-trust-col-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.zakaas-trust-col-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--charcoal);
+  line-height: 1.2;
+}
+
+.zakaas-trust-col-sub {
+  font: 9px 'DM Mono', monospace;
+  color: #777;
+  margin-top: 2px;
+}
+
+/* Delivery Estimate Card */
+.zakaas-delivery-estimate-card {
+  padding: 16px;
+  background: rgba(42, 38, 34, 0.04);
+  border: 1px solid rgba(42, 38, 34, 0.15);
+  margin-bottom: 26px;
+}
+
+.zakaas-delivery-estimate-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.zakaas-estimate-label {
+  font: 10px 'DM Mono', monospace;
+  letter-spacing: 1px;
+  color: #777;
+  font-weight: 700;
+}
+
+.zakaas-estimate-dates {
+  font-size: 13px;
+  color: var(--charcoal);
+}
+
+.zakaas-estimate-dates strong {
+  color: var(--clay);
+  font-weight: 800;
+}
+
+.zakaas-timeline-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+}
+
+.zakaas-timeline-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.zakaas-step-bullet {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.5px solid rgba(42, 38, 34, 0.3);
+  display: grid;
+  place-items: center;
+  color: #777;
+}
+
+.zakaas-step-bullet svg {
+  width: 13px;
+  height: 13px;
+}
+
+.zakaas-timeline-step.is-complete .zakaas-step-bullet,
+.zakaas-timeline-step.is-active .zakaas-step-bullet {
+  background: var(--charcoal);
+  border-color: var(--charcoal);
+  color: var(--khadi);
+}
+
+.zakaas-step-label {
+  font: 9px 'DM Mono', monospace;
+  color: #555;
+  letter-spacing: 0.5px;
+}
+
+.zakaas-timeline-line {
+  flex: 1;
+  height: 2px;
+  background: rgba(42, 38, 34, 0.2);
+  margin: 0 8px -18px;
+}
+
+.zakaas-timeline-line.is-active {
+  background: var(--charcoal);
+}
+
+/* Accordions Section */
+.zakaas-pdp-accordions {
+  border-top: 2px solid var(--charcoal);
+  margin-bottom: 24px;
+}
+
+.zakaas-accordion-item {
+  border-bottom: 1px solid rgba(42, 38, 34, 0.25);
+}
+
+.zakaas-accordion-header {
+  width: 100%;
+  padding: 16px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.zakaas-accordion-title {
+  font: 12px 'DM Mono', monospace;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: var(--charcoal);
+  text-transform: uppercase;
+}
+
+.zakaas-accordion-chevron {
+  width: 18px;
+  height: 18px;
+  color: var(--clay);
+  display: grid;
+  place-items: center;
+}
+
+.zakaas-accordion-chevron svg {
+  width: 16px;
+  height: 16px;
+}
+
+.zakaas-accordion-body {
+  padding: 0 4px 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.zakaas-accordion-body p {
+  margin: 0 0 10px;
+}
+
+.zakaas-accordion-body p:last-child {
+  margin-bottom: 0;
+}
+
+.zakaas-specs-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 0;
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 14px;
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(42, 38, 34, 0.15);
+  font-size: 12.5px;
+}
+
+.spec-row:last-child {
+  border-bottom: 0;
+}
+
+.spec-row dt {
+  font: 11px 'DM Mono', monospace;
+  color: #666;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.spec-row dd {
+  margin: 0;
+  color: var(--charcoal);
+  font-weight: 600;
+}
+
+.zakaas-allergen-alert {
+  padding: 8px 12px;
+  background: rgba(168, 72, 46, 0.08);
+  border-left: 3px solid var(--clay);
+  font-size: 12px;
+  margin-top: 10px !important;
+}
+
+/* Subtle Brand Hashtags */
+.zakaas-editorial-hashtags {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0 0;
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.zakaas-editorial-hashtags .dot {
+  color: var(--clay);
+}
+
+/* Related Products Section */
+.pdp-related-section {
+  padding: 80px 5vw;
+  background: var(--khadi);
+  border-top: 2px solid var(--charcoal);
+}
+
+.related-header {
+  margin-bottom: 35px;
+}
+
+.related-header h2 {
+  font-size: clamp(34px, 4.5vw, 60px);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  margin: 0;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.related-card {
+  border: 1.5px solid var(--charcoal);
+  background: #fff;
+  overflow: hidden;
+  display: block;
+  box-shadow: 4px 4px 0 rgba(42, 38, 34, 0.1);
+  transition: all 0.25s ease;
+}
+
+.related-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 6px 6px 0 var(--charcoal);
+}
+
+.related-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.related-card-info {
+  padding: 16px;
+}
+
+.related-card-info small {
+  font: 8.5px 'DM Mono', monospace;
+  display: block;
+  margin-bottom: 4px;
+  color: var(--clay);
+  letter-spacing: 1px;
+}
+
+.related-card-info h3 {
+  font-size: 20px;
+  margin: 0 0 6px;
+  letter-spacing: -0.04em;
+}
+
+.related-card-info p {
+  font: 12px 'DM Mono', monospace;
+  margin: 0;
+  font-weight: 800;
+  color: var(--charcoal);
+}
+
+/* Sticky Mobile Add To Cart Bar */
+.zakaas-sticky-mobile-cta {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .pdp-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 15px 4vw 60px;
+  }
+
+  .pdp-gallery-col {
+    position: static;
+  }
+
+  .zakaas-pdp-main-image {
+    max-height: 400px;
+  }
+
+  .zakaas-pack-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .zakaas-pack-card {
+    padding: 16px 14px;
+  }
+
+  .zakaas-pack-badge {
+    top: -8px;
+    left: 20px;
+    transform: none;
+  }
+
+  .zakaas-delivery-trust-strip {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .spec-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sticky Bar Active on Mobile */
+  .zakaas-sticky-mobile-cta {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 2px solid var(--charcoal);
+    padding: 10px 16px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    z-index: 100;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
+    animation: slideUp 0.25s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .zakaas-sticky-cta-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .zakaas-sticky-pack-meta {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .zakaas-sticky-pack-name {
+    font-size: 13px;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--charcoal);
+  }
+
+  .zakaas-sticky-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .zakaas-sticky-selling-price {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--charcoal);
+  }
+
+  .zakaas-sticky-mrp {
+    font: 10px 'DM Mono', monospace;
+    color: #888;
+    text-decoration: line-through;
+  }
+
+  .zakaas-sticky-badge {
+    font: 9px 'DM Mono', monospace;
+    font-weight: 700;
+    color: var(--clay);
+  }
+
+  .zakaas-sticky-add-btn {
+    height: 44px;
+    padding: 0 18px;
+    background: var(--charcoal);
+    color: var(--khadi);
+    border: 2px solid var(--charcoal);
+    font: 11px 'DM Mono', monospace;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .zakaas-sticky-add-btn:active {
+    background: var(--clay);
+  }
+
+  .zakaas-sticky-add-btn.is-added {
+    background: #2b7a4b;
+    border-color: #2b7a4b;
+  }
+
+  .btn-icon {
+    width: 14px;
+    height: 14px;
+  }
+}

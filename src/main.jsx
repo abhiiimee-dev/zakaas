@@ -69,8 +69,10 @@ function App() {
     window.setTimeout(() => setToast(''), 2200);
   };
 
-  const handleAdd = async (product) => {
-    setItems((prev) => [...prev, product]);
+  const handleAdd = async (product, customQty) => {
+    const qty = customQty || product.quantity || 1;
+    const newItems = Array.from({ length: qty }, () => ({ ...product }));
+    setItems((prev) => [...prev, ...newItems]);
     setCartOpen(true);
     showToast(`${product.name} added to bag`);
 
@@ -81,8 +83,8 @@ function App() {
 
     try {
       const next = cartData
-        ? await addCartLines(cartData.id, [{ merchandiseId: product.variantId, quantity: 1 }])
-        : await createCart([{ merchandiseId: product.variantId, quantity: 1 }]);
+        ? await addCartLines(cartData.id, [{ merchandiseId: product.variantId, quantity: qty }])
+        : await createCart([{ merchandiseId: product.variantId, quantity: qty }]);
       setCartData(next);
     } catch {
       showToast('Shopify bag update failed.');
@@ -202,7 +204,7 @@ function App() {
         />
         <Route
           path="/products/:handle"
-          element={<ProductDetailPage products={catalog} onAdd={handleAdd} />}
+          element={<ProductDetailPage products={catalog} onAdd={handleAdd} cartData={cartData} />}
         />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/faq" element={<FaqPage />} />

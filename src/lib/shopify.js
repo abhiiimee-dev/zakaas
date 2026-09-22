@@ -29,21 +29,32 @@ const productFields = `
 
 function toProduct(product, index = 0) {
   const variant = product.variants?.nodes?.[0];
-  const fallback = fallbackProducts[index % fallbackProducts.length] || {};
+  const fallback = getFallbackProductByHandle(product.handle) || fallbackProducts[index % fallbackProducts.length] || {};
   return {
+    ...fallback,
     id: product.id || fallback.id,
     handle: product.handle || fallback.handle,
     variantId: variant?.id || fallback.variants?.[0]?.variantId || `var-${product.handle}-default`,
     name: product.title || fallback.name,
     description: product.description || fallback.description,
-    line: product.description || fallback.line,
+    shortDescription: fallback.shortDescription || product.description,
+    line: fallback.line || product.description,
     personality: fallback.personality || 'MAHARASHTRA ORIGINAL',
-    price: variant?.price?.amount || fallback.price,
+    price: variant?.price?.amount || fallback.price || '150',
+    mrp: fallback.mrp || '199',
     currencyCode: variant?.price?.currencyCode || fallback.currencyCode || 'INR',
     image: product.featuredImage?.url || fallback.image || ['/zakaas-bhakarwadi.jpg','/zakaas-chakli.jpg','/zakaas-shankarpali.jpg'][index % 3],
     images: product.images?.nodes?.map(i => i.url).filter(Boolean).length 
       ? product.images.nodes.map(i => i.url) 
       : (fallback.images || [fallback.image]),
+    trustClaims: fallback.trustClaims || [],
+    highlights: fallback.highlights || [],
+    packOptions: fallback.packOptions || [],
+    ingredients: fallback.ingredients,
+    allergenInfo: fallback.allergenInfo,
+    shelfLife: fallback.shelfLife,
+    origin: fallback.origin,
+    manufacturingInfo: fallback.manufacturingInfo,
     variants: product.variants?.nodes?.map(v => ({
       id: v.id,
       title: v.title,
@@ -51,7 +62,7 @@ function toProduct(product, index = 0) {
       currencyCode: v.price?.currencyCode || 'INR',
       variantId: v.id,
       availableForSale: v.availableForSale ?? true
-    })) || fallback.variants || [{ id: `var-${product.handle}-250`, title: '250g Pack', price: variant?.price?.amount || fallback.price, variantId: variant?.id }]
+    })) || fallback.variants || [{ id: `var-${product.handle}-1`, title: '1 Pack (100g)', price: variant?.price?.amount || fallback.price, variantId: variant?.id }]
   };
 }
 
