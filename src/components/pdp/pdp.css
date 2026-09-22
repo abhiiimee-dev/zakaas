@@ -1,74 +1,97 @@
-/* ZAKAAS PDP — REDESIGNED CONVERSION & TRUST SUITE */
+/* ==================================================
+   ZAKAAS PDP — JOYFUL, PREMIUM, PRODUCT-OBSESSED EDITORIAL
+   ================================================== */
 
-/* Breadcrumbs */
+:root {
+  --zakaas-cream: #f2ead8;
+  --zakaas-charcoal: #221f1d;
+  --zakaas-red: #c83a22;
+  --zakaas-orange: #df5327;
+  --zakaas-blue: #1d2d44;
+  --zakaas-ochre: #dda725;
+  --zakaas-warm-white: #fffdf9;
+  --zakaas-hairline: rgba(34, 31, 29, 0.2);
+}
+
+/* Page Foundation */
+.page-product-detail {
+  padding-top: 80px;
+  background-color: var(--zakaas-cream);
+  color: var(--zakaas-charcoal);
+  min-height: 100vh;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+}
+
+/* 1. Breadcrumbs */
 .pdp-breadcrumbs {
-  max-width: 1320px;
+  max-width: 1360px;
   margin: 0 auto;
-  padding: 20px 5vw 0;
+  padding: 18px 5vw 0;
   display: flex;
   align-items: center;
   gap: 8px;
-  font: 11px 'DM Mono', monospace;
+  font: 10.5px 'DM Mono', monospace;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #666;
+  letter-spacing: 1.2px;
+  color: #726c64;
 }
 
 .pdp-breadcrumbs a:hover {
-  color: var(--clay);
+  color: var(--zakaas-red);
 }
 
 .crumb-separator {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   opacity: 0.5;
 }
 
-/* PDP Main Container */
-.page-product-detail {
-  padding-top: 80px;
-  background: var(--khadi);
-  min-height: 100vh;
-}
-
+/* 2. Hero Section */
 .pdp-container {
-  padding: 30px 5vw 70px;
+  padding: 24px 5vw 60px;
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 50px;
-  max-width: 1320px;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 60px;
+  max-width: 1360px;
   margin: 0 auto;
   align-items: start;
 }
 
-/* Gallery Column */
+/* Left: Large Editorial Packaging Photo */
 .pdp-gallery-col {
   position: sticky;
-  top: 95px;
+  top: 90px;
 }
 
 .zakaas-pdp-gallery {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
+}
+
+.zakaas-pdp-main-image-wrap {
+  position: relative;
+  width: 100%;
 }
 
 .zakaas-pdp-main-image {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  max-height: 580px;
-  border: 2px solid var(--charcoal);
-  background: #fff;
+  max-height: 600px;
+  border: 2.5px solid var(--zakaas-charcoal);
+  background: var(--zakaas-warm-white);
   overflow: hidden;
-  box-shadow: 6px 6px 0 rgba(42, 38, 34, 0.1);
+  box-shadow: 8px 8px 0 var(--zakaas-charcoal);
+  transition: transform 0.3s ease;
 }
 
 .zakaas-pdp-main-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
 .zakaas-pdp-main-image:hover img {
@@ -80,29 +103,76 @@
   bottom: 16px;
   left: 16px;
   padding: 6px 14px;
-  background: var(--khadi);
-  border: 1px solid var(--charcoal);
-  font: 10px 'DM Mono', monospace;
+  background: var(--zakaas-blue);
+  color: var(--zakaas-cream);
+  font: 9.5px 'DM Mono', monospace;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   font-weight: 700;
-  box-shadow: 2px 2px 0 var(--charcoal);
+  border: 1px solid var(--zakaas-charcoal);
+  box-shadow: 3px 3px 0 var(--zakaas-charcoal);
+  z-index: 2;
 }
 
+/* Editorial Floating Stamps Around Packaging */
+.gallery-annotations-layer {
+  position: absolute;
+  inset: -15px -15px -15px -15px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.editorial-stamp {
+  position: absolute;
+  font: 9px 'DM Mono', monospace;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--zakaas-charcoal);
+  background: var(--zakaas-cream);
+  padding: 3px 8px;
+  border: 1px solid var(--zakaas-charcoal);
+  font-weight: 700;
+  box-shadow: 2px 2px 0 var(--zakaas-charcoal);
+}
+
+.stamp-top-left {
+  top: 0;
+  left: -5px;
+  background: var(--zakaas-ochre);
+  color: var(--zakaas-charcoal);
+}
+
+.stamp-top-right {
+  top: 0;
+  right: -5px;
+  background: var(--zakaas-red);
+  color: #fff;
+}
+
+.stamp-bottom-left {
+  bottom: 0;
+  left: -5px;
+}
+
+.stamp-bottom-right {
+  bottom: 0;
+  right: -5px;
+  background: var(--zakaas-blue);
+  color: var(--zakaas-cream);
+}
+
+/* Thumbnails */
 .zakaas-pdp-thumbnails {
   display: flex;
   gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 4px;
 }
 
 .zakaas-pdp-thumb {
-  width: 82px;
-  height: 82px;
-  flex-shrink: 0;
-  border: 2px solid rgba(42, 38, 34, 0.3);
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--zakaas-hairline);
+  background: var(--zakaas-warm-white);
   padding: 0;
-  background: #fff;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.2s ease;
@@ -115,32 +185,36 @@
 }
 
 .zakaas-pdp-thumb.is-active {
-  border-color: var(--clay);
-  box-shadow: 0 0 0 1px var(--clay);
+  border-color: var(--zakaas-red);
+  box-shadow: 0 0 0 1px var(--zakaas-red);
   transform: translateY(-2px);
 }
 
-.zakaas-pdp-thumb:hover {
-  border-color: var(--charcoal);
-}
-
-/* Info Column */
+/* Right: Product Information Column */
 .pdp-info-col {
   display: flex;
   flex-direction: column;
 }
 
-.pdp-meta-header {
+.pdp-personality-lead {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
-.pdp-origin-pill {
-  font: 9px 'DM Mono', monospace;
-  padding: 4px 10px;
-  border: 1px solid var(--charcoal);
+.personality-label {
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--zakaas-red);
+  font-weight: 800;
+}
+
+.heritage-badge {
+  font: 9.5px 'DM Mono', monospace;
+  padding: 3px 8px;
+  border: 1px solid var(--zakaas-charcoal);
   background: #fff;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -148,242 +222,143 @@
 }
 
 .pdp-title {
-  font-size: clamp(38px, 4.5vw, 68px);
-  letter-spacing: -0.06em;
-  line-height: 0.9;
-  margin: 0 0 8px;
-  color: var(--charcoal);
+  font-size: clamp(48px, 6vw, 84px);
   font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+  margin: 0 0 16px;
+  color: var(--zakaas-charcoal);
+  text-transform: uppercase;
 }
 
-.pdp-quote {
-  font: 20px 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  color: var(--clay);
-  margin: 0 0 20px;
-  line-height: 1.35;
+.pdp-short-lead {
+  font-size: 17px;
+  line-height: 1.5;
+  color: #35302b;
+  margin: 0 0 22px;
+  font-weight: 500;
 }
 
-/* Price Block */
-.zakaas-pdp-price-block {
-  padding-bottom: 16px;
-  margin-bottom: 18px;
-  border-bottom: 1px solid rgba(42, 38, 34, 0.2);
-}
-
-.zakaas-price-primary-row {
+/* Pricing Row */
+.pdp-hero-price-line {
   display: flex;
   align-items: baseline;
-  gap: 14px;
-  margin-bottom: 6px;
-  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+  border-bottom: 1.5px solid var(--zakaas-hairline);
 }
 
-.zakaas-selling-price {
-  font-size: clamp(34px, 4vw, 44px);
+.price-num-group {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.price-main {
+  font-size: clamp(36px, 4.5vw, 48px);
   font-weight: 800;
   letter-spacing: -0.04em;
-  color: var(--charcoal);
+  color: var(--zakaas-charcoal);
   line-height: 1;
 }
 
-.zakaas-mrp-price {
-  font-size: 20px;
-  color: #777;
+.price-strike {
+  font-size: 22px;
+  color: #7b746c;
   text-decoration: line-through;
   font-family: 'DM Mono', monospace;
 }
 
-.zakaas-savings-badge {
-  background: var(--clay);
-  color: #fff;
-  font: 11px 'DM Mono', monospace;
-  font-weight: 700;
+.price-pack-weight {
+  font: 12px 'DM Mono', monospace;
   letter-spacing: 1px;
-  padding: 4px 10px;
-  border-radius: 2px;
   text-transform: uppercase;
+  color: #635d55;
+  font-weight: 700;
 }
 
-.zakaas-tax-notice {
-  font: 11px 'DM Mono', monospace;
-  color: #666;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.bullet-sep {
-  opacity: 0.5;
-}
-
-/* Trust / Value Strip */
-.zakaas-trust-strip {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 12px;
-  padding: 10px 14px;
-  background: rgba(42, 38, 34, 0.04);
-  border: 1px solid rgba(42, 38, 34, 0.15);
-  margin-bottom: 22px;
-  border-radius: 2px;
-}
-
-.zakaas-trust-pill {
-  font: 11px 'DM Mono', monospace;
-  letter-spacing: 0.5px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--charcoal);
-  font-weight: 600;
-}
-
-.trust-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--clay);
-}
-
-/* Short Description */
-.zakaas-short-description {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #333;
-  margin: 0 0 24px;
-}
-
-/* Highlights Grid */
-.zakaas-highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px 18px;
-  padding: 16px 18px;
-  background: #fff;
-  border: 1px solid rgba(42, 38, 34, 0.18);
-  margin-bottom: 26px;
-  box-shadow: 2px 2px 0 rgba(42, 38, 34, 0.05);
-}
-
-.zakaas-highlight-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.zakaas-highlight-icon-wrap {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(168, 72, 46, 0.1);
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  color: var(--clay);
-}
-
-.zakaas-highlight-icon {
-  width: 15px;
-  height: 15px;
-}
-
-.zakaas-highlight-text {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--charcoal);
-  line-height: 1.35;
-}
-
-/* Pack Selector Section */
+/* Pack Selector: Not Cards Everywhere */
 .zakaas-pack-selector-section {
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .zakaas-pack-selector-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .zakaas-section-label {
   font: 11px 'DM Mono', monospace;
-  letter-spacing: 1.4px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
-  font-weight: 700;
-  color: var(--charcoal);
+  font-weight: 800;
+  color: var(--zakaas-charcoal);
 }
 
 .zakaas-pack-effective-rate {
   font: 11px 'DM Mono', monospace;
-  color: #777;
+  color: #68625a;
 }
 
 .zakaas-pack-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
 
 .zakaas-pack-card {
   position: relative;
-  border: 1.5px solid rgba(42, 38, 34, 0.25);
-  background: #fff;
-  padding: 22px 12px 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  border: 1.5px solid var(--zakaas-hairline);
+  background: var(--zakaas-warm-white);
+  padding: 16px 12px 12px;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: left;
-  border-radius: 2px;
 }
 
 .zakaas-pack-card:hover {
-  border-color: var(--charcoal);
+  border-color: var(--zakaas-charcoal);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(42, 38, 34, 0.08);
 }
 
 .zakaas-pack-card.is-selected {
-  border-color: var(--charcoal);
-  border-width: 2px;
-  background: #fffefb;
-  box-shadow: 4px 4px 0 var(--charcoal);
+  border: 2px solid var(--zakaas-charcoal);
+  background: #fff8eb;
+  box-shadow: 4px 4px 0 var(--zakaas-charcoal);
   transform: translateY(-2px);
 }
 
 .zakaas-pack-badge {
   position: absolute;
-  top: -10px;
+  top: -9px;
   left: 50%;
   transform: translateX(-50%);
-  font: 9px 'DM Mono', monospace;
+  font: 8.5px 'DM Mono', monospace;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 2px;
+  padding: 2px 7px;
   white-space: nowrap;
 }
 
 .badge-bestseller {
-  background: var(--clay);
+  background: var(--zakaas-red);
   color: #fff;
 }
 
 .badge-stockup {
-  background: var(--charcoal);
-  color: var(--khadi);
+  background: var(--zakaas-blue);
+  color: var(--zakaas-cream);
 }
 
 .zakaas-pack-card-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .zakaas-pack-card-title-group {
@@ -392,73 +367,70 @@
 }
 
 .zakaas-pack-count {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--charcoal);
+  color: var(--zakaas-charcoal);
 }
 
 .zakaas-pack-weight {
   font: 10px 'DM Mono', monospace;
-  color: #666;
-  margin-top: 2px;
+  color: #68625a;
+  margin-top: 1px;
 }
 
 .zakaas-radio-indicator {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  border: 1.5px solid rgba(42, 38, 34, 0.4);
+  border: 1.5px solid var(--zakaas-hairline);
   display: grid;
   place-items: center;
   transition: all 0.2s;
-  flex-shrink: 0;
 }
 
 .zakaas-radio-indicator.is-checked {
-  border-color: var(--charcoal);
-  background: var(--charcoal);
+  border-color: var(--zakaas-charcoal);
+  background: var(--zakaas-charcoal);
   color: #fff;
 }
 
 .radio-check-icon {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }
 
 .zakaas-pack-card-pricing {
   margin-top: auto;
-  border-top: 1px dashed rgba(42, 38, 34, 0.2);
-  padding-top: 10px;
+  border-top: 1px dashed var(--zakaas-hairline);
+  padding-top: 6px;
 }
 
 .zakaas-pack-price-row {
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: 5px;
 }
 
 .zakaas-pack-mrp {
-  font: 11px 'DM Mono', monospace;
-  color: #888;
+  font: 10.5px 'DM Mono', monospace;
+  color: #857e75;
   text-decoration: line-through;
 }
 
 .zakaas-pack-price {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 800;
-  color: var(--charcoal);
+  color: var(--zakaas-charcoal);
 }
 
 .zakaas-pack-savings {
-  font: 10px 'DM Mono', monospace;
+  font: 9.5px 'DM Mono', monospace;
   font-weight: 700;
-  color: var(--clay);
-  margin-top: 3px;
-  letter-spacing: 0.5px;
+  color: var(--zakaas-red);
+  margin-top: 2px;
 }
 
-/* Actions Wrap (Quantity + Add to Bag) */
+/* Actions Wrap */
 .pdp-actions-wrap {
   display: flex;
   gap: 12px;
@@ -468,10 +440,10 @@
 .pdp-quantity-picker {
   display: flex;
   align-items: center;
-  border: 2px solid var(--charcoal);
-  background: #fff;
+  border: 2px solid var(--zakaas-charcoal);
+  background: var(--zakaas-warm-white);
   height: 52px;
-  box-shadow: 3px 3px 0 var(--charcoal);
+  box-shadow: 3px 3px 0 var(--zakaas-charcoal);
 }
 
 .pdp-quantity-picker button {
@@ -482,235 +454,640 @@
   border: 0;
   background: transparent;
   cursor: pointer;
-  color: var(--charcoal);
+  color: var(--zakaas-charcoal);
   transition: background 0.15s;
 }
 
 .pdp-quantity-picker button:hover {
-  background: rgba(42, 38, 34, 0.08);
+  background: rgba(34, 31, 29, 0.08);
 }
 
 .pdp-quantity-picker span {
   font: 14px 'DM Mono', monospace;
-  padding: 0 12px;
+  padding: 0 10px;
   font-weight: 800;
-  min-width: 24px;
+  min-width: 22px;
   text-align: center;
 }
 
-.pdp-add-btn {
+/* Primary Food CTA — Zakaas Red/Orange */
+.pdp-primary-cta {
   flex: 1;
   height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: var(--charcoal);
-  color: var(--khadi);
+  background: var(--zakaas-red);
+  color: #fff;
   font: 12px 'DM Mono', monospace;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   font-weight: 800;
-  border: 2px solid var(--charcoal);
-  box-shadow: 4px 4px 0 var(--clay);
-  transition: all 0.2s ease;
+  border: 2px solid var(--zakaas-charcoal);
+  box-shadow: 4px 4px 0 var(--zakaas-charcoal);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  text-transform: uppercase;
 }
 
-.pdp-add-btn:hover {
-  background: var(--clay);
-  border-color: var(--clay);
-  color: #fff;
-  box-shadow: 4px 4px 0 var(--charcoal);
-  transform: translateY(-1px);
+.pdp-primary-cta:hover {
+  background: var(--zakaas-orange);
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 var(--zakaas-charcoal);
 }
 
-.pdp-add-btn.is-added {
-  background: #2b7a4b;
-  border-color: #2b7a4b;
-  color: #fff;
+.pdp-primary-cta:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--zakaas-charcoal);
 }
 
-/* Buy Now Button */
+.pdp-primary-cta.is-added {
+  background: #256f44;
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Secondary Buy Now */
 .pdp-buy-now-btn {
   width: 100%;
-  height: 48px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  background: var(--clay);
-  color: #fff;
-  border: 2px solid var(--clay);
-  font: 11px 'DM Mono', monospace;
+  gap: 8px;
+  background: var(--zakaas-charcoal);
+  color: var(--zakaas-cream);
+  border: 2px solid var(--zakaas-charcoal);
+  font: 10.5px 'DM Mono', monospace;
   letter-spacing: 1px;
   font-weight: 700;
-  margin-bottom: 26px;
-  box-shadow: 3px 3px 0 var(--charcoal);
+  margin-bottom: 22px;
+  box-shadow: 3px 3px 0 var(--zakaas-red);
   transition: all 0.2s;
   cursor: pointer;
 }
 
 .pdp-buy-now-btn:hover {
-  background: var(--charcoal);
-  border-color: var(--charcoal);
+  background: var(--zakaas-blue);
+  border-color: var(--zakaas-blue);
+  color: #fff;
   transform: translateY(-1px);
 }
 
-/* Delivery Trust Strip (3-column) */
-.zakaas-delivery-trust-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding: 16px;
-  background: #fff;
-  border: 1px solid rgba(42, 38, 34, 0.2);
-  margin-bottom: 18px;
-}
-
-.zakaas-trust-col {
+/* Quick Delivery Assurance Bar */
+.pdp-quick-delivery-bar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: rgba(34, 31, 29, 0.04);
+  border: 1px solid var(--zakaas-hairline);
+  font: 10.5px 'DM Mono', monospace;
+  font-weight: 700;
+  color: var(--zakaas-charcoal);
+  letter-spacing: 0.8px;
 }
 
-.zakaas-trust-icon-box {
-  width: 32px;
-  height: 32px;
-  background: rgba(168, 72, 46, 0.08);
-  border: 1px solid rgba(168, 72, 46, 0.2);
+.quick-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quick-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--zakaas-red);
+}
+
+.quick-sep {
+  opacity: 0.3;
+}
+
+/* ==================================================
+   3. PRODUCT FACT STRIP (TYPOGRAPHY & DIVIDERS)
+   ================================================== */
+.zakaas-fact-strip {
+  border-top: 2px solid var(--zakaas-charcoal);
+  border-bottom: 2px solid var(--zakaas-charcoal);
+  background: var(--zakaas-warm-white);
+}
+
+.zakaas-fact-strip-inner {
+  max-width: 1360px;
+  margin: 0 auto;
   display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  color: var(--clay);
-  border-radius: 2px;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 24px 5vw;
 }
 
-.zakaas-trust-icon {
-  width: 17px;
-  height: 17px;
-}
-
-.zakaas-trust-col-text {
+.zakaas-fact-col {
+  padding: 8px 24px;
+  border-right: 1.5px solid var(--zakaas-hairline);
   display: flex;
   flex-direction: column;
 }
 
-.zakaas-trust-col-title {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--charcoal);
-  line-height: 1.2;
+.zakaas-fact-col:last-child {
+  border-right: 0;
 }
 
-.zakaas-trust-col-sub {
-  font: 9px 'DM Mono', monospace;
-  color: #777;
-  margin-top: 2px;
+.fact-value {
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--zakaas-charcoal);
+  line-height: 1;
+  margin-bottom: 4px;
 }
 
-/* Delivery Estimate Card */
-.zakaas-delivery-estimate-card {
-  padding: 16px;
-  background: rgba(42, 38, 34, 0.04);
-  border: 1px solid rgba(42, 38, 34, 0.15);
-  margin-bottom: 26px;
-}
-
-.zakaas-delivery-estimate-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.zakaas-estimate-label {
+.fact-label {
   font: 10px 'DM Mono', monospace;
-  letter-spacing: 1px;
-  color: #777;
+  letter-spacing: 1.2px;
+  color: var(--zakaas-red);
   font-weight: 700;
 }
 
-.zakaas-estimate-dates {
-  font-size: 13px;
-  color: var(--charcoal);
+/* ==================================================
+   4. LARGE FOOD PHOTOGRAPH (MACRO HERO)
+   ================================================== */
+.zakaas-macro-hero {
+  max-width: 1360px;
+  margin: 70px auto;
+  padding: 0 5vw;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
+  align-items: center;
 }
 
-.zakaas-estimate-dates strong {
-  color: var(--clay);
+.macro-hero-frame {
+  position: relative;
+  border: 2.5px solid var(--zakaas-charcoal);
+  background: var(--zakaas-charcoal);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  box-shadow: 10px 10px 0 var(--zakaas-charcoal);
+}
+
+.macro-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.macro-hero-wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 65%, rgba(34, 31, 29, 0.45));
+}
+
+.macro-hero-stamp-corner {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--zakaas-cream);
+  border: 1.5px solid var(--zakaas-charcoal);
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 3px 3px 0 var(--zakaas-charcoal);
+}
+
+.macro-stamp-kicker {
+  font: 8.5px 'DM Mono', monospace;
+  letter-spacing: 1.2px;
+  color: var(--zakaas-red);
   font-weight: 800;
 }
 
-.zakaas-timeline-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4px 8px;
-}
-
-.zakaas-timeline-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  text-align: center;
-  flex: 0 0 auto;
-}
-
-.zakaas-step-bullet {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1.5px solid rgba(42, 38, 34, 0.3);
-  display: grid;
-  place-items: center;
-  color: #777;
-}
-
-.zakaas-step-bullet svg {
-  width: 13px;
-  height: 13px;
-}
-
-.zakaas-timeline-step.is-complete .zakaas-step-bullet,
-.zakaas-timeline-step.is-active .zakaas-step-bullet {
-  background: var(--charcoal);
-  border-color: var(--charcoal);
-  color: var(--khadi);
-}
-
-.zakaas-step-label {
-  font: 9px 'DM Mono', monospace;
-  color: #555;
+.macro-stamp-product {
+  font-size: 13px;
+  font-weight: 800;
   letter-spacing: 0.5px;
 }
 
-.zakaas-timeline-line {
-  flex: 1;
-  height: 2px;
-  background: rgba(42, 38, 34, 0.2);
-  margin: 0 8px -18px;
+.macro-hero-caption {
+  display: flex;
+  flex-direction: column;
 }
 
-.zakaas-timeline-line.is-active {
-  background: var(--charcoal);
+.macro-caption-kicker {
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1.5px;
+  color: var(--zakaas-red);
+  font-weight: 800;
+  margin-bottom: 12px;
 }
 
-/* Accordions Section */
+.macro-hero-statement {
+  font-size: clamp(38px, 5vw, 68px);
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+  margin: 0 0 20px;
+  color: var(--zakaas-charcoal);
+  font-weight: 800;
+}
+
+.macro-hero-statement em {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: var(--zakaas-red);
+  font-weight: 600;
+}
+
+.macro-hero-sub {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #423d37;
+  max-width: 480px;
+}
+
+/* ==================================================
+   5. WHY CHAKLI? (PRODUCT STORY)
+   ================================================== */
+.zakaas-product-story-section {
+  padding: 70px 5vw;
+  background: var(--zakaas-blue);
+  color: var(--zakaas-cream);
+  border-top: 2px solid var(--zakaas-charcoal);
+  border-bottom: 2px solid var(--zakaas-charcoal);
+}
+
+.product-story-grid {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.story-kicker {
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1.5px;
+  color: var(--zakaas-ochre);
+  font-weight: 800;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.story-headline {
+  font-size: clamp(40px, 5.5vw, 76px);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  margin: 0 0 24px;
+  font-weight: 800;
+}
+
+.story-headline em {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: var(--zakaas-ochre);
+}
+
+.story-body p {
+  font-size: 16px;
+  line-height: 1.65;
+  margin-bottom: 16px;
+  color: #ddd4c0;
+}
+
+.story-lead {
+  font-size: 19px !important;
+  color: var(--zakaas-cream) !important;
+  font-weight: 600;
+}
+
+.story-tagline {
+  font: 13px 'DM Mono', monospace;
+  color: var(--zakaas-ochre);
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+}
+
+.story-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.story-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid rgba(242, 234, 216, 0.3);
+  font: 10px 'DM Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.pill-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--zakaas-ochre);
+}
+
+.product-story-image-frame {
+  position: relative;
+  border: 2px solid var(--zakaas-cream);
+  box-shadow: 8px 8px 0 var(--zakaas-charcoal);
+  overflow: hidden;
+}
+
+.product-story-image-frame img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+.story-image-caption {
+  padding: 10px 14px;
+  background: var(--zakaas-charcoal);
+  color: var(--zakaas-cream);
+  font: 9.5px 'DM Mono', monospace;
+  letter-spacing: 1.2px;
+}
+
+/* ==================================================
+   6. INGREDIENT STORY (WHAT'S IN THE CRUNCH?)
+   ================================================== */
+.zakaas-ingredient-story-section {
+  padding: 90px 5vw;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.ingredient-story-header {
+  margin-bottom: 50px;
+}
+
+.ingredient-kicker {
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1.5px;
+  color: var(--zakaas-red);
+  font-weight: 800;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.ingredient-heading {
+  font-size: clamp(42px, 6vw, 84px);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  margin: 0 0 16px;
+  font-weight: 800;
+}
+
+.ingredient-heading em {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: var(--zakaas-red);
+}
+
+.ingredient-intro {
+  font-size: 17px;
+  max-width: 620px;
+  line-height: 1.55;
+  color: #443e37;
+}
+
+.ingredient-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 50px;
+}
+
+.ingredient-editorial-card {
+  position: relative;
+  padding: 26px 22px;
+  background: var(--zakaas-warm-white);
+  border: 1.5px solid var(--zakaas-charcoal);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.ingredient-editorial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 0 var(--zakaas-charcoal);
+}
+
+.ingredient-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+}
+
+.ingredient-number {
+  font: 12px 'DM Mono', monospace;
+  font-weight: 800;
+  color: var(--zakaas-red);
+}
+
+.ingredient-role-tag {
+  font: 9.5px 'DM Mono', monospace;
+  letter-spacing: 1px;
+  padding: 2px 7px;
+  background: var(--zakaas-blue);
+  color: var(--zakaas-cream);
+  font-weight: 700;
+}
+
+.ingredient-name {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+  color: var(--zakaas-charcoal);
+}
+
+.ingredient-desc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #554e46;
+  margin: 0;
+}
+
+.ingredient-connector-line {
+  margin-top: auto;
+  padding-top: 18px;
+  border-bottom: 2px solid var(--zakaas-ochre);
+  width: 40px;
+}
+
+.why-ingredients-callout {
+  border: 2px solid var(--zakaas-charcoal);
+  background: #fff8eb;
+  padding: 36px 40px;
+  box-shadow: 6px 6px 0 var(--zakaas-charcoal);
+}
+
+.why-label {
+  font: 10px 'DM Mono', monospace;
+  letter-spacing: 1.5px;
+  color: var(--zakaas-red);
+  font-weight: 800;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.why-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 12px;
+  letter-spacing: -0.03em;
+}
+
+.why-body {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: #38332d;
+  margin: 0;
+  max-width: 900px;
+}
+
+/* ==================================================
+   7. NUTRITION AT A GLANCE
+   ================================================== */
+.zakaas-nutrition-section {
+  padding: 70px 5vw;
+  background: var(--zakaas-warm-white);
+  border-top: 2px solid var(--zakaas-charcoal);
+  border-bottom: 2px solid var(--zakaas-charcoal);
+}
+
+.nutrition-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.nutrition-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nutrition-kicker {
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1.5px;
+  color: var(--zakaas-red);
+  font-weight: 800;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.nutrition-title {
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  margin: 0;
+  line-height: 1;
+}
+
+.nutrition-basis-badge {
+  font: 10.5px 'DM Mono', monospace;
+  padding: 5px 12px;
+  border: 1px solid var(--zakaas-charcoal);
+  background: var(--zakaas-cream);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nutrition-table-wrap {
+  border: 2px solid var(--zakaas-charcoal);
+  background: #fff;
+  margin-bottom: 18px;
+}
+
+.nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nutrition-table th,
+.nutrition-table td {
+  padding: 13px 20px;
+  border-bottom: 1px solid var(--zakaas-hairline);
+  font-size: 14px;
+}
+
+.nutrition-table th {
+  background: var(--zakaas-charcoal);
+  color: var(--zakaas-cream);
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.nutrient-name {
+  font-weight: 600;
+  color: var(--zakaas-charcoal);
+}
+
+.nutrient-val {
+  font-family: 'DM Mono', monospace;
+  font-weight: 700;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.nutrition-disclaimer {
+  font: 11px 'DM Mono', monospace;
+  color: #6a635a;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ==================================================
+   8. SPECIFICATIONS & MANUFACTURING ACCORDIONS
+   ================================================== */
+.zakaas-details-wrapper {
+  padding: 80px 5vw;
+}
+
+.details-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.details-section-header {
+  margin-bottom: 35px;
+}
+
+.details-main-title {
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  margin: 0;
+}
+
 .zakaas-pdp-accordions {
-  border-top: 2px solid var(--charcoal);
-  margin-bottom: 24px;
+  border-top: 2.5px solid var(--zakaas-charcoal);
 }
 
 .zakaas-accordion-item {
-  border-bottom: 1px solid rgba(42, 38, 34, 0.25);
+  border-bottom: 1.5px solid var(--zakaas-charcoal);
 }
 
 .zakaas-accordion-header {
   width: 100%;
-  padding: 16px 4px;
+  padding: 20px 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -721,179 +1098,226 @@
 }
 
 .zakaas-accordion-title {
-  font: 12px 'DM Mono', monospace;
-  letter-spacing: 1px;
-  font-weight: 700;
-  color: var(--charcoal);
+  font: 13px 'DM Mono', monospace;
+  letter-spacing: 1.2px;
+  font-weight: 800;
+  color: var(--zakaas-charcoal);
   text-transform: uppercase;
 }
 
 .zakaas-accordion-chevron {
-  width: 18px;
-  height: 18px;
-  color: var(--clay);
+  width: 20px;
+  height: 20px;
+  color: var(--zakaas-red);
   display: grid;
   place-items: center;
 }
 
-.zakaas-accordion-chevron svg {
-  width: 16px;
-  height: 16px;
-}
-
 .zakaas-accordion-body {
-  padding: 0 4px 18px;
+  padding: 0 4px 26px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #3b352f;
+}
+
+/* Made the Zakaas Way grid inside accordion */
+.made-way-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 12px 0;
+}
+
+.made-way-pillar {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid var(--zakaas-red);
+  padding-left: 14px;
+}
+
+.made-way-bullet {
+  font: 11px 'DM Mono', monospace;
+  font-weight: 800;
+  color: var(--zakaas-red);
+  margin-bottom: 4px;
+}
+
+.made-way-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--zakaas-charcoal);
+  margin-bottom: 4px;
+}
+
+.made-way-desc {
   font-size: 13px;
-  line-height: 1.6;
-  color: #444;
+  line-height: 1.45;
+  color: #554e46;
+  margin: 0;
 }
 
-.zakaas-accordion-body p {
-  margin: 0 0 10px;
-}
-
-.zakaas-accordion-body p:last-child {
-  margin-bottom: 0;
-}
-
+/* Specs Definition List */
 .zakaas-specs-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 12px;
   margin: 0;
 }
 
 .spec-row {
   display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 14px;
-  padding: 6px 0;
-  border-bottom: 1px dashed rgba(42, 38, 34, 0.15);
-  font-size: 12.5px;
-}
-
-.spec-row:last-child {
-  border-bottom: 0;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--zakaas-hairline);
+  font-size: 13.5px;
 }
 
 .spec-row dt {
   font: 11px 'DM Mono', monospace;
-  color: #666;
+  color: #6a635a;
   font-weight: 700;
   text-transform: uppercase;
 }
 
 .spec-row dd {
   margin: 0;
-  color: var(--charcoal);
+  color: var(--zakaas-charcoal);
   font-weight: 600;
+  line-height: 1.5;
 }
 
 .zakaas-allergen-alert {
-  padding: 8px 12px;
-  background: rgba(168, 72, 46, 0.08);
-  border-left: 3px solid var(--clay);
-  font-size: 12px;
-  margin-top: 10px !important;
+  padding: 10px 14px;
+  background: rgba(200, 58, 34, 0.08);
+  border-left: 3px solid var(--zakaas-red);
+  font-size: 13px;
+  margin-top: 12px !important;
 }
 
-/* Subtle Brand Hashtags */
-.zakaas-editorial-hashtags {
+/* ==================================================
+   9. FROM THE ZAKAAS TABLE (UGC / INSTAGRAM)
+   ================================================== */
+.zakaas-social-section {
+  padding: 80px 5vw;
+  background: var(--zakaas-cream);
+  border-top: 2px solid var(--zakaas-charcoal);
+}
+
+.social-header {
+  max-width: 1360px;
+  margin: 0 auto 35px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 20px 0 0;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.social-kicker {
   font: 11px 'DM Mono', monospace;
   letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #888;
+  color: var(--zakaas-red);
+  font-weight: 800;
+  display: block;
+  margin-bottom: 8px;
 }
 
-.zakaas-editorial-hashtags .dot {
-  color: var(--clay);
-}
-
-/* Related Products Section */
-.pdp-related-section {
-  padding: 80px 5vw;
-  background: var(--khadi);
-  border-top: 2px solid var(--charcoal);
-}
-
-.related-header {
-  margin-bottom: 35px;
-}
-
-.related-header h2 {
-  font-size: clamp(34px, 4.5vw, 60px);
+.social-title {
+  font-size: clamp(36px, 4.5vw, 64px);
+  font-weight: 800;
   line-height: 0.9;
   letter-spacing: -0.06em;
   margin: 0;
 }
 
-.related-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.social-title em {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: var(--zakaas-red);
 }
 
-.related-card {
-  border: 1.5px solid var(--charcoal);
+.social-handle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: 2px solid var(--zakaas-charcoal);
   background: #fff;
-  overflow: hidden;
-  display: block;
-  box-shadow: 4px 4px 0 rgba(42, 38, 34, 0.1);
-  transition: all 0.25s ease;
-}
-
-.related-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 6px 6px 0 var(--charcoal);
-}
-
-.related-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-}
-
-.related-card-info {
-  padding: 16px;
-}
-
-.related-card-info small {
-  font: 8.5px 'DM Mono', monospace;
-  display: block;
-  margin-bottom: 4px;
-  color: var(--clay);
-  letter-spacing: 1px;
-}
-
-.related-card-info h3 {
-  font-size: 20px;
-  margin: 0 0 6px;
-  letter-spacing: -0.04em;
-}
-
-.related-card-info p {
-  font: 12px 'DM Mono', monospace;
-  margin: 0;
+  font: 11px 'DM Mono', monospace;
   font-weight: 800;
-  color: var(--charcoal);
+  letter-spacing: 1px;
+  box-shadow: 3px 3px 0 var(--zakaas-charcoal);
+  transition: all 0.2s ease;
 }
 
-/* Sticky Mobile Add To Cart Bar */
+.social-handle-btn:hover {
+  background: var(--zakaas-charcoal);
+  color: var(--zakaas-cream);
+  transform: translateY(-2px);
+}
+
+.social-photo-grid {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.social-photo-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--zakaas-charcoal);
+  overflow: hidden;
+  box-shadow: 4px 4px 0 var(--zakaas-charcoal);
+}
+
+.social-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.social-photo-card:hover img {
+  transform: scale(1.05);
+}
+
+.social-photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 12px;
+  background: linear-gradient(0deg, rgba(34, 31, 29, 0.85), transparent);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.social-tag {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.social-source {
+  font: 9.5px 'DM Mono', monospace;
+  opacity: 0.8;
+}
+
+/* ==================================================
+   10. STICKY MOBILE ADD TO CART
+   ================================================== */
 .zakaas-sticky-mobile-cta {
   display: none;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .pdp-container {
     grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 15px 4vw 60px;
+    gap: 36px;
+    padding: 16px 4vw 50px;
   }
 
   .pdp-gallery-col {
@@ -901,27 +1325,37 @@
   }
 
   .zakaas-pdp-main-image {
-    max-height: 400px;
+    max-height: 420px;
   }
 
-  .zakaas-pack-cards-grid {
+  .zakaas-fact-strip-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .zakaas-fact-col {
+    border-right: 0;
+  }
+
+  .zakaas-macro-hero {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 30px;
+    margin: 50px auto;
   }
 
-  .zakaas-pack-card {
-    padding: 16px 14px;
-  }
-
-  .zakaas-pack-badge {
-    top: -8px;
-    left: 20px;
-    transform: none;
-  }
-
-  .zakaas-delivery-trust-strip {
+  .product-story-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 36px;
+  }
+
+  .ingredient-editorial-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .made-way-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .spec-row {
@@ -929,8 +1363,8 @@
     gap: 4px;
   }
 
-  .related-grid {
-    grid-template-columns: 1fr;
+  .social-photo-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   /* Sticky Bar Active on Mobile */
@@ -941,7 +1375,7 @@
     left: 0;
     right: 0;
     background: #fff;
-    border-top: 2px solid var(--charcoal);
+    border-top: 2px solid var(--zakaas-charcoal);
     padding: 10px 16px;
     padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
     z-index: 100;
@@ -975,7 +1409,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--charcoal);
+    color: var(--zakaas-charcoal);
   }
 
   .zakaas-sticky-price-row {
@@ -988,7 +1422,7 @@
   .zakaas-sticky-selling-price {
     font-size: 16px;
     font-weight: 800;
-    color: var(--charcoal);
+    color: var(--zakaas-charcoal);
   }
 
   .zakaas-sticky-mrp {
@@ -1000,15 +1434,15 @@
   .zakaas-sticky-badge {
     font: 9px 'DM Mono', monospace;
     font-weight: 700;
-    color: var(--clay);
+    color: var(--zakaas-red);
   }
 
   .zakaas-sticky-add-btn {
     height: 44px;
     padding: 0 18px;
-    background: var(--charcoal);
-    color: var(--khadi);
-    border: 2px solid var(--charcoal);
+    background: var(--zakaas-red);
+    color: #fff;
+    border: 2px solid var(--zakaas-charcoal);
     font: 11px 'DM Mono', monospace;
     font-weight: 800;
     letter-spacing: 0.8px;
@@ -1020,16 +1454,10 @@
   }
 
   .zakaas-sticky-add-btn:active {
-    background: var(--clay);
+    background: var(--zakaas-orange);
   }
 
   .zakaas-sticky-add-btn.is-added {
-    background: #2b7a4b;
-    border-color: #2b7a4b;
-  }
-
-  .btn-icon {
-    width: 14px;
-    height: 14px;
+    background: #256f44;
   }
 }

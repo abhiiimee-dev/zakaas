@@ -6,8 +6,9 @@ export function ProductAccordions({
   selectedPack = null
 }) {
   const [openSections, setOpenSections] = useState({
-    manufacturing: false,
-    ingredients: true, // open by default for immediate transparency
+    madeWay: true,
+    manufacturing: true,
+    ingredients: false,
     storage: false,
     shipping: false
   });
@@ -19,14 +20,58 @@ export function ProductAccordions({
     }));
   };
 
-  const manufacturing = product.manufacturingInfo || {};
+  const manufacturing = product.manufacturingInfo || {
+    manufacturedBy: 'Bharat Namkeen Private Limited',
+    factoryAddress: 'Bombay Super 11, Plot No. 32/33, Kuvadva to Wakaner Road, Rajkot – 360023, Gujarat, India.',
+    netQuantity: '100g (1 Pack)',
+    countryOfOrigin: 'India',
+    foodCategory: 'Ready to Eat Traditional Savouries'
+  };
+
+  const madeWay = product.madeTheZakaasWay || [
+    { title: 'SMALL BATCHES', desc: 'Crafted in limited quantities so every pack retains home-kitchen crispness.' },
+    { title: 'FRESHLY PACKED', desc: 'Sealed immediately into multi-layer pouches to preserve aroma and crunch.' },
+    { title: 'TRADITIONAL RECIPE', desc: 'Honest Maharashtrian recipes with roasted flours, authentic spices, and zero artificial shortcuts.' }
+  ];
+
   const currentNetQty = selectedPack
     ? `${selectedPack.weight} (${selectedPack.title})`
-    : (product.weight || '100g');
+    : (manufacturing.netQuantity || '100g (1 Pack)');
 
   return (
     <div className="zakaas-pdp-accordions" aria-label="Product specifications and details">
-      {/* 1. Manufacturing Information Accordion */}
+      {/* 1. Made the Zakaas Way */}
+      <div className="zakaas-accordion-item">
+        <button
+          type="button"
+          className="zakaas-accordion-header"
+          onClick={() => toggle('madeWay')}
+          aria-expanded={openSections.madeWay}
+        >
+          <span className="zakaas-accordion-title">MADE THE ZAKAAS WAY</span>
+          <span className="zakaas-accordion-chevron">
+            {openSections.madeWay ? <ChevronUp /> : <ChevronDown />}
+          </span>
+        </button>
+
+        {openSections.madeWay && (
+          <div className="zakaas-accordion-body">
+            <div className="made-way-grid">
+              {madeWay.map((item, i) => (
+                <div key={i} className="made-way-pillar">
+                  <span className="made-way-bullet">0{i + 1}</span>
+                  <div className="made-way-content">
+                    <strong className="made-way-title">{item.title}</strong>
+                    <p className="made-way-desc">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 2. Manufacturing Information (Exact Non-Negotiable Data) */}
       <div className="zakaas-accordion-item">
         <button
           type="button"
@@ -34,7 +79,7 @@ export function ProductAccordions({
           onClick={() => toggle('manufacturing')}
           aria-expanded={openSections.manufacturing}
         >
-          <span className="zakaas-accordion-title">MANUFACTURING INFORMATION</span>
+          <span className="zakaas-accordion-title">MANUFACTURING & PACKAGING DETAILS</span>
           <span className="zakaas-accordion-chevron">
             {openSections.manufacturing ? <ChevronUp /> : <ChevronDown />}
           </span>
@@ -43,49 +88,50 @@ export function ProductAccordions({
         {openSections.manufacturing && (
           <div className="zakaas-accordion-body">
             <dl className="zakaas-specs-list">
-              {manufacturing.manufacturedBy && (
-                <div className="spec-row">
-                  <dt>Manufactured By</dt>
-                  <dd>{manufacturing.manufacturedBy}</dd>
-                </div>
-              )}
               <div className="spec-row">
-                <dt>Net Quantity</dt>
+                <dt>MANUFACTURED BY</dt>
+                <dd><strong>{manufacturing.manufacturedBy || 'Bharat Namkeen Private Limited'}</strong></dd>
+              </div>
+              <div className="spec-row">
+                <dt>FACTORY & OFFICE</dt>
+                <dd>
+                  {manufacturing.factoryAddress ||
+                    'Bombay Super 11, Plot No. 32/33, Kuvadva to Wakaner Road, Rajkot – 360023, Gujarat, India.'}
+                </dd>
+              </div>
+              <div className="spec-row">
+                <dt>NET QUANTITY</dt>
                 <dd>{currentNetQty}</dd>
               </div>
-              {manufacturing.countryOfOrigin && (
-                <div className="spec-row">
-                  <dt>Country of Origin</dt>
-                  <dd>{manufacturing.countryOfOrigin}</dd>
-                </div>
-              )}
-              {manufacturing.foodCategory && (
-                <div className="spec-row">
-                  <dt>Food Category</dt>
-                  <dd>{manufacturing.foodCategory}</dd>
-                </div>
-              )}
+              <div className="spec-row">
+                <dt>COUNTRY OF ORIGIN</dt>
+                <dd>{manufacturing.countryOfOrigin || 'India'}</dd>
+              </div>
+              <div className="spec-row">
+                <dt>FOOD CATEGORY</dt>
+                <dd>{manufacturing.foodCategory || 'Ready to Eat Traditional Savouries'}</dd>
+              </div>
               {product.origin && (
                 <div className="spec-row">
-                  <dt>Regional Culinary Heritage</dt>
+                  <dt>REGIONAL HERITAGE</dt>
                   <dd>{product.origin}</dd>
                 </div>
               )}
               {manufacturing.shelfLife && (
                 <div className="spec-row">
-                  <dt>Best Before</dt>
+                  <dt>SHELF LIFE</dt>
                   <dd>{manufacturing.shelfLife}</dd>
                 </div>
               )}
               {manufacturing.storageInstructions && (
                 <div className="spec-row">
-                  <dt>Storage</dt>
+                  <dt>STORAGE INSTRUCTIONS</dt>
                   <dd>{manufacturing.storageInstructions}</dd>
                 </div>
               )}
               {manufacturing.batchInfo && (
                 <div className="spec-row">
-                  <dt>Batch & MFD</dt>
+                  <dt>BATCH & MFD</dt>
                   <dd>{manufacturing.batchInfo}</dd>
                 </div>
               )}
@@ -94,7 +140,7 @@ export function ProductAccordions({
         )}
       </div>
 
-      {/* 2. Ingredients & Allergens */}
+      {/* 3. Ingredients & Allergens */}
       {product.ingredients && (
         <div className="zakaas-accordion-item">
           <button
@@ -103,7 +149,7 @@ export function ProductAccordions({
             onClick={() => toggle('ingredients')}
             aria-expanded={openSections.ingredients}
           >
-            <span className="zakaas-accordion-title">INGREDIENTS & ALLERGENS</span>
+            <span className="zakaas-accordion-title">INGREDIENTS & ALLERGEN ADVICE</span>
             <span className="zakaas-accordion-chevron">
               {openSections.ingredients ? <ChevronUp /> : <ChevronDown />}
             </span>
@@ -124,7 +170,7 @@ export function ProductAccordions({
         </div>
       )}
 
-      {/* 3. Shelf Life & Storage */}
+      {/* 4. Shelf Life & Storage */}
       <div className="zakaas-accordion-item">
         <button
           type="button"
@@ -141,17 +187,17 @@ export function ProductAccordions({
         {openSections.storage && (
           <div className="zakaas-accordion-body">
             <p>
-              <strong>Shelf Life:</strong> {product.shelfLife || '90 Days'}.
+              <strong>Shelf Life:</strong> {product.shelfLife || '90 Days from packaging date'}.
             </p>
             <p>
-              Our snacks are dispatched in airtight, multi-layer pouches to seal in peak home-kitchen crunch.
-              Once unsealed, transfer contents to a clean, dry airtight container. Store away from direct sunlight, humidity, and heat sources.
+              Our snacks are dispatched in sealed, airtight multi-layer pouches to keep moisture out.
+              Once opened, transfer contents to a clean, dry airtight container to preserve signature crunch.
             </p>
           </div>
         )}
       </div>
 
-      {/* 4. Shipping & Returns */}
+      {/* 5. Shipping & Returns */}
       <div className="zakaas-accordion-item">
         <button
           type="button"
@@ -159,7 +205,7 @@ export function ProductAccordions({
           onClick={() => toggle('shipping')}
           aria-expanded={openSections.shipping}
         >
-          <span className="zakaas-accordion-title">SHIPPING & RETURNS</span>
+          <span className="zakaas-accordion-title">SHIPPING & CRISPNESS GUARANTEE</span>
           <span className="zakaas-accordion-chevron">
             {openSections.shipping ? <ChevronUp /> : <ChevronDown />}
           </span>
@@ -168,10 +214,10 @@ export function ProductAccordions({
         {openSections.shipping && (
           <div className="zakaas-accordion-body">
             <p>
-              <strong>Pan-India Shipping:</strong> All orders are dispatched within 24 hours from our Mumbai facility. Expected doorstep delivery is within 3 to 5 business days across metro and tier-1/tier-2 cities.
+              <strong>Fast Pan-India Delivery:</strong> Dispatched within 24 hours. Expected delivery within 3–5 business days across India.
             </p>
             <p>
-              <strong>Damage & Freshness Guarantee:</strong> Because our food items are prepared fresh without artificial preservatives, we cannot accept returns once opened. However, if your package arrives damaged, unsealed, or compromised in transit, please contact us within 48 hours for an immediate complimentary replacement.
+              <strong>Freshness Promise:</strong> If your packet arrives damaged or unsealed in transit, contact our team within 48 hours for an immediate replacement.
             </p>
           </div>
         )}

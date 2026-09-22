@@ -1,18 +1,21 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Check, Minus, Plus, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Check, Minus, Plus, ChevronRight, Truck, Banknote, ShieldCheck } from 'lucide-react';
 import { getProductByHandle } from '../lib/shopify';
-import { getFallbackProductByHandle, products as fallbackProducts } from '../data/products';
+import { getFallbackProductByHandle } from '../data/products';
 import { Footer } from '../components/Footer';
 
 import { ProductGallery } from '../components/pdp/ProductGallery';
-import { ProductTrustStrip } from '../components/pdp/ProductTrustStrip';
-import { ProductHighlights } from '../components/pdp/ProductHighlights';
 import { PackSelector } from '../components/pdp/PackSelector';
-import { DeliveryTrust } from '../components/pdp/DeliveryTrust';
-import { DeliveryEstimate } from '../components/pdp/DeliveryEstimate';
+import { ProductFactStrip } from '../components/pdp/ProductFactStrip';
+import { SnackMacroHero } from '../components/pdp/SnackMacroHero';
+import { ProductStorySection } from '../components/pdp/ProductStorySection';
+import { IngredientStorySection } from '../components/pdp/IngredientStorySection';
+import { NutritionPanel } from '../components/pdp/NutritionPanel';
 import { ProductAccordions } from '../components/pdp/ProductAccordions';
+import { SocialTableSection } from '../components/pdp/SocialTableSection';
 import { StickyMobileCTA } from '../components/pdp/StickyMobileCTA';
+
 import '../components/pdp/pdp.css';
 
 export function ProductDetailPage({ onAdd, cartData }) {
@@ -38,7 +41,6 @@ export function ProductDetailPage({ onAdd, cartData }) {
         if (!isMounted) return;
         const resolved = data || getFallbackProductByHandle(handle);
         setProduct(resolved);
-        // Default to the first pack option (1 Pack: 100g)
         if (resolved?.packOptions?.length) {
           setSelectedPack(resolved.packOptions[0]);
         }
@@ -60,13 +62,11 @@ export function ProductDetailPage({ onAdd, cartData }) {
     };
   }, [handle]);
 
-  // Monitor visibility of main CTA to display sticky mobile CTA
   useEffect(() => {
     if (!mainCtaRef.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Show sticky when main CTA is scrolled above viewport on mobile
         setShowStickyCta(!entry.isIntersecting && entry.boundingClientRect.top < 0);
       },
       { threshold: 0 }
@@ -107,13 +107,34 @@ export function ProductDetailPage({ onAdd, cartData }) {
       savings: 49,
       badge: null,
       variantId: product.variantId
+    },
+    {
+      id: 'pack-3',
+      packCount: 3,
+      title: '3 PACKS',
+      weight: '300g',
+      mrp: 597,
+      price: 450,
+      savings: 147,
+      badge: 'BEST SELLER',
+      variantId: product.variantId
+    },
+    {
+      id: 'pack-5',
+      packCount: 5,
+      title: '5 PACKS',
+      weight: '500g',
+      mrp: 995,
+      price: 750,
+      savings: 245,
+      badge: 'STOCK UP',
+      variantId: product.variantId
     }
   ];
 
   const currentPack = selectedPack || packOptions[0];
   const unitPrice = currentPack?.price || 150;
   const unitMrp = currentPack?.mrp || 199;
-  const unitSavings = currentPack?.savings || 49;
 
   const handleAddToCart = () => {
     const itemToAdd = {
@@ -140,11 +161,9 @@ export function ProductDetailPage({ onAdd, cartData }) {
     }
   };
 
-  const related = fallbackProducts.filter((p) => p.handle !== product.handle).slice(0, 3);
-
   return (
     <div className="page-product-detail">
-      {/* Breadcrumb row */}
+      {/* 1. Header & Minimal Breadcrumb */}
       <nav className="pdp-breadcrumbs" aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         <ChevronRight className="crumb-separator" />
@@ -153,8 +172,9 @@ export function ProductDetailPage({ onAdd, cartData }) {
         <span aria-current="page">{product.name}</span>
       </nav>
 
+      {/* 2. Hero Section: Packaging Gallery + Product Purchase Column */}
       <div className="pdp-container">
-        {/* 1. Gallery Section (Left on Desktop) */}
+        {/* Left: Large Editorial Packaging Photo with Annotations */}
         <div className="pdp-gallery-col">
           <ProductGallery
             images={images}
@@ -162,56 +182,40 @@ export function ProductDetailPage({ onAdd, cartData }) {
             setSelectedImage={setSelectedImage}
             productName={product.name}
             personality={product.personality}
+            annotations={product.editorialAnnotations}
           />
         </div>
 
-        {/* 2. Product Info Column (Right on Desktop) */}
+        {/* Right: Highly Readable, Visually Exciting Product Information */}
         <div className="pdp-info-col">
-          {/* Header row: Kicker + Origin */}
-          <div className="pdp-meta-header">
-            <span className="kicker">01 / TRADITIONAL MANUFACTURE</span>
-            <span className="pdp-origin-pill">{product.origin || 'Maharashtra Heritage'}</span>
+          <div className="pdp-personality-lead">
+            <span className="personality-label">{product.personality || 'THE CRUNCHY ONE'}</span>
+            <span className="heritage-badge">{product.origin || 'MAHARASHTRA CLASSIC'}</span>
           </div>
 
-          {/* Product Name */}
           <h1 className="pdp-title">{product.name}</h1>
 
-          {/* Editorial Tagline */}
-          <p className="pdp-quote">“{product.line || 'A taste of Maharashtrian heritage.'}”</p>
-
-          {/* Pricing Row */}
-          <div className="zakaas-pdp-price-block">
-            <div className="zakaas-price-primary-row">
-              <span className="zakaas-selling-price">₹{unitPrice}</span>
-              <span className="zakaas-mrp-price">₹{unitMrp}</span>
-              <span className="zakaas-savings-badge">SAVE ₹{unitSavings}</span>
-            </div>
-            <div className="zakaas-tax-notice">
-              <span>Inclusive of all taxes</span>
-              <span className="bullet-sep">·</span>
-              <span>100g vacuum sealed pack</span>
-            </div>
-          </div>
-
-          {/* Product Trust / Value Strip */}
-          <ProductTrustStrip claims={product.trustClaims} />
-
-          {/* Short Product Description */}
-          <p className="zakaas-short-description">
-            {product.shortDescription || product.description}
+          <p className="pdp-short-lead">
+            {product.shortDescription || 'Crisp Maharashtrian chakli made with traditional bhajan flour, cumin and ajwain.'}
           </p>
 
-          {/* Product Highlight Pointers */}
-          <ProductHighlights highlights={product.highlights} />
+          {/* Pricing Row: Product first, clear price & weight */}
+          <div className="pdp-hero-price-line">
+            <div className="price-num-group">
+              <span className="price-main">₹{unitPrice}</span>
+              <span className="price-strike">₹{unitMrp}</span>
+            </div>
+            <span className="price-pack-weight">{currentPack.weight}</span>
+          </div>
 
-          {/* Pack Selector (1 / 3 / 5 Packs Only) */}
+          {/* Pack Size Selector (1 / 3 / 5 Packs Only) */}
           <PackSelector
             options={packOptions}
             selectedOptionId={currentPack.id}
             onSelect={(pack) => setSelectedPack(pack)}
           />
 
-          {/* Quantity Controls & Primary Add to Cart */}
+          {/* Quantity Controls & Bold Red/Orange Primary Food CTA */}
           <div className="pdp-actions-wrap" ref={mainCtaRef}>
             <div className="pdp-quantity-picker" aria-label="Adjust quantity">
               <button
@@ -233,16 +237,16 @@ export function ProductDetailPage({ onAdd, cartData }) {
 
             <button
               type="button"
-              className={`hero-button pdp-add-btn ${added ? 'is-added' : ''}`}
+              className={`pdp-primary-cta ${added ? 'is-added' : ''}`}
               onClick={handleAddToCart}
             >
               {added ? (
                 <>
-                  ADDED TO BAG <Check />
+                  ADDED TO BAG <Check className="btn-icon" />
                 </>
               ) : (
                 <>
-                  ADD TO BAG — ₹{unitPrice * quantity} <Plus />
+                  ADD TO BAG — ₹{unitPrice * quantity} <Plus className="btn-icon" />
                 </>
               )}
             </button>
@@ -254,61 +258,67 @@ export function ProductDetailPage({ onAdd, cartData }) {
             className="pdp-buy-now-btn"
             onClick={handleBuyNow}
           >
-            BUY NOW WITH SHOPIFY CHECKOUT <ArrowUpRight />
+            BUY NOW WITH SHOPIFY CHECKOUT <ArrowUpRight className="btn-icon" />
           </button>
 
-          {/* COD / Shipping / Delivery Trust Bar */}
-          <DeliveryTrust />
-
-          {/* Dynamic Delivery Estimate */}
-          <DeliveryEstimate />
-
-          {/* Manufacturing Information & Product Accordions */}
-          <ProductAccordions
-            product={product}
-            selectedPack={currentPack}
-          />
-
-          {/* Subtle Editorial Brand Hashtags */}
-          <div className="zakaas-editorial-hashtags">
-            <span>#Zakaas</span>
-            <span className="dot">·</span>
-            <span>#MaharashtraInEveryBite</span>
-            <span className="dot">·</span>
-            <span>#JagaBadliSwadNahi</span>
+          {/* Delivery & Assurance Reassurance */}
+          <div className="pdp-quick-delivery-bar">
+            <div className="quick-item">
+              <Banknote className="quick-icon" />
+              <span>COD AVAILABLE</span>
+            </div>
+            <span className="quick-sep">|</span>
+            <div className="quick-item">
+              <Truck className="quick-icon" />
+              <span>FREE SHIPPING</span>
+            </div>
+            <span className="quick-sep">|</span>
+            <div className="quick-item">
+              <ShieldCheck className="quick-icon" />
+              <span>DELIVERY IN 3–5 DAYS</span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Related Products / Pair With */}
-      <section className="pdp-related-section">
-        <div className="related-header">
-          <p className="kicker">PAIR IT WITH</p>
-          <h2>
-            COMPLETE YOUR<br />
-            <em>SNACK TABLE.</em>
-          </h2>
-        </div>
+      {/* 3. Editorial Product Fact Strip (Typography & Dividers) */}
+      <ProductFactStrip facts={product.editorialFactStrip} />
 
-        <div className="related-grid">
-          {related.map((relItem) => (
-            <Link
-              key={relItem.id}
-              to={`/products/${relItem.handle}`}
-              className="related-card"
-            >
-              <img src={relItem.image} alt={relItem.name} loading="lazy" />
-              <div className="related-card-info">
-                <small>{relItem.personality}</small>
-                <h3>{relItem.name}</h3>
-                <p>₹{Number(relItem.price || 150).toFixed(0)}</p>
-              </div>
-            </Link>
-          ))}
+      {/* 4. Large Food Photograph — "Show the Actual Snack" */}
+      <SnackMacroHero
+        image={images[0]}
+        title={product.name}
+        personality={product.personality}
+      />
+
+      {/* 5. "Why Chakli?" — The Product Story */}
+      <ProductStorySection product={product} />
+
+      {/* 6. Ingredient Story & Education — "What's in the Crunch?" */}
+      <IngredientStorySection product={product} />
+
+      {/* 7. Nutrition at a Glance — Real Laboratory/Manufacturer Data */}
+      <NutritionPanel nutritionFacts={product.nutritionFacts} />
+
+      {/* 8. Product Details & Exact Manufacturer Information */}
+      <section className="zakaas-details-wrapper">
+        <div className="details-container">
+          <div className="details-section-header">
+            <span className="kicker">AUTHENTIC PRODUCTION</span>
+            <h2 className="details-main-title">PRODUCT & MAKER SPECIFICATIONS</h2>
+          </div>
+
+          <ProductAccordions
+            product={product}
+            selectedPack={currentPack}
+          />
         </div>
       </section>
 
-      {/* Sticky Mobile Add to Cart Bar */}
+      {/* 9. From the Zakaas Table / Zakaas IRL (Authentic Community Moments) */}
+      <SocialTableSection />
+
+      {/* 10. Sticky Mobile Add to Cart Bar */}
       <StickyMobileCTA
         productName={product.name}
         selectedPack={currentPack}
