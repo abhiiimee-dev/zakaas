@@ -40,7 +40,7 @@ export function Footer() {
       <div className="footer-bottom">
         <small>© {new Date().getFullYear()} ZAKAAS. ALL TASTE RESERVED.</small>
         <div className="footer-socials">
-          <a href="https://instagram.com" target="_blank" rel="noreferrer">INSTAGRAM</a>
+          <a href="https://www.instagram.com/zakaas.in/" target="_blank" rel="noreferrer">INSTAGRAM</a>
           <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer">WHATSAPP</a>
           <a href="mailto:hello@zakaas.in">EMAIL US</a>
         </div>
