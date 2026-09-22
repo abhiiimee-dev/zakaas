@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Check, Minus, Plus, ChevronRight, Truck, Banknote, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, Check, Minus, Plus, ChevronRight } from 'lucide-react';
 import { getProductByHandle } from '../lib/shopify';
 import { getFallbackProductByHandle } from '../data/products';
 import { Footer } from '../components/Footer';
@@ -8,12 +8,9 @@ import { Footer } from '../components/Footer';
 import { ProductGallery } from '../components/pdp/ProductGallery';
 import { PackSelector } from '../components/pdp/PackSelector';
 import { ProductFactStrip } from '../components/pdp/ProductFactStrip';
-import { SnackMacroHero } from '../components/pdp/SnackMacroHero';
-import { ProductStorySection } from '../components/pdp/ProductStorySection';
 import { IngredientStorySection } from '../components/pdp/IngredientStorySection';
-import { NutritionPanel } from '../components/pdp/NutritionPanel';
-import { ProductAccordions } from '../components/pdp/ProductAccordions';
-import { SocialTableSection } from '../components/pdp/SocialTableSection';
+import { ProductDetailsSection } from '../components/pdp/ProductDetailsSection';
+import { InstagramSection } from '../components/pdp/InstagramSection';
 import { StickyMobileCTA } from '../components/pdp/StickyMobileCTA';
 
 import '../components/pdp/pdp.css';
@@ -62,6 +59,7 @@ export function ProductDetailPage({ onAdd, cartData }) {
     };
   }, [handle]);
 
+  // Observer for mobile sticky CTA
   useEffect(() => {
     if (!mainCtaRef.current) return;
 
@@ -127,7 +125,7 @@ export function ProductDetailPage({ onAdd, cartData }) {
       mrp: 995,
       price: 750,
       savings: 245,
-      badge: 'STOCK UP',
+      badge: null,
       variantId: product.variantId
     }
   ];
@@ -163,7 +161,7 @@ export function ProductDetailPage({ onAdd, cartData }) {
 
   return (
     <div className="page-product-detail">
-      {/* 1. Header & Minimal Breadcrumb */}
+      {/* 01. Minimal Breadcrumb Navigation */}
       <nav className="pdp-breadcrumbs" aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         <ChevronRight className="crumb-separator" />
@@ -172,52 +170,42 @@ export function ProductDetailPage({ onAdd, cartData }) {
         <span aria-current="page">{product.name}</span>
       </nav>
 
-      {/* 2. Hero Section: Packaging Gallery + Product Purchase Column */}
-      <div className="pdp-container">
-        {/* Left: Large Editorial Packaging Photo with Annotations */}
-        <div className="pdp-gallery-col">
+      {/* 01. Product Hero */}
+      <div className="pdp-hero-container">
+        {/* Left: Product Photography */}
+        <div className="pdp-hero-visual-col">
           <ProductGallery
             images={images}
             selectedImage={selectedImage}
             setSelectedImage={setSelectedImage}
             productName={product.name}
-            personality={product.personality}
-            annotations={product.editorialAnnotations}
           />
         </div>
 
-        {/* Right: Highly Readable, Visually Exciting Product Information */}
-        <div className="pdp-info-col">
-          <div className="pdp-personality-lead">
-            <span className="personality-label">{product.personality || 'THE CRUNCHY ONE'}</span>
-            <span className="heritage-badge">{product.origin || 'MAHARASHTRA CLASSIC'}</span>
-          </div>
+        {/* Right: Product Purchase Column */}
+        <div className="pdp-hero-info-col">
+          <h1 className="product-title">{product.name}</h1>
 
-          <h1 className="pdp-title">{product.name}</h1>
-
-          <p className="pdp-short-lead">
-            {product.shortDescription || 'Crisp Maharashtrian chakli made with traditional bhajan flour, cumin and ajwain.'}
+          <p className="product-summary">
+            {product.shortDescription || 'Crisp, savoury Maharashtrian chakli made with traditional bhajan flour, cumin and ajwain.'}
           </p>
 
-          {/* Pricing Row: Product first, clear price & weight */}
-          <div className="pdp-hero-price-line">
-            <div className="price-num-group">
-              <span className="price-main">₹{unitPrice}</span>
-              <span className="price-strike">₹{unitMrp}</span>
-            </div>
-            <span className="price-pack-weight">{currentPack.weight}</span>
+          <div className="product-pricing-line">
+            <span className="current-price">₹{unitPrice}</span>
+            <span className="original-mrp">MRP ₹{unitMrp}</span>
+            <span className="pack-weight-indicator">{currentPack.weight}</span>
           </div>
 
-          {/* Pack Size Selector (1 / 3 / 5 Packs Only) */}
+          {/* Pack Selector (1 / 3 / 5 Packs Only) */}
           <PackSelector
             options={packOptions}
             selectedOptionId={currentPack.id}
             onSelect={(pack) => setSelectedPack(pack)}
           />
 
-          {/* Quantity Controls & Bold Red/Orange Primary Food CTA */}
-          <div className="pdp-actions-wrap" ref={mainCtaRef}>
-            <div className="pdp-quantity-picker" aria-label="Adjust quantity">
+          {/* Quantity Stepper & Primary Red CTA */}
+          <div className="pdp-cta-group" ref={mainCtaRef}>
+            <div className="stepper-picker" aria-label="Adjust quantity">
               <button
                 type="button"
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -237,7 +225,7 @@ export function ProductDetailPage({ onAdd, cartData }) {
 
             <button
               type="button"
-              className={`pdp-primary-cta ${added ? 'is-added' : ''}`}
+              className={`primary-add-button ${added ? 'is-added' : ''}`}
               onClick={handleAddToCart}
             >
               {added ? (
@@ -246,7 +234,7 @@ export function ProductDetailPage({ onAdd, cartData }) {
                 </>
               ) : (
                 <>
-                  ADD TO BAG — ₹{unitPrice * quantity} <Plus className="btn-icon" />
+                  ADD TO BAG — ₹{unitPrice * quantity}
                 </>
               )}
             </button>
@@ -255,70 +243,32 @@ export function ProductDetailPage({ onAdd, cartData }) {
           {/* Secondary Buy Now */}
           <button
             type="button"
-            className="pdp-buy-now-btn"
+            className="secondary-buy-button"
             onClick={handleBuyNow}
           >
-            BUY NOW WITH SHOPIFY CHECKOUT <ArrowUpRight className="btn-icon" />
+            BUY NOW
           </button>
 
-          {/* Delivery & Assurance Reassurance */}
-          <div className="pdp-quick-delivery-bar">
-            <div className="quick-item">
-              <Banknote className="quick-icon" />
-              <span>COD AVAILABLE</span>
-            </div>
-            <span className="quick-sep">|</span>
-            <div className="quick-item">
-              <Truck className="quick-icon" />
-              <span>FREE SHIPPING</span>
-            </div>
-            <span className="quick-sep">|</span>
-            <div className="quick-item">
-              <ShieldCheck className="quick-icon" />
-              <span>DELIVERY IN 3–5 DAYS</span>
-            </div>
-          </div>
+          {/* Delivery Note */}
+          <p className="delivery-simple-note">
+            Standard delivery in 3–5 business days across India. Cash on Delivery available.
+          </p>
         </div>
       </div>
 
-      {/* 3. Editorial Product Fact Strip (Typography & Dividers) */}
-      <ProductFactStrip facts={product.editorialFactStrip} />
+      {/* 02. Product Facts Strip */}
+      <ProductFactStrip />
 
-      {/* 4. Large Food Photograph — "Show the Actual Snack" */}
-      <SnackMacroHero
-        image={images[0]}
-        title={product.name}
-        personality={product.personality}
-      />
+      {/* 03. What's In The Crunch (Single Visual Composition) */}
+      <IngredientStorySection />
 
-      {/* 5. "Why Chakli?" — The Product Story */}
-      <ProductStorySection product={product} />
+      {/* 04. Nutrition & Product Details */}
+      <ProductDetailsSection selectedPack={currentPack} />
 
-      {/* 6. Ingredient Story & Education — "What's in the Crunch?" */}
-      <IngredientStorySection product={product} />
+      {/* 05. Real Zakaas Content (Zakaas, IRL) */}
+      <InstagramSection />
 
-      {/* 7. Nutrition at a Glance — Real Laboratory/Manufacturer Data */}
-      <NutritionPanel nutritionFacts={product.nutritionFacts} />
-
-      {/* 8. Product Details & Exact Manufacturer Information */}
-      <section className="zakaas-details-wrapper">
-        <div className="details-container">
-          <div className="details-section-header">
-            <span className="kicker">AUTHENTIC PRODUCTION</span>
-            <h2 className="details-main-title">PRODUCT & MAKER SPECIFICATIONS</h2>
-          </div>
-
-          <ProductAccordions
-            product={product}
-            selectedPack={currentPack}
-          />
-        </div>
-      </section>
-
-      {/* 9. From the Zakaas Table / Zakaas IRL (Authentic Community Moments) */}
-      <SocialTableSection />
-
-      {/* 10. Sticky Mobile Add to Cart Bar */}
+      {/* Sticky Mobile Bar */}
       <StickyMobileCTA
         productName={product.name}
         selectedPack={currentPack}
@@ -328,6 +278,7 @@ export function ProductDetailPage({ onAdd, cartData }) {
         visible={showStickyCta}
       />
 
+      {/* Footer */}
       <Footer />
     </div>
   );

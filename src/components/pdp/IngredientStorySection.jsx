@@ -1,70 +1,64 @@
-export function IngredientStorySection({ product }) {
-  const ingredients = product?.ingredientBreakdown || [
+export function IngredientStorySection() {
+  const ingredients = [
     {
       name: 'BHAJAN FLOUR',
       role: 'THE BASE',
-      description: 'The traditional multigrain flour base crafted from slow-roasted rice and chana dal that gives Chakli its characteristic brittle spiral ridges and savoury depth.'
+      description: 'Slow-roasted rice and chana dal milled together. Roasting pre-cooks the grains, creating a light, porous structure that fries to an airy, brittle crunch rather than a hard shell.'
     },
     {
-      name: 'CUMIN (JEERA)',
+      name: 'CUMIN',
       role: 'THE WARM NOTE',
-      description: 'Whole seeds roasted into the dough for warm, aromatic, earthy flavour and centuries of traditional presence in Maharashtrian kitchens.'
+      description: 'Whole cumin seeds roasted directly into the dough. When fried, they release an earthy, aromatic warmth that anchors the savoury profile.'
     },
     {
       name: 'AJWAIN',
       role: 'THE DISTINCTIVE AROMA',
-      description: 'Adds its unmistakable pungent aroma and sharp, savoury note that commands attention the moment the airtight packet is unsealed.'
+      description: 'Pungent carom seeds that lend a bright, peppery aroma and clean herbal sharpness the moment the pouch is opened.'
     },
     {
-      name: 'WHITE SESAME SEEDS (TIL)',
+      name: 'WHITE SESAME SEEDS',
       role: 'THE NUTTY CRUNCH',
-      description: 'Nutty seeds embedded throughout the ridges, toasting golden in the oil to add delicate crunch and visual heritage to every spiral.'
-    },
-    {
-      name: 'COLD-PRESSED PEANUT OIL',
-      role: 'THE CRISP MEDIUM',
-      description: 'Traditional groundnut oil cooked at precise temperature to deliver that unmistakable clean, golden snap without greasiness.'
+      description: 'Golden toasted seeds scattered across the ridges, adding gentle nuttiness and textural contrast to every bite.'
     }
   ];
 
-  const whyStory = product?.whyIngredientsStory ||
-    'Traditional Maharashtrian snack craft is culinary balance honed over generations. Slow-roasting the grains before milling (the bhajan method) pre-cooks the starches, ensuring each spiral fries to a brittle, airy crunch rather than a hard shell. Cumin and ajwain are kneaded directly into the dough to release their fragrant essential oils in the hot oil, pairing with evening chai.';
-
   return (
-    <section className="zakaas-ingredient-story-section" aria-label="Ingredient origins and culinary science">
-      <div className="ingredient-story-header">
-        <span className="ingredient-kicker">04 / THE BOTANICALS & GRAINS</span>
-        <h2 className="ingredient-heading">
-          WHAT’S IN<br />
-          <em>THE CRUNCH?</em>
-        </h2>
-        <p className="ingredient-intro">
-          No fillers. No artificial preservatives. Just slow-roasted grains and aromatic Indian spices
-          combined using classical culinary balance.
-        </p>
-      </div>
+    <section className="zakaas-ingredients-composition" aria-label="Ingredients and preparation">
+      <div className="ingredients-inner-container">
+        {/* Editorial Section Header */}
+        <div className="ingredients-header">
+          <span className="section-eyebrow">WHAT’S IN THE CRUNCH</span>
+          <h2 className="ingredients-title">REAL INGREDIENTS. TRADITIONAL TECHNIQUE.</h2>
+          <p className="ingredients-intro">
+            No starches, no chemical leaveners, no artificial flavourings. Every element has a culinary purpose in creating the authentic Maharashtrian texture and aroma.
+          </p>
+        </div>
 
-      {/* Editorial Ingredients Layout with Hairlines & Connectors */}
-      <div className="ingredient-editorial-grid">
-        {ingredients.map((ing, idx) => (
-          <article key={idx} className="ingredient-editorial-card">
-            <div className="ingredient-card-meta">
-              <span className="ingredient-number">0{idx + 1}</span>
-              <span className="ingredient-role-tag">{ing.role}</span>
+        {/* Single Integrated Composition: Real Photo + Clean Typographic Details */}
+        <div className="ingredients-composition-layout">
+          <div className="ingredients-visual">
+            <img
+              src="/zakaas-chakli.jpg"
+              alt="Crisp Maharashtrian Chakli showing toasted spices and sesame seeds"
+              loading="lazy"
+              className="ingredients-main-image"
+            />
+            <div className="ingredients-caption">
+              <span>TRADITIONAL BHAJAN FLOUR · ROASTED WHOLE SPICES · COLD-PRESSED OIL</span>
             </div>
-            <h3 className="ingredient-name">{ing.name}</h3>
-            <p className="ingredient-desc">{ing.description}</p>
-            <div className="ingredient-connector-line" aria-hidden="true" />
-          </article>
-        ))}
-      </div>
+          </div>
 
-      {/* "Why These Ingredients?" Box */}
-      <div className="why-ingredients-callout">
-        <div className="why-ingredients-inner">
-          <span className="why-label">CULINARY CRAFT</span>
-          <h4 className="why-title">WHY THESE INGREDIENTS?</h4>
-          <p className="why-body">{whyStory}</p>
+          <div className="ingredients-list-flow">
+            {ingredients.map((item, index) => (
+              <div key={index} className="ingredient-entry">
+                <div className="ingredient-title-line">
+                  <h3 className="ingredient-heading">{item.name}</h3>
+                  <span className="ingredient-role">{item.role}</span>
+                </div>
+                <p className="ingredient-text">{item.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

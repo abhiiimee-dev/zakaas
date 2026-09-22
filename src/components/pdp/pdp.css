@@ -1,65 +1,78 @@
 /* ==================================================
-   ZAKAAS PDP — JOYFUL, PREMIUM, PRODUCT-OBSESSED EDITORIAL
+   ZAKAAS CHAKLI PDP — FINAL ART DIRECTION
+   "Normal, but beautiful." Real food brand design.
    ================================================== */
 
 :root {
-  --zakaas-cream: #f2ead8;
-  --zakaas-charcoal: #221f1d;
-  --zakaas-red: #c83a22;
-  --zakaas-orange: #df5327;
-  --zakaas-blue: #1d2d44;
-  --zakaas-ochre: #dda725;
-  --zakaas-warm-white: #fffdf9;
-  --zakaas-hairline: rgba(34, 31, 29, 0.2);
+  --pdp-bg: #f8f5ee;
+  --pdp-bg-alt: #f1ebd9;
+  --pdp-surface: #ffffff;
+  --pdp-text: #191816;
+  --pdp-text-muted: #6b645a;
+  --pdp-red: #c4301c;
+  --pdp-red-hover: #b02613;
+  --pdp-blue: #1c2938;
+  --pdp-border: rgba(25, 24, 22, 0.16);
+  --pdp-border-dark: #191816;
 }
 
-/* Page Foundation */
+/* Base Page */
 .page-product-detail {
-  padding-top: 80px;
-  background-color: var(--zakaas-cream);
-  color: var(--zakaas-charcoal);
+  padding-top: 75px;
+  background-color: var(--pdp-bg);
+  color: var(--pdp-text);
   min-height: 100vh;
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
-  overflow-x: hidden;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* 1. Breadcrumbs */
+/* ==================================================
+   01. BREADCRUMBS
+   ================================================== */
 .pdp-breadcrumbs {
-  max-width: 1360px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 18px 5vw 0;
+  padding: 16px 5vw 0;
   display: flex;
   align-items: center;
   gap: 8px;
-  font: 10.5px 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
-  color: #726c64;
+  color: var(--pdp-text-muted);
+  font-weight: 600;
+}
+
+.pdp-breadcrumbs a {
+  color: var(--pdp-text-muted);
+  transition: color 0.15s ease;
 }
 
 .pdp-breadcrumbs a:hover {
-  color: var(--zakaas-red);
+  color: var(--pdp-text);
 }
 
 .crumb-separator {
   width: 12px;
   height: 12px;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
-/* 2. Hero Section */
-.pdp-container {
-  padding: 24px 5vw 60px;
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 60px;
-  max-width: 1360px;
+/* ==================================================
+   01. PRODUCT HERO
+   ================================================== */
+.pdp-hero-container {
+  max-width: 1240px;
   margin: 0 auto;
+  padding: 30px 5vw 60px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
   align-items: start;
 }
 
-/* Left: Large Editorial Packaging Photo */
-.pdp-gallery-col {
+/* Visual Column */
+.pdp-hero-visual-col {
   position: sticky;
   top: 90px;
 }
@@ -67,1307 +80,693 @@
 .zakaas-pdp-gallery {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
-.zakaas-pdp-main-image-wrap {
-  position: relative;
-  width: 100%;
-}
-
-.zakaas-pdp-main-image {
-  position: relative;
+.zakaas-main-photo-frame {
   width: 100%;
   aspect-ratio: 1 / 1;
-  max-height: 600px;
-  border: 2.5px solid var(--zakaas-charcoal);
-  background: var(--zakaas-warm-white);
+  max-height: 560px;
+  background: var(--pdp-surface);
+  border: 1px solid var(--pdp-border);
   overflow: hidden;
-  box-shadow: 8px 8px 0 var(--zakaas-charcoal);
-  transition: transform 0.3s ease;
 }
 
-.zakaas-pdp-main-image img {
+.zakaas-main-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  display: block;
 }
 
-.zakaas-pdp-main-image:hover img {
-  transform: scale(1.03);
-}
-
-.zakaas-personality-tag {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  padding: 6px 14px;
-  background: var(--zakaas-blue);
-  color: var(--zakaas-cream);
-  font: 9.5px 'DM Mono', monospace;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  font-weight: 700;
-  border: 1px solid var(--zakaas-charcoal);
-  box-shadow: 3px 3px 0 var(--zakaas-charcoal);
-  z-index: 2;
-}
-
-/* Editorial Floating Stamps Around Packaging */
-.gallery-annotations-layer {
-  position: absolute;
-  inset: -15px -15px -15px -15px;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.editorial-stamp {
-  position: absolute;
-  font: 9px 'DM Mono', monospace;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--zakaas-charcoal);
-  background: var(--zakaas-cream);
-  padding: 3px 8px;
-  border: 1px solid var(--zakaas-charcoal);
-  font-weight: 700;
-  box-shadow: 2px 2px 0 var(--zakaas-charcoal);
-}
-
-.stamp-top-left {
-  top: 0;
-  left: -5px;
-  background: var(--zakaas-ochre);
-  color: var(--zakaas-charcoal);
-}
-
-.stamp-top-right {
-  top: 0;
-  right: -5px;
-  background: var(--zakaas-red);
-  color: #fff;
-}
-
-.stamp-bottom-left {
-  bottom: 0;
-  left: -5px;
-}
-
-.stamp-bottom-right {
-  bottom: 0;
-  right: -5px;
-  background: var(--zakaas-blue);
-  color: var(--zakaas-cream);
-}
-
-/* Thumbnails */
-.zakaas-pdp-thumbnails {
+.zakaas-photo-thumbnails {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 
-.zakaas-pdp-thumb {
-  width: 80px;
-  height: 80px;
-  border: 2px solid var(--zakaas-hairline);
-  background: var(--zakaas-warm-white);
+.zakaas-thumb-btn {
+  width: 72px;
+  height: 72px;
+  border: 1.5px solid transparent;
   padding: 0;
+  background: var(--pdp-surface);
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: border-color 0.15s ease;
 }
 
-.zakaas-pdp-thumb img {
+.zakaas-thumb-btn img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-.zakaas-pdp-thumb.is-active {
-  border-color: var(--zakaas-red);
-  box-shadow: 0 0 0 1px var(--zakaas-red);
-  transform: translateY(-2px);
+.zakaas-thumb-btn.is-active {
+  border-color: var(--pdp-border-dark);
 }
 
-/* Right: Product Information Column */
-.pdp-info-col {
+.zakaas-thumb-btn:hover {
+  border-color: var(--pdp-text-muted);
+}
+
+/* Information Column */
+.pdp-hero-info-col {
   display: flex;
   flex-direction: column;
 }
 
-.pdp-personality-lead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.personality-label {
-  font: 11px 'DM Mono', monospace;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--zakaas-red);
+.product-title {
+  font-size: clamp(38px, 4.5vw, 56px);
   font-weight: 800;
-}
-
-.heritage-badge {
-  font: 9.5px 'DM Mono', monospace;
-  padding: 3px 8px;
-  border: 1px solid var(--zakaas-charcoal);
-  background: #fff;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.pdp-title {
-  font-size: clamp(48px, 6vw, 84px);
-  font-weight: 800;
-  letter-spacing: -0.06em;
-  line-height: 0.88;
-  margin: 0 0 16px;
-  color: var(--zakaas-charcoal);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0 0 14px;
+  color: var(--pdp-text);
   text-transform: uppercase;
 }
 
-.pdp-short-lead {
-  font-size: 17px;
-  line-height: 1.5;
-  color: #35302b;
-  margin: 0 0 22px;
-  font-weight: 500;
+.product-summary {
+  font-size: 16px;
+  line-height: 1.55;
+  color: #3b3731;
+  margin: 0 0 20px;
+  max-width: 520px;
 }
 
-/* Pricing Row */
-.pdp-hero-price-line {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  padding-bottom: 18px;
-  margin-bottom: 22px;
-  border-bottom: 1.5px solid var(--zakaas-hairline);
-}
-
-.price-num-group {
+/* Pricing Line */
+.product-pricing-line {
   display: flex;
   align-items: baseline;
   gap: 12px;
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--pdp-border);
 }
 
-.price-main {
-  font-size: clamp(36px, 4.5vw, 48px);
+.current-price {
+  font-size: 34px;
   font-weight: 800;
-  letter-spacing: -0.04em;
-  color: var(--zakaas-charcoal);
-  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--pdp-text);
 }
 
-.price-strike {
-  font-size: 22px;
-  color: #7b746c;
+.original-mrp {
+  font-size: 18px;
+  color: var(--pdp-text-muted);
   text-decoration: line-through;
-  font-family: 'DM Mono', monospace;
+  font-weight: 500;
 }
 
-.price-pack-weight {
-  font: 12px 'DM Mono', monospace;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #635d55;
+.pack-weight-indicator {
+  font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--pdp-text-muted);
+  margin-left: 4px;
 }
 
-/* Pack Selector: Not Cards Everywhere */
-.zakaas-pack-selector-section {
-  margin-bottom: 24px;
+/* Pack Selector: Normal, Clean, Attractive */
+.zakaas-pack-selector {
+  margin-bottom: 22px;
 }
 
-.zakaas-pack-selector-header {
+.pack-selector-label-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.zakaas-section-label {
-  font: 11px 'DM Mono', monospace;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
+.pack-select-heading {
+  font-size: 11px;
   font-weight: 800;
-  color: var(--zakaas-charcoal);
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.zakaas-pack-effective-rate {
-  font: 11px 'DM Mono', monospace;
-  color: #68625a;
+.pack-unit-price {
+  font-size: 12px;
+  color: var(--pdp-text-muted);
 }
 
-.zakaas-pack-cards-grid {
+.pack-options-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
-.zakaas-pack-card {
+.pack-option-pill {
   position: relative;
-  border: 1.5px solid var(--zakaas-hairline);
-  background: var(--zakaas-warm-white);
-  padding: 16px 12px 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  background: var(--pdp-surface);
+  border: 1px solid var(--pdp-border);
+  padding: 14px 12px 10px;
   text-align: left;
-}
-
-.zakaas-pack-card:hover {
-  border-color: var(--zakaas-charcoal);
-  transform: translateY(-2px);
-}
-
-.zakaas-pack-card.is-selected {
-  border: 2px solid var(--zakaas-charcoal);
-  background: #fff8eb;
-  box-shadow: 4px 4px 0 var(--zakaas-charcoal);
-  transform: translateY(-2px);
-}
-
-.zakaas-pack-badge {
-  position: absolute;
-  top: -9px;
-  left: 50%;
-  transform: translateX(-50%);
-  font: 8.5px 'DM Mono', monospace;
-  font-weight: 800;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  white-space: nowrap;
-}
-
-.badge-bestseller {
-  background: var(--zakaas-red);
-  color: #fff;
-}
-
-.badge-stockup {
-  background: var(--zakaas-blue);
-  color: var(--zakaas-cream);
-}
-
-.zakaas-pack-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 8px;
-}
-
-.zakaas-pack-card-title-group {
+  cursor: pointer;
+  transition: all 0.15s ease;
   display: flex;
   flex-direction: column;
 }
 
-.zakaas-pack-count {
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--zakaas-charcoal);
+.pack-option-pill:hover {
+  border-color: var(--pdp-text-muted);
 }
 
-.zakaas-pack-weight {
-  font: 10px 'DM Mono', monospace;
-  color: #68625a;
-  margin-top: 1px;
+.pack-option-pill.is-selected {
+  border: 2px solid var(--pdp-border-dark);
+  background: #fffcf5;
 }
 
-.zakaas-radio-indicator {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 1.5px solid var(--zakaas-hairline);
-  display: grid;
-  place-items: center;
-  transition: all 0.2s;
-}
-
-.zakaas-radio-indicator.is-checked {
-  border-color: var(--zakaas-charcoal);
-  background: var(--zakaas-charcoal);
+.pack-bestseller-tag {
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  background: var(--pdp-red);
   color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  padding: 2px 6px;
+  text-transform: uppercase;
 }
 
-.radio-check-icon {
-  width: 10px;
-  height: 10px;
+.pack-option-title-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
 }
 
-.zakaas-pack-card-pricing {
-  margin-top: auto;
-  border-top: 1px dashed var(--zakaas-hairline);
-  padding-top: 6px;
+.pack-option-name {
+  font-size: 13px;
+  font-weight: 800;
 }
 
-.zakaas-pack-price-row {
+.pack-option-weight {
+  font-size: 11px;
+  color: var(--pdp-text-muted);
+}
+
+.pack-option-price-line {
   display: flex;
   align-items: baseline;
-  gap: 5px;
+  gap: 6px;
+  margin-top: auto;
 }
 
-.zakaas-pack-mrp {
-  font: 10.5px 'DM Mono', monospace;
-  color: #857e75;
+.pack-current-price {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.pack-mrp-price {
+  font-size: 11px;
+  color: var(--pdp-text-muted);
   text-decoration: line-through;
 }
 
-.zakaas-pack-price {
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--zakaas-charcoal);
-}
-
-.zakaas-pack-savings {
-  font: 9.5px 'DM Mono', monospace;
+.pack-savings-note {
+  font-size: 10px;
   font-weight: 700;
-  color: var(--zakaas-red);
+  color: var(--pdp-red);
   margin-top: 2px;
 }
 
-/* Actions Wrap */
-.pdp-actions-wrap {
+/* CTA Group */
+.pdp-cta-group {
   display: flex;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.pdp-quantity-picker {
+.stepper-picker {
   display: flex;
   align-items: center;
-  border: 2px solid var(--zakaas-charcoal);
-  background: var(--zakaas-warm-white);
-  height: 52px;
-  box-shadow: 3px 3px 0 var(--zakaas-charcoal);
+  border: 1.5px solid var(--pdp-border-dark);
+  background: var(--pdp-surface);
+  height: 48px;
 }
 
-.pdp-quantity-picker button {
-  width: 44px;
+.stepper-picker button {
+  width: 40px;
   height: 100%;
   display: grid;
   place-items: center;
   border: 0;
   background: transparent;
   cursor: pointer;
-  color: var(--zakaas-charcoal);
+  color: var(--pdp-text);
   transition: background 0.15s;
 }
 
-.pdp-quantity-picker button:hover {
-  background: rgba(34, 31, 29, 0.08);
+.stepper-picker button:hover {
+  background: rgba(25, 24, 22, 0.06);
 }
 
-.pdp-quantity-picker span {
-  font: 14px 'DM Mono', monospace;
-  padding: 0 10px;
-  font-weight: 800;
-  min-width: 22px;
+.stepper-picker span {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 8px;
+  min-width: 20px;
   text-align: center;
 }
 
-/* Primary Food CTA — Zakaas Red/Orange */
-.pdp-primary-cta {
+.primary-add-button {
   flex: 1;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: var(--zakaas-red);
+  height: 48px;
+  background: var(--pdp-red);
   color: #fff;
-  font: 12px 'DM Mono', monospace;
-  letter-spacing: 1.2px;
+  border: 0;
+  font-size: 12px;
   font-weight: 800;
-  border: 2px solid var(--zakaas-charcoal);
-  box-shadow: 4px 4px 0 var(--zakaas-charcoal);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-  text-transform: uppercase;
-}
-
-.pdp-primary-cta:hover {
-  background: var(--zakaas-orange);
-  transform: translateY(-2px);
-  box-shadow: 6px 6px 0 var(--zakaas-charcoal);
-}
-
-.pdp-primary-cta:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--zakaas-charcoal);
-}
-
-.pdp-primary-cta.is-added {
-  background: #256f44;
-}
-
-.btn-icon {
-  width: 16px;
-  height: 16px;
-}
-
-/* Secondary Buy Now */
-.pdp-buy-now-btn {
-  width: 100%;
-  height: 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: var(--zakaas-charcoal);
-  color: var(--zakaas-cream);
-  border: 2px solid var(--zakaas-charcoal);
-  font: 10.5px 'DM Mono', monospace;
   letter-spacing: 1px;
-  font-weight: 700;
-  margin-bottom: 22px;
-  box-shadow: 3px 3px 0 var(--zakaas-red);
-  transition: all 0.2s;
+  text-transform: uppercase;
   cursor: pointer;
-}
-
-.pdp-buy-now-btn:hover {
-  background: var(--zakaas-blue);
-  border-color: var(--zakaas-blue);
-  color: #fff;
-  transform: translateY(-1px);
-}
-
-/* Quick Delivery Assurance Bar */
-.pdp-quick-delivery-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 14px;
-  background: rgba(34, 31, 29, 0.04);
-  border: 1px solid var(--zakaas-hairline);
-  font: 10.5px 'DM Mono', monospace;
-  font-weight: 700;
-  color: var(--zakaas-charcoal);
-  letter-spacing: 0.8px;
-}
-
-.quick-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.quick-icon {
-  width: 15px;
-  height: 15px;
-  color: var(--zakaas-red);
-}
-
-.quick-sep {
-  opacity: 0.3;
-}
-
-/* ==================================================
-   3. PRODUCT FACT STRIP (TYPOGRAPHY & DIVIDERS)
-   ================================================== */
-.zakaas-fact-strip {
-  border-top: 2px solid var(--zakaas-charcoal);
-  border-bottom: 2px solid var(--zakaas-charcoal);
-  background: var(--zakaas-warm-white);
-}
-
-.zakaas-fact-strip-inner {
-  max-width: 1360px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 24px 5vw;
-}
-
-.zakaas-fact-col {
-  padding: 8px 24px;
-  border-right: 1.5px solid var(--zakaas-hairline);
-  display: flex;
-  flex-direction: column;
-}
-
-.zakaas-fact-col:last-child {
-  border-right: 0;
-}
-
-.fact-value {
-  font-size: clamp(20px, 2.2vw, 28px);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: var(--zakaas-charcoal);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.fact-label {
-  font: 10px 'DM Mono', monospace;
-  letter-spacing: 1.2px;
-  color: var(--zakaas-red);
-  font-weight: 700;
-}
-
-/* ==================================================
-   4. LARGE FOOD PHOTOGRAPH (MACRO HERO)
-   ================================================== */
-.zakaas-macro-hero {
-  max-width: 1360px;
-  margin: 70px auto;
-  padding: 0 5vw;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 50px;
-  align-items: center;
-}
-
-.macro-hero-frame {
-  position: relative;
-  border: 2.5px solid var(--zakaas-charcoal);
-  background: var(--zakaas-charcoal);
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  box-shadow: 10px 10px 0 var(--zakaas-charcoal);
-}
-
-.macro-hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(1.05) contrast(1.05);
-}
-
-.macro-hero-wash {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 65%, rgba(34, 31, 29, 0.45));
-}
-
-.macro-hero-stamp-corner {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: var(--zakaas-cream);
-  border: 1.5px solid var(--zakaas-charcoal);
-  padding: 6px 12px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 3px 3px 0 var(--zakaas-charcoal);
-}
-
-.macro-stamp-kicker {
-  font: 8.5px 'DM Mono', monospace;
-  letter-spacing: 1.2px;
-  color: var(--zakaas-red);
-  font-weight: 800;
-}
-
-.macro-stamp-product {
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-}
-
-.macro-hero-caption {
-  display: flex;
-  flex-direction: column;
-}
-
-.macro-caption-kicker {
-  font: 11px 'DM Mono', monospace;
-  letter-spacing: 1.5px;
-  color: var(--zakaas-red);
-  font-weight: 800;
-  margin-bottom: 12px;
-}
-
-.macro-hero-statement {
-  font-size: clamp(38px, 5vw, 68px);
-  line-height: 0.92;
-  letter-spacing: -0.06em;
-  margin: 0 0 20px;
-  color: var(--zakaas-charcoal);
-  font-weight: 800;
-}
-
-.macro-hero-statement em {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  color: var(--zakaas-red);
-  font-weight: 600;
-}
-
-.macro-hero-sub {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #423d37;
-  max-width: 480px;
-}
-
-/* ==================================================
-   5. WHY CHAKLI? (PRODUCT STORY)
-   ================================================== */
-.zakaas-product-story-section {
-  padding: 70px 5vw;
-  background: var(--zakaas-blue);
-  color: var(--zakaas-cream);
-  border-top: 2px solid var(--zakaas-charcoal);
-  border-bottom: 2px solid var(--zakaas-charcoal);
-}
-
-.product-story-grid {
-  max-width: 1360px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-
-.story-kicker {
-  font: 11px 'DM Mono', monospace;
-  letter-spacing: 1.5px;
-  color: var(--zakaas-ochre);
-  font-weight: 800;
-  display: block;
-  margin-bottom: 14px;
-}
-
-.story-headline {
-  font-size: clamp(40px, 5.5vw, 76px);
-  line-height: 0.9;
-  letter-spacing: -0.06em;
-  margin: 0 0 24px;
-  font-weight: 800;
-}
-
-.story-headline em {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  color: var(--zakaas-ochre);
-}
-
-.story-body p {
-  font-size: 16px;
-  line-height: 1.65;
-  margin-bottom: 16px;
-  color: #ddd4c0;
-}
-
-.story-lead {
-  font-size: 19px !important;
-  color: var(--zakaas-cream) !important;
-  font-weight: 600;
-}
-
-.story-tagline {
-  font: 13px 'DM Mono', monospace;
-  color: var(--zakaas-ochre);
-  letter-spacing: 0.5px;
-  margin-top: 20px;
-}
-
-.story-badges-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 30px;
-}
-
-.story-pill {
+  transition: background 0.15s ease;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 6px 12px;
-  border: 1px solid rgba(242, 234, 216, 0.3);
-  font: 10px 'DM Mono', monospace;
-  letter-spacing: 1px;
 }
 
-.pill-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--zakaas-ochre);
+.primary-add-button:hover {
+  background: var(--pdp-red-hover);
 }
 
-.product-story-image-frame {
-  position: relative;
-  border: 2px solid var(--zakaas-cream);
-  box-shadow: 8px 8px 0 var(--zakaas-charcoal);
-  overflow: hidden;
+.primary-add-button.is-added {
+  background: #1e6b3c;
 }
 
-.product-story-image-frame img {
+.secondary-buy-button {
   width: 100%;
-  height: 480px;
-  object-fit: cover;
-  display: block;
-}
-
-.story-image-caption {
-  padding: 10px 14px;
-  background: var(--zakaas-charcoal);
-  color: var(--zakaas-cream);
-  font: 9.5px 'DM Mono', monospace;
-  letter-spacing: 1.2px;
-}
-
-/* ==================================================
-   6. INGREDIENT STORY (WHAT'S IN THE CRUNCH?)
-   ================================================== */
-.zakaas-ingredient-story-section {
-  padding: 90px 5vw;
-  max-width: 1360px;
-  margin: 0 auto;
-}
-
-.ingredient-story-header {
-  margin-bottom: 50px;
-}
-
-.ingredient-kicker {
-  font: 11px 'DM Mono', monospace;
-  letter-spacing: 1.5px;
-  color: var(--zakaas-red);
+  height: 44px;
+  background: transparent;
+  color: var(--pdp-text);
+  border: 1.5px solid var(--pdp-border-dark);
+  font-size: 11px;
   font-weight: 800;
-  display: block;
-  margin-bottom: 12px;
-}
-
-.ingredient-heading {
-  font-size: clamp(42px, 6vw, 84px);
-  line-height: 0.9;
-  letter-spacing: -0.06em;
-  margin: 0 0 16px;
-  font-weight: 800;
-}
-
-.ingredient-heading em {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  color: var(--zakaas-red);
-}
-
-.ingredient-intro {
-  font-size: 17px;
-  max-width: 620px;
-  line-height: 1.55;
-  color: #443e37;
-}
-
-.ingredient-editorial-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 50px;
-}
-
-.ingredient-editorial-card {
-  position: relative;
-  padding: 26px 22px;
-  background: var(--zakaas-warm-white);
-  border: 1.5px solid var(--zakaas-charcoal);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s ease;
-}
-
-.ingredient-editorial-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 4px 4px 0 var(--zakaas-charcoal);
-}
-
-.ingredient-card-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 14px;
-}
-
-.ingredient-number {
-  font: 12px 'DM Mono', monospace;
-  font-weight: 800;
-  color: var(--zakaas-red);
-}
-
-.ingredient-role-tag {
-  font: 9.5px 'DM Mono', monospace;
   letter-spacing: 1px;
-  padding: 2px 7px;
-  background: var(--zakaas-blue);
-  color: var(--zakaas-cream);
-  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 18px;
 }
 
-.ingredient-name {
-  font-size: 21px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  margin: 0 0 10px;
-  color: var(--zakaas-charcoal);
+.secondary-buy-button:hover {
+  background: var(--pdp-text);
+  color: #fff;
 }
 
-.ingredient-desc {
-  font-size: 14px;
-  line-height: 1.55;
-  color: #554e46;
+.delivery-simple-note {
+  font-size: 12.5px;
+  color: var(--pdp-text-muted);
+  line-height: 1.45;
   margin: 0;
 }
 
-.ingredient-connector-line {
-  margin-top: auto;
-  padding-top: 18px;
-  border-bottom: 2px solid var(--zakaas-ochre);
-  width: 40px;
+/* ==================================================
+   02. PRODUCT FACTS STRIP (CLEAN TYPOGRAPHY)
+   ================================================== */
+.zakaas-fact-strip {
+  border-top: 1px solid var(--pdp-border);
+  border-bottom: 1px solid var(--pdp-border);
+  background: var(--pdp-bg-alt);
 }
 
-.why-ingredients-callout {
-  border: 2px solid var(--zakaas-charcoal);
-  background: #fff8eb;
-  padding: 36px 40px;
-  box-shadow: 6px 6px 0 var(--zakaas-charcoal);
+.fact-strip-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 22px 5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-.why-label {
-  font: 10px 'DM Mono', monospace;
-  letter-spacing: 1.5px;
-  color: var(--zakaas-red);
+.fact-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.fact-strong {
+  font-size: 18px;
   font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--pdp-text);
+}
+
+.fact-sub {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--pdp-text-muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ==================================================
+   03. WHAT'S IN THE CRUNCH (SINGLE COMPOSITION)
+   ================================================== */
+.zakaas-ingredients-composition {
+  padding: 80px 5vw;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.ingredients-header {
+  margin-bottom: 40px;
+}
+
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--pdp-red);
   display: block;
   margin-bottom: 8px;
 }
 
-.why-title {
-  font-size: 24px;
+.ingredients-title {
+  font-size: clamp(28px, 3.5vw, 42px);
   font-weight: 800;
-  margin: 0 0 12px;
   letter-spacing: -0.03em;
+  margin: 0 0 12px;
+  line-height: 1.1;
 }
 
-.why-body {
-  font-size: 15.5px;
-  line-height: 1.65;
-  color: #38332d;
+.ingredients-intro {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--pdp-text-muted);
+  max-width: 640px;
   margin: 0;
-  max-width: 900px;
 }
 
-/* ==================================================
-   7. NUTRITION AT A GLANCE
-   ================================================== */
-.zakaas-nutrition-section {
-  padding: 70px 5vw;
-  background: var(--zakaas-warm-white);
-  border-top: 2px solid var(--zakaas-charcoal);
-  border-bottom: 2px solid var(--zakaas-charcoal);
+.ingredients-composition-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 50px;
+  align-items: center;
 }
 
-.nutrition-container {
-  max-width: 1000px;
-  margin: 0 auto;
+.ingredients-visual {
+  border: 1px solid var(--pdp-border);
+  background: var(--pdp-surface);
 }
 
-.nutrition-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.nutrition-kicker {
-  font: 11px 'DM Mono', monospace;
-  letter-spacing: 1.5px;
-  color: var(--zakaas-red);
-  font-weight: 800;
+.ingredients-main-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
   display: block;
+}
+
+.ingredients-caption {
+  padding: 10px 14px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--pdp-text-muted);
+  background: var(--pdp-bg-alt);
+  border-top: 1px solid var(--pdp-border);
+}
+
+.ingredients-list-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.ingredient-entry {
+  border-bottom: 1px solid var(--pdp-border);
+  padding-bottom: 18px;
+}
+
+.ingredient-entry:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.ingredient-title-line {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
   margin-bottom: 6px;
 }
 
-.nutrition-title {
-  font-size: clamp(30px, 4vw, 48px);
+.ingredient-heading {
+  font-size: 17px;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.01em;
   margin: 0;
-  line-height: 1;
 }
 
-.nutrition-basis-badge {
-  font: 10.5px 'DM Mono', monospace;
-  padding: 5px 12px;
-  border: 1px solid var(--zakaas-charcoal);
-  background: var(--zakaas-cream);
+.ingredient-role {
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--pdp-red);
 }
 
-.nutrition-table-wrap {
-  border: 2px solid var(--zakaas-charcoal);
-  background: #fff;
-  margin-bottom: 18px;
+.ingredient-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #4a453d;
+  margin: 0;
 }
 
-.nutrition-table {
+/* ==================================================
+   04. NUTRITION & PRODUCT DETAILS
+   ================================================== */
+.zakaas-product-specs-section {
+  padding: 70px 5vw;
+  background: var(--pdp-surface);
+  border-top: 1px solid var(--pdp-border);
+  border-bottom: 1px solid var(--pdp-border);
+}
+
+.specs-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 60px;
+}
+
+.specs-header {
+  margin-bottom: 24px;
+}
+
+.specs-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 4px;
+}
+
+.specs-basis-note {
+  font-size: 12px;
+  color: var(--pdp-text-muted);
+}
+
+.specs-nutrition-table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 14px;
 }
 
-.nutrition-table th,
-.nutrition-table td {
-  padding: 13px 20px;
-  border-bottom: 1px solid var(--zakaas-hairline);
-  font-size: 14px;
+.specs-nutrition-table th,
+.specs-nutrition-table td {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--pdp-border);
+  font-size: 13.5px;
 }
 
-.nutrition-table th {
-  background: var(--zakaas-charcoal);
-  color: var(--zakaas-cream);
-  font: 11px 'DM Mono', monospace;
-  letter-spacing: 1.2px;
+.specs-nutrition-table th {
+  font-size: 11px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
+  color: var(--pdp-text-muted);
   text-align: left;
-}
-
-.nutrient-name {
-  font-weight: 600;
-  color: var(--zakaas-charcoal);
-}
-
-.nutrient-val {
-  font-family: 'DM Mono', monospace;
   font-weight: 700;
+}
+
+.num-cell {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
 }
 
 .text-right {
   text-align: right;
 }
 
-.nutrition-disclaimer {
-  font: 11px 'DM Mono', monospace;
-  color: #6a635a;
+.specs-nutrition-footnote {
+  font-size: 11.5px;
   line-height: 1.5;
+  color: var(--pdp-text-muted);
   margin: 0;
 }
 
-/* ==================================================
-   8. SPECIFICATIONS & MANUFACTURING ACCORDIONS
-   ================================================== */
-.zakaas-details-wrapper {
-  padding: 80px 5vw;
-}
-
-.details-container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.details-section-header {
-  margin-bottom: 35px;
-}
-
-.details-main-title {
-  font-size: clamp(32px, 4vw, 54px);
-  font-weight: 800;
-  letter-spacing: -0.05em;
-  margin: 0;
-}
-
-.zakaas-pdp-accordions {
-  border-top: 2.5px solid var(--zakaas-charcoal);
-}
-
-.zakaas-accordion-item {
-  border-bottom: 1.5px solid var(--zakaas-charcoal);
-}
-
-.zakaas-accordion-header {
-  width: 100%;
-  padding: 20px 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  text-align: left;
-}
-
-.zakaas-accordion-title {
-  font: 13px 'DM Mono', monospace;
-  letter-spacing: 1.2px;
-  font-weight: 800;
-  color: var(--zakaas-charcoal);
-  text-transform: uppercase;
-}
-
-.zakaas-accordion-chevron {
-  width: 20px;
-  height: 20px;
-  color: var(--zakaas-red);
-  display: grid;
-  place-items: center;
-}
-
-.zakaas-accordion-body {
-  padding: 0 4px 26px;
-  font-size: 14px;
-  line-height: 1.65;
-  color: #3b352f;
-}
-
-/* Made the Zakaas Way grid inside accordion */
-.made-way-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  padding: 12px 0;
-}
-
-.made-way-pillar {
+/* Details Data List */
+.specs-data-list {
   display: flex;
   flex-direction: column;
-  border-left: 2px solid var(--zakaas-red);
-  padding-left: 14px;
-}
-
-.made-way-bullet {
-  font: 11px 'DM Mono', monospace;
-  font-weight: 800;
-  color: var(--zakaas-red);
-  margin-bottom: 4px;
-}
-
-.made-way-title {
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--zakaas-charcoal);
-  margin-bottom: 4px;
-}
-
-.made-way-desc {
-  font-size: 13px;
-  line-height: 1.45;
-  color: #554e46;
+  gap: 16px;
   margin: 0;
 }
 
-/* Specs Definition List */
-.zakaas-specs-list {
+.data-row {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin: 0;
-}
-
-.spec-row {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 20px;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--zakaas-hairline);
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--pdp-border);
   font-size: 13.5px;
 }
 
-.spec-row dt {
-  font: 11px 'DM Mono', monospace;
-  color: #6a635a;
-  font-weight: 700;
+.data-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.data-row dt {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
+  color: var(--pdp-text-muted);
 }
 
-.spec-row dd {
+.data-row dd {
   margin: 0;
-  color: var(--zakaas-charcoal);
-  font-weight: 600;
   line-height: 1.5;
+  color: var(--pdp-text);
 }
 
-.zakaas-allergen-alert {
-  padding: 10px 14px;
-  background: rgba(200, 58, 34, 0.08);
-  border-left: 3px solid var(--zakaas-red);
-  font-size: 13px;
-  margin-top: 12px !important;
+.manufacturer-row dd strong {
+  font-size: 14px;
 }
 
 /* ==================================================
-   9. FROM THE ZAKAAS TABLE (UGC / INSTAGRAM)
+   05. REAL ZAKAAS CONTENT (ZAKAAS, IRL)
    ================================================== */
-.zakaas-social-section {
-  padding: 80px 5vw;
-  background: var(--zakaas-cream);
-  border-top: 2px solid var(--zakaas-charcoal);
+.zakaas-irl-section {
+  padding: 60px 5vw;
 }
 
-.social-header {
-  max-width: 1360px;
-  margin: 0 auto 35px;
+.irl-container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.irl-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  margin-bottom: 24px;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
 }
 
-.social-kicker {
-  font: 11px 'DM Mono', monospace;
-  letter-spacing: 1.5px;
-  color: var(--zakaas-red);
+.irl-title {
+  font-size: clamp(28px, 3.5vw, 42px);
   font-weight: 800;
-  display: block;
-  margin-bottom: 8px;
+  letter-spacing: -0.03em;
+  margin: 0;
+  line-height: 1;
 }
 
-.social-title {
-  font-size: clamp(36px, 4.5vw, 64px);
+.irl-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
   font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.06em;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--pdp-text);
+  border-bottom: 1.5px solid var(--pdp-border-dark);
+  padding-bottom: 2px;
+  transition: color 0.15s ease;
+}
+
+.irl-profile-link:hover {
+  color: var(--pdp-red);
+  border-color: var(--pdp-red);
+}
+
+.arrow-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.irl-authentic-strip {
+  padding: 24px;
+  background: var(--pdp-bg-alt);
+  border: 1px solid var(--pdp-border);
+}
+
+.irl-statement {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #3b3731;
   margin: 0;
 }
 
-.social-title em {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-style: italic;
-  color: var(--zakaas-red);
-}
-
-.social-handle-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 18px;
-  border: 2px solid var(--zakaas-charcoal);
-  background: #fff;
-  font: 11px 'DM Mono', monospace;
-  font-weight: 800;
-  letter-spacing: 1px;
-  box-shadow: 3px 3px 0 var(--zakaas-charcoal);
-  transition: all 0.2s ease;
-}
-
-.social-handle-btn:hover {
-  background: var(--zakaas-charcoal);
-  color: var(--zakaas-cream);
-  transform: translateY(-2px);
-}
-
-.social-photo-grid {
-  max-width: 1360px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.social-photo-card {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  border: 2px solid var(--zakaas-charcoal);
-  overflow: hidden;
-  box-shadow: 4px 4px 0 var(--zakaas-charcoal);
-}
-
-.social-photo-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.social-photo-card:hover img {
-  transform: scale(1.05);
-}
-
-.social-photo-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 10px 12px;
-  background: linear-gradient(0deg, rgba(34, 31, 29, 0.85), transparent);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-}
-
-.social-tag {
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.social-source {
-  font: 9.5px 'DM Mono', monospace;
-  opacity: 0.8;
-}
-
 /* ==================================================
-   10. STICKY MOBILE ADD TO CART
+   MOBILE RESPONSIVENESS & STICKY CTA
    ================================================== */
 .zakaas-sticky-mobile-cta {
   display: none;
 }
 
-@media (max-width: 900px) {
-  .pdp-container {
+@media (max-width: 860px) {
+  .pdp-hero-container {
     grid-template-columns: 1fr;
-    gap: 36px;
-    padding: 16px 4vw 50px;
+    gap: 32px;
+    padding: 16px 4vw 40px;
   }
 
-  .pdp-gallery-col {
+  .pdp-hero-visual-col {
     position: static;
   }
 
-  .zakaas-pdp-main-image {
-    max-height: 420px;
+  .zakaas-main-photo-frame {
+    max-height: 380px;
   }
 
-  .zakaas-fact-strip-inner {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  .pack-options-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
-  .zakaas-fact-col {
-    border-right: 0;
+  .fact-strip-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
 
-  .zakaas-macro-hero {
+  .ingredients-composition-layout {
     grid-template-columns: 1fr;
     gap: 30px;
-    margin: 50px auto;
   }
 
-  .product-story-grid {
+  .specs-container {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 40px;
   }
 
-  .ingredient-editorial-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .made-way-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .spec-row {
+  .data-row {
     grid-template-columns: 1fr;
     gap: 4px;
   }
 
-  .social-photo-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Sticky Bar Active on Mobile */
+  /* Sticky Mobile Bar */
   .zakaas-sticky-mobile-cta {
     display: block;
     position: fixed;
@@ -1375,17 +774,11 @@
     left: 0;
     right: 0;
     background: #fff;
-    border-top: 2px solid var(--zakaas-charcoal);
+    border-top: 1px solid var(--pdp-border-dark);
     padding: 10px 16px;
     padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
     z-index: 100;
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
-    animation: slideUp 0.25s ease-out;
-  }
-
-  @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
+    box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.08);
   }
 
   .zakaas-sticky-cta-content {
@@ -1393,7 +786,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
   }
 
@@ -1409,7 +802,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--zakaas-charcoal);
+    color: var(--pdp-text);
   }
 
   .zakaas-sticky-price-row {
@@ -1422,28 +815,28 @@
   .zakaas-sticky-selling-price {
     font-size: 16px;
     font-weight: 800;
-    color: var(--zakaas-charcoal);
+    color: var(--pdp-text);
   }
 
   .zakaas-sticky-mrp {
-    font: 10px 'DM Mono', monospace;
-    color: #888;
+    font-size: 11px;
+    color: var(--pdp-text-muted);
     text-decoration: line-through;
   }
 
   .zakaas-sticky-badge {
-    font: 9px 'DM Mono', monospace;
+    font-size: 9.5px;
     font-weight: 700;
-    color: var(--zakaas-red);
+    color: var(--pdp-red);
   }
 
   .zakaas-sticky-add-btn {
-    height: 44px;
-    padding: 0 18px;
-    background: var(--zakaas-red);
+    height: 42px;
+    padding: 0 16px;
+    background: var(--pdp-red);
     color: #fff;
-    border: 2px solid var(--zakaas-charcoal);
-    font: 11px 'DM Mono', monospace;
+    border: 0;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.8px;
     display: inline-flex;
@@ -1454,10 +847,10 @@
   }
 
   .zakaas-sticky-add-btn:active {
-    background: var(--zakaas-orange);
+    background: var(--pdp-red-hover);
   }
 
   .zakaas-sticky-add-btn.is-added {
-    background: #256f44;
+    background: #1e6b3c;
   }
 }

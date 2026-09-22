@@ -1,20 +1,19 @@
-export function ProductFactStrip({ facts = [] }) {
-  const defaultFacts = [
-    { label: 'NET WEIGHT', value: '100g' },
-    { label: 'PRODUCT', value: '100% VEGETARIAN' },
-    { label: 'PREPARATION', value: 'SMALL BATCH CRAFTED' },
-    { label: 'ORIGIN', value: 'MAHARASHTRA INSPIRED' }
+export function ProductFactStrip() {
+  const facts = [
+    { value: '100G', label: 'NET QUANTITY' },
+    { value: 'TRADITIONAL', label: 'BHAJAN FLOUR RECIPE' },
+    { value: 'FRESHLY PACKED', label: 'SMALL BATCHES' },
+    { value: '100% VEG', label: 'PURE VEGETARIAN' },
+    { value: 'NO ADDED', label: 'PRESERVATIVES' }
   ];
-
-  const items = facts.length ? facts : defaultFacts;
 
   return (
     <section className="zakaas-fact-strip" aria-label="Product facts">
-      <div className="zakaas-fact-strip-inner">
-        {items.map((item, idx) => (
-          <div key={idx} className="zakaas-fact-col">
-            <span className="fact-value">{item.value}</span>
-            <span className="fact-label">{item.label}</span>
+      <div className="fact-strip-container">
+        {facts.map((fact, idx) => (
+          <div key={idx} className="fact-item">
+            <span className="fact-strong">{fact.value}</span>
+            <span className="fact-sub">{fact.label}</span>
           </div>
         ))}
       </div>
