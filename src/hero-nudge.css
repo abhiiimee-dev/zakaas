@@ -1,0 +1,6 @@
+/* Desktop-only breathing room for the first hero line; the rest of the lockup stays fixed. */
+@media (min-width: 801px) {
+  .hero-content h1 > span:first-child {
+    transform: translate(-16px, -10px);
+  }
+}

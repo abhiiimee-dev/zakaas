@@ -17,9 +17,6 @@ export function Footer() {
         <div className="footer-col">
           <h4>SHOP</h4>
           <Link to="/collections">Collections</Link>
-          <Link to="/collections?category=chakli">Chakli</Link>
-          <Link to="/collections?category=bhakarwadi">Bhakarwadi</Link>
-          <Link to="/collections?category=shankarpada">Shankarpada</Link>
         </div>
 
         <div className="footer-col">

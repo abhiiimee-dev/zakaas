@@ -18,9 +18,6 @@ export function Header({ cartCount, onCartOpen, menuOpen, setMenuOpen, onSearchO
   const navItems = [
     { label: 'SHOP', path: '/collections' },
     { label: 'BUILD A BOX', path: '/builder' },
-    { label: 'CHAKLI', path: '/collections?category=chakli' },
-    { label: 'BHAKARWADI', path: '/collections?category=bhakarwadi' },
-    { label: 'SHANKARPADA', path: '/collections?category=shankarpada' },
     { label: 'ABOUT US', path: '/about' },
     { label: 'FAQ', path: '/faq' },
   ];
@@ -86,10 +83,10 @@ export function Header({ cartCount, onCartOpen, menuOpen, setMenuOpen, onSearchO
             </Link>
           ))}
           <Link to="/contact" onClick={() => setMenuOpen(false)}>
-            CONTACT US <i>07</i>
+            CONTACT US <i>0{navItems.length + 1}</i>
           </Link>
           <Link to="/b2b" onClick={() => setMenuOpen(false)}>
-            B2B & BULK <i>08</i>
+            B2B & BULK <i>0{navItems.length + 2}</i>
           </Link>
         </div>
         <p className="mobile-tagline">
