@@ -1,22 +1,201 @@
-import { Check, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import { ArrowUpRight, Check, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { useMemo, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { products as fallbackProducts } from '../data/products';
 
 const tones = ['terracotta', 'ochre-deep', 'maroon'];
-const crops = ['50% 50%', '31% 70%', '72% 66%'];
-const productFrames = product => { const images = (product.images?.length ? product.images : [product.image]).slice(0, 3).map((image, i) => ({ image, position: crops[i] })); while (images.length < 3) images.push({ image: product.image, position: crops[images.length] }); return images; };
+const crops = ['50% 50%', '35% 65%', '65% 60%'];
+
+const productSubtitles = {
+  chakli: 'Slow-roasted multigrain flour with brittle cumin ridges and nutty sesame crunch.',
+  bhakarwadi: 'Crisp fried rolls packed with roasted coconut, poppy seeds, and spicy warmth.',
+  shankarpali: 'Golden sweet flaky diamonds made with pure ghee and melt-in-mouth sweetness.'
+};
+
+const productFrames = product => {
+  const images = (product.images?.length ? product.images : [product.image]).slice(0, 3).map((image, i) => ({
+    image,
+    position: crops[i] || '50% 50%'
+  }));
+  while (images.length < 3) {
+    images.push({ image: product.image, position: crops[images.length] || '50% 50%' });
+  }
+  return images;
+};
 
 function ProductCard({ product, index, onAdd, onFly }) {
-  const [frame, setFrame] = useState(0); const [added, setAdded] = useState(false); const pointer = useRef(null); const visualRef = useRef(null); const frames = useMemo(() => productFrames(product), [product]); const go = direction => setFrame(current => (current + direction + frames.length) % frames.length);
-  const down = event => { pointer.current = { x: event.clientX, y: event.clientY }; event.currentTarget.setPointerCapture?.(event.pointerId); };
-  const up = event => { if (!pointer.current) return; const dx = event.clientX - pointer.current.x; const dy = event.clientY - pointer.current.y; pointer.current = null; if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1); };
-  const add = () => { if (!product.variantId || added) return; setAdded(true); onFly(product, visualRef.current, frames[frame]); onAdd(product); window.setTimeout(() => setAdded(false), 1450); };
-  return <article className={`product-feature product-editorial ${tones[index]}`}><div className="product-top"><span>0{index + 1} / ZAKAAS ORIGINAL</span><span className="product-price">{product.price ? `₹${Number(product.price).toFixed(0)}` : 'MAHARASHTRA'}</span></div><div className="product-visual product-gallery" ref={visualRef} onPointerDown={down} onPointerUp={up}><div className="product-gallery-track" style={{ transform: `translateX(-${frame * 100}%)` }}>{frames.map((item, imageIndex) => <div className="product-gallery-frame" key={`${item.image}-${imageIndex}`}><img src={item.image} style={{ objectPosition: item.position }} alt={imageIndex === 0 ? `${product.name} ZAKAAS pack` : ''}/></div>)}</div><div className="gallery-controls"><button type="button" onClick={() => go(-1)} aria-label={`Previous ${product.name} image`}><ChevronLeft/></button><span>{String(frame + 1).padStart(2, '0')} <i/> 03</span><button type="button" onClick={() => go(1)} aria-label={`Next ${product.name} image`}><ChevronRight/></button></div></div><div className="product-copy"><small>{product.personality || 'MAHARASHTRA ORIGINAL'}</small><h3>{product.name}</h3><p>“{product.line || product.description || 'A little taste of home.'}”</p><button className={`product-add ${added ? 'is-added' : ''}`} disabled={!product.variantId} onClick={add}>{added ? <>ADDED <Check/></> : <>ADD <Plus/></>}</button></div></article>;
+  const [frame, setFrame] = useState(0);
+  const [added, setAdded] = useState(false);
+  const pointer = useRef(null);
+  const visualRef = useRef(null);
+  const frames = useMemo(() => productFrames(product), [product]);
+
+  const go = direction => {
+    setFrame(current => (current + direction + frames.length) % frames.length);
+  };
+
+  const down = event => {
+    pointer.current = { x: event.clientX, y: event.clientY };
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
+  const up = event => {
+    if (!pointer.current) return;
+    const dx = event.clientX - pointer.current.x;
+    const dy = event.clientY - pointer.current.y;
+    pointer.current = null;
+    if (Math.abs(dx) > 35 && Math.abs(dx) > Math.abs(dy)) {
+      go(dx < 0 ? 1 : -1);
+    }
+  };
+
+  const add = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!product.variantId && !product.id) return;
+    setAdded(true);
+    if (onFly) onFly(product, visualRef.current, frames[frame]);
+    if (onAdd) onAdd(product);
+    window.setTimeout(() => setAdded(false), 1400);
+  };
+
+  const handle = product.handle || product.id;
+  const descriptionText = productSubtitles[product.id] || product.line || product.description || 'A little taste of home.';
+
+  return (
+    <article className={`product-feature product-editorial ${tones[index % tones.length]}`}>
+      <div className="product-top">
+        <span className="product-origin-label">0{index + 1} / ZAKAAS ORIGINAL</span>
+        <span className="product-price">
+          {product.price ? `₹${Number(product.price).toFixed(0)}` : '₹150'} · 100g
+        </span>
+      </div>
+
+      <Link 
+        to={`/product/${handle}`}
+        className="product-visual product-gallery" 
+        ref={visualRef} 
+        onPointerDown={down} 
+        onPointerUp={up}
+        aria-label={`View ${product.name} details`}
+      >
+        <div className="product-gallery-track" style={{ transform: `translateX(-${frame * 100}%)` }}>
+          {frames.map((item, imageIndex) => (
+            <div className="product-gallery-frame" key={`${item.image}-${imageIndex}`}>
+              <img 
+                src={item.image} 
+                style={{ objectPosition: item.position }} 
+                alt={imageIndex === 0 ? `${product.name} ZAKAAS pack` : `${product.name} texture detail`}
+                loading={index === 0 ? 'eager' : 'lazy'}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div className="gallery-controls" onClick={e => e.stopPropagation()}>
+          <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(-1); }} aria-label={`Previous ${product.name} image`}>
+            <ChevronLeft size={16} />
+          </button>
+          <span>{String(frame + 1).padStart(2, '0')} <i /> 03</span>
+          <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(1); }} aria-label={`Next ${product.name} image`}>
+            <ChevronRight size={16} />
+          </button>
+        </div>
+      </Link>
+
+      <div className="product-copy">
+        <div className="product-header-line">
+          <small>{product.personality || 'MAHARASHTRA ORIGINAL'}</small>
+        </div>
+        <Link to={`/product/${handle}`} className="product-title-link">
+          <h3>{product.name}</h3>
+        </Link>
+        <p className="product-subline">“{descriptionText}”</p>
+        
+        <div className="product-card-actions">
+          <button 
+            type="button"
+            className={`product-add ${added ? 'is-added' : ''}`} 
+            onClick={add}
+            aria-label={`Add ${product.name} to bag`}
+          >
+            {added ? (
+              <>ADDED TO BAG <Check size={14} /></>
+            ) : (
+              <>ADD TO BAG — ₹{product.price || '150'} <Plus size={14} /></>
+            )}
+          </button>
+          
+          <Link to={`/product/${handle}`} className="product-detail-btn" aria-label={`View ${product.name} details`}>
+            DETAILS <ArrowUpRight size={13} />
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
 }
 
 export function ProductSection({ onAdd, products = fallbackProducts, live = false }) {
   const [flying, setFlying] = useState(null);
-  const fly = (product, visual, frame) => { if (!visual || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; const start = visual.getBoundingClientRect(); const bag = document.querySelector('.bag-button')?.getBoundingClientRect(); if (!bag) return; setFlying({ product, image: frame.image, start, bag }); window.requestAnimationFrame(() => window.requestAnimationFrame(() => setFlying(current => current ? { ...current, go: true } : null))); window.setTimeout(() => { setFlying(null); window.dispatchEvent(new CustomEvent('zakaas:add-to-bag')); }, 850); };
-  const style = flying ? { '--start-x': `${flying.start.left + flying.start.width * .5}px`, '--start-y': `${flying.start.top + flying.start.height * .63}px`, '--end-x': `${flying.bag.left + flying.bag.width * .5}px`, '--end-y': `${flying.bag.top + flying.bag.height * .5}px` } : {};
-  return <section className="products-section" id="shop"><div className="section-intro"><p className="kicker">01 / PICK YOUR PACK {live && '· LIVE FROM SHOPIFY'}</p><h2>WHAT’S YOUR<br/><em>ZAKAAS?</em></h2><p>Three Maharashtra classics. One very loud snack table. Pick your mood, tear it open, pass it around.</p></div><div className="product-rail">{products.slice(0, 3).map((product, index) => <ProductCard key={product.id} product={product} index={index} onAdd={onAdd} onFly={fly}/>)}</div>{flying && <div className={`snack-flight ${flying.go ? 'is-flying' : ''}`} style={style} aria-hidden="true"><img src={flying.image} alt=""/></div>}</section>;
+
+  const fly = (product, visual, frame) => {
+    if (!visual || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const start = visual.getBoundingClientRect();
+    const bag = document.querySelector('.bag-button')?.getBoundingClientRect();
+    if (!bag) return;
+    setFlying({ product, image: frame.image, start, bag });
+    window.requestAnimationFrame(() => 
+      window.requestAnimationFrame(() => 
+        setFlying(current => current ? { ...current, go: true } : null)
+      )
+    );
+    window.setTimeout(() => {
+      setFlying(null);
+      window.dispatchEvent(new CustomEvent('zakaas:add-to-bag'));
+    }, 850);
+  };
+
+  const style = flying ? {
+    '--start-x': `${flying.start.left + flying.start.width * 0.5}px`,
+    '--start-y': `${flying.start.top + flying.start.height * 0.63}px`,
+    '--end-x': `${flying.bag.left + flying.bag.width * 0.5}px`,
+    '--end-y': `${flying.bag.top + flying.bag.height * 0.5}px`
+  } : {};
+
+  const displayProducts = products.length >= 3 ? products.slice(0, 3) : fallbackProducts.slice(0, 3);
+
+  return (
+    <section className="products-section" id="shop">
+      <div className="section-intro">
+        <div className="section-title-wrap">
+          <p className="kicker">01 / THE MAHARASHTRIAN TRIO {live && '· LIVE FROM SHOPIFY'}</p>
+          <h2>THREE CLASSICS.<br /><em>ONE LOUD SNACK TABLE.</em></h2>
+        </div>
+        <div className="section-intro-right">
+          <p>Handcrafted with slow-roasted grains, whole spices, and pure ghee. Pick your pack, tear it open, pass it around.</p>
+          <Link to="/collections" className="light-button inline-btn">
+            EXPLORE ALL SNACKS <ArrowUpRight size={14} />
+          </Link>
+        </div>
+      </div>
+
+      <div className="product-rail">
+        {displayProducts.map((product, index) => (
+          <ProductCard 
+            key={product.id || index} 
+            product={product} 
+            index={index} 
+            onAdd={onAdd} 
+            onFly={fly} 
+          />
+        ))}
+      </div>
+
+      {flying && (
+        <div className={`snack-flight ${flying.go ? 'is-flying' : ''}`} style={style} aria-hidden="true">
+          <img src={flying.image} alt="" />
+        </div>
+      )}
+    </section>
+  );
 }

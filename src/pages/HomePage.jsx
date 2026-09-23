@@ -1,155 +1,48 @@
-import { ArrowUpRight, PackageCheck, Sparkles, Utensils, ShieldCheck, Check, Plus, ShoppingBag } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { ArrowUpRight, Check, Package, Sparkles, Utensils, HeartHandshake } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ProductSection } from '../components/ProductSection';
 import { StoryFilm } from '../components/StoryFilm';
 import { ReviewsSection } from '../components/ReviewsSection';
 import { Footer } from '../components/Footer';
-import { products as fallbackProducts } from '../data/products';
 
 function Hero() {
   return (
     <section className="hero-film" id="top">
-      <img src="/zakaas-hero.png" alt="ZAKAAS snack packs at a Maharashtrian home" />
+      <img 
+        src="/zakaas-hero.png" 
+        alt="ZAKAAS snack packs and hot tea at a traditional Maharashtra home" 
+        fetchpriority="high"
+      />
       <div className="hero-wash" />
+      
       <div className="hero-content">
-        <p className="kicker hero-kicker">EST. IN MAHARASHTRA · MADE FOR EVERYWHERE</p>
+        <p className="kicker hero-kicker">EST. IN MAHARASHTRA · CRAFTED FOR EVERYWHERE</p>
         <h1>
-          <span>MAHARASHTRA.</span>
-          <em>IN EVERY BITE.</em>
+          <span>CRUNCH THAT FEELS</span>
+          <em>LIKE HOME.</em>
         </h1>
         <p className="hero-lede">
-          Traditional snacks crafted with slow-roasted grains and authentic spices.<br />
-          Tear it open. Pass it around.
+          Traditional savouries handcrafted from slow-roasted grains and whole aromatic spices.<br />
+          Tear open the aroma pack. Pass it around the table.
         </p>
-        <Link className="hero-button" to="/collections">
-          EXPLORE ALL SNACKS <ArrowUpRight />
-        </Link>
-      </div>
-      
-      <div className="hero-snack-ticker" aria-hidden="true">
-        <div className="ticker-item">
-          <img src="/zakaas-chakli.jpg" alt="Chakli" />
-          <span>CHAKLI</span>
-        </div>
-        <div className="ticker-dot">•</div>
-        <div className="ticker-item">
-          <img src="/zakaas-bhakarwadi.jpg" alt="Bhakarwadi" />
-          <span>BHAKARWADI</span>
-        </div>
-        <div className="ticker-dot">•</div>
-        <div className="ticker-item">
-          <img src="/zakaas-shankarpali.jpg" alt="Shankarpali" />
-          <span>SHANKARPALI</span>
-        </div>
-        <div className="ticker-dot">•</div>
-        <div className="ticker-item">
-          <img src="/zakaas-home-kitchen.png" alt="Home Recipe" />
-          <span>100% HANDCRAFTED</span>
-        </div>
-      </div>
-
-      <div className="hero-meta">
-        <span>SCROLL TO DISCOVER</span>
-        <span>TRADITIONAL RECIPES · AIRTIGHT PACKAGING</span>
-      </div>
-    </section>
-  );
-}
-
-function VisualProductDiscovery({ onAdd, catalog = [] }) {
-  const navigate = useNavigate();
-  const items = catalog.length >= 3 ? catalog.slice(0, 3) : fallbackProducts.slice(0, 3);
-  const featured = items[0] || fallbackProducts[0];
-  const secondaries = items.slice(1, 3);
-  const [addedId, setAddedId] = useState(null);
-
-  const handleQuickAdd = (product, e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (onAdd && product) {
-      onAdd(product);
-      setAddedId(product.id);
-      setTimeout(() => setAddedId(null), 1500);
-    }
-  };
-
-  return (
-    <section className="visual-product-discovery" id="shop">
-      <div className="discovery-intro">
-        <div>
-          <p className="kicker">01 / OUR CLASSIC SNACKS</p>
-          <h2>MADE FOR THE<br /><em>SNACK TABLE.</em></h2>
-        </div>
-        <div className="discovery-intro-copy">
-          <p>Crispy spirals, spicy rolls, and sweet flaky diamonds. Made in small batches using traditional Maharashtrian recipes.</p>
-          <Link to="/collections" className="light-button inline-btn">
-            EXPLORE ALL SNACKS <ArrowUpRight />
+        <div className="hero-cta-group">
+          <a className="hero-button" href="#shop">
+            SHOP THE SNACKS <ArrowUpRight size={14} />
+          </a>
+          <Link className="hero-button-ghost" to="/builder">
+            BUILD A BOX <ArrowUpRight size={14} />
           </Link>
         </div>
       </div>
 
-      <div className="discovery-art-grid">
-        {/* Large Featured Product Spotlight */}
-        {featured && (
-          <article className="featured-product-hero">
-            <div className="featured-image-stage">
-              <img src={featured.image || '/zakaas-chakli.jpg'} alt={featured.name} />
-              <div className="featured-badge-tag">MOST POPULAR</div>
-              <div className="featured-price-tag">₹{featured.price || '150'}</div>
-            </div>
+      <div className="hero-taste-mark" aria-hidden="true">
+        <i>★</i>
+        <span>CRUNCH · SPICE · HOME ·</span>
+      </div>
 
-            <div className="featured-content">
-              <div className="featured-kicker">01 / FEATURED CLASSIC</div>
-              <h3>{featured.name}</h3>
-              <p className="featured-tagline">“{featured.line || featured.shortDescription}”</p>
-              
-              <div className="ingredient-highlights">
-                <span className="ing-tag"><Utensils size={12} /> Bhajan Flour</span>
-                <span className="ing-tag"><Sparkles size={12} /> Ajwain & Cumin</span>
-                <span className="ing-tag"><PackageCheck size={12} /> 100g Airtight Pouch</span>
-              </div>
-
-              <div className="featured-actions">
-                <button 
-                  className={`hero-add-btn ${addedId === featured.id ? 'is-added' : ''}`}
-                  onClick={(e) => handleQuickAdd(featured, e)}
-                >
-                  {addedId === featured.id ? <>ADDED TO BAG <Check size={16}/></> : <>ADD TO BAG — ₹{featured.price || '150'} <Plus size={16}/></>}
-                </button>
-                <Link to={`/product/${featured.handle || featured.id}`} className="featured-details-link">
-                  VIEW DETAILS <ArrowUpRight size={14} />
-                </Link>
-              </div>
-            </div>
-          </article>
-        )}
-
-        {/* Secondary Products Column */}
-        <div className="secondary-products-column">
-          {secondaries.map((prod, idx) => (
-            <Link key={prod.id || idx} to={`/product/${prod.handle || prod.id}`} className="secondary-product-card">
-              <div className="secondary-img-wrap">
-                <img src={prod.image} alt={prod.name} />
-                <span className="secondary-price">₹{prod.price}</span>
-              </div>
-              <div className="secondary-info">
-                <span className="secondary-num">0{idx + 2} / {prod.personality || 'CLASSIC'}</span>
-                <h4>{prod.name}</h4>
-                <p>{prod.shortDescription || 'Traditional Maharashtrian flavour.'}</p>
-                <div className="secondary-card-footer">
-                  <button 
-                    type="button" 
-                    className={`quick-add-chip ${addedId === prod.id ? 'added' : ''}`}
-                    onClick={(e) => handleQuickAdd(prod, e)}
-                  >
-                    {addedId === prod.id ? <><Check size={12}/> ADDED</> : <><Plus size={12}/> QUICK ADD</>}
-                  </button>
-                  <span className="view-arrow">VIEW <ArrowUpRight size={14} /></span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+      <div className="hero-meta">
+        <span>SCROLL TO SNACK</span>
+        <span className="hero-meta-coords">18.5204° N, 73.8567° E · MAHARASHTRA</span>
       </div>
     </section>
   );
@@ -160,57 +53,72 @@ function VisualPromise() {
     {
       num: '01',
       title: 'AUTHENTIC TASTE',
-      desc: 'Flavours rooted in original Maharashtra home recipes — slow roasted grains, whole seeds, and aromatic spices.',
-      image: '/zakaas-home-kitchen.png',
-      caption: 'Slow-roasted multigrain flour dough'
+      desc: 'Flavours rooted in original Maharashtrian households — slow-roasted grains, whole cumin, and fragrant ajwain.',
+      icon: Utensils
     },
     {
       num: '02',
       title: 'QUALITY YOU CAN TRUST',
-      desc: 'No artificial preservatives or cheap fillers. Pure ingredients we proudly serve to our own family.',
-      image: '/zakaas-chakli.jpg',
-      caption: '100% Vegetarian small-batch production'
+      desc: 'No artificial preservatives, no cheap flour blends. Pure ingredients we proudly serve to our own family.',
+      icon: Sparkles
     },
     {
       num: '03',
       title: 'MADE FOR TODAY',
-      desc: 'Traditional brittle crunch sealed in modern multi-layer aroma pouches so every spiral stays fresh.',
-      image: '/zakaas-bhakarwadi.jpg',
-      caption: 'Airtight nitrogen pouch sealing'
+      desc: 'Signature brittle crunch sealed inside multi-layer nitrogen pouches so every spiral stays crisp.',
+      icon: Package
     },
     {
       num: '04',
       title: 'MAHARASHTRA, EVERYWHERE',
-      desc: 'From Maharashtra kitchens directly to your doorstep anywhere in India and across the world.',
-      image: '/zakaas-shankarpali.jpg',
-      caption: 'Delivered fresh to your home'
+      desc: 'From Maharashtra kitchens directly to your doorstep across India and around the globe.',
+      icon: HeartHandshake
     }
   ];
 
   return (
-    <section className="visual-promise" id="trust">
-      <div className="promise-header">
-        <p className="kicker">02 / THE ZAKAAS STANDARD</p>
-        <h2>NO SHORTCUTS.<br /><em>NO SMALL FEELING.</em></h2>
-        <p className="promise-subhead">Visual proof of quality. Real food, traditional craft, uncompromised standards.</p>
-      </div>
+    <section className="promise-section" id="promise">
+      <div className="promise-container">
+        <div className="promise-content-col">
+          <p className="kicker">03 / THE ZAKAAS STANDARD</p>
+          <h2>NO SHORTCUTS.<br /><em>NO SMALL FEELING.</em></h2>
+          <p className="promise-lead">
+            We don’t cut corners on roasting, seed quality, or oil purity. What comes out of the kadai is the exact crunch we grew up loving.
+          </p>
 
-      <div className="promise-grid">
-        {principles.map(p => (
-          <article key={p.num} className="promise-card">
-            <div className="promise-card-media">
-              <img src={p.image} alt={p.title} />
-              <div className="promise-card-overlay">
-                <span className="promise-num">{p.num}</span>
-                <span className="promise-caption">{p.caption}</span>
-              </div>
+          <div className="promise-principles-list">
+            {principles.map(p => {
+              const IconComp = p.icon;
+              return (
+                <div key={p.num} className="promise-principle-item">
+                  <span className="promise-num">{p.num}</span>
+                  <div>
+                    <h3>{p.title}</h3>
+                    <p>{p.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="promise-visual-col">
+          <div className="promise-visual-stage">
+            <img 
+              src="/zakaas-home-kitchen.png" 
+              alt="Handcrafting traditional Maharashtrian savouries in a kitchen" 
+              className="promise-main-photo"
+            />
+            <div className="promise-badge-pill">
+              <span className="dot-live" />
+              <span>SMALL-BATCH CRAFTED IN MAHARASHTRA</span>
             </div>
-            <div className="promise-card-body">
-              <h3>{p.title}</h3>
-              <p>{p.desc}</p>
+            <div className="promise-inset-snack">
+              <img src="/zakaas-chakli.jpg" alt="Chakli brittle spiral crunch" />
+              <small>THE SIGNATURE SPIRAL</small>
             </div>
-          </article>
-        ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -220,69 +128,74 @@ function VisualGiftingSection({ onBuildBox }) {
   const navigate = useNavigate();
 
   return (
-    <section className="gifting-visual-section" id="gifting">
-      <div className="gifting-container">
+    <section className="gifting-experience-section" id="gifting">
+      <div className="gifting-wrapper">
         <div className="gifting-header">
-          <p className="kicker">04 / CUSTOM SNACK BOXES</p>
+          <p className="kicker">05 / A BOX WITH A BACKSTORY</p>
           <h2>SEND A LITTLE<br /><em>MAHARASHTRA.</em></h2>
-          <p className="gifting-tagline">
-            Curate your own combination of freshly packed Maharashtrian snacks in a signature ZAKAAS gift box.
+          <p className="gifting-lead">
+            Curate your own combination of freshly packed Maharashtrian snacks in a signature ZAKAAS gift box. Hand-packed and delivered fresh anywhere.
           </p>
         </div>
 
-        {/* Visual Standalone Build-A-Box Ecommerce Experience */}
-        <div className="build-a-box-card">
-          <div className="box-visual-composition">
-            <div className="box-mockup-frame">
-              <img src="/zakaas-hero.png" alt="Zakaas Custom Box Packaging" className="box-bg-image" />
-              <div className="box-products-overlap">
-                <div className="mini-product-pill">
-                  <img src="/zakaas-chakli.jpg" alt="Chakli" />
-                  <span>CHAKLI</span>
-                </div>
-                <div className="mini-product-pill">
-                  <img src="/zakaas-bhakarwadi.jpg" alt="Bhakarwadi" />
-                  <span>BHAKARWADI</span>
-                </div>
-                <div className="mini-product-pill">
-                  <img src="/zakaas-shankarpali.jpg" alt="Shankarpali" />
-                  <span>SHANKARPALI</span>
-                </div>
+        {/* Standalone Physical Box Visual Experience */}
+        <div className="box-showcase-card">
+          <div className="box-visual-side">
+            <img 
+              src="/zakaas-hero.png" 
+              alt="Zakaas Custom Snack Box Presentation" 
+              className="box-pack-photo"
+            />
+            <div className="box-snack-glimpses">
+              <div className="glimpse-item">
+                <img src="/zakaas-chakli.jpg" alt="Chakli" />
+                <span>CHAKLI</span>
+              </div>
+              <div className="glimpse-item">
+                <img src="/zakaas-bhakarwadi.jpg" alt="Bhakarwadi" />
+                <span>BHAKARWADI</span>
+              </div>
+              <div className="glimpse-item">
+                <img src="/zakaas-shankarpali.jpg" alt="Shankarpali" />
+                <span>SHANKARPALI</span>
               </div>
             </div>
           </div>
 
-          <div className="box-details-content">
-            <div className="box-kicker-badge">CUSTOM ASSORTMENT</div>
-            <h3>BUILD YOUR OWN BOX</h3>
-            <p>Pick 3 or 5 of your favourite snack packs. Perfect for family gifts, festive celebrations, or your personal pantry stock.</p>
-            
-            <ul className="box-feature-list">
-              <li><Check size={14} /> Mix & match any Zakaas snacks</li>
-              <li><Check size={14} /> Hand-packed in protective gift box</li>
-              <li><Check size={14} /> Custom message note included</li>
+          <div className="box-action-side">
+            <div className="box-subkicker">CUSTOM SNACK CURATION</div>
+            <h3>CREATE YOUR OWN ZAKAAS BOX</h3>
+            <p>
+              Choose 3 or 5 of your favourite packs. We assemble them by hand in our festive gift box with a custom personalized note.
+            </p>
+
+            <ul className="box-perks-list">
+              <li><Check size={15} /> Select any combination of snacks</li>
+              <li><Check size={15} /> Hand-packed in protective gift carton</li>
+              <li><Check size={15} /> Personal gift message card included</li>
+              <li><Check size={15} /> Express door delivery across India</li>
             </ul>
 
-            <Link to="/builder" className="build-box-main-btn">
-              BUILD A BOX NOW <ArrowUpRight size={18} />
+            <Link to="/builder" className="build-box-btn">
+              BUILD A BOX <ArrowUpRight size={16} />
             </Link>
           </div>
         </div>
 
         {/* B2B Teaser Banner */}
-        <div className="b2b-teaser-visual">
-          <div className="b2b-info-side">
-            <p className="kicker">05 / CORPORATE & EVENTS</p>
+        <div className="b2b-banner-box">
+          <div className="b2b-banner-info">
+            <p className="kicker">06 / CORPORATE & CELEBRATIONS</p>
             <h2>ZAKAAS FOR<br /><em>BUSINESS.</em></h2>
-            <p>Make your next corporate gesture or wedding gift one people actually enjoy. Customized packaging available.</p>
-            <button onClick={() => navigate('/b2b')} className="light-button inline-btn">
-              ENQUIRE FOR BULK ORDERS <ArrowUpRight />
+            <p>Weddings, festive hampers, corporate gifting, and retail orders. Give a gift that people genuinely devour.</p>
+            <button onClick={() => navigate('/b2b')} className="b2b-banner-btn">
+              ENQUIRE FOR BULK ORDERS <ArrowUpRight size={14} />
             </button>
           </div>
-          <div className="b2b-tags-side">
+          <div className="b2b-banner-words">
             <span>WEDDINGS</span>
             <span>CORPORATE</span>
-            <span>EVENTS</span>
+            <span>FESTIVALS</span>
             <span>RETAIL</span>
           </div>
         </div>
@@ -293,24 +206,38 @@ function VisualGiftingSection({ onBuildBox }) {
 
 function RealCommunitySection() {
   const posts = [
-    { img: '/reels/reel-1.jpg', caption: 'Fresh batch of Chakli packed for Diwali chai' },
-    { img: '/reels/reel-2.jpg', caption: 'The signature spicy Bhakarwadi spiral' },
-    { img: '/reels/reel-3.jpg', caption: 'Tea time is incomplete without ZAKAAS' },
+    { 
+      img: '/reels/reel-1.jpg', 
+      caption: 'Evening cutting chai and crisp Chakli spirals. The sacred tea-time ritual.',
+      tag: 'KOLHAPUR CHAI'
+    },
+    { 
+      img: '/reels/reel-2.jpg', 
+      caption: 'Spicy Bhakarwadi rolls packed fresh for festive snacking.',
+      tag: 'FRESH BATCH'
+    },
+    { 
+      img: '/reels/reel-3.jpg', 
+      caption: 'Melt-in-mouth Shankarpali diamonds shared with family.',
+      tag: 'FESTIVE DELIGHT'
+    }
   ];
 
   return (
     <section className="community-section">
       <div className="community-header">
-        <p className="kicker">06 / REAL SNACKERS</p>
-        <h2>FROM MAHARASHTRA KITCHENS<br /><em>TO YOUR SNACK TABLE.</em></h2>
+        <p className="kicker">07 / FROM OUR KITCHEN TO YOUR TABLE</p>
+        <h2>THE SNACK TABLE<br /><em>IN THE WILD.</em></h2>
       </div>
+
       <div className="community-grid">
         {posts.map((post, idx) => (
           <div key={idx} className="community-card">
-            <img src={post.img} alt={post.caption} />
-            <div className="community-overlay">
+            <img src={post.img} alt={post.caption} loading="lazy" />
+            <div className="community-card-overlay">
+              <span className="community-tag">{post.tag}</span>
               <p>{post.caption}</p>
-              <span>@zakaas.official</span>
+              <small>@zakaas.official</small>
             </div>
           </div>
         ))}
@@ -323,11 +250,11 @@ export function HomePage({ onAdd, catalog = [], live = false, onBuildBox }) {
   return (
     <div className="page-home">
       <Hero />
-      <VisualProductDiscovery onAdd={onAdd} catalog={catalog} />
+      <ProductSection onAdd={onAdd} products={catalog} live={live} />
       <StoryFilm />
       <VisualPromise />
-      <ReviewsSection />
       <VisualGiftingSection onBuildBox={onBuildBox} />
+      <ReviewsSection />
       <RealCommunitySection />
       <Footer />
     </div>

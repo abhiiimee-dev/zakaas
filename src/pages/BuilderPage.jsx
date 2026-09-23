@@ -21,9 +21,9 @@ export function BuilderPage({ products = [], packaging, onAddGift }) {
 
   // Fallback to top 3 products if products empty
   const availableProducts = products.length ? products : [
-    { id: 'chakli-1', name: 'ZAKAAS Chakli (250g)', price: 220, image: '/zakaas-chakli.jpg', personality: 'THE CRUNCHY CLASSIC' },
-    { id: 'bhakarwadi-1', name: 'ZAKAAS Bhakarwadi (250g)', price: 240, image: '/zakaas-bhakarwadi.jpg', personality: 'THE SPICY SPIRAL' },
-    { id: 'shankarpada-1', name: 'ZAKAAS Shankarpada (250g)', price: 200, image: '/zakaas-shankarpali.jpg', personality: 'THE SWEET DELIGHT' },
+    { id: 'chakli', name: 'ZAKAAS Chakli (100g)', price: 150, image: '/zakaas-chakli.jpg', personality: 'THE CRUNCHY ORIGINAL' },
+    { id: 'bhakarwadi', name: 'ZAKAAS Bhakarwadi (100g)', price: 150, image: '/zakaas-bhakarwadi.jpg', personality: 'THE SPICY SPIRAL' },
+    { id: 'shankarpali', name: 'ZAKAAS Shankarpali (100g)', price: 150, image: '/zakaas-shankarpali.jpg', personality: 'THE SWEET DELIGHT' },
   ];
 
   const handleSelectProduct = (product) => {
