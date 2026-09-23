@@ -169,7 +169,7 @@ export function ProductSection({ onAdd, products = fallbackProducts, live = fals
       <div className="section-intro">
         <div className="section-title-wrap">
           <p className="kicker">01 / THE MAHARASHTRIAN TRIO {live && '· LIVE FROM SHOPIFY'}</p>
-          <h2>THREE CLASSICS.<br /><em>ONE LOUD SNACK TABLE.</em></h2>
+          <h2>THREE CLASSICS.</h2>
         </div>
         <div className="section-intro-right">
           <p>Handcrafted with slow-roasted grains, whole spices, and pure ghee. Pick your pack, tear it open, pass it around.</p>
