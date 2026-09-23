@@ -418,5 +418,9 @@ export const products = [
 export function getFallbackProductByHandle(handle) {
   if (!handle) return products[0];
   const normalized = handle.toLowerCase().replace('zakaas-', '');
-  return products.find(p => p.handle.toLowerCase() === normalized || p.id.toLowerCase() === normalized) || products[0];
+  return products.find(p => 
+    p.handle.toLowerCase() === normalized || 
+    p.id.toLowerCase() === normalized ||
+    (normalized.includes('shankar') && (p.handle.includes('shankar') || p.id.includes('shankar')))
+  ) || products[0];
 }
