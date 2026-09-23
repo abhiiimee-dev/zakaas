@@ -30,13 +30,15 @@ function ProductCard({ product, index, onAdd, onFly }) {
   const visualRef = useRef(null);
   const frames = useMemo(() => productFrames(product), [product]);
 
+  const wasDragged = useRef(false);
+
   const go = direction => {
     setFrame(current => (current + direction + frames.length) % frames.length);
   };
 
   const down = event => {
     pointer.current = { x: event.clientX, y: event.clientY };
-    event.currentTarget.setPointerCapture?.(event.pointerId);
+    wasDragged.current = false;
   };
 
   const up = event => {
@@ -44,8 +46,17 @@ function ProductCard({ product, index, onAdd, onFly }) {
     const dx = event.clientX - pointer.current.x;
     const dy = event.clientY - pointer.current.y;
     pointer.current = null;
-    if (Math.abs(dx) > 35 && Math.abs(dx) > Math.abs(dy)) {
+    if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) {
+      wasDragged.current = true;
       go(dx < 0 ? 1 : -1);
+    }
+  };
+
+  const handleVisualClick = event => {
+    if (wasDragged.current) {
+      event.preventDefault();
+      event.stopPropagation();
+      wasDragged.current = false;
     }
   };
 
@@ -72,11 +83,12 @@ function ProductCard({ product, index, onAdd, onFly }) {
       </div>
 
       <Link 
-        to={`/product/${handle}`}
+        to={`/products/${handle}`}
         className="product-visual product-gallery" 
         ref={visualRef} 
         onPointerDown={down} 
         onPointerUp={up}
+        onClick={handleVisualClick}
         aria-label={`View ${product.name} details`}
       >
         <div className="product-gallery-track" style={{ transform: `translateX(-${frame * 100}%)` }}>
@@ -107,7 +119,7 @@ function ProductCard({ product, index, onAdd, onFly }) {
         <div className="product-header-line">
           <small>{product.personality || 'MAHARASHTRA ORIGINAL'}</small>
         </div>
-        <Link to={`/product/${handle}`} className="product-title-link">
+        <Link to={`/products/${handle}`} className="product-title-link">
           <h3>{product.name}</h3>
         </Link>
         <p className="product-subline">“{descriptionText}”</p>
@@ -126,7 +138,7 @@ function ProductCard({ product, index, onAdd, onFly }) {
             )}
           </button>
           
-          <Link to={`/product/${handle}`} className="product-detail-btn" aria-label={`View ${product.name} details`}>
+          <Link to={`/products/${handle}`} className="product-detail-btn" aria-label={`View ${product.name} details`}>
             DETAILS <ArrowUpRight size={13} />
           </Link>
         </div>

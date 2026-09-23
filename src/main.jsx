@@ -206,6 +206,10 @@ function App() {
           path="/products/:handle"
           element={<ProductDetailPage products={catalog} onAdd={handleAdd} cartData={cartData} />}
         />
+        <Route
+          path="/product/:handle"
+          element={<ProductDetailPage products={catalog} onAdd={handleAdd} cartData={cartData} />}
+        />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/contact" element={<ContactPage />} />
