@@ -102,57 +102,63 @@ function VisualPromise() {
 function VisualGiftingSection({ onBuildBox }) {
   const navigate = useNavigate();
 
+  const packs = [
+    {
+      id: 'chakli',
+      name: 'CHAKLI',
+      weight: '100g',
+      image: '/zakaas-chakli.jpg'
+    },
+    {
+      id: 'bhakarwadi',
+      name: 'BHAKARWADI',
+      weight: '100g',
+      image: '/zakaas-bhakarwadi.jpg'
+    },
+    {
+      id: 'shankarpali',
+      name: 'SHANKARPALI',
+      weight: '100g',
+      image: '/zakaas-shankarpali.jpg'
+    }
+  ];
+
   return (
     <section className="gifting-experience-section" id="gifting">
       <div className="gifting-wrapper">
         <div className="gifting-header">
-          <p className="kicker">05 / A BOX WITH A BACKSTORY</p>
+          <p className="kicker">04 / CUSTOM SNACK BOX</p>
           <h2>SEND A LITTLE<br /><em>MAHARASHTRA.</em></h2>
-          <p className="gifting-lead">
-            Curate your own combination of freshly packed Maharashtrian snacks in a signature ZAKAAS gift box. Hand-packed and delivered fresh anywhere.
-          </p>
+          <p className="gifting-lead">Build a box with the snacks you want to send.</p>
         </div>
 
-        {/* Standalone Physical Box Visual Experience */}
-        <div className="box-showcase-card">
-          <div className="box-visual-side">
-            <img 
-              src="/zakaas-hero.png" 
-              alt="Zakaas Custom Snack Box Presentation" 
-              className="box-pack-photo"
-            />
-            <div className="box-snack-glimpses">
-              <div className="glimpse-item">
-                <img src="/zakaas-chakli.jpg" alt="Chakli" />
-                <span>CHAKLI</span>
-              </div>
-              <div className="glimpse-item">
-                <img src="/zakaas-bhakarwadi.jpg" alt="Bhakarwadi" />
-                <span>BHAKARWADI</span>
-              </div>
-              <div className="glimpse-item">
-                <img src="/zakaas-shankarpali.jpg" alt="Shankarpali" />
-                <span>SHANKARPALI</span>
-              </div>
-            </div>
+        {/* Product-Led Composition */}
+        <div className="gifting-pack-composition">
+          <div className="gifting-packs-stage">
+            {packs.map((p, idx) => (
+              <Link 
+                to="/builder" 
+                key={p.id} 
+                className={`gifting-pack-figure pack-${idx + 1}`}
+                aria-label={`Select ${p.name} in gift box builder`}
+              >
+                <div className="gifting-pack-img-wrap">
+                  <img src={p.image} alt={`Zakaas ${p.name} 100g Pack`} />
+                </div>
+                <div className="gifting-pack-label">
+                  <b>{p.name}</b>
+                  <span>{p.weight}</span>
+                </div>
+              </Link>
+            ))}
           </div>
 
-          <div className="box-action-side">
-            <div className="box-subkicker">CUSTOM SNACK CURATION</div>
-            <h3>CREATE YOUR OWN ZAKAAS BOX</h3>
-            <p>
-              Choose 3 or 5 of your favourite packs. We assemble them by hand in our festive gift box with a custom personalized note.
-            </p>
-
-            <ul className="box-perks-list">
-              <li><Check size={15} /> Select any combination of snacks</li>
-              <li><Check size={15} /> Hand-packed in protective gift carton</li>
-              <li><Check size={15} /> Personal gift message card included</li>
-              <li><Check size={15} /> Express door delivery across India</li>
-            </ul>
-
-            <Link to="/builder" className="build-box-btn">
-              BUILD A BOX <ArrowUpRight size={16} />
+          <div className="gifting-action-bar">
+            <div className="gifting-config-pill">
+              <span>3 PACKS / 5 PACKS</span>
+            </div>
+            <Link to="/builder" className="gifting-cta-button">
+              BUILD A BOX <ArrowUpRight size={15} />
             </Link>
           </div>
         </div>
@@ -160,7 +166,7 @@ function VisualGiftingSection({ onBuildBox }) {
         {/* B2B Teaser Banner */}
         <div className="b2b-banner-box">
           <div className="b2b-banner-info">
-            <p className="kicker">06 / CORPORATE & CELEBRATIONS</p>
+            <p className="kicker">05 / CORPORATE & CELEBRATIONS</p>
             <h2>ZAKAAS FOR<br /><em>BUSINESS.</em></h2>
             <p>Weddings, festive hampers, corporate gifting, and retail orders. Give a gift that people genuinely devour.</p>
             <button onClick={() => navigate('/b2b')} className="b2b-banner-btn">
