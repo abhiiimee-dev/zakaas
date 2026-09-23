@@ -3,8 +3,9 @@ export function IngredientStorySection() {
     {
       id: 'bhajan-flour',
       name: 'Bhajan Flour',
-      icon: '🌾',
-      role: 'THE BASE',
+      nativeName: 'भाजणी पीठ',
+      index: '01',
+      role: 'THE GRAIN BASE',
       image: '/ingredients/bhajan-flour.jpg',
       alt: 'Slow-roasted rice and chana dal Bhajan flour',
       benefit: 'Roasted rice & chana dal deliver lasting energy, plant protein and fibre.',
@@ -13,7 +14,8 @@ export function IngredientStorySection() {
     {
       id: 'cumin',
       name: 'Cumin',
-      icon: '🌿',
+      nativeName: 'जिरे · Jeera',
+      index: '02',
       role: 'THE WARM NOTE',
       image: '/ingredients/cumin.jpg',
       alt: 'Whole aromatic cumin seeds',
@@ -23,7 +25,8 @@ export function IngredientStorySection() {
     {
       id: 'ajwain',
       name: 'Ajwain',
-      icon: '🌱',
+      nativeName: 'ओवा · Carom',
+      index: '03',
       role: 'THE DISTINCTIVE AROMA',
       image: '/ingredients/ajwain.jpg',
       alt: 'Whole ajwain carom seeds',
@@ -33,7 +36,8 @@ export function IngredientStorySection() {
     {
       id: 'white-sesame',
       name: 'White Sesame',
-      icon: '⚪',
+      nativeName: 'पांढरे तीळ · Til',
+      index: '04',
       role: 'THE NUTTY CRUNCH',
       image: '/ingredients/white-sesame.jpg',
       alt: 'Toasted white sesame seeds',
@@ -54,32 +58,41 @@ export function IngredientStorySection() {
           </p>
         </div>
 
-        {/* 4-Card Grid with Small Photos and Benefits */}
+        {/* 4-Card Circular Ingredient Display */}
         <div className="ingredients-cards-grid">
           {ingredients.map((item) => (
-            <article key={item.id} className="ingredient-card">
-              <div className="ingredient-image-wrap">
-                <img
-                  src={item.image}
-                  alt={item.alt}
-                  loading="lazy"
-                  className="ingredient-image"
-                />
-                <span className="ingredient-role-badge">{item.role}</span>
-              </div>
-              <div className="ingredient-card-body">
-                <div className="ingredient-heading-row">
-                  <span className="ingredient-icon" aria-hidden="true">{item.icon}</span>
-                  <h3 className="ingredient-name">{item.name}</h3>
+            <article key={item.id} className="ingredient-circle-card">
+              {/* Circular Specimen Frame */}
+              <div className="ingredient-circle-wrap">
+                <div className="ingredient-circle-disc">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    loading="lazy"
+                    className="ingredient-circle-img"
+                  />
                 </div>
-
-                <div className="ingredient-benefit-box">
-                  <span className="benefit-label">KEY BENEFIT</span>
-                  <p className="ingredient-benefit-text">{item.benefit}</p>
-                </div>
-
-                <p className="ingredient-desc-text">{item.description}</p>
+                <span className="ingredient-index-badge">{item.index}</span>
               </div>
+
+              {/* Editorial Header */}
+              <div className="ingredient-meta-block">
+                <span className="ingredient-role-tag">{item.role}</span>
+                <h3 className="ingredient-heading-title">{item.name}</h3>
+                <span className="ingredient-native-label">{item.nativeName}</span>
+              </div>
+
+              <div className="ingredient-ornamental-divider" aria-hidden="true" />
+
+              {/* Natural Benefit Statement */}
+              <p className="ingredient-benefit-quote">
+                “{item.benefit}”
+              </p>
+
+              {/* Culinary & Crunch Technique */}
+              <p className="ingredient-technique-text">
+                {item.description}
+              </p>
             </article>
           ))}
         </div>
