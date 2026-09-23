@@ -53,71 +53,46 @@ function VisualPromise() {
     {
       num: '01',
       title: 'AUTHENTIC TASTE',
-      desc: 'Flavours rooted in original Maharashtrian households — slow-roasted grains, whole cumin, and fragrant ajwain.',
-      icon: Utensils
+      desc: 'Rooted in Maharashtrian flavours and familiar ingredients.'
     },
     {
       num: '02',
       title: 'QUALITY YOU CAN TRUST',
-      desc: 'No artificial preservatives, no cheap flour blends. Pure ingredients we proudly serve to our own family.',
-      icon: Sparkles
+      desc: 'Carefully selected ingredients and consistent preparation.'
     },
     {
       num: '03',
       title: 'MADE FOR TODAY',
-      desc: 'Signature brittle crunch sealed inside multi-layer nitrogen pouches so every spiral stays crisp.',
-      icon: Package
+      desc: 'Packed to keep every bite crisp.'
     },
     {
       num: '04',
       title: 'MAHARASHTRA, EVERYWHERE',
-      desc: 'From Maharashtra kitchens directly to your doorstep across India and around the globe.',
-      icon: HeartHandshake
+      desc: 'Maharashtrian snacks, delivered beyond home.'
     }
   ];
 
   return (
     <section className="promise-section" id="promise">
       <div className="promise-container">
-        <div className="promise-content-col">
-          <p className="kicker">03 / THE ZAKAAS STANDARD</p>
-          <h2>NO SHORTCUTS.<br /><em>NO SMALL FEELING.</em></h2>
-          <p className="promise-lead">
-            We don’t cut corners on roasting, seed quality, or oil purity. What comes out of the kadai is the exact crunch we grew up loving.
-          </p>
-
-          <div className="promise-principles-list">
-            {principles.map(p => {
-              const IconComp = p.icon;
-              return (
-                <div key={p.num} className="promise-principle-item">
-                  <span className="promise-num">{p.num}</span>
-                  <div>
-                    <h3>{p.title}</h3>
-                    <p>{p.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
+        <div className="promise-top-bar">
+          <div>
+            <p className="kicker">03 / THE ZAKAAS STANDARD</p>
+            <h2>NO SHORTCUTS.<br /><em>NO SMALL FEELING.</em></h2>
           </div>
+          <p className="promise-lead">
+            Flavours rooted in Maharashtra, made with consistent care and packed for lasting crunch.
+          </p>
         </div>
 
-        <div className="promise-visual-col">
-          <div className="promise-visual-stage">
-            <img 
-              src="/zakaas-home-kitchen.png" 
-              alt="Handcrafting traditional Maharashtrian savouries in a kitchen" 
-              className="promise-main-photo"
-            />
-            <div className="promise-badge-pill">
-              <span className="dot-live" />
-              <span>SMALL-BATCH CRAFTED IN MAHARASHTRA</span>
+        <div className="promise-horizontal-track">
+          {principles.map(p => (
+            <div key={p.num} className="promise-col">
+              <span className="promise-num">{p.num}</span>
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
             </div>
-            <div className="promise-inset-snack">
-              <img src="/zakaas-chakli.jpg" alt="Chakli brittle spiral crunch" />
-              <small>THE SIGNATURE SPIRAL</small>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

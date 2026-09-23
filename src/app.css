@@ -963,122 +963,65 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* Promise Section ("No Shortcuts. No Small Feeling.") */
 .promise-section {
-  padding: 110px 5vw;
+  padding: 100px 5vw;
   background: #fbf6ec;
   border-top: 2px solid var(--charcoal);
   border-bottom: 2px solid var(--charcoal);
 }
 .promise-container {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 60px;
-  align-items: center;
-  max-width: 1300px;
+  max-width: 1250px;
   margin: 0 auto;
 }
-.promise-content-col h2 {
-  font-size: clamp(45px, 6vw, 90px);
-  line-height: 0.85;
-  letter-spacing: -0.085em;
-  margin: 0 0 20px;
-}
-.promise-lead {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #444;
-  max-width: 520px;
-  margin-bottom: 35px;
-}
-.promise-principles-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.promise-principle-item {
+.promise-top-bar {
   display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 16px;
-  padding: 16px 0;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 50px;
+  align-items: flex-end;
+  margin-bottom: 50px;
+  padding-bottom: 35px;
   border-bottom: 1px solid rgba(42, 38, 34, 0.2);
 }
-.promise-principle-item:last-child {
-  border-bottom: 0;
-}
-.promise-principle-item .promise-num {
-  font: 11px 'DM Mono', monospace;
-  color: var(--clay);
-  font-weight: 800;
-  padding-top: 2px;
-}
-.promise-principle-item h3 {
-  font-size: 18px;
-  letter-spacing: -0.04em;
-  margin: 0 0 6px;
-  font-weight: 800;
-}
-.promise-principle-item p {
-  font-size: 13px;
-  line-height: 1.5;
-  color: #555;
+.promise-top-bar h2 {
+  font-size: clamp(38px, 5vw, 75px);
+  line-height: 0.88;
+  letter-spacing: -0.08em;
   margin: 0;
 }
-.promise-visual-stage {
-  position: relative;
-  border: 2px solid var(--charcoal);
-  background: var(--charcoal);
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(42, 38, 34, 0.12);
+.promise-lead {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+  margin: 0;
 }
-.promise-main-photo {
-  width: 100%;
-  height: 480px;
-  object-fit: cover;
-  display: block;
+.promise-horizontal-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
 }
-.promise-badge-pill {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: rgba(20, 18, 16, 0.85);
-  backdrop-filter: blur(6px);
-  padding: 6px 12px;
-  border: 1px solid rgba(242, 234, 216, 0.3);
-  color: var(--khadi);
-  font: 8px 'DM Mono', monospace;
-  letter-spacing: 1px;
+.promise-col {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
 }
-.dot-live {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ochre);
-}
-.promise-inset-snack {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  width: 140px;
-  background: var(--khadi);
-  border: 1px solid var(--charcoal);
-  padding: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-}
-.promise-inset-snack img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
-  margin-bottom: 4px;
-}
-.promise-inset-snack small {
+.promise-col .promise-num {
+  font: 11px 'DM Mono', monospace;
+  font-weight: 800;
+  color: var(--clay);
+  letter-spacing: 1px;
+  margin-bottom: 14px;
   display: block;
-  font: 8px 'DM Mono', monospace;
-  letter-spacing: 0.8px;
-  text-align: center;
-  color: var(--charcoal);
-  font-weight: bold;
+}
+.promise-col h3 {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+.promise-col p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #555;
+  margin: 0;
 }
 
 /* Standalone Visual Gifting Experience */
@@ -1347,14 +1290,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
     grid-template-columns: 1fr;
     gap: 24px;
   }
-  .promise-container {
+  .promise-top-bar {
     grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 36px;
+    padding-bottom: 24px;
   }
-  .promise-visual-stage {
-    order: -1;
-  }
-  .promise-main-photo {
-    height: 300px;
+  .promise-horizontal-track {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 24px;
   }
   .box-showcase-card {
     grid-template-columns: 1fr;
@@ -1374,6 +1318,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
   }
   .community-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .promise-horizontal-track {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
 
