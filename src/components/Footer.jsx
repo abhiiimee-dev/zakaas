@@ -17,6 +17,7 @@ export function Footer() {
         <div className="footer-col">
           <h4>SHOP</h4>
           <Link to="/collections">Collections</Link>
+          <Link to="/builder">Build a Box</Link>
         </div>
 
         <div className="footer-col">
@@ -24,16 +25,16 @@ export function Footer() {
           <Link to="/about">About Us</Link>
           <Link to="/faq">FAQ</Link>
           <Link to="/contact">Contact Us</Link>
-        </div>
-
-        <div className="footer-col">
-          <h4>BUSINESS</h4>
           <Link to="/b2b">B2B / Bulk Orders</Link>
         </div>
 
         <div className="footer-col">
           <h4>POLICIES</h4>
-          <Link to="/policies">Policies</Link>
+          <Link to="/policies#shipping">Shipping Policy</Link>
+          <Link to="/policies#returns">Return & Refund Policy</Link>
+          <Link to="/policies#delivery">Delivery Policy</Link>
+          <Link to="/policies#terms">Terms of Service</Link>
+          <Link to="/policies#privacy">Privacy Policy</Link>
         </div>
       </div>
 

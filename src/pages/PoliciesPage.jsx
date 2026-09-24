@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 
 export function PoliciesPage() {
   const [activeTab, setActiveTab] = useState('shipping');
+  const location = useLocation();
 
   const policies = [
     { id: 'shipping', title: '1. SHIPPING POLICY' },
@@ -11,6 +13,17 @@ export function PoliciesPage() {
     { id: 'terms', title: '4. TERMS OF SERVICE' },
     { id: 'privacy', title: '5. PRIVACY POLICY' },
   ];
+
+  useEffect(() => {
+    const hash = location.hash?.replace('#', '');
+    if (hash && policies.some(p => p.id === hash)) {
+      setActiveTab(hash);
+      const el = document.getElementById(`policy-section-${hash}`);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 120);
+      }
+    }
+  }, [location.hash]);
 
   return (
     <div className="page-policies">

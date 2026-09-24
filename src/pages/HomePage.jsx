@@ -18,8 +18,8 @@ function Hero() {
       <div className="hero-content">
         <p className="kicker hero-kicker">EST. IN MAHARASHTRA · CRAFTED FOR EVERYWHERE</p>
         <h1>
-          <span>CRUNCH THAT FEELS</span>
-          <em>LIKE HOME.</em>
+          <span>THE TASTE OF HOME,</span>
+          <em>MADE TO GO.</em>
         </h1>
         <p className="hero-lede">
           Traditional savouries handcrafted from slow-roasted grains and whole aromatic spices.<br />
@@ -227,11 +227,30 @@ function RealCommunitySection() {
   );
 }
 
+function BrandOneLiner() {
+  return (
+    <section className="brand-oneliner-strip" aria-label="About ZAKAAS brand introduction">
+      <div className="brand-oneliner-inner">
+        <div className="brand-oneliner-content">
+          <span className="brand-oneliner-kicker">ABOUT ZAKAAS · OUR STORY</span>
+          <p className="brand-oneliner-quote">
+            “Rooted in Maharashtra’s rich culinary heritage, ZAKAAS crafts authentic, small-batch tea-time savouries with pure ghee, whole roasted spices, and zero compromise—the true taste of home, made to go.”
+          </p>
+        </div>
+        <Link to="/about" className="brand-oneliner-link">
+          OUR STORY <ArrowUpRight size={13} />
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 export function HomePage({ onAdd, catalog = [], products = [], live = false, onBuildBox }) {
   const displayProducts = catalog?.length ? catalog : (products?.length ? products : []);
   return (
     <div className="page-home">
       <Hero />
+      <BrandOneLiner />
       <ProductSection onAdd={onAdd} products={displayProducts} live={live} />
       <StoryFilm />
       <VisualPromise />

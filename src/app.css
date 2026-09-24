@@ -134,6 +134,96 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .hero-taste-mark i { font-style: normal; font-size: 15px; color: #f0bf5b; animation: slow-spin-reverse 22s linear infinite; }
 .hero-meta { position: absolute; bottom: 22px; left: 4vw; right: 4vw; display: flex; justify-content: space-between; font: 10px 'DM Mono'; letter-spacing: 1px; }
 
+/* Brand About-Us One-Liner Strip (Just before Three Classics) */
+.brand-oneliner-strip {
+  background: var(--charcoal);
+  color: var(--khadi);
+  padding: 34px 5vw;
+  border-top: 1px solid rgba(242, 234, 216, 0.15);
+  border-bottom: 2px solid var(--charcoal);
+  position: relative;
+  overflow: hidden;
+}
+.brand-oneliner-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(242, 234, 216, 0.08) 1px, transparent 1px);
+  background-size: 7px 7px;
+  pointer-events: none;
+}
+.brand-oneliner-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+.brand-oneliner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 880px;
+}
+.brand-oneliner-kicker {
+  font: 10px 'DM Mono', monospace;
+  letter-spacing: 2px;
+  color: var(--ochre);
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.brand-oneliner-kicker::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--clay);
+  border-radius: 50%;
+}
+.brand-oneliner-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 2.1vw, 24px);
+  font-style: italic;
+  line-height: 1.45;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.brand-oneliner-link {
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1.2px;
+  color: var(--khadi);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid rgba(242, 234, 216, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+  transition: all 0.22s ease;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.brand-oneliner-link:hover {
+  background: var(--khadi);
+  color: var(--charcoal);
+  border-color: var(--khadi);
+  transform: translateY(-2px);
+}
+@media (max-width: 860px) {
+  .brand-oneliner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
 /* Product Section on Homepage */
 .products-section { padding: 110px 5vw; background: var(--khadi); background-image: radial-gradient(#8d614633 .7px, transparent .7px); background-size: 5px 5px; }
 .section-intro { display: grid; grid-template-columns: 1.3fr 1fr 1fr; align-items: end; margin-bottom: 50px; }
@@ -1349,7 +1439,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .footer-tagline { font: 10px 'DM Mono'; letter-spacing: 1.5px; color: var(--ochre); margin: 0; }
 .footer-coords { font: 9px 'DM Mono'; opacity: 0.6; }
 
-.footer-nav-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; border-top: 1px solid rgba(242,234,216,0.2); padding-top: 40px; }
+.footer-nav-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; border-top: 1px solid rgba(242,234,216,0.2); padding-top: 40px; }
 .footer-col h4 { font: 10px 'DM Mono'; letter-spacing: 1.5px; color: var(--clay); margin: 0 0 18px; }
 .footer-col a { display: block; font-size: 13px; font-weight: bold; letter-spacing: 0.5px; margin-bottom: 12px; color: rgba(242,234,216,0.85); transition: color 0.2s; }
 .footer-col a:hover { color: #fff; text-decoration: underline; }

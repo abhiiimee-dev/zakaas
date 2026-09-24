@@ -49,9 +49,6 @@ export function Header({ cartCount, onCartOpen, menuOpen, setMenuOpen, onSearchO
           <button onClick={onSearchOpen} aria-label="Search snacks">
             <Search />
           </button>
-          <button className="account-button" onClick={() => navigate('/b2b')}>
-            B2B / BULK
-          </button>
           <button
             type="button"
             className={`bag-button ${bagPulse ? 'is-pulsing' : ''}`}
