@@ -35,10 +35,22 @@ export function CartDrawer({
       <button className="cart-scrim" aria-label="Close bag" onClick={onClose} />
       <aside className="cart-drawer" aria-label="Shopping bag">
         <div className="cart-head">
-          <p>
-            YOUR BAG <span>({items.length})</span>
-          </p>
-          <button onClick={onClose} aria-label="Close bag">
+          <div className="cart-head-meta">
+            <p className="cart-head-title">
+              YOUR BAG <span>({items.length})</span>
+            </p>
+            {items.length > 0 && (
+              <button
+                type="button"
+                onClick={handleViewFullCart}
+                className="cart-edit-link"
+              >
+                <span>VIEW / EDIT BAG</span>
+                <span className="cart-edit-arrow">→</span>
+              </button>
+            )}
+          </div>
+          <button onClick={onClose} aria-label="Close bag" className="cart-close-button">
             <X />
           </button>
         </div>
@@ -76,10 +88,6 @@ export function CartDrawer({
               <span>ESTIMATED TOTAL</span>
               <b>₹{subtotal.toFixed(0)}</b>
             </div>
-
-            <button type="button" onClick={handleViewFullCart} className="view-cart-link">
-              VIEW FULL BAG / EDIT ITEMS
-            </button>
 
             <button
               type="button"

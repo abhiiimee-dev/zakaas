@@ -1487,22 +1487,68 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .cart-head {
-  padding: 24px 28px;
-  border-bottom: 1px solid rgba(240, 234, 223, 0.15);
+  padding: 22px 28px 20px;
+  border-bottom: 1px solid rgba(240, 234, 223, 0.12);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
-.cart-head p {
+.cart-head-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.cart-head-title {
   font: 11px 'DM Mono', monospace;
   letter-spacing: 1.5px;
   margin: 0;
   color: #f0eadf;
+  text-transform: uppercase;
 }
-.cart-head p span {
+.cart-head-title span {
   color: #c64625;
 }
-.cart-head button {
+.cart-edit-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: rgba(240, 234, 223, 0.55);
+  font: 10px 'DM Mono', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-align: left;
+  transition: color 0.2s ease;
+  width: fit-content;
+}
+.cart-edit-link span {
+  text-decoration: underline;
+  text-decoration-color: rgba(240, 234, 223, 0.2);
+  text-underline-offset: 3px;
+  transition: all 0.2s ease;
+}
+.cart-edit-link .cart-edit-arrow {
+  text-decoration: none !important;
+  color: #e5933a;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.cart-edit-link:hover {
+  background: none !important;
+  color: #e5933a !important;
+}
+.cart-edit-link:hover span {
+  color: #e5933a;
+  text-decoration-color: #e5933a;
+}
+.cart-edit-link:hover .cart-edit-arrow {
+  transform: translateX(3px);
+}
+.cart-close-button {
   background: transparent;
   border: 0;
   color: #f0eadf;
@@ -1514,7 +1560,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   justify-content: center;
   transition: background 0.2s;
 }
-.cart-head button:hover {
+.cart-close-button:hover {
   background: rgba(240, 234, 223, 0.1);
 }
 
