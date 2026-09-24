@@ -234,7 +234,7 @@ function BrandOneLiner() {
         <div className="brand-oneliner-content">
           <span className="brand-oneliner-kicker">ABOUT ZAKAAS · OUR STORY</span>
           <p className="brand-oneliner-quote">
-            “Rooted in Maharashtra’s rich culinary heritage, ZAKAAS crafts authentic, small-batch tea-time savouries with pure ghee, whole roasted spices, and zero compromise—the true taste of home, made to go.”
+            “Classic Maharashtrian snacks, packed with the taste of home.”
           </p>
         </div>
         <Link to="/about" className="brand-oneliner-link">
