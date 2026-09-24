@@ -1,8 +1,16 @@
-import { Minus, Plus, Trash2, ArrowUpRight, ShoppingBag, ShieldCheck } from 'lucide-react';
+import { Minus, Plus, Trash2, ArrowUpRight, ShoppingBag, ShieldCheck, CreditCard } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 
-export function CartPage({ items = [], onChange, onCheckout, checkoutReady, cartData }) {
+export function CartPage({
+  items = [],
+  onChange,
+  onShopifyCheckout,
+  onRazorpayCheckout,
+  checkoutLoading = false,
+  checkoutReady,
+  cartData,
+}) {
   const countById = items.reduce((all, item) => {
     if (!item || item.id === undefined) return all;
     return { ...all, [item.id]: (all[item.id] || 0) + 1 };
@@ -16,7 +24,7 @@ export function CartPage({ items = [], onChange, onCheckout, checkoutReady, cart
     .filter(Boolean);
 
   const subtotal = uniqueItems.reduce((acc, item) => {
-    const itemPrice = Number(item.price || 220);
+    const itemPrice = Number(item.price || 150);
     return acc + itemPrice * item.quantity;
   }, 0);
 
@@ -56,7 +64,7 @@ export function CartPage({ items = [], onChange, onCheckout, checkoutReady, cart
               </div>
 
               {uniqueItems.map((item) => {
-                const itemPrice = Number(item.price || 220);
+                const itemPrice = Number(item.price || 150);
                 return (
                   <article key={item.id} className="cart-page-item">
                     <div className="cart-item-info">
@@ -132,21 +140,33 @@ export function CartPage({ items = [], onChange, onCheckout, checkoutReady, cart
 
               <div className="shopify-trust-box">
                 <ShieldCheck />
-                <p>
-                  {checkoutReady
-                    ? 'Secure checkout powered by Shopify.'
-                    : 'Preparing your Shopify checkout connection…'}
-                </p>
+                <p>Secure checkout powered by Shopify & Razorpay.</p>
               </div>
 
-              <button
-                type="button"
-                className="hero-button full-width-checkout"
-                disabled={!checkoutReady}
-                onClick={onCheckout}
-              >
-                PROCEED TO SHOPIFY CHECKOUT <ArrowUpRight />
-              </button>
+              <div className="cart-checkout-actions">
+                <button
+                  type="button"
+                  className="hero-button full-width-checkout"
+                  disabled={!items.length || checkoutLoading}
+                  onClick={onShopifyCheckout}
+                >
+                  {checkoutLoading ? 'CONNECTING TO SHOPIFY…' : 'PROCEED TO SHOPIFY CHECKOUT'}{' '}
+                  <ArrowUpRight />
+                </button>
+
+                <div className="cart-checkout-separator">
+                  <span>OR PAY ONLINE VIA RAZORPAY</span>
+                </div>
+
+                <button
+                  type="button"
+                  className="razorpay-checkout-button full-width-checkout"
+                  disabled={!items.length || checkoutLoading}
+                  onClick={onRazorpayCheckout}
+                >
+                  <CreditCard size={16} /> PAY WITH RAZORPAY (UPI / CARDS)
+                </button>
+              </div>
             </div>
           </div>
         )}

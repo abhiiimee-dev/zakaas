@@ -9,6 +9,7 @@ export const products = [
     price: '150',
     mrp: '199',
     currencyCode: 'INR',
+    variantId: 'gid://shopify/ProductVariant/50267737391361',
     accent: 'ochre',
     weight: '100g',
     image: '/zakaas-chakli.jpg',
@@ -51,7 +52,7 @@ export const products = [
         price: 150,
         savings: 49,
         badge: null,
-        variantId: 'gid://shopify/ProductVariant/chakli-100'
+        variantId: 'gid://shopify/ProductVariant/50267737391361'
       },
       {
         id: 'pack-3',
@@ -62,7 +63,7 @@ export const products = [
         price: 450,
         savings: 147,
         badge: 'BEST SELLER',
-        variantId: 'gid://shopify/ProductVariant/chakli-300'
+        variantId: 'gid://shopify/ProductVariant/50267737391361'
       },
       {
         id: 'pack-5',
@@ -73,7 +74,7 @@ export const products = [
         price: 750,
         savings: 245,
         badge: 'STOCK UP',
-        variantId: 'gid://shopify/ProductVariant/chakli-500'
+        variantId: 'gid://shopify/ProductVariant/50267737391361'
       }
     ],
     ingredientBreakdown: [
@@ -137,9 +138,9 @@ export const products = [
       batchInfo: 'See batch code, packaging date, and best before printed on the sealed pouch.'
     },
     variants: [
-      { id: 'var-chakli-1', title: '1 Pack (100g)', price: '150', mrp: '199', variantId: 'gid://shopify/ProductVariant/chakli-100', packCount: 1 },
-      { id: 'var-chakli-3', title: '3 Packs (300g)', price: '450', mrp: '597', variantId: 'gid://shopify/ProductVariant/chakli-300', packCount: 3 },
-      { id: 'var-chakli-5', title: '5 Packs (500g)', price: '750', mrp: '995', variantId: 'gid://shopify/ProductVariant/chakli-500', packCount: 5 }
+      { id: 'var-chakli-1', title: '1 Pack (100g)', price: '150', mrp: '199', variantId: 'gid://shopify/ProductVariant/50267737391361', packCount: 1 },
+      { id: 'var-chakli-3', title: '3 Packs (300g)', price: '450', mrp: '597', variantId: 'gid://shopify/ProductVariant/50267737391361', packCount: 3 },
+      { id: 'var-chakli-5', title: '5 Packs (500g)', price: '750', mrp: '995', variantId: 'gid://shopify/ProductVariant/50267737391361', packCount: 5 }
     ]
   },
   {
@@ -152,6 +153,7 @@ export const products = [
     price: '150',
     mrp: '199',
     currencyCode: 'INR',
+    variantId: 'gid://shopify/ProductVariant/50267737456897',
     accent: 'clay',
     weight: '100g',
     image: '/zakaas-bhakarwadi.jpg',
@@ -194,7 +196,7 @@ export const products = [
         price: 150,
         savings: 49,
         badge: null,
-        variantId: 'gid://shopify/ProductVariant/bhakarwadi-100'
+        variantId: 'gid://shopify/ProductVariant/50267737456897'
       },
       {
         id: 'pack-3',
@@ -205,7 +207,7 @@ export const products = [
         price: 450,
         savings: 147,
         badge: 'BEST SELLER',
-        variantId: 'gid://shopify/ProductVariant/bhakarwadi-300'
+        variantId: 'gid://shopify/ProductVariant/50267737456897'
       },
       {
         id: 'pack-5',
@@ -216,7 +218,7 @@ export const products = [
         price: 750,
         savings: 245,
         badge: 'STOCK UP',
-        variantId: 'gid://shopify/ProductVariant/bhakarwadi-500'
+        variantId: 'gid://shopify/ProductVariant/50267737456897'
       }
     ],
     ingredientBreakdown: [
@@ -275,9 +277,9 @@ export const products = [
       batchInfo: 'See batch code, packaging date, and best before printed on the sealed pouch.'
     },
     variants: [
-      { id: 'var-bhakarwadi-1', title: '1 Pack (100g)', price: '150', mrp: '199', variantId: 'gid://shopify/ProductVariant/bhakarwadi-100', packCount: 1 },
-      { id: 'var-bhakarwadi-3', title: '3 Packs (300g)', price: '450', mrp: '597', variantId: 'gid://shopify/ProductVariant/bhakarwadi-300', packCount: 3 },
-      { id: 'var-bhakarwadi-5', title: '5 Packs (500g)', price: '750', mrp: '995', variantId: 'gid://shopify/ProductVariant/bhakarwadi-500', packCount: 5 }
+      { id: 'var-bhakarwadi-1', title: '1 Pack (100g)', price: '150', mrp: '199', variantId: 'gid://shopify/ProductVariant/50267737456897', packCount: 1 },
+      { id: 'var-bhakarwadi-3', title: '3 Packs (300g)', price: '450', mrp: '597', variantId: 'gid://shopify/ProductVariant/50267737456897', packCount: 3 },
+      { id: 'var-bhakarwadi-5', title: '5 Packs (500g)', price: '750', mrp: '995', variantId: 'gid://shopify/ProductVariant/50267737456897', packCount: 5 }
     ]
   },
   {
@@ -290,6 +292,7 @@ export const products = [
     price: '150',
     mrp: '199',
     currencyCode: 'INR',
+    variantId: 'gid://shopify/ProductVariant/50267737784577',
     accent: 'rose',
     weight: '100g',
     image: '/zakaas-shankarpali.jpg',
@@ -332,7 +335,7 @@ export const products = [
         price: 150,
         savings: 49,
         badge: null,
-        variantId: 'gid://shopify/ProductVariant/shankarpali-100'
+        variantId: 'gid://shopify/ProductVariant/50267737784577'
       },
       {
         id: 'pack-3',
@@ -343,7 +346,7 @@ export const products = [
         price: 450,
         savings: 147,
         badge: 'BEST SELLER',
-        variantId: 'gid://shopify/ProductVariant/shankarpali-300'
+        variantId: 'gid://shopify/ProductVariant/50267737784577'
       },
       {
         id: 'pack-5',
@@ -354,7 +357,7 @@ export const products = [
         price: 750,
         savings: 245,
         badge: 'STOCK UP',
-        variantId: 'gid://shopify/ProductVariant/shankarpali-500'
+        variantId: 'gid://shopify/ProductVariant/50267737784577'
       }
     ],
     ingredientBreakdown: [
@@ -408,9 +411,9 @@ export const products = [
       batchInfo: 'See batch code, packaging date, and best before printed on the sealed pouch.'
     },
     variants: [
-      { id: 'var-shankarpali-1', title: '1 Pack (100g)', price: '150', mrp: '199', variantId: 'gid://shopify/ProductVariant/shankarpali-100', packCount: 1 },
-      { id: 'var-shankarpali-3', title: '3 Packs (300g)', price: '450', mrp: '597', variantId: 'gid://shopify/ProductVariant/shankarpali-300', packCount: 3 },
-      { id: 'var-shankarpali-5', title: '5 Packs (500g)', price: '750', mrp: '995', variantId: 'gid://shopify/ProductVariant/shankarpali-500', packCount: 5 }
+      { id: 'var-shankarpali-1', title: '1 Pack (100g)', price: '150', mrp: '199', variantId: 'gid://shopify/ProductVariant/50267737784577', packCount: 1 },
+      { id: 'var-shankarpali-3', title: '3 Packs (300g)', price: '450', mrp: '597', variantId: 'gid://shopify/ProductVariant/50267737784577', packCount: 3 },
+      { id: 'var-shankarpali-5', title: '5 Packs (500g)', price: '750', mrp: '995', variantId: 'gid://shopify/ProductVariant/50267737784577', packCount: 5 }
     ]
   }
 ];

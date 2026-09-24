@@ -227,11 +227,12 @@ function RealCommunitySection() {
   );
 }
 
-export function HomePage({ onAdd, catalog = [], live = false, onBuildBox }) {
+export function HomePage({ onAdd, catalog = [], products = [], live = false, onBuildBox }) {
+  const displayProducts = catalog?.length ? catalog : (products?.length ? products : []);
   return (
     <div className="page-home">
       <Hero />
-      <ProductSection onAdd={onAdd} products={catalog} live={live} />
+      <ProductSection onAdd={onAdd} products={displayProducts} live={live} />
       <StoryFilm />
       <VisualPromise />
       <VisualGiftingSection onBuildBox={onBuildBox} />

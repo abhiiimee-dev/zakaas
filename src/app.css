@@ -2100,5 +2100,208 @@ button { font: inherit; color: inherit; cursor: pointer; }
   }
 }
 
+/* ==========================================================================
+   Checkout & Razorpay Payment Styles
+   ========================================================================== */
 
+.cart-drawer-subtotal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 12px 'DM Mono', monospace;
+  color: #f0eadf;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(240, 234, 223, 0.15);
+}
+.cart-drawer-subtotal-row b {
+  font-size: 16px;
+  color: #e5933a;
+}
 
+.cart-drawer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.cart-action-divider,
+.cart-checkout-separator {
+  position: relative;
+  text-align: center;
+  margin: 6px 0;
+}
+.cart-action-divider::before,
+.cart-checkout-separator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(240, 234, 223, 0.12);
+}
+.cart-action-divider span,
+.cart-checkout-separator span {
+  position: relative;
+  background: #141210;
+  padding: 0 10px;
+  font: 9px 'DM Mono', monospace;
+  letter-spacing: 1px;
+  color: rgba(240, 234, 223, 0.5);
+  text-transform: uppercase;
+}
+.cart-summary-card .cart-checkout-separator span {
+  background: #1a1715;
+}
+
+.cart-razorpay-btn {
+  background: #0f172a !important;
+  border: 1px solid rgba(240, 234, 223, 0.2) !important;
+  color: #fff !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.cart-razorpay-btn:hover:not(:disabled) {
+  background: #1e293b !important;
+  border-color: #38bdf8 !important;
+}
+
+.cart-checkout-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.razorpay-checkout-button {
+  width: 100%;
+  padding: 16px;
+  background: #0f172a;
+  color: #f0eadf;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  font: 11px 'DM Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.razorpay-checkout-button:hover:not(:disabled) {
+  background: #1e293b;
+  border-color: #38bdf8;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.razorpay-checkout-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cart-trust-note {
+  font: 10px 'DM Mono', monospace;
+  color: rgba(240, 234, 223, 0.45);
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+/* Payment Success Modal */
+.payment-success-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 9, 8, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.payment-success-card {
+  background: #1a1715;
+  border: 1px solid rgba(240, 234, 223, 0.18);
+  border-radius: 4px;
+  padding: 36px 30px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.success-badge-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #166534;
+  color: #86efac;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 auto 18px;
+}
+
+.payment-success-card h2 {
+  font: 700 24px 'Syne', sans-serif;
+  color: #f0eadf;
+  margin: 0 0 10px;
+  letter-spacing: -0.5px;
+}
+
+.payment-success-card .success-sub {
+  font: 13px/1.6 'Plus Jakarta Sans', sans-serif;
+  color: rgba(240, 234, 223, 0.7);
+  margin: 0 0 24px;
+}
+
+.payment-receipt-box {
+  background: #12100e;
+  border: 1px solid rgba(240, 234, 223, 0.1);
+  padding: 16px 18px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font: 12px 'DM Mono', monospace;
+  color: rgba(240, 234, 223, 0.7);
+  border-bottom: 1px solid rgba(240, 234, 223, 0.06);
+}
+.receipt-row:last-child {
+  border-bottom: none;
+}
+.receipt-row b {
+  color: #e5933a;
+  font-size: 15px;
+}
+.receipt-row code {
+  color: #f0eadf;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 11px;
+}
+
+.payment-success-card .hero-button.full-width {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
