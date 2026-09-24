@@ -13,14 +13,15 @@ const productSubtitles = {
 };
 
 const productFrames = product => {
-  const images = (product.images?.length ? product.images : [product.image]).slice(0, 3).map((image, i) => ({
+  const rawList = Array.isArray(product.images) && product.images.length
+    ? product.images
+    : [product.image];
+  // Deduplicate images to prevent accidental repeated rendering of the same image
+  const uniqueUrls = Array.from(new Set(rawList.filter(Boolean)));
+  return uniqueUrls.map((image, i) => ({
     image,
-    position: crops[i] || '50% 50%'
+    position: crops[i % crops.length] || '50% 50%'
   }));
-  while (images.length < 3) {
-    images.push({ image: product.image, position: crops[images.length] || '50% 50%' });
-  }
-  return images;
 };
 
 function ProductCard({ product, index, onAdd, onFly }) {
@@ -29,20 +30,23 @@ function ProductCard({ product, index, onAdd, onFly }) {
   const pointer = useRef(null);
   const visualRef = useRef(null);
   const frames = useMemo(() => productFrames(product), [product]);
+  const hasMultipleFrames = frames.length > 1;
 
   const wasDragged = useRef(false);
 
   const go = direction => {
+    if (!hasMultipleFrames) return;
     setFrame(current => (current + direction + frames.length) % frames.length);
   };
 
   const down = event => {
+    if (!hasMultipleFrames) return;
     pointer.current = { x: event.clientX, y: event.clientY };
     wasDragged.current = false;
   };
 
   const up = event => {
-    if (!pointer.current) return;
+    if (!hasMultipleFrames || !pointer.current) return;
     const dx = event.clientX - pointer.current.x;
     const dy = event.clientY - pointer.current.y;
     pointer.current = null;
@@ -65,13 +69,14 @@ function ProductCard({ product, index, onAdd, onFly }) {
     e.stopPropagation();
     if (!product.variantId && !product.id) return;
     setAdded(true);
-    if (onFly) onFly(product, visualRef.current, frames[frame]);
+    if (onFly) onFly(product, visualRef.current, frames[frame] || { image: product.image });
     if (onAdd) onAdd(product);
     window.setTimeout(() => setAdded(false), 1400);
   };
 
   const handle = product.handle || product.id;
   const descriptionText = productSubtitles[product.id] || product.line || product.description || 'A little taste of home.';
+  const primaryImage = frames[0]?.image || product.image || '/zakaas-chakli.jpg';
 
   return (
     <article className={`product-feature product-editorial ${tones[index % tones.length]}`}>
@@ -91,28 +96,41 @@ function ProductCard({ product, index, onAdd, onFly }) {
         onClick={handleVisualClick}
         aria-label={`View ${product.name} details`}
       >
-        <div className="product-gallery-track" style={{ transform: `translateX(-${frame * 100}%)` }}>
-          {frames.map((item, imageIndex) => (
-            <div className="product-gallery-frame" key={`${item.image}-${imageIndex}`}>
-              <img 
-                src={item.image} 
-                style={{ objectPosition: item.position }} 
-                alt={imageIndex === 0 ? `${product.name} ZAKAAS pack` : `${product.name} texture detail`}
-                loading={index === 0 ? 'eager' : 'lazy'}
-              />
+        {hasMultipleFrames ? (
+          <>
+            <div className="product-gallery-track" style={{ transform: `translateX(-${frame * 100}%)` }}>
+              {frames.map((item, imageIndex) => (
+                <div className="product-gallery-frame" key={`${item.image}-${imageIndex}`}>
+                  <img 
+                    src={item.image} 
+                    style={{ objectPosition: item.position }} 
+                    alt={imageIndex === 0 ? `${product.name} ZAKAAS pack` : `${product.name} detail`}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        <div className="gallery-controls" onClick={e => e.stopPropagation()}>
-          <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(-1); }} aria-label={`Previous ${product.name} image`}>
-            <ChevronLeft size={16} />
-          </button>
-          <span>{String(frame + 1).padStart(2, '0')} <i /> 03</span>
-          <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(1); }} aria-label={`Next ${product.name} image`}>
-            <ChevronRight size={16} />
-          </button>
-        </div>
+            <div className="gallery-controls" onClick={e => e.stopPropagation()}>
+              <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(-1); }} aria-label={`Previous ${product.name} image`}>
+                <ChevronLeft size={16} />
+              </button>
+              <span>{String(frame + 1).padStart(2, '0')} <i /> {String(frames.length).padStart(2, '0')}</span>
+              <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(1); }} aria-label={`Next ${product.name} image`}>
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="product-gallery-frame single-frame">
+            <img 
+              src={primaryImage} 
+              style={{ objectPosition: '50% 50%' }} 
+              alt={`${product.name} ZAKAAS pack`}
+              loading={index === 0 ? 'eager' : 'lazy'}
+            />
+          </div>
+        )}
       </Link>
 
       <div className="product-copy">
