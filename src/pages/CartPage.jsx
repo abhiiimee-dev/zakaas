@@ -1,4 +1,4 @@
-import { Minus, Plus, Trash2, ArrowUpRight, ShoppingBag, ShieldCheck, CreditCard } from 'lucide-react';
+import { Minus, Plus, Trash2, ArrowUpRight, ShoppingBag, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 
@@ -6,7 +6,6 @@ export function CartPage({
   items = [],
   onChange,
   onShopifyCheckout,
-  onRazorpayCheckout,
   checkoutLoading = false,
   checkoutReady,
   cartData,
@@ -140,7 +139,7 @@ export function CartPage({
 
               <div className="shopify-trust-box">
                 <ShieldCheck />
-                <p>Secure checkout powered by Shopify & Razorpay.</p>
+                <p>Secure checkout powered by Shopify.</p>
               </div>
 
               <div className="cart-checkout-actions">
@@ -152,19 +151,6 @@ export function CartPage({
                 >
                   {checkoutLoading ? 'CONNECTING TO SHOPIFY…' : 'PROCEED TO SHOPIFY CHECKOUT'}{' '}
                   <ArrowUpRight />
-                </button>
-
-                <div className="cart-checkout-separator">
-                  <span>OR PAY ONLINE VIA RAZORPAY</span>
-                </div>
-
-                <button
-                  type="button"
-                  className="razorpay-checkout-button full-width-checkout"
-                  disabled={!items.length || checkoutLoading}
-                  onClick={onRazorpayCheckout}
-                >
-                  <CreditCard size={16} /> PAY WITH RAZORPAY (UPI / CARDS)
                 </button>
               </div>
             </div>

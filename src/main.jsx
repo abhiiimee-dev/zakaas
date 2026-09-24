@@ -394,7 +394,6 @@ function App() {
               items={items}
               onChange={handleChange}
               onShopifyCheckout={handleShopifyCheckout}
-              onRazorpayCheckout={handleRazorpayCheckout}
               checkoutLoading={checkoutLoading}
               checkoutReady={Boolean(cartData?.checkoutUrl || items.length > 0)}
               cartData={cartData}
@@ -409,7 +408,6 @@ function App() {
         onClose={() => setCartOpen(false)}
         onChange={handleChange}
         onShopifyCheckout={handleShopifyCheckout}
-        onRazorpayCheckout={handleRazorpayCheckout}
         checkoutLoading={checkoutLoading}
       />
 

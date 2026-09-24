@@ -1,4 +1,4 @@
-import { Minus, Plus, X, ShoppingBag, ShieldCheck } from 'lucide-react';
+import { Minus, Plus, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export function CartDrawer({
@@ -7,7 +7,6 @@ export function CartDrawer({
   onClose,
   onChange,
   onShopifyCheckout,
-  onRazorpayCheckout,
   checkoutLoading = false,
 }) {
   const navigate = useNavigate();
@@ -82,34 +81,14 @@ export function CartDrawer({
               VIEW FULL BAG / EDIT ITEMS
             </button>
 
-            <div className="cart-drawer-actions">
-              <button
-                type="button"
-                onClick={onShopifyCheckout}
-                disabled={!items.length || checkoutLoading}
-                className="cart-checkout"
-              >
-                {checkoutLoading ? 'OPENING SHOPIFY CHECKOUT…' : 'CONTINUE TO SHOPIFY CHECKOUT'}
-              </button>
-
-              <div className="cart-action-divider">
-                <span>OR PAY DIRECTLY</span>
-              </div>
-
-              <button
-                type="button"
-                onClick={onRazorpayCheckout}
-                disabled={!items.length || checkoutLoading}
-                className="cart-checkout cart-razorpay-btn"
-              >
-                💳 PAY WITH RAZORPAY (UPI / CARDS)
-              </button>
-            </div>
-
-            <p className="cart-trust-note">
-              <ShieldCheck size={12} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
-              100% Secure Checkout with SSL encryption
-            </p>
+            <button
+              type="button"
+              onClick={onShopifyCheckout}
+              disabled={!items.length || checkoutLoading}
+              className="cart-checkout"
+            >
+              {checkoutLoading ? 'OPENING SHOPIFY CHECKOUT…' : 'CONTINUE TO SHOPIFY CHECKOUT'}
+            </button>
           </div>
         )}
       </aside>
