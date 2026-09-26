@@ -52,38 +52,30 @@ function Hero() {
 function VisualPromise() {
   const principles = [
     {
-      num: '01',
+      id: 'taste',
       icon: Sparkles,
       title: 'AUTHENTIC FLAVOUR',
-      tag: 'Heritage Recipes',
-      desc: 'Handcrafted with slow-roasted grains and whole regional spices.',
       accent: '#B8332A',
       accentBg: 'rgba(184, 51, 42, 0.08)'
     },
     {
-      num: '02',
+      id: 'purity',
       icon: ShieldCheck,
-      title: 'UNCOMPROMISED PURITY',
-      tag: '100% Vegetarian',
-      desc: 'Zero adulteration, clean ingredients, no artificial preservatives.',
+      title: '100% PURE',
       accent: '#B27715',
       accentBg: 'rgba(200, 142, 40, 0.10)'
     },
     {
-      num: '03',
+      id: 'crunch',
       icon: PackageCheck,
       title: 'SIGNATURE CRUNCH',
-      tag: 'Aroma-Locked Seal',
-      desc: 'Multi-layer nitrogen pack retains crispness until opened.',
       accent: '#264A38',
       accentBg: 'rgba(38, 74, 56, 0.09)'
     },
     {
-      num: '04',
+      id: 'delivery',
       icon: Truck,
-      title: 'DELIVERED ANYWHERE',
-      tag: 'Direct to Doorstep',
-      desc: 'Shipped fresh from Maharashtra across India in 3-5 days.',
+      title: 'DOORSTEP DELIVERY',
       accent: '#8B3A2B',
       accentBg: 'rgba(139, 58, 43, 0.08)'
     }
@@ -95,32 +87,22 @@ function VisualPromise() {
         <div className="promise-top-bar">
           <div>
             <p className="kicker">03 / THE ZAKAAS STANDARD</p>
-            <h2>NO SHORTCUTS.<br /><em>NO SMALL FEELING.</em></h2>
+            <h2>NO SHORTCUTS. <em>NO SMALL FEELING.</em></h2>
           </div>
-          <p className="promise-lead">
-            Every batch honors authentic Maharashtrian snack heritage. Crafted with care, sealed for crunch, delivered to your door.
-          </p>
         </div>
 
         <div className="promise-horizontal-track">
           {principles.map(p => {
             const Icon = p.icon;
             return (
-              <div key={p.num} className="promise-card">
-                <div className="promise-card-head">
-                  <div 
-                    className="promise-icon-wrap" 
-                    style={{ background: p.accentBg, color: p.accent }}
-                  >
-                    <Icon size={24} strokeWidth={2.2} />
-                  </div>
-                  <span className="promise-num">{p.num}</span>
-                </div>
-                <div className="promise-tag" style={{ color: p.accent }}>
-                  {p.tag}
+              <div key={p.id} className="promise-card">
+                <div 
+                  className="promise-icon-wrap" 
+                  style={{ background: p.accentBg, color: p.accent }}
+                >
+                  <Icon size={26} strokeWidth={2.2} />
                 </div>
                 <h3>{p.title}</h3>
-                <p>{p.desc}</p>
               </div>
             );
           })}

@@ -2551,7 +2551,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* Promise Section ("No Shortcuts. No Small Feeling.") */
 .promise-section {
-  padding: 90px 5vw;
+  padding: 60px 5vw;
   background: #fbf6ec;
   border-top: 2px solid var(--charcoal);
   border-bottom: 2px solid var(--charcoal);
@@ -2561,95 +2561,70 @@ button { font: inherit; color: inherit; cursor: pointer; }
   margin: 0 auto;
 }
 .promise-top-bar {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 50px;
+  display: flex;
+  justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 44px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid rgba(42, 38, 34, 0.2);
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(42, 38, 34, 0.15);
 }
 .promise-top-bar h2 {
-  font-size: clamp(38px, 5vw, 75px);
-  line-height: 0.88;
-  letter-spacing: -0.08em;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
   margin: 0;
+  color: var(--charcoal);
 }
-.promise-lead {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #444;
-  margin: 0;
+.promise-top-bar h2 em {
+  font-style: italic;
+  font-weight: 400;
+  font-family: 'Newsreader', serif;
 }
 .promise-horizontal-track {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 .promise-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   background: #ffffff;
   border: 1.5px solid var(--charcoal);
   box-shadow: 3px 3px 0 var(--charcoal);
-  border-radius: 16px;
-  padding: 26px 22px;
+  border-radius: 14px;
+  padding: 24px 16px;
   position: relative;
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .promise-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 6px 6px 0 var(--charcoal);
-}
-.promise-card-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  transform: translateY(-3px);
+  box-shadow: 5px 5px 0 var(--charcoal);
 }
 .promise-icon-wrap {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(42, 38, 34, 0.1);
   transition: transform 0.2s ease;
+  margin-bottom: 14px;
 }
 .promise-card:hover .promise-icon-wrap {
-  transform: scale(1.06);
-}
-.promise-card .promise-num {
-  font: 11px 'DM Mono', monospace;
-  font-weight: 800;
-  color: var(--charcoal);
-  background: #fbf6ec;
-  border: 1px solid rgba(42, 38, 34, 0.18);
-  border-radius: 999px;
-  padding: 3px 9px;
-  letter-spacing: 0.8px;
-}
-.promise-tag {
-  font: 10.5px 'DM Mono', monospace;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 8px;
+  transform: scale(1.08);
 }
 .promise-card h3 {
-  font-size: 17px;
+  font-size: 13.5px;
   font-weight: 800;
-  letter-spacing: -0.025em;
-  margin: 0 0 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0;
   line-height: 1.25;
   color: var(--charcoal);
-}
-.promise-card p {
-  font-size: 13px;
-  line-height: 1.5;
-  color: #555;
-  margin: 0;
 }
 
 /* Product-Led Gifting Experience */
@@ -2916,10 +2891,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
     gap: 24px;
   }
   .promise-top-bar {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-bottom: 36px;
-    padding-bottom: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
   }
   .promise-horizontal-track {
     grid-template-columns: repeat(2, 1fr);
