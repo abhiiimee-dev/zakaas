@@ -347,20 +347,19 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* Floating Pouch Stage */
 .anti-pouch-stage {
   position: relative;
-  width: calc(100% + 28px);
-  margin-left: -14px;
-  margin-right: -14px;
+  width: 100%;
   margin-top: -55px;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 3;
-  padding: 0 8px;
+  padding: 0 10px;
   box-sizing: border-box;
 }
 
 .anti-pouch-anchor {
-  display: block;
+  display: flex;
+  justify-content: center;
   width: 100%;
   text-decoration: none;
   cursor: pointer;
@@ -370,14 +369,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .anti-pouch-float-box {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1.18;
-  max-height: 310px;
-  border-radius: 4px;
+  width: min(100%, 285px);
+  aspect-ratio: 2 / 3;
+  border-radius: 6px;
   overflow: hidden;
-  background: #1F1712;
-  border: 1px solid rgba(43, 30, 22, 0.14);
-  box-shadow: 0 14px 30px rgba(37, 24, 17, 0.18), 0 3px 8px rgba(37, 24, 17, 0.08);
+  background: #18120E;
+  border: 1px solid rgba(43, 30, 22, 0.12);
+  box-shadow: 0 16px 36px rgba(37, 24, 17, 0.18), 0 3px 8px rgba(37, 24, 17, 0.08);
   transform: translateY(0);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -390,8 +388,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* Contact Shadow Dynamics */
 .anti-pouch-shadow {
-  width: 76%;
-  height: 16px;
+  width: min(75%, 230px);
+  height: 14px;
   margin-top: 10px;
   background: radial-gradient(ellipse at center, rgba(37, 24, 17, 0.38) 0%, rgba(37, 24, 17, 0.14) 48%, rgba(37, 24, 17, 0) 72%);
   filter: blur(7px);
@@ -433,7 +431,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 32%;
+  object-position: center center;
   display: block;
   transform: scale(1);
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
@@ -458,8 +456,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .anti-gallery-controls button {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   display: grid;
   place-items: center;
   border: 1px solid rgba(250, 246, 240, 0.4);
@@ -477,16 +475,16 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .anti-gallery-controls span {
-  font: 10px 'DM Mono', monospace;
+  font: 9.5px 'DM Mono', monospace;
   font-weight: 700;
   letter-spacing: 1px;
   color: #FAF6F0;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
 }
 
-/* Card Content Area */
+/* Compact Card Content Area */
 .anti-card-content {
-  padding: 16px 20px 20px;
+  padding: 10px 16px 14px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -497,13 +495,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
-  padding-bottom: 8px;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
   border-bottom: 1px solid rgba(43, 30, 22, 0.08);
 }
 
 .anti-kicker-num {
-  font: 10px 'DM Mono', monospace;
+  font: 9.5px 'DM Mono', monospace;
   font-weight: 700;
   letter-spacing: 1.5px;
   color: #7A6B61;
@@ -511,7 +509,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .anti-kicker-weight {
-  font: 10px 'DM Mono', monospace;
+  font: 9.5px 'DM Mono', monospace;
   font-weight: 700;
   letter-spacing: 1px;
   color: #7A6B61;
@@ -525,10 +523,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .anti-product-name {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(24px, 2vw, 28px);
+  font-size: clamp(20px, 1.8vw, 24px);
   font-weight: 700;
   color: #251811;
-  margin: 2px 0 4px;
+  margin: 0 0 3px;
   line-height: 1.15;
   letter-spacing: -0.02em;
   transition: color 0.2s ease;
@@ -538,72 +536,67 @@ button { font: inherit; color: inherit; cursor: pointer; }
   color: var(--card-accent, #8B3A2B);
 }
 
-.anti-product-descriptor {
-  font: 10.5px 'DM Mono', monospace;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--card-accent, #8B3A2B);
-  margin: 0 0 8px;
-}
-
 .anti-product-summary {
-  font: 13px/1.45 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font: 12px/1.38 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #5D4D42;
-  margin: 0 0 14px;
-  min-height: 38px;
+  margin: 0 0 10px;
+  min-height: unset;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .anti-price-row {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin-bottom: 16px;
-  padding-top: 8px;
-  border-top: 1px dashed rgba(43, 30, 22, 0.14);
+  margin-bottom: 10px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(43, 30, 22, 0.12);
 }
 
 .anti-current-price {
-  font: 19px 'DM Mono', monospace;
+  font: 18px 'DM Mono', monospace;
   font-weight: 800;
   color: #251811;
 }
 
 .anti-original-mrp {
-  font: 12px 'DM Mono', monospace;
+  font: 11.5px 'DM Mono', monospace;
   text-decoration: line-through;
   color: #8C7D73;
 }
 
 .anti-weight-tag {
   margin-left: auto;
-  font: 9.5px 'DM Mono', monospace;
+  font: 9px 'DM Mono', monospace;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   color: #5D4D42;
   background: rgba(43, 30, 22, 0.06);
-  padding: 3px 7px;
+  padding: 2px 6px;
   border-radius: 2px;
 }
 
-/* Dedicated Anti-Gravity Card Action Buttons */
+/* Dedicated Compact Anti-Gravity Card Action Buttons */
 .anti-card-actions {
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
 }
 
 .anti-buy-btn {
   width: 100%;
-  height: 42px;
+  height: 36px;
   background: #251811 !important;
   color: #FAF6F0 !important;
   border: 1.5px solid #251811 !important;
-  font: 11px/1 'DM Mono', monospace !important;
+  font: 10.5px/1 'DM Mono', monospace !important;
   font-weight: 800 !important;
-  letter-spacing: 1.5px !important;
+  letter-spacing: 1.3px !important;
   text-transform: uppercase !important;
   cursor: pointer;
   display: flex;
@@ -617,15 +610,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
   background: #3E2B20 !important;
   border-color: #3E2B20 !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(37, 24, 17, 0.22);
+  box-shadow: 0 4px 12px rgba(37, 24, 17, 0.2);
 }
 
 .anti-cart-row {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: stretch;
   width: 100%;
-  height: 40px;
+  height: 36px;
 }
 
 .anti-stepper {
@@ -633,13 +626,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
   align-items: center;
   border: 1px solid rgba(43, 30, 22, 0.25) !important;
   background: #F5EFE6 !important;
-  height: 40px !important;
+  height: 36px !important;
   box-sizing: border-box;
   border-radius: 2px;
 }
 
 .anti-stepper button {
-  width: 32px;
+  width: 28px;
   height: 100%;
   display: grid;
   place-items: center;
@@ -656,28 +649,28 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 .anti-stepper span {
-  font: 12px/1 'DM Mono', monospace !important;
+  font: 11.5px/1 'DM Mono', monospace !important;
   font-weight: 700 !important;
   color: #251811 !important;
-  padding: 0 6px;
-  min-width: 22px;
+  padding: 0 5px;
+  min-width: 18px;
   text-align: center;
 }
 
 .anti-add-btn {
   flex: 1;
-  height: 40px;
+  height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 0 12px;
-  border: 1px solid rgba(43, 30, 22, 0.4) !important;
+  gap: 5px;
+  padding: 0 10px;
+  border: 1px solid rgba(43, 30, 22, 0.35) !important;
   background: transparent !important;
   color: #251811 !important;
-  font: 10.5px 'DM Mono', monospace !important;
+  font: 10px 'DM Mono', monospace !important;
   font-weight: 700 !important;
-  letter-spacing: 0.8px !important;
+  letter-spacing: 0.6px !important;
   text-transform: uppercase !important;
   cursor: pointer;
   box-sizing: border-box;

@@ -128,7 +128,6 @@ function ProductCard({ product, index, onAdd, onFly, cartData }) {
                     <div className="anti-gallery-frame" key={`${item.image}-${imageIndex}`}>
                       <img 
                         src={item.image} 
-                        style={{ objectPosition: item.position }} 
                         alt={imageIndex === 0 ? `${product.name} ZAKAAS pack` : `${product.name} detail`}
                         className="anti-pouch-img"
                         loading={index === 0 ? 'eager' : 'lazy'}
@@ -139,11 +138,11 @@ function ProductCard({ product, index, onAdd, onFly, cartData }) {
 
                 <div className="anti-gallery-controls" onClick={e => e.stopPropagation()}>
                   <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(-1); }} aria-label={`Previous ${product.name} image`}>
-                    <ChevronLeft size={15} />
+                    <ChevronLeft size={14} />
                   </button>
                   <span>{String(frame + 1).padStart(2, '0')} / {String(frames.length).padStart(2, '0')}</span>
                   <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(1); }} aria-label={`Next ${product.name} image`}>
-                    <ChevronRight size={15} />
+                    <ChevronRight size={14} />
                   </button>
                 </div>
               </>
@@ -167,14 +166,13 @@ function ProductCard({ product, index, onAdd, onFly, cartData }) {
       {/* Card Content & Details */}
       <div className="anti-card-content">
         <div className="anti-card-kicker">
-          <span className="anti-kicker-num">0{index + 1} / {descriptor.toUpperCase()}</span>
+          <span className="anti-kicker-num">0{index + 1} · {descriptor.toUpperCase()}</span>
           <span className="anti-kicker-weight">200g</span>
         </div>
 
         <Link to={`/products/${handle}`} className="anti-card-title-link">
           <h3 className="anti-product-name">{product.name}</h3>
         </Link>
-        <p className="anti-product-descriptor">{descriptor}</p>
         <p className="anti-product-summary">{descriptionText}</p>
         
         <div className="anti-price-row">
