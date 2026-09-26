@@ -13,6 +13,13 @@ const productDescriptors = {
   shankarpada: 'Sweet Diamonds'
 };
 
+const productPersonalities = {
+  chakli: 'THE CRUNCHY ONE',
+  bhakarwadi: 'THE SPICY ONE',
+  shankarpali: 'THE SWEET ONE',
+  shankarpada: 'THE SWEET ONE'
+};
+
 const productSubtitles = {
   chakli: 'Slow-roasted multigrain flour with brittle cumin ridges and aromatic ajwain crunch.',
   bhakarwadi: 'Crisp fried rolls packed with roasted coconut, poppy seeds, and spicy warmth.',
@@ -98,7 +105,7 @@ function ProductCard({ product, index, onAdd, onFly, cartData }) {
 
   const handle = product.handle || product.id;
   const normalizedKey = (handle || '').toLowerCase();
-  const descriptor = productDescriptors[normalizedKey] || product.personality || 'MAHARASHTRA ORIGINAL';
+  const personality = productPersonalities[normalizedKey] || product.personality || 'THE CRUNCHY ONE';
   const descriptionText = productSubtitles[normalizedKey] || productSubtitles[product.id] || product.shortDescription || product.line || 'Traditional Maharashtrian snack.';
   const primaryImage = frames[0]?.image || product.image || '/zakaas-chakli.jpg';
   const unitPrice = Number(product.price) || 150;
@@ -165,11 +172,7 @@ function ProductCard({ product, index, onAdd, onFly, cartData }) {
 
       {/* Card Content & Details */}
       <div className="anti-card-content">
-        <div className="anti-card-kicker">
-          <span className="anti-kicker-num">0{index + 1} · {descriptor.toUpperCase()}</span>
-          <span className="anti-kicker-weight">200g</span>
-        </div>
-
+        <span className="anti-product-personality">{personality}</span>
         <Link to={`/products/${handle}`} className="anti-card-title-link">
           <h3 className="anti-product-name">{product.name}</h3>
         </Link>
