@@ -1432,8 +1432,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
   background: #FAF7F2;
 }
 .pack-selector-pill.is-selected {
-  border-color: var(--charcoal);
-  background: var(--charcoal);
+  border-color: #bf3e12;
+  background: #d94819;
   color: #FFFFFF;
 }
 .pill-price {

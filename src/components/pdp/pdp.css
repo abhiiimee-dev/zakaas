@@ -234,8 +234,38 @@
 }
 
 .pack-option-pill.is-selected {
-  border: 2px solid var(--pdp-border-dark);
-  background: #fffcf5;
+  border: 2px solid #bf3e12;
+  background: #d94819;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(217, 72, 25, 0.28);
+}
+
+.pack-option-pill.is-selected .pack-option-name {
+  color: #ffffff;
+}
+
+.pack-option-pill.is-selected .pack-option-weight {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.pack-option-pill.is-selected .pack-current-price {
+  color: #ffffff;
+}
+
+.pack-option-pill.is-selected .pack-mrp-price {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.pack-option-pill.is-selected .pack-savings-note {
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.pack-option-pill.is-selected .pack-bestseller-tag {
+  background: #191816;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .pack-bestseller-tag {
