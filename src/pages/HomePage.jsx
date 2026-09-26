@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ArrowUpRight, Check, Package, Sparkles, Utensils, HeartHandshake } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ProductSection } from '../components/ProductSection';
@@ -247,6 +248,14 @@ function BrandOneLiner() {
 
 export function HomePage({ onAdd, catalog = [], products = [], live = false, onBuildBox, cartData }) {
   const displayProducts = catalog?.length ? catalog : (products?.length ? products : []);
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const el = document.querySelector(window.location.hash);
+      if (el) el.scrollIntoView({ behavior: 'instant' });
+    }
+  }, []);
+
   return (
     <div className="page-home">
       <Hero />
