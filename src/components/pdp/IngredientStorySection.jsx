@@ -6,8 +6,7 @@ export function IngredientStorySection() {
       nativeName: 'भाजणी पीठ',
       index: '01',
       role: 'THE GRAIN BASE',
-      image: '/ingredients/bhajan-flour.jpg',
-      isFlour: true,
+      image: '/ingredients/bhajan-flour.png',
       alt: 'Slow-roasted rice and chana dal Bhajan flour',
       nutritionalPointers: [
         {
@@ -30,8 +29,7 @@ export function IngredientStorySection() {
       nativeName: 'जिरे · Jeera',
       index: '02',
       role: 'THE WARM NOTE',
-      image: '/ingredients/cumin.jpg',
-      isFlour: false,
+      image: '/ingredients/cumin.png',
       alt: 'Whole aromatic cumin seeds',
       nutritionalPointers: [
         {
@@ -54,8 +52,7 @@ export function IngredientStorySection() {
       nativeName: 'ओवा · Carom',
       index: '03',
       role: 'THE DISTINCTIVE AROMA',
-      image: '/ingredients/ajwain.jpg',
-      isFlour: false,
+      image: '/ingredients/ajwain.png',
       alt: 'Whole ajwain carom seeds',
       nutritionalPointers: [
         {
@@ -78,8 +75,7 @@ export function IngredientStorySection() {
       nativeName: 'पांढरे तीळ · Til',
       index: '04',
       role: 'THE NUTTY CRUNCH',
-      image: '/ingredients/white-sesame.jpg',
-      isFlour: false,
+      image: '/ingredients/white-sesame.png',
       alt: 'Toasted white sesame seeds',
       nutritionalPointers: [
         {
@@ -110,21 +106,23 @@ export function IngredientStorySection() {
           </p>
         </div>
 
-        {/* 4-Card Circular Ingredient Display */}
+        {/* 4-Card Open Ingredient Display */}
         <div className="ingredients-cards-grid">
           {ingredients.map((item) => (
-            <article key={item.id} className="ingredient-circle-card">
-              {/* Circular Specimen Frame */}
-              <div className="ingredient-circle-wrap">
-                <div className="ingredient-circle-disc">
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    loading="lazy"
-                    className={`ingredient-circle-img ${item.isFlour ? 'zoom-flour' : ''}`}
-                  />
-                </div>
+            <article key={item.id} className="ingredient-open-card">
+              {/* Card Topbar with Index */}
+              <div className="ingredient-card-topbar">
                 <span className="ingredient-index-badge">{item.index}</span>
+              </div>
+
+              {/* Open Floating PNG Specimen */}
+              <div className="ingredient-open-image-wrap">
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                  className="ingredient-open-img"
+                />
               </div>
 
               {/* Editorial Header */}

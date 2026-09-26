@@ -496,86 +496,74 @@
   align-items: stretch;
 }
 
-.ingredient-circle-card {
+.ingredient-open-card {
   background: var(--pdp-surface, #ffffff);
   border: 1px solid var(--pdp-border);
-  border-radius: 18px;
-  padding: 32px 20px 26px;
+  border-radius: 20px;
+  padding: 24px 22px 28px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-.ingredient-circle-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 36px rgba(28, 25, 23, 0.09);
+.ingredient-open-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 42px rgba(28, 25, 23, 0.09);
   border-color: #cfc6b6;
 }
 
-/* Circular Photo Specimen Frame - Significantly enlarged */
-.ingredient-circle-wrap {
-  position: relative;
-  margin-bottom: 22px;
-}
-
-.ingredient-circle-disc {
-  width: 172px;
-  height: 172px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 5px solid #ffffff;
-  outline: 2px solid #e6ded2;
-  box-shadow: 0 12px 28px rgba(35, 24, 15, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
-  background: #fdfbf7;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ingredient-circle-img {
+/* Card Topbar with Index */
+.ingredient-card-topbar {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Focus closely on roasted flour without showing plate edges */
-.ingredient-circle-img.zoom-flour {
-  transform: scale(1.36);
-  transform-origin: center;
-}
-
-.ingredient-circle-card:hover .ingredient-circle-img {
-  transform: scale(1.08);
-}
-
-.ingredient-circle-card:hover .ingredient-circle-img.zoom-flour {
-  transform: scale(1.48);
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: -10px;
+  z-index: 2;
 }
 
 .ingredient-index-badge {
-  position: absolute;
-  bottom: 2px;
-  right: 6px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #1c1917;
-  color: #f7f4ed;
+  font-family: 'DM Mono', monospace;
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  color: #8c8273;
+  background: #f7f4ed;
+  border: 1px solid #e7ded0;
+  border-radius: 20px;
+  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Open Floating PNG Specimen - Big, unconstrained and open */
+.ingredient-open-image-wrap {
+  width: 100%;
+  height: 205px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2.5px solid #ffffff;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+  position: relative;
+  margin: 4px 0 14px;
+}
+
+.ingredient-open-img {
+  max-width: 95%;
+  max-height: 195px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 14px 22px rgba(35, 22, 10, 0.12));
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
+}
+
+.ingredient-open-card:hover .ingredient-open-img {
+  transform: translateY(-6px) scale(1.07);
+  filter: drop-shadow(0 22px 30px rgba(35, 22, 10, 0.18));
 }
 
 /* Meta Typography */
@@ -1339,13 +1327,16 @@
     gap: 18px;
   }
 
-  .ingredient-circle-card {
-    padding: 28px 18px 22px;
+  .ingredient-open-card {
+    padding: 20px 18px 24px;
   }
 
-  .ingredient-circle-disc {
-    width: 150px;
-    height: 150px;
+  .ingredient-open-image-wrap {
+    height: 180px;
+  }
+
+  .ingredient-open-img {
+    max-height: 170px;
   }
 
   .ingredient-heading-title {
