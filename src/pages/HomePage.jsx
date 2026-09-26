@@ -22,10 +22,6 @@ function Hero() {
           <span>THE TASTE OF HOME,</span>
           <em>MADE TO GO.</em>
         </h1>
-        <p className="hero-lede">
-          Traditional savouries handcrafted from slow-roasted grains and whole aromatic spices.<br />
-          Tear open the aroma pack. Pass it around the table.
-        </p>
         <div className="hero-cta-group">
           <a className="hero-button" href="#shop">
             SHOP THE SNACKS <ArrowUpRight size={14} />

@@ -2355,6 +2355,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   gap: 14px;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 24px;
 }
 .hero-button-ghost {
   display: inline-flex;
