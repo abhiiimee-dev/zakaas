@@ -347,6 +347,7 @@ function App() {
               onAdd={handleAdd}
               onBuildBox={() => setBuilderOpen(true)}
               live={shopifyConfigured}
+              cartData={cartData}
             />
           }
         />

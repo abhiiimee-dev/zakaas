@@ -245,13 +245,13 @@ function BrandOneLiner() {
   );
 }
 
-export function HomePage({ onAdd, catalog = [], products = [], live = false, onBuildBox }) {
+export function HomePage({ onAdd, catalog = [], products = [], live = false, onBuildBox, cartData }) {
   const displayProducts = catalog?.length ? catalog : (products?.length ? products : []);
   return (
     <div className="page-home">
       <Hero />
       <BrandOneLiner />
-      <ProductSection onAdd={onAdd} products={displayProducts} live={live} />
+      <ProductSection onAdd={onAdd} products={displayProducts} live={live} cartData={cartData} />
       <StoryFilm />
       <VisualPromise />
       <VisualGiftingSection onBuildBox={onBuildBox} />

@@ -63,7 +63,7 @@ export function CartDrawer({
                 <div>
                   <small>{item.personality || 'MAHARASHTRA ORIGINAL'}</small>
                   <h3>{item.name}</h3>
-                  <p>“{item.line || item.description || 'Traditional taste.'}”</p>
+                  <p>{item.line || item.shortDescription || item.description || 'Traditional taste.'}</p>
                   <b className="drawer-item-price">₹{Number(item.price || 150).toFixed(0)}</b>
                 </div>
                 <div className="quantity">

@@ -73,7 +73,7 @@ export function CartPage({
                         <h3>
                           <Link to={`/products/${item.handle || item.id}`}>{item.name}</Link>
                         </h3>
-                        <p className="cart-item-quote">“{item.line || 'A taste of home.'}”</p>
+                        <p className="cart-item-desc">{item.line || item.shortDescription || 'A taste of home.'}</p>
                       </div>
                     </div>
 

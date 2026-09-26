@@ -1,6 +1,6 @@
-import { ArrowUpRight, Check, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import { ArrowUpRight, Check, ChevronLeft, ChevronRight, Minus, Plus } from 'lucide-react';
 import { useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { products as fallbackProducts } from '../data/products';
 
 const tones = ['terracotta', 'ochre-deep', 'maroon'];
@@ -24,9 +24,11 @@ const productFrames = product => {
   }));
 };
 
-function ProductCard({ product, index, onAdd, onFly }) {
+function ProductCard({ product, index, onAdd, onFly, cartData }) {
   const [frame, setFrame] = useState(0);
   const [added, setAdded] = useState(false);
+  const [qty, setQty] = useState(1);
+  const navigate = useNavigate();
   const pointer = useRef(null);
   const visualRef = useRef(null);
   const frames = useMemo(() => productFrames(product), [product]);
@@ -70,20 +72,33 @@ function ProductCard({ product, index, onAdd, onFly }) {
     if (!product.variantId && !product.id) return;
     setAdded(true);
     if (onFly) onFly(product, visualRef.current, frames[frame] || { image: product.image });
-    if (onAdd) onAdd(product);
+    if (onAdd) onAdd(product, qty);
     window.setTimeout(() => setAdded(false), 1400);
   };
 
+  const buyNow = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!product.variantId && !product.id) return;
+    if (onAdd) onAdd(product, qty);
+    if (cartData?.checkoutUrl) {
+      window.open(cartData.checkoutUrl, '_blank');
+    } else {
+      navigate('/cart');
+    }
+  };
+
   const handle = product.handle || product.id;
-  const descriptionText = productSubtitles[product.id] || product.line || product.description || 'A little taste of home.';
+  const descriptionText = productSubtitles[handle] || productSubtitles[product.id] || product.shortDescription || product.line || 'Crisp Maharashtrian snack.';
   const primaryImage = frames[0]?.image || product.image || '/zakaas-chakli.jpg';
+  const unitPrice = Number(product.price) || 150;
 
   return (
     <article className={`product-feature product-editorial ${tones[index % tones.length]}`}>
       <div className="product-top">
         <span className="product-origin-label">0{index + 1} / ZAKAAS ORIGINAL</span>
         <span className="product-price">
-          {product.price ? `₹${Number(product.price).toFixed(0)}` : '₹150'} · 100g
+          ₹{unitPrice} · 100g
         </span>
       </div>
 
@@ -140,32 +155,59 @@ function ProductCard({ product, index, onAdd, onFly }) {
         <Link to={`/products/${handle}`} className="product-title-link">
           <h3>{product.name}</h3>
         </Link>
-        <p className="product-subline">“{descriptionText}”</p>
+        <p className="product-subline">{descriptionText}</p>
         
         <div className="product-card-actions">
+          {/* 01. Buy Now (Above Add to Bag) */}
           <button 
             type="button"
-            className={`product-add ${added ? 'is-added' : ''}`} 
-            onClick={add}
-            aria-label={`Add ${product.name} to bag`}
+            className="product-buy-now-btn" 
+            onClick={buyNow}
+            aria-label={`Buy ${product.name} now`}
           >
-            {added ? (
-              <>ADDED TO BAG <Check size={14} /></>
-            ) : (
-              <>ADD TO BAG — ₹{product.price || '150'} <Plus size={14} /></>
-            )}
+            BUY NOW
           </button>
           
-          <Link to={`/products/${handle}`} className="product-detail-btn" aria-label={`View ${product.name} details`}>
-            DETAILS <ArrowUpRight size={13} />
-          </Link>
+          {/* 02. Quantity Stepper + Add to Bag (Aligned Row) */}
+          <div className="product-cart-row">
+            <div className="product-stepper" aria-label={`Adjust ${product.name} quantity`}>
+              <button 
+                type="button" 
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setQty(q => Math.max(1, q - 1)); }}
+                aria-label="Decrease quantity"
+              >
+                <Minus size={13} />
+              </button>
+              <span aria-live="polite">{qty}</span>
+              <button 
+                type="button" 
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); setQty(q => q + 1); }}
+                aria-label="Increase quantity"
+              >
+                <Plus size={13} />
+              </button>
+            </div>
+
+            <button 
+              type="button"
+              className={`product-add ${added ? 'is-added' : ''}`} 
+              onClick={add}
+              aria-label={`Add ${product.name} to bag`}
+            >
+              {added ? (
+                <>ADDED TO BAG <Check size={14} /></>
+              ) : (
+                <>ADD TO BAG — ₹{unitPrice * qty}</>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </article>
   );
 }
 
-export function ProductSection({ onAdd, products = fallbackProducts, live = false }) {
+export function ProductSection({ onAdd, products = fallbackProducts, live = false, cartData }) {
   const [flying, setFlying] = useState(null);
 
   const fly = (product, visual, frame) => {
@@ -217,6 +259,7 @@ export function ProductSection({ onAdd, products = fallbackProducts, live = fals
             index={index} 
             onAdd={onAdd} 
             onFly={fly} 
+            cartData={cartData}
           />
         ))}
       </div>

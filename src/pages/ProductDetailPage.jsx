@@ -203,7 +203,16 @@ export function ProductDetailPage({ onAdd, cartData }) {
             onSelect={(pack) => setSelectedPack(pack)}
           />
 
-          {/* Quantity Stepper & Primary Red CTA */}
+          {/* 01. Buy Now (Placed Above Add to Bag) */}
+          <button
+            type="button"
+            className="pdp-buy-now-button"
+            onClick={handleBuyNow}
+          >
+            BUY NOW
+          </button>
+
+          {/* 02. Quantity Stepper & Add to Bag */}
           <div className="pdp-cta-group" ref={mainCtaRef}>
             <div className="stepper-picker" aria-label="Adjust quantity">
               <button
@@ -239,15 +248,6 @@ export function ProductDetailPage({ onAdd, cartData }) {
               )}
             </button>
           </div>
-
-          {/* Secondary Buy Now */}
-          <button
-            type="button"
-            className="secondary-buy-button"
-            onClick={handleBuyNow}
-          >
-            BUY NOW
-          </button>
 
           {/* Delivery Note */}
           <p className="delivery-simple-note">
