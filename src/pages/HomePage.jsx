@@ -32,11 +32,6 @@ function Hero() {
         </div>
       </div>
 
-      <div className="hero-taste-mark" aria-hidden="true">
-        <i>★</i>
-        <span>CRUNCH · SPICE · HOME ·</span>
-      </div>
-
       <div className="hero-meta">
         <span>SCROLL TO SNACK</span>
         <span className="hero-meta-coords">18.5204° N, 73.8567° E · MAHARASHTRA</span>
