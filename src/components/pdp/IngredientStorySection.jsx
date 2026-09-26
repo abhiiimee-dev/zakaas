@@ -11,16 +11,16 @@ export function IngredientStorySection() {
       alt: 'Slow-roasted rice and chana dal Bhajan flour',
       nutritionalPointers: [
         {
-          title: 'Sustained Energy',
-          text: 'Complex low-GI carbs from slow-roasted grains deliver steady stamina without sugar crashes.'
+          title: 'Long-Lasting Energy',
+          text: 'Roasted grains keep you full and energetic for hours without sugar spikes or crashes.'
         },
         {
           title: 'Plant Protein & Fibre',
-          text: 'Wholesome chana & urad pulses nourish muscles and provide natural prebiotic dietary fibre.'
+          text: 'Wholesome lentils give you natural daily strength and keep digestion smooth.'
         },
         {
-          title: 'Effortless Digestion',
-          text: 'Traditional slow-roasting breaks down tough starches, making it exceptionally light on the gut.'
+          title: 'Light on the Stomach',
+          text: 'Slow-roasted before milling so it digests easily with zero heaviness or bloating.'
         }
       ]
     },
@@ -35,16 +35,16 @@ export function IngredientStorySection() {
       alt: 'Whole aromatic cumin seeds',
       nutritionalPointers: [
         {
-          title: 'Bioavailable Iron',
-          text: 'Rich natural dietary iron essential for healthy hemoglobin formation and active cellular vitality.'
+          title: 'Natural Iron Boost',
+          text: 'Helps fight daily tiredness, boosts blood health, and keeps stamina up.'
         },
         {
-          title: 'Digestive Spark',
-          text: 'Natural thymol triggers active digestive enzymes to accelerate nutrient assimilation.'
+          title: 'Better Digestion',
+          text: 'Naturally triggers stomach enzymes to break down food faster and cleaner.'
         },
         {
-          title: 'Antioxidant Shield',
-          text: 'Concentrated apigenin and luteolin flavonoids help defend cells from oxidative stress.'
+          title: 'Fights Inflammation',
+          text: 'Packed with natural antioxidants that help protect cells and keep you healthy.'
         }
       ]
     },
@@ -59,16 +59,16 @@ export function IngredientStorySection() {
       alt: 'Whole ajwain carom seeds',
       nutritionalPointers: [
         {
-          title: 'Potent Active Thymol',
-          text: 'Renowned essential oil compound that delivers rapid gut soothing, calm, and acid balance.'
+          title: 'Stops Gas & Bloating',
+          text: 'The trusted home spice that immediately relieves stomach heaviness after snacking.'
         },
         {
-          title: 'Anti-Bloating Action',
-          text: 'Prized carminative properties alleviate post-snack abdominal fullness and heaviness.'
+          title: 'Quick Acidity Relief',
+          text: 'Cools and balances stomach acid naturally so you feel comfortable and light.'
         },
         {
-          title: 'Gut Motility Support',
-          text: 'Antimicrobial bio-actives promote healthy gut microflora and smooth intestinal comfort.'
+          title: 'Good Gut Health',
+          text: 'Natural antibacterial oils cleanse your digestive tract and keep your gut happy.'
         }
       ]
     },
@@ -83,16 +83,16 @@ export function IngredientStorySection() {
       alt: 'Toasted white sesame seeds',
       nutritionalPointers: [
         {
-          title: 'Natural Calcium Source',
-          text: 'Superior plant-based mineral density to strengthen bones, joints, and musculoskeletal wellness.'
+          title: 'Strong Bones & Teeth',
+          text: 'One of the richest natural plant sources of calcium to support bone strength.'
         },
         {
-          title: 'Heart-Healthy Fats',
-          text: 'Rich in sesamin, sesamolin, and healthy polyunsaturated lipids for cardiovascular vitality.'
+          title: 'Heart-Healthy Oils',
+          text: 'Loaded with natural good fats that support a healthy heart and cholesterol.'
         },
         {
-          title: 'Immunity & Mineral Boost',
-          text: 'High in zinc, magnesium, and vitamin E to nourish cellular immunity and combat fatigue.'
+          title: 'Immunity & Glowing Skin',
+          text: 'High in zinc and vitamin E to boost your daily immune defense and skin vitality.'
         }
       ]
     }
