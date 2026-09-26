@@ -4,12 +4,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import { products as fallbackProducts } from '../data/products';
 
 const tones = ['terracotta', 'ochre-deep', 'maroon'];
-const crops = ['50% 50%', '35% 65%', '65% 60%'];
+const crops = ['50% 32%', '35% 65%', '65% 60%'];
+
+const productDescriptors = {
+  chakli: 'Crispy Spirals',
+  bhakarwadi: 'Spiced Pinwheels',
+  shankarpali: 'Sweet Diamonds',
+  shankarpada: 'Sweet Diamonds'
+};
 
 const productSubtitles = {
-  chakli: 'Slow-roasted multigrain flour with brittle cumin ridges and nutty sesame crunch.',
+  chakli: 'Slow-roasted multigrain flour with brittle cumin ridges and aromatic ajwain crunch.',
   bhakarwadi: 'Crisp fried rolls packed with roasted coconut, poppy seeds, and spicy warmth.',
-  shankarpali: 'Golden sweet flaky diamonds made with pure ghee and melt-in-mouth sweetness.'
+  shankarpali: 'Golden sweet flaky diamonds handcrafted with pure desi ghee and cardamom.',
+  shankarpada: 'Golden sweet flaky diamonds handcrafted with pure desi ghee and cardamom.'
 };
 
 const productFrames = product => {
@@ -89,79 +97,98 @@ function ProductCard({ product, index, onAdd, onFly, cartData }) {
   };
 
   const handle = product.handle || product.id;
-  const descriptionText = productSubtitles[handle] || productSubtitles[product.id] || product.shortDescription || product.line || 'Crisp Maharashtrian snack.';
+  const normalizedKey = (handle || '').toLowerCase();
+  const descriptor = productDescriptors[normalizedKey] || product.personality || 'MAHARASHTRA ORIGINAL';
+  const descriptionText = productSubtitles[normalizedKey] || productSubtitles[product.id] || product.shortDescription || product.line || 'Traditional Maharashtrian snack.';
   const primaryImage = frames[0]?.image || product.image || '/zakaas-chakli.jpg';
   const unitPrice = Number(product.price) || 150;
+  const unitMrp = (product.mrp && Number(product.mrp) > unitPrice) 
+    ? Number(product.mrp) 
+    : Math.round(unitPrice * 1.25);
+  const toneClass = tones[index % tones.length];
 
   return (
-    <article className={`product-feature product-editorial ${tones[index % tones.length]}`}>
-      <div className="product-top">
-        <span className="product-origin-label">0{index + 1} / ZAKAAS ORIGINAL</span>
-        <span className="product-price">
-          ₹{unitPrice} · 100g
-        </span>
+    <article className={`zakaas-anti-card tone-${toneClass}`} aria-label={`${product.name} product card`}>
+      {/* Anti-Gravity Floating Stage */}
+      <div className="anti-pouch-stage">
+        <Link 
+          to={`/products/${handle}`}
+          className="anti-pouch-anchor"
+          ref={visualRef} 
+          onPointerDown={down} 
+          onPointerUp={up}
+          onClick={handleVisualClick}
+          aria-label={`View ${product.name} details`}
+        >
+          <div className="anti-pouch-float-box">
+            {hasMultipleFrames ? (
+              <>
+                <div className="anti-gallery-track" style={{ transform: `translateX(-${frame * 100}%)` }}>
+                  {frames.map((item, imageIndex) => (
+                    <div className="anti-gallery-frame" key={`${item.image}-${imageIndex}`}>
+                      <img 
+                        src={item.image} 
+                        style={{ objectPosition: item.position }} 
+                        alt={imageIndex === 0 ? `${product.name} ZAKAAS pack` : `${product.name} detail`}
+                        className="anti-pouch-img"
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="anti-gallery-controls" onClick={e => e.stopPropagation()}>
+                  <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(-1); }} aria-label={`Previous ${product.name} image`}>
+                    <ChevronLeft size={15} />
+                  </button>
+                  <span>{String(frame + 1).padStart(2, '0')} / {String(frames.length).padStart(2, '0')}</span>
+                  <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(1); }} aria-label={`Next ${product.name} image`}>
+                    <ChevronRight size={15} />
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="anti-gallery-frame single-frame">
+                <img 
+                  src={primaryImage} 
+                  alt={`${product.name} ZAKAAS pack`}
+                  className="anti-pouch-img"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                />
+              </div>
+            )}
+          </div>
+        </Link>
+
+        {/* Soft Blurred Elliptical Contact Shadow */}
+        <div className="anti-pouch-shadow" aria-hidden="true" />
       </div>
 
-      <Link 
-        to={`/products/${handle}`}
-        className="product-visual product-gallery" 
-        ref={visualRef} 
-        onPointerDown={down} 
-        onPointerUp={up}
-        onClick={handleVisualClick}
-        aria-label={`View ${product.name} details`}
-      >
-        {hasMultipleFrames ? (
-          <>
-            <div className="product-gallery-track" style={{ transform: `translateX(-${frame * 100}%)` }}>
-              {frames.map((item, imageIndex) => (
-                <div className="product-gallery-frame" key={`${item.image}-${imageIndex}`}>
-                  <img 
-                    src={item.image} 
-                    style={{ objectPosition: item.position }} 
-                    alt={imageIndex === 0 ? `${product.name} ZAKAAS pack` : `${product.name} detail`}
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                  />
-                </div>
-              ))}
-            </div>
-
-            <div className="gallery-controls" onClick={e => e.stopPropagation()}>
-              <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(-1); }} aria-label={`Previous ${product.name} image`}>
-                <ChevronLeft size={16} />
-              </button>
-              <span>{String(frame + 1).padStart(2, '0')} <i /> {String(frames.length).padStart(2, '0')}</span>
-              <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); go(1); }} aria-label={`Next ${product.name} image`}>
-                <ChevronRight size={16} />
-              </button>
-            </div>
-          </>
-        ) : (
-          <div className="product-gallery-frame single-frame">
-            <img 
-              src={primaryImage} 
-              style={{ objectPosition: '50% 50%' }} 
-              alt={`${product.name} ZAKAAS pack`}
-              loading={index === 0 ? 'eager' : 'lazy'}
-            />
-          </div>
-        )}
-      </Link>
-
-      <div className="product-copy">
-        <div className="product-header-line">
-          <small>{product.personality || 'MAHARASHTRA ORIGINAL'}</small>
+      {/* Card Content & Details */}
+      <div className="anti-card-content">
+        <div className="anti-card-kicker">
+          <span className="anti-kicker-num">0{index + 1} / {descriptor.toUpperCase()}</span>
+          <span className="anti-kicker-weight">200g</span>
         </div>
-        <Link to={`/products/${handle}`} className="product-title-link">
-          <h3>{product.name}</h3>
+
+        <Link to={`/products/${handle}`} className="anti-card-title-link">
+          <h3 className="anti-product-name">{product.name}</h3>
         </Link>
-        <p className="product-subline">{descriptionText}</p>
+        <p className="anti-product-descriptor">{descriptor}</p>
+        <p className="anti-product-summary">{descriptionText}</p>
         
-        <div className="product-card-actions">
+        <div className="anti-price-row">
+          <span className="anti-current-price">₹{unitPrice}</span>
+          <span className="anti-original-mrp">MRP ₹{unitMrp}</span>
+          <span className="anti-weight-tag">200g PACK</span>
+        </div>
+
+        {/* Card Purchase Actions */}
+        <div className="product-card-actions anti-card-actions">
           {/* 01. Buy Now (Above Add to Bag) */}
           <button 
             type="button"
-            className="product-buy-now-btn" 
+            className="product-buy-now-btn anti-buy-btn" 
             onClick={buyNow}
             aria-label={`Buy ${product.name} now`}
           >
@@ -169,8 +196,8 @@ function ProductCard({ product, index, onAdd, onFly, cartData }) {
           </button>
           
           {/* 02. Quantity Stepper + Add to Bag (Aligned Row) */}
-          <div className="product-cart-row">
-            <div className="product-stepper" aria-label={`Adjust ${product.name} quantity`}>
+          <div className="product-cart-row anti-cart-row">
+            <div className="product-stepper anti-stepper" aria-label={`Adjust ${product.name} quantity`}>
               <button 
                 type="button" 
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); setQty(q => Math.max(1, q - 1)); }}
@@ -190,7 +217,7 @@ function ProductCard({ product, index, onAdd, onFly, cartData }) {
 
             <button 
               type="button"
-              className={`product-add ${added ? 'is-added' : ''}`} 
+              className={`product-add anti-add-btn ${added ? 'is-added' : ''}`} 
               onClick={add}
               aria-label={`Add ${product.name} to bag`}
             >
@@ -237,21 +264,21 @@ export function ProductSection({ onAdd, products = fallbackProducts, live = fals
   const displayProducts = products.length >= 3 ? products.slice(0, 3) : fallbackProducts.slice(0, 3);
 
   return (
-    <section className="products-section" id="shop">
-      <div className="section-intro">
-        <div className="section-title-wrap">
-          <p className="kicker">01 / THE MAHARASHTRIAN TRIO {live && '· LIVE FROM SHOPIFY'}</p>
-          <h2>THREE CLASSICS.</h2>
-        </div>
-        <div className="section-intro-right">
-          <p>Handcrafted with slow-roasted grains, whole spices, and pure ghee. Pick your pack, tear it open, pass it around.</p>
-          <Link to="/collections" className="light-button inline-btn">
-            EXPLORE ALL SNACKS <ArrowUpRight size={14} />
+    <section className="products-section zakaas-anti-section" id="shop">
+      {/* Editorial Header */}
+      <div className="zakaas-anti-header">
+        <span className="zakaas-anti-brand-label">ZAKAAS {live && '· LIVE FROM SHOPIFY'}</span>
+        <h2 className="zakaas-anti-title">TRADITIONAL MAHARASHTRIAN SNACKS</h2>
+        <p className="zakaas-anti-tagline">“Timeless recipes. Irresistible flavours.”</p>
+        <div className="zakaas-anti-header-action">
+          <Link to="/collections" className="zakaas-anti-link">
+            EXPLORE ALL SNACKS <ArrowUpRight size={13} />
           </Link>
         </div>
       </div>
 
-      <div className="product-rail">
+      {/* Anti-Gravity Cards Grid */}
+      <div className="zakaas-anti-grid">
         {displayProducts.map((product, index) => (
           <ProductCard 
             key={product.id || index} 
@@ -263,6 +290,15 @@ export function ProductSection({ onAdd, products = fallbackProducts, live = fals
           />
         ))}
       </div>
+
+      {/* Subtle Heritage Footer Detail */}
+      <footer className="zakaas-anti-footer" aria-label="Brand heritage note">
+        <span>Natural ingredients</span>
+        <span className="anti-footer-sep" aria-hidden="true">✦</span>
+        <span>Authentic Maharashtrian recipes</span>
+        <span className="anti-footer-sep" aria-hidden="true">✦</span>
+        <span>Made with love and tradition</span>
+      </footer>
 
       {flying && (
         <div className={`snack-flight ${flying.go ? 'is-flying' : ''}`} style={style} aria-hidden="true">
