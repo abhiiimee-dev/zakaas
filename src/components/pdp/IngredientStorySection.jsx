@@ -7,9 +7,23 @@ export function IngredientStorySection() {
       index: '01',
       role: 'THE GRAIN BASE',
       image: '/ingredients/bhajan-flour.jpg',
+      isFlour: true,
       alt: 'Slow-roasted rice and chana dal Bhajan flour',
       benefit: 'Roasted rice & chana dal deliver lasting energy, plant protein and fibre.',
-      description: 'Slow-roasted rice and chana dal milled together for a light, porous structure that fries to an airy, brittle crunch rather than a hard shell.'
+      nutritionalPointers: [
+        {
+          title: 'Sustained Energy',
+          text: 'Complex low-GI carbs from slow-roasted grains deliver steady stamina without sugar crashes.'
+        },
+        {
+          title: 'Plant Protein & Fibre',
+          text: 'Wholesome chana & urad pulses nourish muscles and provide natural prebiotic dietary fibre.'
+        },
+        {
+          title: 'Effortless Digestion',
+          text: 'Traditional slow-roasting breaks down tough starches, making it exceptionally light on the gut.'
+        }
+      ]
     },
     {
       id: 'cumin',
@@ -18,9 +32,23 @@ export function IngredientStorySection() {
       index: '02',
       role: 'THE WARM NOTE',
       image: '/ingredients/cumin.jpg',
+      isFlour: false,
       alt: 'Whole aromatic cumin seeds',
       benefit: 'More than flavour — a natural source of iron and antioxidant compounds.',
-      description: 'Whole cumin seeds roasted directly into the dough, releasing an earthy, aromatic warmth that anchors the savoury profile.'
+      nutritionalPointers: [
+        {
+          title: 'Bioavailable Iron',
+          text: 'Rich natural dietary iron essential for healthy hemoglobin formation and active cellular vitality.'
+        },
+        {
+          title: 'Digestive Spark',
+          text: 'Natural thymol triggers active digestive enzymes to accelerate nutrient assimilation.'
+        },
+        {
+          title: 'Antioxidant Shield',
+          text: 'Concentrated apigenin and luteolin flavonoids help defend cells from oxidative stress.'
+        }
+      ]
     },
     {
       id: 'ajwain',
@@ -29,9 +57,23 @@ export function IngredientStorySection() {
       index: '03',
       role: 'THE DISTINCTIVE AROMA',
       image: '/ingredients/ajwain.jpg',
+      isFlour: false,
       alt: 'Whole ajwain carom seeds',
       benefit: 'That unmistakable Indian spice, traditionally enjoyed for its digestion-friendly qualities.',
-      description: 'Pungent carom seeds that lend a bright, peppery aroma and clean herbal sharpness the moment the pouch is opened.'
+      nutritionalPointers: [
+        {
+          title: 'Potent Active Thymol',
+          text: 'Renowned essential oil compound that delivers rapid gut soothing, calm, and acid balance.'
+        },
+        {
+          title: 'Anti-Bloating Action',
+          text: 'Prized carminative properties alleviate post-snack abdominal fullness and heaviness.'
+        },
+        {
+          title: 'Gut Motility Support',
+          text: 'Antimicrobial bio-actives promote healthy gut microflora and smooth intestinal comfort.'
+        }
+      ]
     },
     {
       id: 'white-sesame',
@@ -40,9 +82,23 @@ export function IngredientStorySection() {
       index: '04',
       role: 'THE NUTTY CRUNCH',
       image: '/ingredients/white-sesame.jpg',
+      isFlour: false,
       alt: 'Toasted white sesame seeds',
       benefit: 'Tiny seeds, big nutrition — with plant protein, calcium, magnesium and good fats.',
-      description: 'Golden toasted seeds scattered across ridges, adding gentle nuttiness and textural contrast to every bite.'
+      nutritionalPointers: [
+        {
+          title: 'Natural Calcium Source',
+          text: 'Superior plant-based mineral density to strengthen bones, joints, and musculoskeletal wellness.'
+        },
+        {
+          title: 'Heart-Healthy Fats',
+          text: 'Rich in sesamin, sesamolin, and healthy polyunsaturated lipids for cardiovascular vitality.'
+        },
+        {
+          title: 'Immunity & Mineral Boost',
+          text: 'High in zinc, magnesium, and vitamin E to nourish cellular immunity and combat fatigue.'
+        }
+      ]
     }
   ];
 
@@ -69,7 +125,7 @@ export function IngredientStorySection() {
                     src={item.image}
                     alt={item.alt}
                     loading="lazy"
-                    className="ingredient-circle-img"
+                    className={`ingredient-circle-img ${item.isFlour ? 'zoom-flour' : ''}`}
                   />
                 </div>
                 <span className="ingredient-index-badge">{item.index}</span>
@@ -84,15 +140,27 @@ export function IngredientStorySection() {
 
               <div className="ingredient-ornamental-divider" aria-hidden="true" />
 
-              {/* Natural Benefit Statement */}
+              {/* Natural Benefit Statement (Main bold black line retained) */}
               <p className="ingredient-benefit-quote">
                 “{item.benefit}”
               </p>
 
-              {/* Culinary & Crunch Technique */}
-              <p className="ingredient-technique-text">
-                {item.description}
-              </p>
+              {/* 3 Nutritional Benefit Pointers */}
+              <ul className="ingredient-nutritional-pointers" aria-label={`Nutritional benefits of ${item.name}`}>
+                {item.nutritionalPointers.map((point, idx) => (
+                  <li key={idx} className="nutritional-pointer-item">
+                    <span className="pointer-icon" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M10 3L4.5 8.5L2 6" stroke="#c0392b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </span>
+                    <div className="pointer-text-group">
+                      <strong className="pointer-title">{point.title}:</strong>{' '}
+                      <span className="pointer-detail">{point.text}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>
