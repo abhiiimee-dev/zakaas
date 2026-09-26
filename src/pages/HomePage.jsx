@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { ArrowUpRight, Check, Package, Sparkles, Utensils, HeartHandshake } from 'lucide-react';
+import { ArrowUpRight, Check, Package, Sparkles, Utensils, HeartHandshake, ShieldCheck, PackageCheck, Truck } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ProductSection } from '../components/ProductSection';
 import { StoryFilm } from '../components/StoryFilm';
@@ -53,23 +53,39 @@ function VisualPromise() {
   const principles = [
     {
       num: '01',
-      title: 'AUTHENTIC TASTE',
-      desc: 'Rooted in Maharashtrian flavours and familiar ingredients.'
+      icon: Sparkles,
+      title: 'AUTHENTIC FLAVOUR',
+      tag: 'Heritage Recipes',
+      desc: 'Handcrafted with slow-roasted grains and whole regional spices.',
+      accent: '#B8332A',
+      accentBg: 'rgba(184, 51, 42, 0.08)'
     },
     {
       num: '02',
-      title: 'QUALITY YOU CAN TRUST',
-      desc: 'Carefully selected ingredients and consistent preparation.'
+      icon: ShieldCheck,
+      title: 'UNCOMPROMISED PURITY',
+      tag: '100% Vegetarian',
+      desc: 'Zero adulteration, clean ingredients, no artificial preservatives.',
+      accent: '#B27715',
+      accentBg: 'rgba(200, 142, 40, 0.10)'
     },
     {
       num: '03',
-      title: 'MADE FOR TODAY',
-      desc: 'Packed to keep every bite crisp.'
+      icon: PackageCheck,
+      title: 'SIGNATURE CRUNCH',
+      tag: 'Aroma-Locked Seal',
+      desc: 'Multi-layer nitrogen pack retains crispness until opened.',
+      accent: '#264A38',
+      accentBg: 'rgba(38, 74, 56, 0.09)'
     },
     {
       num: '04',
-      title: 'MAHARASHTRA, EVERYWHERE',
-      desc: 'Maharashtrian snacks, delivered beyond home.'
+      icon: Truck,
+      title: 'DELIVERED ANYWHERE',
+      tag: 'Direct to Doorstep',
+      desc: 'Shipped fresh from Maharashtra across India in 3-5 days.',
+      accent: '#8B3A2B',
+      accentBg: 'rgba(139, 58, 43, 0.08)'
     }
   ];
 
@@ -82,18 +98,32 @@ function VisualPromise() {
             <h2>NO SHORTCUTS.<br /><em>NO SMALL FEELING.</em></h2>
           </div>
           <p className="promise-lead">
-            Flavours rooted in Maharashtra, made with consistent care and packed for lasting crunch.
+            Every batch honors authentic Maharashtrian snack heritage. Crafted with care, sealed for crunch, delivered to your door.
           </p>
         </div>
 
         <div className="promise-horizontal-track">
-          {principles.map(p => (
-            <div key={p.num} className="promise-col">
-              <span className="promise-num">{p.num}</span>
-              <h3>{p.title}</h3>
-              <p>{p.desc}</p>
-            </div>
-          ))}
+          {principles.map(p => {
+            const Icon = p.icon;
+            return (
+              <div key={p.num} className="promise-card">
+                <div className="promise-card-head">
+                  <div 
+                    className="promise-icon-wrap" 
+                    style={{ background: p.accentBg, color: p.accent }}
+                  >
+                    <Icon size={24} strokeWidth={2.2} />
+                  </div>
+                  <span className="promise-num">{p.num}</span>
+                </div>
+                <div className="promise-tag" style={{ color: p.accent }}>
+                  {p.tag}
+                </div>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

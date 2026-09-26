@@ -2551,7 +2551,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 /* Promise Section ("No Shortcuts. No Small Feeling.") */
 .promise-section {
-  padding: 100px 5vw;
+  padding: 90px 5vw;
   background: #fbf6ec;
   border-top: 2px solid var(--charcoal);
   border-bottom: 2px solid var(--charcoal);
@@ -2565,8 +2565,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
   grid-template-columns: 1.2fr 0.8fr;
   gap: 50px;
   align-items: flex-end;
-  margin-bottom: 50px;
-  padding-bottom: 35px;
+  margin-bottom: 44px;
+  padding-bottom: 30px;
   border-bottom: 1px solid rgba(42, 38, 34, 0.2);
 }
 .promise-top-bar h2 {
@@ -2584,30 +2584,70 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .promise-horizontal-track {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 36px;
+  gap: 24px;
 }
-.promise-col {
+.promise-card {
   display: flex;
   flex-direction: column;
+  background: #ffffff;
+  border: 1.5px solid var(--charcoal);
+  box-shadow: 3px 3px 0 var(--charcoal);
+  border-radius: 16px;
+  padding: 26px 22px;
+  position: relative;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.promise-col .promise-num {
+.promise-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 var(--charcoal);
+}
+.promise-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.promise-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(42, 38, 34, 0.1);
+  transition: transform 0.2s ease;
+}
+.promise-card:hover .promise-icon-wrap {
+  transform: scale(1.06);
+}
+.promise-card .promise-num {
   font: 11px 'DM Mono', monospace;
   font-weight: 800;
-  color: var(--clay);
-  letter-spacing: 1px;
-  margin-bottom: 14px;
-  display: block;
+  color: var(--charcoal);
+  background: #fbf6ec;
+  border: 1px solid rgba(42, 38, 34, 0.18);
+  border-radius: 999px;
+  padding: 3px 9px;
+  letter-spacing: 0.8px;
 }
-.promise-col h3 {
+.promise-tag {
+  font: 10.5px 'DM Mono', monospace;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+.promise-card h3 {
   font-size: 17px;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
   margin: 0 0 10px;
   line-height: 1.25;
+  color: var(--charcoal);
 }
-.promise-col p {
+.promise-card p {
   font-size: 13px;
-  line-height: 1.55;
+  line-height: 1.5;
   color: #555;
   margin: 0;
 }
@@ -2883,7 +2923,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   }
   .promise-horizontal-track {
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px 24px;
+    gap: 20px;
   }
   .gifting-packs-stage {
     flex-wrap: wrap;
@@ -2912,7 +2952,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 @media (max-width: 600px) {
   .promise-horizontal-track {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 16px;
   }
 }
 
