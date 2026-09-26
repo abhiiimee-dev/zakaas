@@ -9,7 +9,6 @@ export function IngredientStorySection() {
       image: '/ingredients/bhajan-flour.jpg',
       isFlour: true,
       alt: 'Slow-roasted rice and chana dal Bhajan flour',
-      benefit: 'Roasted rice & chana dal deliver lasting energy, plant protein and fibre.',
       nutritionalPointers: [
         {
           title: 'Sustained Energy',
@@ -34,7 +33,6 @@ export function IngredientStorySection() {
       image: '/ingredients/cumin.jpg',
       isFlour: false,
       alt: 'Whole aromatic cumin seeds',
-      benefit: 'More than flavour — a natural source of iron and antioxidant compounds.',
       nutritionalPointers: [
         {
           title: 'Bioavailable Iron',
@@ -59,7 +57,6 @@ export function IngredientStorySection() {
       image: '/ingredients/ajwain.jpg',
       isFlour: false,
       alt: 'Whole ajwain carom seeds',
-      benefit: 'That unmistakable Indian spice, traditionally enjoyed for its digestion-friendly qualities.',
       nutritionalPointers: [
         {
           title: 'Potent Active Thymol',
@@ -84,7 +81,6 @@ export function IngredientStorySection() {
       image: '/ingredients/white-sesame.jpg',
       isFlour: false,
       alt: 'Toasted white sesame seeds',
-      benefit: 'Tiny seeds, big nutrition — with plant protein, calcium, magnesium and good fats.',
       nutritionalPointers: [
         {
           title: 'Natural Calcium Source',
@@ -137,13 +133,6 @@ export function IngredientStorySection() {
                 <h3 className="ingredient-heading-title">{item.name}</h3>
                 <span className="ingredient-native-label">{item.nativeName}</span>
               </div>
-
-              <div className="ingredient-ornamental-divider" aria-hidden="true" />
-
-              {/* Natural Benefit Statement (Main bold black line retained) */}
-              <p className="ingredient-benefit-quote">
-                “{item.benefit}”
-              </p>
 
               {/* 3 Nutritional Benefit Pointers */}
               <ul className="ingredient-nutritional-pointers" aria-label={`Nutritional benefits of ${item.name}`}>
