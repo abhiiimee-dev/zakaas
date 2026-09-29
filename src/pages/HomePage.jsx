@@ -191,21 +191,21 @@ function VisualGiftingSection({ onBuildBox, onAdd }) {
     {
       id: 'chakli',
       name: 'CHAKLI',
-      weight: '128g',
+      weight: '100 GRAMS',
       image: '/zakaas-chakli.jpg',
       price: 160
     },
     {
       id: 'bhakarwadi',
       name: 'BHAKARWADI',
-      weight: '108g',
+      weight: '100 GRAMS',
       image: '/zakaas-bhakarwadi.jpg',
       price: 160
     },
     {
       id: 'shankarpali',
       name: 'SHANKARPALI',
-      weight: '108g',
+      weight: '100 GRAMS',
       image: '/zakaas-shankarpali.jpg',
       price: 160
     }

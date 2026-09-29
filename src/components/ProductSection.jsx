@@ -181,7 +181,7 @@ function ProductCard({ product, index, onAdd, onFly, cartData }) {
         <div className="anti-price-row">
           <span className="anti-current-price">₹{unitPrice}</span>
           <span className="anti-original-mrp">MRP ₹{unitMrp}</span>
-          <span className="anti-weight-tag">200g PACK</span>
+          <span className="anti-weight-tag">100 GRAMS</span>
         </div>
 
         {/* Card Purchase Actions */}

@@ -283,7 +283,7 @@ function ArtDirectedProductCard({ product, onAdd, isAdded }) {
 
   // Pack Variants Options
   const packVariants = product.packOptions || product.variants || [
-    { id: 'pack-1', title: '1 PACK', weight: '100g', price: product.price || 150, mrp: product.mrp || 199 }
+    { id: 'pack-1', title: '1 PACK', weight: '100 GRAMS', price: product.price || 150, mrp: product.mrp || 199 }
   ];
 
   const [selectedPack, setSelectedPack] = useState(packVariants[0]);
@@ -292,12 +292,21 @@ function ArtDirectedProductCard({ product, onAdd, isAdded }) {
   const currentMrp = selectedPack?.mrp || (currentPrice === 150 ? 199 : Math.round(currentPrice * 1.33));
   const savings = currentMrp - currentPrice;
 
+  const cardWeight = (() => {
+    const raw = selectedPack?.weight || product.weight || '100g';
+    const clean = String(raw).trim().toLowerCase();
+    if (clean === '100g' || clean === '100 grams') return '100 GRAMS';
+    if (clean === '300g' || clean === '300 grams') return '300 GRAMS';
+    if (clean === '500g' || clean === '500 grams') return '500 GRAMS';
+    return String(raw).toUpperCase();
+  })();
+
   return (
     <article className={`art-collection-card ${theme.class}`} aria-label={`${product.name} snack card`}>
       {/* Top Card Kicker Row */}
       <div className="card-top-tag-bar">
         <span className="card-origin-pill">{theme.badge}</span>
-        <span className="card-weight-pill">{selectedPack?.weight || product.weight || '100g'}</span>
+        <span className="card-weight-pill">{cardWeight}</span>
       </div>
 
       {/* Visual Product Pack Stage */}
@@ -309,7 +318,7 @@ function ArtDirectedProductCard({ product, onAdd, isAdded }) {
         <div className="card-pack-pedestal">
           <img 
             src={product.image} 
-            alt={`Zakaas ${product.name} 100g Pack`} 
+            alt={`Zakaas ${product.name} 100 grams Pack`} 
             className="card-pack-img"
             loading="lazy"
           />

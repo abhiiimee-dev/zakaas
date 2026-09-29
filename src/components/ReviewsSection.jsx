@@ -8,7 +8,7 @@ export function ReviewsSection() {
       city: "PUNE",
       tag: "VERIFIED SNACKER",
       photoTag: "REAL SNACKER · BHAKARWADI",
-      product: "Bhakarwadi 200g"
+      product: "Bhakarwadi 100g"
     },
     {
       id: 'rev-2',
