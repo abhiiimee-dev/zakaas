@@ -17,9 +17,9 @@ export function Header({ cartCount, onCartOpen, menuOpen, setMenuOpen, onSearchO
 
   const navItems = [
     { label: 'SHOP', path: '/collections' },
-    { label: 'BUILD A BOX', path: '/builder' },
-    { label: 'ABOUT US', path: '/about' },
-    { label: 'FAQ', path: '/faq' },
+    { label: 'GIFT BOXES', path: '/builder' },
+    { label: 'OUR STORY', path: '/about' },
+    { label: 'FOR BUSINESS', path: '/b2b' },
   ];
 
   return (
@@ -79,12 +79,11 @@ export function Header({ cartCount, onCartOpen, menuOpen, setMenuOpen, onSearchO
               {item.label} <i>0{i + 1}</i>
             </Link>
           ))}
-          <Link to="/contact" onClick={() => setMenuOpen(false)}>
-            CONTACT US <i>0{navItems.length + 1}</i>
-          </Link>
-          <Link to="/b2b" onClick={() => setMenuOpen(false)}>
-            B2B & BULK <i>0{navItems.length + 2}</i>
-          </Link>
+        </div>
+        <div className="mobile-nav-support">
+          <Link to="/faq" onClick={() => setMenuOpen(false)}>FAQ</Link>
+          <Link to="/contact" onClick={() => setMenuOpen(false)}>CONTACT</Link>
+          <Link to="/policies" onClick={() => setMenuOpen(false)}>POLICIES</Link>
         </div>
         <p className="mobile-tagline">
           MAHARASHTRA.<br />IN EVERY BITE.

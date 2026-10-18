@@ -1,35 +1,43 @@
-import { useState, useEffect } from 'react';
-import { ArrowUpRight, Check, Package, Sparkles, Utensils, HeartHandshake, ShieldCheck, PackageCheck, Truck, Plus, Minus, ShoppingBag } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { ArrowUpRight, Award, ShieldCheck, Package, Truck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { ProductSection } from '../components/ProductSection';
 import { StoryFilm } from '../components/StoryFilm';
 import { ReviewsSection } from '../components/ReviewsSection';
 import { Footer } from '../components/Footer';
+import { Rangoli, Diya } from '../components/DiwaliArt';
+import { UNIT_PRICE, GIFT_PACKAGING_PRICE, ACTIVE_GIFT_DISCOUNT } from '../data/products';
 
 function Hero() {
   return (
     <section className="hero-film" id="top">
-      <img 
-        src="/zakaas-hero.png" 
-        alt="ZAKAAS snack packs and hot tea at a traditional Maharashtra home" 
+      <img
+        src="/zakaas-hero.png"
+        alt="ZAKAAS snack packs and hot tea at a traditional Maharashtra home"
         fetchpriority="high"
       />
       <div className="hero-wash" />
-      
+
       <div className="hero-content">
         <p className="kicker hero-kicker">EST. IN MAHARASHTRA · CRAFTED FOR EVERYWHERE</p>
         <h1>
           <span>THE TASTE OF HOME,</span>
           <em>MADE TO GO.</em>
         </h1>
+        <p className="hero-subline" style={{ fontSize: '14px', maxWidth: '36ch', opacity: 0.9, lineHeight: 1.4, margin: '0 0 24px 0' }}>
+          Chakli, bhakarwadi and shankarpali. Fresh-fried, packed in Pune.
+        </p>
         <div className="hero-cta-group">
           <a className="hero-button" href="#shop">
             SHOP THE SNACKS <ArrowUpRight size={14} />
           </a>
           <Link className="hero-button-ghost" to="/builder">
-            BUILD A BOX <ArrowUpRight size={14} />
+            SEND A GIFT BOX <ArrowUpRight size={14} />
           </Link>
         </div>
+        <p className="hero-mono-footer" style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', letterSpacing: '0.04em', opacity: 0.8, marginTop: '24px', textTransform: 'uppercase' }}>
+          ₹{UNIT_PRICE} PER 100G · SHIPS PAN-INDIA
+        </p>
       </div>
 
       <div className="hero-meta">
@@ -40,437 +48,273 @@ function Hero() {
   );
 }
 
-function VisualPromise() {
-  const principles = [
-    {
-      id: 'taste',
-      icon: Sparkles,
-      title: 'AUTHENTIC FLAVOUR',
-      accent: '#B8332A',
-      accentBg: 'rgba(184, 51, 42, 0.08)'
-    },
-    {
-      id: 'purity',
-      icon: ShieldCheck,
-      title: '100% PURE',
-      accent: '#B27715',
-      accentBg: 'rgba(200, 142, 40, 0.10)'
-    },
-    {
-      id: 'crunch',
-      icon: PackageCheck,
-      title: 'SIGNATURE CRUNCH',
-      accent: '#264A38',
-      accentBg: 'rgba(38, 74, 56, 0.09)'
-    },
-    {
-      id: 'delivery',
-      icon: Truck,
-      title: 'DOORSTEP DELIVERY',
-      accent: '#8B3A2B',
-      accentBg: 'rgba(139, 58, 43, 0.08)'
-    }
+function ZakaasStandard() {
+  const standards = [
+    { icon: <Award color="#B8281B" size={20} strokeWidth={1.6} />, title: 'AUTHENTIC FLAVOUR' },
+    { icon: <ShieldCheck color="#D9822B" size={20} strokeWidth={1.6} />, title: '100% VEGETARIAN' },
+    { icon: <Package color="#2E5A44" size={20} strokeWidth={1.6} />, title: 'SIGNATURE CRUNCH' },
+    { icon: <Truck color="#B8281B" size={20} strokeWidth={1.6} />, title: 'DOORSTEP DELIVERY' }
   ];
-
   return (
-    <section className="promise-section" id="promise">
-      <div className="promise-container">
-        <div className="promise-top-bar">
-          <div>
-            <p className="kicker">03 / THE ZAKAAS STANDARD</p>
-            <h2>NO SHORTCUTS. <em>NO SMALL FEELING.</em></h2>
-          </div>
-        </div>
+    <section className="zakaas-standard" style={{ backgroundColor: '#ffffff', padding: '56px 24px', borderBottom: '2px solid #1A1815' }}>
+      <div style={{ maxWidth: '1020px', margin: '0 auto' }}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', color: 'rgba(26,24,21,0.7)', fontWeight: 'bold' }}>03 / THE ZAKAAS STANDARD</span>
+        <h2 style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)', marginTop: '10px', marginBottom: '28px', color: '#1A1815', fontWeight: '800', letterSpacing: '-0.02em' }}>
+          NO SHORTCUTS. <em style={{fontFamily: 'serif', fontStyle: 'italic', fontWeight: 'normal', color: '#1A1815'}}>NO SMALL FEELING.</em>
+        </h2>
 
-        <div className="promise-horizontal-track">
-          {principles.map(p => {
-            const Icon = p.icon;
-            return (
-              <div key={p.id} className="promise-card">
-                <div 
-                  className="promise-icon-wrap" 
-                  style={{ background: p.accentBg, color: p.accent }}
-                >
-                  <Icon size={26} strokeWidth={2.2} />
-                </div>
-                <h3>{p.title}</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: '16px' }}>
+          {standards.map((s, i) => (
+            <div key={i} style={{
+              backgroundColor: '#fff',
+              border: '2px solid #1A1815',
+              borderRadius: '10px',
+              padding: '24px 16px',
+              textAlign: 'center',
+              boxShadow: '4px 4px 0 #1A1815',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}>
+              <div style={{
+                width: '46px',
+                height: '46px',
+                margin: '0 auto 14px auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '12px',
+                backgroundColor: '#FDFBF7',
+                border: '1.5px solid rgba(26,24,21,0.15)'
+              }}>
+                {s.icon}
               </div>
-            );
-          })}
+              <h3 style={{ fontSize: '12px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: '#1A1815', margin: 0, letterSpacing: '0.05em' }}>{s.title}</h3>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function RangoliFlourish({ className, style }) {
+/* Rich entry point to the gifting flow at /builder. */
+function GiftTeaser() {
   return (
-    <svg 
-      viewBox="0 0 240 240" 
-      className={className} 
-      style={style} 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <circle cx="120" cy="120" r="105" stroke="#E2B768" strokeWidth="1" strokeDasharray="3 4" opacity="0.3" />
-      <circle cx="120" cy="120" r="88" stroke="#E2B768" strokeWidth="1.2" opacity="0.35" />
-      <circle cx="120" cy="120" r="64" stroke="#E2B768" strokeWidth="1" opacity="0.3" />
-      <circle cx="120" cy="120" r="38" stroke="#E2B768" strokeWidth="1.2" opacity="0.4" />
-      <circle cx="120" cy="120" r="14" stroke="#E2B768" strokeWidth="1.5" opacity="0.5" />
-      {[0, 45, 90, 135, 180, 225, 270, 315].map(deg => (
-        <g key={deg} transform={`rotate(${deg} 120 120)`}>
-          <path d="M 120 32 C 135 50, 135 62, 120 80 C 105 62, 105 50, 120 32 Z" stroke="#E2B768" strokeWidth="1.2" opacity="0.4" />
-          <path d="M 120 12 C 128 22, 128 28, 120 32 C 112 28, 112 22, 120 12 Z" fill="#E2B768" opacity="0.35" />
-          <circle cx="120" cy="56" r="2.5" fill="#E2B768" opacity="0.5" />
-        </g>
-      ))}
-      {[22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5].map(deg => (
-        <g key={deg} transform={`rotate(${deg} 120 120)`}>
-          <path d="M 120 48 L 124 64 L 120 72 L 116 64 Z" stroke="#E2B768" strokeWidth="1" opacity="0.3" />
-          <circle cx="120" cy="24" r="1.8" fill="#E2B768" opacity="0.4" />
-        </g>
-      ))}
-    </svg>
-  );
-}
+    <section className="gift-teaser" id="gifting" aria-labelledby="gift-teaser-title" style={{ backgroundColor: 'var(--bg-khadi, #F6EFE2)', padding: '130px 24px 120px', textAlign: 'center', borderBottom: '2px solid #1A1815', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundImage: 'radial-gradient(rgba(26,24,21,0.1) 1px, transparent 1px)', backgroundSize: '24px 24px', opacity: 0.5, pointerEvents: 'none' }} />
 
-function CuratedBoxCartouche({ count }) {
-  return (
-    <div className="curation-cartouche-wrap">
-      <svg viewBox="0 0 220 90" className="cartouche-svg" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="goldBevelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#F5DF9E" />
-            <stop offset="35%" stopColor="#C99738" />
-            <stop offset="70%" stopColor="#F5DF9E" />
-            <stop offset="100%" stopColor="#9C6B17" />
-          </linearGradient>
-          <radialGradient id="wineRadialGrad" cx="50%" cy="50%" r="60%">
-            <stop offset="0%" stopColor="#6C1717" />
-            <stop offset="60%" stopColor="#4A0C0C" />
-            <stop offset="100%" stopColor="#300606" />
-          </radialGradient>
-          <filter id="cartoucheShadow" x="-10%" y="-10%" width="120%" height="130%">
-            <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#000" floodOpacity="0.45" />
-          </filter>
-        </defs>
-        <path 
-          d="M 30 6 Q 12 6 12 24 Q 2 45 12 66 Q 12 84 30 84 L 190 84 Q 208 84 208 66 Q 218 45 208 24 Q 208 6 190 6 Z" 
-          fill="url(#wineRadialGrad)" 
-          stroke="url(#goldBevelGrad)" 
-          strokeWidth="3.5"
-          filter="url(#cartoucheShadow)"
-        />
-        <path 
-          d="M 33 11 Q 17 11 17 26 Q 8 45 17 64 Q 17 79 33 79 L 187 79 Q 203 79 203 64 Q 212 45 203 26 Q 203 11 187 11 Z" 
-          fill="none" 
-          stroke="rgba(245, 223, 158, 0.45)" 
-          strokeWidth="1.2" 
-        />
-      </svg>
-      <div className="cartouche-body">
-        <span className="cartouche-heading">YOUR CURATED<br />BOX SUMMARY</span>
-        <span className="cartouche-count-tag">
-          {count} {count === 1 ? 'ITEM' : 'ITEMS'} ADDED
-        </span>
-      </div>
-    </div>
-  );
-}
+      <div className="gt-toran" aria-hidden="true" />
+      <div className="gt-paithani" aria-hidden="true" />
 
-function VisualGiftingSection({ onBuildBox, onAdd }) {
-  const navigate = useNavigate();
-  const [boxItems, setBoxItems] = useState({
-    chakli: 0,
-    bhakarwadi: 0,
-    shankarpali: 0
-  });
+      <figure className="gt-side gt-side-left" aria-hidden="true">
+        <Rangoli />
+        <Diya />
+        <figcaption className="gt-deva">शुभ दीपावली<small>SHUBH DIWALI</small></figcaption>
+      </figure>
+      <figure className="gt-side gt-side-right" aria-hidden="true">
+        <Rangoli />
+        <Diya />
+        <figcaption className="gt-deva">फराळ<small>DIWALI FARAL</small></figcaption>
+      </figure>
 
-  const packs = [
-    {
-      id: 'chakli',
-      name: 'CHAKLI',
-      weight: '100 GRAMS',
-      image: '/zakaas-chakli.jpg',
-      price: 160
-    },
-    {
-      id: 'bhakarwadi',
-      name: 'BHAKARWADI',
-      weight: '100 GRAMS',
-      image: '/zakaas-bhakarwadi.jpg',
-      price: 160
-    },
-    {
-      id: 'shankarpali',
-      name: 'SHANKARPALI',
-      weight: '100 GRAMS',
-      image: '/zakaas-shankarpali.jpg',
-      price: 160
-    }
-  ];
-
-  const handleAddItem = (id) => {
-    setBoxItems(prev => ({ ...prev, [id]: prev[id] + 1 }));
-  };
-
-  const handleRemoveItem = (id) => {
-    setBoxItems(prev => ({ ...prev, [id]: Math.max(0, prev[id] - 1) }));
-  };
-
-  const totalCount = boxItems.chakli + boxItems.bhakarwadi + boxItems.shankarpali;
-  const rawTotal = (boxItems.chakli * 160) + (boxItems.bhakarwadi * 160) + (boxItems.shankarpali * 160);
-  const discount = Math.round(rawTotal * 0.20);
-  const finalPrice = Math.max(0, rawTotal - discount);
-
-  const handleAddBoxToCart = () => {
-    if (totalCount === 0) return;
-    const selectedPacks = [];
-    if (boxItems.chakli > 0) selectedPacks.push(`${boxItems.chakli}x Chakli`);
-    if (boxItems.bhakarwadi > 0) selectedPacks.push(`${boxItems.bhakarwadi}x Bhakarwadi`);
-    if (boxItems.shankarpali > 0) selectedPacks.push(`${boxItems.shankarpali}x Shankarpali`);
-
-    const giftBoxItem = {
-      id: `gift-box-curated-${Date.now()}`,
-      name: 'Curated Maharashtrian Gift Box (20% Off)',
-      price: finalPrice,
-      image: '/zakaas-open-gift-box.png',
-      personality: `Celebration Hamper · ${selectedPacks.join(', ')}`,
-      quantity: 1,
-      isGiftBox: true
-    };
-
-    if (typeof onAdd === 'function') {
-      onAdd(giftBoxItem);
-    } else if (typeof onBuildBox === 'function') {
-      onBuildBox();
-    }
-  };
-
-  return (
-    <section className="gifting-experience-section" id="gifting">
-      {/* Background Decorative Rangolis */}
-      <RangoliFlourish className="curation-rangoli-bg left" />
-      <RangoliFlourish className="curation-rangoli-bg right" />
-
-      <div className="gifting-wrapper">
-        {/* Celebration Special Banner */}
-        <div className="curation-banner-container">
-          <img 
-            src="/celebration-banner.png" 
-            alt="CELEBRATION SPECIAL: ENJOY 20% OFF YOUR GIFT BOX CURATION" 
-            className="curation-banner-img"
-          />
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <p className="gt-greet gt-deva">॥ दिवाळीच्या हार्दिक शुभेच्छा ॥</p>
+        <div style={{ display: 'inline-block', background: 'linear-gradient(to right, #751B15, #D9822B)', color: '#fff', padding: '10px 20px', borderRadius: '4px', fontSize: '13px', fontWeight: 'bold', marginBottom: '32px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', border: '1px solid rgba(255,255,255,0.2)' }}>
+          CELEBRATION SPECIAL: AUTOMATIC {ACTIVE_GIFT_DISCOUNT.percent}% OFF 3 &amp; 6 PACK GIFT BOXES AT CHECKOUT
         </div>
-
-        {/* Hero Header */}
-        <div className="curation-hero-header">
-          <h2 className="curation-main-title">
-            <span>CREATE A PERFECT</span>
-            <em>MAHARASHTRIAN GIFT BOX</em>
-          </h2>
-          <p className="curation-subtitle">
-            Build your unique ZAKAAS snack box to gift and get an exclusive 20% discount applied to the entire box at checkout.
-          </p>
-        </div>
-
-        {/* Master Curation Stage */}
-        <div className="curation-stage">
-          {/* Left: 3 Product Cards Grid */}
-          <div className="curation-cards-grid">
-            {packs.map((pack) => {
-              const qty = boxItems[pack.id] || 0;
-              return (
-                <div key={pack.id} className={`curation-card ${qty > 0 ? 'is-selected' : ''}`}>
-                  <div className="curation-card-image-box">
-                    <img src={pack.image} alt={pack.name} className="curation-card-img" />
-                    
-                    {/* Top-Right Gold Checkbox Badge */}
-                    <div className={`curation-card-badge ${qty > 0 ? 'is-active' : ''}`}>
-                      {qty > 0 ? <Check size={12} strokeWidth={3} /> : null}
-                    </div>
-
-                    {/* Interactive Button Overlay */}
-                    <div className="curation-card-btn-wrap">
-                      {qty === 0 ? (
-                        <button 
-                          type="button" 
-                          className="curation-add-btn"
-                          onClick={() => handleAddItem(pack.id)}
-                          aria-label={`Add ${pack.name} to box`}
-                        >
-                          <Plus size={13} strokeWidth={2.5} />
-                          <span>ADD TO BOX</span>
-                        </button>
-                      ) : (
-                        <div className="curation-stepper">
-                          <button 
-                            type="button" 
-                            className="curation-step-btn"
-                            onClick={() => handleRemoveItem(pack.id)}
-                            aria-label={`Remove one ${pack.name}`}
-                          >
-                            <Minus size={12} strokeWidth={2.5} />
-                          </button>
-                          <span className="curation-step-count">{qty}</span>
-                          <button 
-                            type="button" 
-                            className="curation-step-btn"
-                            onClick={() => handleAddItem(pack.id)}
-                            aria-label={`Add another ${pack.name}`}
-                          >
-                            <Plus size={12} strokeWidth={2.5} />
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Card Title & Weight */}
-                  <div className="curation-card-info">
-                    <h3 className="curation-card-title">{pack.name}</h3>
-                    <span className="curation-card-weight">{pack.weight}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Right: The Open Keepsake Box & Curated Box Summary */}
-          <div className="curation-box-column">
-            {/* Scalloped Royal Summary Cartouche */}
-            <CuratedBoxCartouche count={totalCount} />
-
-            {/* The Open Box Graphic */}
-            <div className="curation-box-stage">
-              <img 
-                src="/zakaas-open-gift-box.png" 
-                alt="Open ZAKAAS Royal Teal and Gold Keepsake Gift Box" 
-                className="curation-box-img"
-              />
-
-              {/* Dynamic Snack Pouches Resting Inside Box */}
-              {totalCount > 0 && (
-                <div className="curation-box-pouch-preview">
-                  {packs.filter(p => boxItems[p.id] > 0).map(p => (
-                    <span key={p.id} className="curation-pouch-chip">
-                      {boxItems[p.id]}× {p.name}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Interactive Checkout / Add Box Bar */}
-            <div className="curation-box-action-bar">
-              {totalCount > 0 ? (
-                <div className="curation-pricing-row">
-                  <div className="curation-pricing-text">
-                    <span className="curation-old-price">₹{rawTotal}</span>
-                    <span className="curation-net-price">₹{finalPrice}</span>
-                    <span className="curation-discount-pill">20% OFF</span>
-                  </div>
-                  <button 
-                    type="button" 
-                    className="curation-checkout-btn"
-                    onClick={handleAddBoxToCart}
-                  >
-                    ADD GIFT BOX TO CART <ArrowUpRight size={14} />
-                  </button>
-                </div>
-              ) : (
-                <div className="curation-empty-prompt">
-                  <span>SELECT 1 OR MORE SNACKS TO FILL YOUR BOX</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* B2B Teaser Banner */}
-        <div className="b2b-banner-box">
-          <div className="b2b-banner-info">
-            <p className="kicker">05 / CORPORATE & CELEBRATIONS</p>
-            <h2>ZAKAAS FOR<br /><em>BUSINESS.</em></h2>
-            <p>Weddings, festive hampers, corporate gifting, and retail orders. Give a gift that people genuinely devour.</p>
-            <button onClick={() => navigate('/b2b')} className="b2b-banner-btn">
-              ENQUIRE FOR BULK ORDERS <ArrowUpRight size={14} />
-            </button>
-          </div>
-          <div className="b2b-banner-words">
-            <span>WEDDINGS</span>
-            <span>CORPORATE</span>
-            <span>FESTIVALS</span>
-            <span>RETAIL</span>
-          </div>
-        </div>
+        <h2 id="gift-teaser-title" className="gt-royal-heading">
+          <span className="gt-royal-top">Create a Perfect</span>
+          <em className="gt-royal-main">Maharashtrian Gift Box</em>
+        </h2>
+        <p style={{ fontSize: '18px', maxWidth: '650px', margin: '0 auto 40px auto', color: 'rgba(26, 24, 21, 0.85)', lineHeight: '1.6' }}>
+          Curate a 3-pack Trio or 6-pack Grand gift box (₹{UNIT_PRICE} per 100g pouch + ₹{GIFT_PACKAGING_PRICE} gift box &amp; card) and enjoy an automatic {ACTIVE_GIFT_DISCOUNT.percent}% bundle discount applied across the entire box at Shopify checkout.
+        </p>
+        <Link to="/builder" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', padding: '18px 36px', backgroundColor: '#1A1815', color: '#fff', textDecoration: 'none', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', transition: 'transform 0.2s', boxShadow: '0 4px 0 rgba(0,0,0,0.2)' }}>
+          BUILD A BOX <ArrowUpRight size={16} />
+        </Link>
+        <p className="gt-faral">DIWALI FARAL · 3 OR 6 PACK CURATIONS</p>
       </div>
     </section>
   );
 }
 
 function RealCommunitySection() {
+  const [activeReel, setActiveReel] = useState(null);
+
   const posts = [
-    { 
-      img: '/reels/reel-1.jpg', 
-      caption: 'Evening cutting chai and crisp Chakli spirals. The sacred tea-time ritual.',
-      tag: 'KOLHAPUR CHAI'
+    {
+      id: 'Dc5tgRvPge-',
+      img: '/reels/reel-1.jpg',
+      title: 'The Sacred Chai Ritual',
+      caption: 'Evening cutting chai and crisp Chakli spirals. The classic Maharashtrian tea-time ritual.',
+      tag: 'KOLHAPUR CHAI',
+      url: 'https://www.instagram.com/p/Dc5tgRvPge-/',
+      duration: '0:32'
     },
-    { 
-      img: '/reels/reel-2.jpg', 
-      caption: 'Spicy Bhakarwadi rolls packed fresh for festive snacking.',
-      tag: 'FRESH BATCH'
+    {
+      id: 'DdEbKJqvbmZ',
+      img: '/reels/reel-2.jpg',
+      title: 'Spiced Spirals Fresh From Kettle',
+      caption: 'Spicy Bhakarwadi pinwheels packed fresh for festive snacking with tangy amchur, sesame & whole spices.',
+      tag: 'FRESH BATCH',
+      url: 'https://www.instagram.com/p/DdEbKJqvbmZ/',
+      duration: '0:24'
     },
-    { 
-      img: '/reels/reel-3.jpg', 
-      caption: 'Melt-in-mouth Shankarpali diamonds shared with family.',
-      tag: 'FESTIVE DELIGHT'
+    {
+      id: 'DdRp04iPbUg',
+      img: '/reels/reel-3.jpg',
+      title: 'Crisp Sweet Shankarpada Diamonds',
+      caption: 'Golden diamond-cut Shankarpada bites shared with family during Diwali and festive mornings.',
+      tag: 'FESTIVE DELIGHT',
+      url: 'https://www.instagram.com/p/DdRp04iPbUg/',
+      duration: '0:18'
     }
   ];
 
   return (
-    <section className="community-section">
+    <section className="community-section" aria-label="Social community and snack reels">
       <div className="community-header">
-        <p className="kicker">07 / FROM OUR KITCHEN TO YOUR TABLE</p>
-        <h2>THE SNACK TABLE<br /><em>IN THE WILD.</em></h2>
+        <div className="community-header-left">
+          <div className="community-kicker-row">
+            <span className="community-diya-mini"><Diya /></span>
+            <span className="gt-deva community-deva-pill">॥ चव महाराष्ट्राची · सोशल गप्पा ॥</span>
+            <p className="kicker" style={{ margin: 0 }}>05 / FROM OUR KITCHEN TO YOUR TABLE</p>
+          </div>
+          <h2 className="community-royal-heading">
+            <span className="community-heading-top">The Snack Table</span>
+            <em className="community-heading-em">In The Wild.</em>
+          </h2>
+          <p className="community-subline">
+            Real tea-time crunch, late-night bingeing, and festive gatherings captured by ZAKAAS snackers across India.
+          </p>
+        </div>
+
+        <a
+          href="https://www.instagram.com/zakaas.in/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="community-insta-btn"
+        >
+          <span>FOLLOW @ZAKAAS.IN</span>
+          <ArrowUpRight size={15} />
+        </a>
       </div>
 
       <div className="community-grid">
         {posts.map((post, idx) => (
-          <div key={idx} className="community-card">
-            <img src={post.img} alt={post.caption} loading="lazy" />
-            <div className="community-card-overlay">
-              <span className="community-tag">{post.tag}</span>
-              <p>{post.caption}</p>
-              <small>@zakaas.official</small>
+          <article
+            key={idx}
+            className="community-card"
+            onClick={() => setActiveReel(post)}
+          >
+            <div className="community-card-media">
+              <img src={post.img} alt={post.caption} loading="lazy" />
+              <div className="community-card-tint" />
+              <div className="community-play-trigger" aria-label={`Play reel: ${post.title}`}>
+                <span className="play-triangle">▶</span>
+              </div>
+              <div className="community-card-top-bar">
+                <span className="community-badge-tag">{post.tag}</span>
+                <span className="community-duration">{post.duration}</span>
+              </div>
             </div>
-          </div>
+
+            <div className="community-card-info">
+              <h3 className="community-post-title">{post.title}</h3>
+              <p className="community-post-desc">{post.caption}</p>
+              <div className="community-card-foot">
+                <span className="community-handle">@zakaas.in</span>
+                <span className="community-watch-link">WATCH REEL <ArrowUpRight size={12} /></span>
+              </div>
+            </div>
+          </article>
         ))}
       </div>
+
+      {/* Reel Video Modal */}
+      {activeReel && (
+        <div
+          className="community-modal-backdrop"
+          onClick={() => setActiveReel(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="community-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="community-modal-header">
+              <div className="community-modal-meta">
+                <span className="gt-deva" style={{ color: '#F4B63C' }}>॥ झकास रील्स ॥</span>
+                <b>{activeReel.title}</b>
+              </div>
+              <button
+                type="button"
+                className="community-modal-close"
+                onClick={() => setActiveReel(null)}
+                aria-label="Close modal"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="community-modal-body">
+              <img src={activeReel.img} alt={activeReel.title} className="community-modal-cover" />
+              <div className="community-modal-caption-box">
+                <span className="community-tag" style={{ color: '#D9A94B' }}>{activeReel.tag}</span>
+                <p>{activeReel.caption}</p>
+                <a
+                  href={activeReel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hero-button"
+                  style={{ display: 'inline-flex', marginTop: '16px' }}
+                >
+                  OPEN ON INSTAGRAM <ArrowUpRight size={14} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
 
-function BrandOneLiner() {
+/* Premium Corporate Strip */
+function B2bStrip() {
   return (
-    <section className="brand-oneliner-strip" aria-label="About ZAKAAS brand introduction">
-      <div className="brand-oneliner-inner">
-        <div className="brand-oneliner-content">
-          <span className="brand-oneliner-kicker">ABOUT ZAKAAS · OUR STORY</span>
-          <p className="brand-oneliner-quote">
-            “Classic Maharashtrian snacks, packed with the taste of home.”
+    <section className="b2b-strip-premium" style={{ backgroundColor: '#7A1C16', padding: '100px 24px', position: 'relative', overflow: 'hidden', borderTop: '2px solid #1A1815' }}>
+      {/* Decorative background rangoli/circles */}
+      <div style={{ position: 'absolute', bottom: '-150px', left: '-100px', width: '400px', height: '400px', border: '1px dashed rgba(246, 239, 226, 0.25)', borderRadius: '50%', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: '-100px', left: '-50px', width: '300px', height: '300px', border: '1px solid rgba(246, 239, 226, 0.15)', borderRadius: '50%', pointerEvents: 'none' }} />
+
+      <div style={{ position: 'absolute', bottom: '-150px', right: '-100px', width: '400px', height: '400px', border: '1px dashed rgba(246, 239, 226, 0.25)', borderRadius: '50%', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: '-100px', right: '-50px', width: '300px', height: '300px', border: '1px solid rgba(246, 239, 226, 0.15)', borderRadius: '50%', pointerEvents: 'none' }} />
+
+      <div className="b2b-strip-card">
+        <div className="b2b-strip-left">
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', letterSpacing: '0.15em', opacity: 0.9, fontWeight: '700' }}>05 / CORPORATE &amp; CELEBRATIONS</span>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 4rem)', margin: '20px 0', lineHeight: '1.05', textTransform: 'uppercase', color: '#F6EFE2', fontWeight: '800' }}>
+            ZAKAAS FOR<br/><em style={{fontFamily: 'serif', fontStyle: 'italic', fontWeight: 'normal'}}>BUSINESS.</em>
+          </h2>
+          <p style={{ fontSize: '16px', lineHeight: '1.6', marginBottom: '32px', opacity: 0.85 }}>
+            Weddings, festive hampers, corporate gifting, and retail orders. Give a gift that people genuinely devour.
           </p>
+          <Link to="/b2b" className="b2b-enquire-btn">
+            ENQUIRE FOR BULK ORDERS <ArrowUpRight size={14} />
+          </Link>
         </div>
-        <Link to="/about" className="brand-oneliner-link">
-          OUR STORY <ArrowUpRight size={13} />
-        </Link>
+
+        <div className="b2b-strip-right">
+          <span className="b2b-word-1">WEDDINGS</span>
+          <span className="b2b-word-2">CORPORATE</span>
+          <span className="b2b-word-3">FESTIVALS</span>
+          <span className="b2b-word-4">RETAIL</span>
+        </div>
       </div>
     </section>
   );
 }
 
-export function HomePage({ onAdd, catalog = [], products = [], live = false, onBuildBox, cartData }) {
+export function HomePage({ onAdd, catalog = [], products = [], live = false, cartData }) {
   const displayProducts = catalog?.length ? catalog : (products?.length ? products : []);
 
   useEffect(() => {
@@ -483,13 +327,13 @@ export function HomePage({ onAdd, catalog = [], products = [], live = false, onB
   return (
     <div className="page-home">
       <Hero />
-      <BrandOneLiner />
       <ProductSection onAdd={onAdd} products={displayProducts} live={live} cartData={cartData} />
+      <ZakaasStandard />
+      <GiftTeaser />
       <StoryFilm />
-      <VisualPromise />
-      <VisualGiftingSection onBuildBox={onBuildBox} onAdd={onAdd} />
       <ReviewsSection />
       <RealCommunitySection />
+      <B2bStrip />
       <Footer />
     </div>
   );

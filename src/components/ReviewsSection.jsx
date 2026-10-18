@@ -1,9 +1,11 @@
+import { Diya } from './DiwaliArt';
+
 export function ReviewsSection() {
   const reviews = [
     {
       id: 'rev-1',
       image: '/reviews/customer-bhakarwadi.jpg',
-      quote: "The crunch is unreal. Perfect balance of fiery spice and coconut stuffing. Kept a pack on my desk and it vanished before lunch!",
+      quote: "The crunch is unreal. Perfect balance of fiery spice, tangy amchur, and sesame masala. Kept a pack on my desk and it vanished before lunch!",
       author: "Tanmay Shinde",
       city: "PUNE",
       tag: "VERIFIED SNACKER",
@@ -12,29 +14,29 @@ export function ReviewsSection() {
     },
     {
       id: 'rev-2',
-      quote: "Reminds me of my Aaji's steel tin in Kolhapur. The Bhakarwadi is spicy, crispy, and fresh without heavy commercial grease.",
+      quote: "Reminds me of my Aaji's steel tin in Kolhapur. The Bhakarwadi pinwheels are spicy, crispy, and packed with whole-spice warmth.",
       author: "Pooja Deshmukh",
       city: "MUMBAI",
       tag: "VERIFIED SNACKER",
-      product: "Signature Bhakarwadi"
+      product: "Bhakarwadi 100g"
     },
     {
       id: 'rev-3',
       image: '/reels/reel-1.jpg',
-      quote: "Proper crunch in the Chakli without being oily. Sent a festive box to my brother in London and it arrived intact & aromatic!",
+      quote: "Proper crunch in the Chakli with toasted sesame and ajwain in every bite. Sent a 6-pack festive box to my brother and it arrived intact!",
       author: "Rahul Kulkarni",
       city: "PUNE",
       tag: "BOUGHT 3 BOXES",
       photoTag: "CHAI & CHAKLI RITUAL",
-      product: "Spiced Chakli"
+      product: "Chakli 100g"
     },
     {
       id: 'rev-4',
-      quote: "The Shankarpali is perfectly sweet and flaky with pure ghee aroma. ZAKAAS brings back authentic festive memories for our family.",
+      quote: "The Shankarpada diamonds are crisp, flaky, and just the right amount of sweet for evening tea. Brings back festive memories for our family.",
       author: "Ananya Joshi",
       city: "NAGPUR",
       tag: "FESTIVE GIFTING",
-      product: "Sweet Shankarpali"
+      product: "Shankarpada 100g"
     },
     {
       id: 'rev-5',
@@ -42,15 +44,15 @@ export function ReviewsSection() {
       author: "Aditya & Neha K.",
       city: "BENGALURU",
       tag: "WEEKLY RITUAL",
-      product: "Celebration Hamper"
+      product: "Trio Gift Box"
     },
     {
       id: 'rev-6',
-      quote: "You can taste the slow-roasted bhajan flour immediately. Real texture, real crunch, zero shortcuts. Subscribing for our monthly box.",
+      quote: "You can taste the roasted cumin and sesame immediately in the Chakli. Real texture, real crunch, zero shortcuts.",
       author: "Kavita Rao",
       city: "HYDERABAD",
       tag: "VERIFIED BUYER",
-      product: "Bhajan Flour Chakli"
+      product: "Chakli 100g"
     }
   ];
 
@@ -59,15 +61,26 @@ export function ReviewsSection() {
 
   return (
     <section className="reviews-section" aria-label="Customer reviews and proof of taste">
+      <div className="gt-toran" aria-hidden="true" />
+
       <div className="reviews-header">
         <div className="reviews-header-left">
-          <p className="kicker">06 / PROOF OF TASTE</p>
-          <h2>WHAT PEOPLE<br /><em>ARE SAYING.</em></h2>
+          <div className="reviews-kicker-row">
+            <span className="reviews-diya-mini"><Diya /></span>
+            <span className="gt-deva reviews-deva-pill">॥ चवीची खात्री · ग्राहक अनुभव ॥</span>
+            <p className="kicker" style={{ margin: 0 }}>04 / PROOF OF TASTE</p>
+          </div>
+          <h2 className="reviews-royal-heading">
+            <span className="reviews-heading-top">What People</span>
+            <em className="reviews-heading-em">Are Saying.</em>
+          </h2>
         </div>
+
         <div className="reviews-header-badge">
-          <span>★ 4.9 / 5 RATING</span>
+          <span className="reviews-rating-stars">★★★★★</span>
+          <span className="reviews-rating-val">4.9 / 5</span>
           <span className="badge-dot">·</span>
-          <span>1,200+ SNACKERS DELIGHTED</span>
+          <span className="reviews-rating-count">1,200+ SNACKERS DELIGHTED</span>
         </div>
       </div>
 

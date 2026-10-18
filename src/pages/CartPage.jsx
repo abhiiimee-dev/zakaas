@@ -1,14 +1,16 @@
 import { Minus, Plus, Trash2, ArrowUpRight, ShoppingBag, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
+import { UNIT_PRICE, calculateBagSummary } from '../data/products';
+
+const formatAmount = (val) =>
+  Number(val) % 1 !== 0 ? Number(val).toFixed(2) : Number(val).toFixed(0);
 
 export function CartPage({
   items = [],
   onChange,
   onShopifyCheckout,
   checkoutLoading = false,
-  checkoutReady,
-  cartData,
 }) {
   const countById = items.reduce((all, item) => {
     if (!item || item.id === undefined) return all;
@@ -22,10 +24,7 @@ export function CartPage({
     })
     .filter(Boolean);
 
-  const subtotal = uniqueItems.reduce((acc, item) => {
-    const itemPrice = Number(item.price || 150);
-    return acc + itemPrice * item.quantity;
-  }, 0);
+  const summary = calculateBagSummary(items);
 
   return (
     <div className="page-cart">
@@ -47,7 +46,7 @@ export function CartPage({
           <div className="empty-cart-state">
             <ShoppingBag className="empty-bag-icon" />
             <h2>YOUR BAG IS WAITING FOR A LITTLE MAHARASHTRA.</h2>
-            <p>Explore our classic Chakli, Bhakarwadi, Shankarpali, and Gift Sets.</p>
+            <p>Explore our classic Chakli, Bhakarwadi, Shankarpada, and Gift Boxes.</p>
             <Link to="/collections" className="hero-button">
               EXPLORE STOREFRONT <ArrowUpRight />
             </Link>
@@ -63,7 +62,8 @@ export function CartPage({
               </div>
 
               {uniqueItems.map((item) => {
-                const itemPrice = Number(item.price || 150);
+                const itemPrice = Number(item.price || UNIT_PRICE);
+                const isPkg = item.id === 'gift-box-pkg' || String(item.variantId).includes('50335097979137');
                 return (
                   <article key={item.id} className="cart-page-item">
                     <div className="cart-item-info">
@@ -71,7 +71,11 @@ export function CartPage({
                       <div>
                         <small>{item.personality || 'MAHARASHTRA CLASSIC'}</small>
                         <h3>
-                          <Link to={`/products/${item.handle || item.id}`}>{item.name}</Link>
+                          {isPkg ? (
+                            <span>{item.name}</span>
+                          ) : (
+                            <Link to={`/products/${item.handle || item.id}`}>{item.name}</Link>
+                          )}
                         </h3>
                         <p className="cart-item-desc">{item.line || item.shortDescription || 'A taste of home.'}</p>
                       </div>
@@ -116,9 +120,23 @@ export function CartPage({
               <h3>ORDER SUMMARY</h3>
 
               <div className="summary-row">
-                <span>SUBTOTAL</span>
-                <b>₹{subtotal.toFixed(0)}</b>
+                <span>SNACK SUBTOTAL ({summary.snackCount})</span>
+                <b>₹{formatAmount(summary.snackSubtotal)}</b>
               </div>
+
+              {summary.packagingCharge > 0 && (
+                <div className="summary-row">
+                  <span>GIFT BOX PACKAGING</span>
+                  <b>₹{formatAmount(summary.packagingCharge)}</b>
+                </div>
+              )}
+
+              {summary.discountAmount > 0 && (
+                <div className="summary-row" style={{ color: 'var(--red, #B8281B)' }}>
+                  <span>AUTO BUNDLE DISCOUNT ({summary.discountPercent}% AT CHECKOUT)</span>
+                  <b>−₹{formatAmount(summary.discountAmount)}</b>
+                </div>
+              )}
 
               <div className="summary-row">
                 <span>SHIPPING</span>
@@ -133,13 +151,15 @@ export function CartPage({
               <div className="summary-divider" />
 
               <div className="summary-total-row">
-                <span>ESTIMATED TOTAL</span>
-                <b>₹{subtotal.toFixed(0)}</b>
+                <span>ESTIMATED CHECKOUT TOTAL</span>
+                <b>₹{formatAmount(summary.finalTotal)}</b>
               </div>
 
               <div className="shopify-trust-box">
                 <ShieldCheck />
-                <p>Secure checkout powered by Shopify.</p>
+                <p>
+                  Secure checkout powered by Shopify. Automatic bundle discounts (10% on 2 items, 15% on 3+ items) apply at checkout.
+                </p>
               </div>
 
               <div className="cart-checkout-actions">

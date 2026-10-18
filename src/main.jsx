@@ -3,8 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import { Header } from './components/Header';
+import { DiwaliDecor } from './components/DiwaliDecor';
+import { FireworksCanvas } from './components/FireworksCanvas';
 import { CartDrawer } from './components/CartDrawer';
-import { GiftBuilder } from './components/GiftBuilder';
 import { SearchModal } from './components/SearchModal';
 
 import { HomePage } from './pages/HomePage';
@@ -30,11 +31,18 @@ import {
   KNOWN_SHOPIFY_VARIANTS,
 } from './lib/shopify';
 import { startRazorpayCheckout } from './lib/razorpay';
-import { products as fallbackProducts } from './data/products';
+import {
+  products as fallbackProducts,
+  UNIT_PRICE,
+  GIFT_PACKAGING_PRICE,
+  getUnitPrice,
+} from './data/products';
 
 import './app.css';
 import './story-pan.css';
 import './origin-art.css';
+import './motion.css';
+import { initMotion } from './motion';
 
 function ScrollToTop() {
   const { pathname, search } = useLocation();
@@ -85,7 +93,6 @@ function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [builderOpen, setBuilderOpen] = useState(false);
   const [toast, setToast] = useState('');
   const [catalog, setCatalog] = useState(fallbackProducts);
   const [cartData, setCartData] = useState(null);
@@ -140,10 +147,10 @@ function App() {
     }
   };
 
-  const handleAddGift = async ({ selected, recipient, note, packaging: giftPackaging }) => {
+  const handleAddGift = async ({ selected, recipient, note, packaging: giftPackaging, attributes: extraAttributes = [] }) => {
     const pkg = giftPackaging || packaging || {
       id: 'gift-box-pkg',
-      price: 99,
+      price: GIFT_PACKAGING_PRICE,
       variantId: KNOWN_SHOPIFY_VARIANTS['zakaas-gift-packaging'],
     };
     const pkgVariantId = resolveShopifyVariantId(pkg);
@@ -155,29 +162,38 @@ function App() {
         { key: 'Gift box', value: 'Build a Box' },
         { key: 'For', value: recipient || 'Gift' },
         ...(note ? [{ key: 'Gift note', value: note }] : []),
+        ...extraAttributes,
       ],
     };
 
+    const groupedSelected = selected.reduce((acc, p) => {
+      const vid = resolveShopifyVariantId(p);
+      const existing = acc.find((line) => line.merchandiseId === vid);
+      if (existing) existing.quantity += 1;
+      else acc.push({ merchandiseId: vid, quantity: 1 });
+      return acc;
+    }, []);
+
     const lines = [
-      ...selected.map((p) => ({ merchandiseId: resolveShopifyVariantId(p), quantity: 1 })),
+      ...groupedSelected,
       packagingLine,
     ];
 
     setItems((prev) => [
       ...prev,
-      ...selected,
+      ...selected.map((p) => ({ ...p, price: getUnitPrice(p) })),
       {
         id: pkg.id || 'gift-box-pkg',
         name: 'ZAKAAS Custom Gift Packaging',
-        price: pkg.price || 99,
+        price: Number(pkg.price) || GIFT_PACKAGING_PRICE,
         image: '/zakaas-logo.png',
         personality: 'CUSTOM GIFT BOX',
         variantId: pkgVariantId,
       },
     ]);
-    setBuilderOpen(false);
     setCartOpen(true);
     showToast('ZAKAAS Gift Box added to bag.');
+    window.dispatchEvent(new CustomEvent('zakaas:fireworks', { detail: { grand: true } }));
 
     if (!shopifyConfigured) return;
 
@@ -201,9 +217,21 @@ function App() {
     if (nextQty < 0) return;
 
     setItems((prev) => {
-      if (delta > 0) return [...prev, product];
-      const idx = prev.findIndex((z) => z.id === product.id);
-      return idx === -1 ? prev : prev.filter((_, i) => i !== idx);
+      if (delta > 0) {
+        const additions = Array.from({ length: delta }, () => ({ ...product }));
+        return [...prev, ...additions];
+      }
+      if (nextQty <= 0) {
+        return prev.filter((z) => z.id !== product.id);
+      }
+      let toRemove = Math.abs(delta);
+      return prev.filter((z) => {
+        if (z.id === product.id && toRemove > 0) {
+          toRemove -= 1;
+          return false;
+        }
+        return true;
+      });
     });
 
     if (!cartData || !shopifyConfigured) return;
@@ -294,7 +322,7 @@ function App() {
       return;
     }
 
-    const totalAmount = items.reduce((sum, item) => sum + Number(item.price || 150), 0);
+    const totalAmount = items.reduce((sum, item) => sum + Number(item.price || UNIT_PRICE), 0);
 
     setCheckoutLoading(true);
     showToast('Opening payment gateway…');
@@ -328,6 +356,8 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <DiwaliDecor />
+      <FireworksCanvas />
 
       <Header
         cartCount={items.length}
@@ -345,7 +375,6 @@ function App() {
               catalog={catalog}
               products={catalog}
               onAdd={handleAdd}
-              onBuildBox={() => setBuilderOpen(true)}
               live={shopifyConfigured}
               cartData={cartData}
             />
@@ -412,14 +441,6 @@ function App() {
         checkoutLoading={checkoutLoading}
       />
 
-      <GiftBuilder
-        open={builderOpen}
-        onClose={() => setBuilderOpen(false)}
-        products={catalog}
-        packaging={packaging}
-        onAddGift={handleAddGift}
-      />
-
       <SearchModal
         open={searchOpen}
         onClose={() => setSearchOpen(false)}
@@ -431,9 +452,16 @@ function App() {
         onClose={() => setPaymentSuccess(null)}
       />
 
-      {toast && <div className="toast">{toast}</div>}
+      {toast && (
+        <div className="toast toast-diwali">
+          <span className="toast-spark" aria-hidden="true">✦</span>
+          <span>{toast}</span>
+          <span className="toast-spark" aria-hidden="true">✦</span>
+        </div>
+      )}
     </BrowserRouter>
   );
 }
 
 createRoot(document.getElementById('root')).render(<App />);
+initMotion();

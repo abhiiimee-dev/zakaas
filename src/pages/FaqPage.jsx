@@ -16,36 +16,36 @@ export function FaqPage() {
       items: [
         {
           q: "Are ZAKAAS snacks made with authentic Maharashtrian recipes?",
-          a: "Yes! All ZAKAAS recipes are developed directly from traditional family kitchen methods in Pune, Kolhapur, and Mumbai, preserving authentic spice ratios and hand-crafting techniques."
+          a: "Yes! All ZAKAAS snacks are crafted in small batches by Bharat Namkeen (Marketed by ZAKAAS, FSSAI Lic. No. 10021021000754), preserving traditional Maharashtrian spice ratios and textures."
         },
         {
-          q: "What oil do you use for frying?",
-          a: "We fry exclusively in high-grade groundnut (peanut) oil and pure ghee (for Shankarpali). We never use palm oil or re-heated commercial vegetable oil blends."
+          q: "What flours, oils, and spices are used in each snack?",
+          a: "Every pouch lists its exact recipe on the back label: Chakli is made with wheat flour (atta), sesame seeds (til), cumin, carom seeds (ajwain), red chili, and turmeric in edible vegetable oil (no palm oil). Bhakarwadi is rolled with refined wheat flour (maida) and Bengal gram flour (besan), filled with sesame, fennel, ajowan, amchur, red chilli, and whole spices, and fried in refined palmolein oil. Shankarpada is made with refined wheat flour (maida, 72%), edible vegetable oil (palm oil, 16%), refined sugar (8%), and hydrogenated vegetable fat. None of our snacks use artificial flavours, artificial colours, or added preservatives."
         },
         {
-          q: "How long do ZAKAAS snacks remain fresh?",
-          a: "Unopened ZAKAAS packs maintain guaranteed crispness and flavor for 60 to 90 days from the date of manufacture. Once opened, store in an airtight container."
+          q: "How should I store ZAKAAS snacks for maximum freshness?",
+          a: "Store in a cool, dry place and keep the pouch sealed after opening (or transfer to an airtight tin) to maintain crispness. Please refer to the MFG. DATE, EXP. DATE, and BATCH NO. printed on each pack."
         },
         {
           q: "Are your products 100% vegetarian?",
-          a: "Yes, 100% pure vegetarian (Jain option details available upon bulk request for specific non-garlic/non-onion variants)."
+          a: "Yes, all ZAKAAS products are 100% vegetarian. Please check each product page for specific allergen information (such as wheat/gluten and sesame)."
         }
       ]
     },
     {
-      title: "ORDERS & PAYMENTS",
+      title: "GIFT BOXES, ORDERS & PAYMENTS",
       items: [
         {
+          q: "What gift box sizes and discounts are available?",
+          a: "In our Gift Box Builder (/builder), you can curate The Trio Box (3 × 100g packs) or The Grand Box (6 × 100g packs) with custom festive sleeve art and a printed greeting card (+₹99 packaging charge). When you order 3 or more packs (including any 3-pack or 6-pack gift box), an automatic 15% bundle discount is applied at Shopify checkout."
+        },
+        {
           q: "How do I place an order on the ZAKAAS store?",
-          a: "Simply browse our storefront, add your chosen snack packs or gift boxes to your bag, and click 'Continue to Checkout'. Checkout is securely processed via Shopify."
+          a: "Simply browse our storefront, add your chosen 100g snack pouches (₹180 each) or custom gift box to your bag, and click 'Continue to Shopify Checkout'."
         },
         {
           q: "What payment methods are supported?",
           a: "Through Shopify Checkout, we support Credit/Debit Cards, UPI (GPay, PhonePe, Paytm), Net Banking, and select wallets."
-        },
-        {
-          q: "Can I modify or cancel my order after placing it?",
-          a: "Orders are processed swiftly within 12 hours. If you need to make changes, contact us immediately at hello@zakaas.in or via WhatsApp with your order number."
         }
       ]
     },
@@ -54,7 +54,7 @@ export function FaqPage() {
       items: [
         {
           q: "Where does ZAKAAS deliver?",
-          a: "We ship across India to all major pin codes! For international shipping or custom gift exports, please contact our B2B team."
+          a: "We ship across India to all major pin codes! For bulk or corporate orders, please visit our B2B page."
         },
         {
           q: "How long does shipping take?",
@@ -62,7 +62,7 @@ export function FaqPage() {
         },
         {
           q: "How are the delicate snacks protected during transport?",
-          a: "Our snacks are packed in nitrogen-flushed, moisture-barrier pouches and enclosed inside rigid protective boxes to prevent crushing or crumbling during transit."
+          a: "Our snacks are sealed in moisture-barrier pouches and packed inside protective outer cartons to prevent crushing during transit."
         }
       ]
     },
@@ -84,7 +84,7 @@ export function FaqPage() {
       items: [
         {
           q: "Do you offer corporate gifting and custom boxes?",
-          a: "Yes! We specialize in custom brass-finish and khadi-textured gift boxes for weddings, Diwali, corporate appreciation, and events."
+          a: "Yes! We specialize in custom festive gift boxes for weddings, Diwali, corporate appreciation, and events."
         },
         {
           q: "How do I get a bulk quote?",
@@ -99,7 +99,7 @@ export function FaqPage() {
   return (
     <div className="page-faq">
       <div className="faq-hero">
-        <p className="kicker">01 / QUESTIONS & ANSWERS</p>
+        <p className="kicker">01 / QUESTIONS &amp; ANSWERS</p>
         <h1>
           <span>FREQUENTLY</span>
           <em>ASKED QUESTIONS.</em>

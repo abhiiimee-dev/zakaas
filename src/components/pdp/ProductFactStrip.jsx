@@ -1,9 +1,15 @@
-export function ProductFactStrip() {
+export function ProductFactStrip({ product }) {
+  const handle = (product?.handle || product?.id || '').toLowerCase();
+  const isBhakarwadiOrShankarpada =
+    handle.includes('bhakarwadi') || handle.includes('shankarp');
+
   const facts = [
-    { value: '100G', label: 'NET QUANTITY' },
-    { value: 'TRADITIONAL', label: 'BHAJAN FLOUR RECIPE' },
-    { value: 'FRESHLY PACKED', label: 'SMALL BATCHES' },
-    { value: '100% VEG', label: 'PURE VEGETARIAN' },
+    { value: '100G', label: 'NET WEIGHT' },
+    { value: 'ROASTED', label: 'BHAJAN FLOUR' },
+    ...(!isBhakarwadiOrShankarpada
+      ? [{ value: 'COLD-PRESSED', label: 'GROUNDNUT OIL' }]
+      : []),
+    { value: 'WHOLE', label: 'CUMIN & AJWAIN' },
     { value: 'NO ADDED', label: 'PRESERVATIVES' }
   ];
 

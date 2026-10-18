@@ -1,11 +1,13 @@
-export function PackSelector({ options = [], selectedOptionId, onSelect }) {
+import { UNIT_PRICE } from '../../data/products';
+
+export function PackSelector({ options = [], selectedOptionId, onSelect, unitPrice = UNIT_PRICE }) {
   if (!options || options.length === 0) return null;
 
   return (
     <div className="zakaas-pack-selector">
       <div className="pack-selector-label-row">
         <span className="pack-select-heading">SELECT QUANTITY</span>
-        <span className="pack-unit-price">₹150 / 100g pack</span>
+        <span className="pack-unit-price">₹{unitPrice} / 100g pack</span>
       </div>
 
       <div className="pack-options-row" role="radiogroup" aria-label="Pack options">
@@ -36,7 +38,9 @@ export function PackSelector({ options = [], selectedOptionId, onSelect }) {
                 <span className="pack-mrp-price">₹{opt.mrp}</span>
               </div>
 
-              <span className="pack-savings-note">Save ₹{opt.savings}</span>
+              <span className="pack-savings-note">
+                {opt.packCount >= 3 ? `Save ₹${opt.savings} + 15% at checkout` : `Save ₹${opt.savings}`}
+              </span>
             </button>
           );
         })}

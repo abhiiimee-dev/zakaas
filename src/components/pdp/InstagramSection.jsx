@@ -27,7 +27,7 @@ export const ZAKAAS_REELS = [
     image: '/reels/reel-3.jpg',
     duration: '0:18',
     url: 'https://www.instagram.com/p/DdRp04iPbUg/',
-    caption: 'Festive snacking traditions — pure Bhajan flour Chakli, Shankarpali & Bhakarwadi.'
+    caption: 'Festive snacking traditions — crisp Chakli, spicy Bhakarwadi & sweet Shankarpada.'
   }
 ];
 

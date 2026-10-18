@@ -2,7 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowUpRight, Check, Minus, Plus, ChevronRight } from 'lucide-react';
 import { getProductByHandle } from '../lib/shopify';
-import { getFallbackProductByHandle } from '../data/products';
+import {
+  getFallbackProductByHandle,
+  getUnitPrice,
+  getUnitMrp,
+  buildPackOptions,
+} from '../data/products';
 import { Footer } from '../components/Footer';
 
 import { ProductGallery } from '../components/pdp/ProductGallery';
@@ -19,10 +24,11 @@ export function ProductDetailPage({ onAdd, cartData }) {
   const { handle } = useParams();
   const navigate = useNavigate();
 
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const initialProduct = getFallbackProductByHandle(handle);
+  const [product, setProduct] = useState(initialProduct);
+  const [loading, setLoading] = useState(!initialProduct);
   const [selectedImage, setSelectedImage] = useState(0);
-  const [selectedPack, setSelectedPack] = useState(null);
+  const [selectedPack, setSelectedPack] = useState(initialProduct?.packOptions?.[0] || null);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const [showStickyCta, setShowStickyCta] = useState(false);
@@ -31,27 +37,26 @@ export function ProductDetailPage({ onAdd, cartData }) {
 
   useEffect(() => {
     let isMounted = true;
-    setLoading(true);
+    const fallback = getFallbackProductByHandle(handle);
+    setProduct(fallback);
+    setSelectedImage(0);
+    setQuantity(1);
+    if (fallback?.packOptions?.length) {
+      setSelectedPack(fallback.packOptions[0]);
+    }
+    setLoading(false);
 
     getProductByHandle(handle)
       .then((data) => {
-        if (!isMounted) return;
-        const resolved = data || getFallbackProductByHandle(handle);
-        setProduct(resolved);
-        if (resolved?.packOptions?.length) {
-          setSelectedPack(resolved.packOptions[0]);
+        if (!isMounted || !data) return;
+        setProduct(data);
+        if (data?.packOptions?.length) {
+          setSelectedPack((prev) =>
+            data.packOptions.find((p) => p.id === prev?.id) || data.packOptions[0]
+          );
         }
-        setLoading(false);
       })
-      .catch(() => {
-        if (!isMounted) return;
-        const resolved = getFallbackProductByHandle(handle);
-        setProduct(resolved);
-        if (resolved?.packOptions?.length) {
-          setSelectedPack(resolved.packOptions[0]);
-        }
-        setLoading(false);
-      });
+      .catch(() => {});
 
     window.scrollTo(0, 0);
     return () => {
@@ -94,58 +99,30 @@ export function ProductDetailPage({ onAdd, cartData }) {
   }
 
   const images = product.images?.length ? product.images : [product.image];
-  const packOptions = product.packOptions?.length ? product.packOptions : [
-    {
-      id: 'pack-1',
-      packCount: 1,
-      title: '1 PACK',
-      weight: '100g',
-      mrp: 199,
-      price: 150,
-      savings: 49,
-      badge: null,
-      variantId: product.variantId
-    },
-    {
-      id: 'pack-3',
-      packCount: 3,
-      title: '3 PACKS',
-      weight: '300g',
-      mrp: 597,
-      price: 450,
-      savings: 147,
-      badge: 'BEST SELLER',
-      variantId: product.variantId
-    },
-    {
-      id: 'pack-5',
-      packCount: 5,
-      title: '5 PACKS',
-      weight: '500g',
-      mrp: 995,
-      price: 750,
-      savings: 245,
-      badge: null,
-      variantId: product.variantId
-    }
-  ];
+  const baseUnitPrice = getUnitPrice(product);
+  const baseUnitMrp = getUnitMrp(product);
+  const packOptions = product.packOptions?.length
+    ? product.packOptions
+    : buildPackOptions(baseUnitPrice, baseUnitMrp, product.variantId);
 
   const currentPack = selectedPack || packOptions[0];
-  const unitPrice = currentPack?.price || 150;
-  const unitMrp = currentPack?.mrp || 199;
+  const packPrice = Number(currentPack?.price) || baseUnitPrice;
+  const packMrp = Number(currentPack?.mrp) || baseUnitMrp;
+  const packCount = Number(currentPack?.packCount) || 1;
 
   const handleAddToCart = () => {
-    const itemToAdd = {
+    const totalPouches = packCount * quantity;
+    const baseItem = {
       ...product,
-      id: `${product.id}-${currentPack.id}`,
+      id: product.handle || product.id,
       variantId: currentPack.variantId || product.variantId,
-      price: unitPrice,
-      mrp: unitMrp,
-      name: `${product.name} (${currentPack.title} · ${currentPack.weight})`,
-      quantity: 1
+      price: baseUnitPrice,
+      mrp: baseUnitMrp,
+      name: product.name,
+      quantity: 1,
     };
 
-    onAdd(itemToAdd, quantity);
+    onAdd(baseItem, totalPouches);
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   };
@@ -186,13 +163,21 @@ export function ProductDetailPage({ onAdd, cartData }) {
         <div className="pdp-hero-info-col">
           <h1 className="product-title">{product.name}</h1>
 
+          {/* Verified Buyer Star Rating */}
+          <div className="product-review-badge" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+            <div className="stars" style={{ color: 'var(--red, #B8281B)', display: 'flex', gap: '2px' }}>
+              {'★★★★★'.split('').map((star, i) => <span key={i}>{star}</span>)}
+            </div>
+            <span style={{ fontSize: '12px', fontWeight: 'bold', color: 'rgba(26, 24, 21, 0.8)', fontFamily: 'var(--font-mono)' }}>4.9/5 (120+ REVIEWS)</span>
+          </div>
+
           <p className="product-summary">
-            {product.shortDescription || 'Crisp, savoury Maharashtrian chakli made with traditional bhajan flour, cumin and ajwain.'}
+            {product.shortDescription || product.description}
           </p>
 
           <div className="product-pricing-line">
-            <span className="current-price">₹{unitPrice}</span>
-            <span className="original-mrp">MRP ₹{unitMrp}</span>
+            <span className="current-price">₹{packPrice}</span>
+            <span className="original-mrp">MRP ₹{packMrp}</span>
             <span className="pack-weight-indicator">{currentPack.weight}</span>
           </div>
 
@@ -201,6 +186,7 @@ export function ProductDetailPage({ onAdd, cartData }) {
             options={packOptions}
             selectedOptionId={currentPack.id}
             onSelect={(pack) => setSelectedPack(pack)}
+            unitPrice={baseUnitPrice}
           />
 
           {/* 01. Buy Now (Placed Above Add to Bag) */}
@@ -243,27 +229,35 @@ export function ProductDetailPage({ onAdd, cartData }) {
                 </>
               ) : (
                 <>
-                  ADD TO BAG — ₹{unitPrice * quantity}
+                  ADD TO BAG — ₹{packPrice * quantity}
                 </>
               )}
             </button>
           </div>
 
-          {/* Delivery Note */}
-          <p className="delivery-simple-note">
-            Standard delivery in 3–5 business days across India. Cash on Delivery available.
-          </p>
+          {/* Delivery & Trust Note */}
+          <div className="delivery-simple-note" style={{ marginTop: '24px', padding: '16px', backgroundColor: '#FDF1EC', border: '1.5px solid var(--charcoal, #1A1815)', borderRadius: '6px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+              <span style={{ width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'var(--ochre, #D9822B)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Check size={12} color="#fff" strokeWidth={3} />
+              </span>
+              <span style={{ fontSize: '12px', fontWeight: 'bold', fontFamily: 'var(--font-mono)' }}>FRESHLY FRIED IN SMALL BATCHES</span>
+            </div>
+            <p style={{ fontSize: '13px', lineHeight: '1.5', margin: 0, color: 'rgba(26, 24, 21, 0.8)' }}>
+              Standard delivery in 3–5 business days across India. Automatic 15% multi-pack discount applies at Shopify checkout on 3+ packs.
+            </p>
+          </div>
         </div>
       </div>
 
       {/* 02. Product Facts Strip */}
-      <ProductFactStrip />
+      <ProductFactStrip product={product} />
 
-      {/* 03. What's In The Crunch (Single Visual Composition) */}
-      <IngredientStorySection />
+      {/* 03. What's In The Crunch (Product-Specific Ingredients) */}
+      <IngredientStorySection product={product} />
 
       {/* 04. Nutrition & Product Details */}
-      <ProductDetailsSection selectedPack={currentPack} />
+      <ProductDetailsSection product={product} selectedPack={currentPack} />
 
       {/* 05. Real Zakaas Content (Zakaas, IRL) */}
       <InstagramSection />
@@ -272,7 +266,7 @@ export function ProductDetailPage({ onAdd, cartData }) {
       <StickyMobileCTA
         productName={product.name}
         selectedPack={currentPack}
-        price={unitPrice * quantity}
+        price={packPrice * quantity}
         added={added}
         onAddToCart={handleAddToCart}
         visible={showStickyCta}

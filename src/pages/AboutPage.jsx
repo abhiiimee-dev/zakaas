@@ -12,7 +12,7 @@ export function AboutPage() {
           <div className="about-hero-wash" />
         </div>
         <div className="about-hero-content">
-          <p className="kicker">01 / OUR STORY & PURPOSE</p>
+          <p className="kicker">01 / OUR STORY &amp; PURPOSE</p>
           <h1>
             <span>ROOTED IN</span>
             <em>MAHARASHTRA.</em>
@@ -33,12 +33,12 @@ export function AboutPage() {
               ZAKAAS was born out of a quiet frustration: Maharashtrian snacks were either reduced to generic, machine-mashed store treats or diluted into bland corporate packs.
             </p>
             <p>
-              We set out to protect the bold, fiery, warm flavor signatures of Maharashtra — the exact poppy-seed spice mix of Pune’s Bhakarwadi, the aromatic cumin-ajwain crunch of classic Chakli, and the golden, ghee-rich flake of traditional Shankarpali.
+              We set out to protect the bold, fiery, warm flavour signatures of Maharashtra — the tangy-sweet and spicy 10-spice roll of Pune’s Bhakarwadi, the aromatic cumin-ajwain and sesame crunch of classic Chakli, and the golden, flaky diamond bite of festive Shankarpada.
             </p>
           </div>
           <div className="chapter-image">
             <img src="/zakaas-home-kitchen.png" alt="Maharashtrian women rolling traditional snacks" />
-            <div className="image-caption">HAND-ROLLED SPIRALS & TRADITIONAL MASALAS IN OUR KITCHEN</div>
+            <div className="image-caption">HAND-ROLLED SPIRALS &amp; TRADITIONAL MASALAS IN OUR KITCHEN</div>
           </div>
         </div>
       </section>
@@ -55,14 +55,14 @@ export function AboutPage() {
             </div>
             <div className="city-pillar">
               <b>PUNE</b>
-              <p>The epicentre of Bhakarwadi precision. Sweet, spicy, and fiercely proud of its culinary heritage.</p>
+              <p>The epicentre of Bhakarwadi precision. Sweet, tangy, spicy, and fiercely proud of its culinary heritage.</p>
             </div>
             <div className="city-pillar">
               <b>KOLHAPUR</b>
-              <p>Uncompromising heat, rich groundnut oil aroma, and bold flavor that makes no apologies.</p>
+              <p>Uncompromising heat, roasted whole-spice aroma, and bold flavour that makes no apologies.</p>
             </div>
             <div className="city-pillar">
-              <b>NASHIK & NAGPUR</b>
+              <b>NASHIK &amp; NAGPUR</b>
               <p>Festive hospitality, endless tea tins, and recipes passed down through generations.</p>
             </div>
           </div>
@@ -77,20 +77,20 @@ export function AboutPage() {
           <div className="craft-grid">
             <article>
               <span>01 / INGREDIENTS</span>
-              <h3>PURE GROUNDNUT OIL & REAL SPICES</h3>
-              <p>We use cold-pressed groundnut oil, freshly roasted poppy seeds, sesame, and ajwain. Never palm oil, never synthetic powders.</p>
+              <h3>WHOLE SPICES &amp; HONEST RECIPES</h3>
+              <p>We use toasted sesame seeds, cumin, carom seeds (ajwain), fennel, tangy amchur, and warm whole spices with no artificial colours or added preservatives.</p>
             </article>
 
             <article>
               <span>02 / TECHNIQUE</span>
-              <h3>HAND-ROLLED & DOUGH-LOVED</h3>
-              <p>Each Bhakarwadi is rolled by hand to build tight, spice-filled spiral layers that hold together through frying.</p>
+              <h3>HAND-ROLLED &amp; DOUGH-LOVED</h3>
+              <p>Each Bhakarwadi is rolled to build tight, spice-filled spiral layers, while every Chakli and Shankarpada is shaped for an even, golden crunch.</p>
             </article>
 
             <article>
               <span>03 / FRESHNESS</span>
               <h3>MOISTURE-PROOF SEALING</h3>
-              <p>Packed immediately upon cooling in metallic foil pouches so you experience the crunch as if fried an hour ago.</p>
+              <p>Packed immediately upon cooling in 100g resealable pouches so you experience the crunch and spice aroma fresh in every bite.</p>
             </article>
           </div>
         </div>
@@ -106,7 +106,7 @@ export function AboutPage() {
               SHOP STOREFRONT <ArrowUpRight />
             </Link>
             <Link to="/b2b" className="light-button">
-              BULK & B2B ENQUIRIES <ArrowUpRight />
+              BULK &amp; B2B ENQUIRIES <ArrowUpRight />
             </Link>
           </div>
         </div>

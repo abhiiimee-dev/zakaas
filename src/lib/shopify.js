@@ -1,6 +1,12 @@
 // Shopify Storefront API adapter. Public storefront tokens are safe to use in client apps;
 // never place Admin API credentials here.
-import { products as fallbackProducts, getFallbackProductByHandle } from '../data/products';
+import {
+  products as fallbackProducts,
+  getFallbackProductByHandle,
+  UNIT_PRICE,
+  UNIT_MRP,
+  buildPackOptions,
+} from '../data/products';
 
 const domain = import.meta.env.VITE_SHOPIFY_STORE_DOMAIN;
 const token = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
@@ -71,6 +77,12 @@ function toProduct(product, index = 0) {
   const variant = product.variants?.nodes?.[0];
   const fallback = getFallbackProductByHandle(product.handle) || fallbackProducts[index % fallbackProducts.length] || {};
   const activeVariantId = variant?.id || resolveShopifyVariantId(product.handle) || fallback.variantId;
+  const liveUnitPrice = Number(variant?.price?.amount || fallback.price || UNIT_PRICE);
+  const liveUnitMrp = Number(fallback.mrp || UNIT_MRP);
+
+  const rawImages = (product.images?.nodes || [])
+    .map(i => i.url)
+    .filter(url => url && !url.includes('WhatsApp_Image_2026-09-25_at_7.54.18_PM_1.jpg'));
 
   return {
     ...fallback,
@@ -78,39 +90,33 @@ function toProduct(product, index = 0) {
     handle: product.handle || fallback.handle,
     variantId: activeVariantId,
     name: product.title || fallback.name,
-    description: product.description || fallback.description,
+    description: fallback.description || product.description,
     shortDescription: fallback.shortDescription || product.description,
     line: fallback.line || product.description,
     personality: fallback.personality || 'MAHARASHTRA ORIGINAL',
-    price: variant?.price?.amount || fallback.price || '150',
-    mrp: fallback.mrp || '199',
+    price: String(liveUnitPrice),
+    mrp: String(liveUnitMrp),
     currencyCode: variant?.price?.currencyCode || fallback.currencyCode || 'INR',
-    image: product.featuredImage?.url || fallback.image || ['/zakaas-bhakarwadi.jpg','/zakaas-chakli.jpg','/zakaas-shankarpali.jpg'][index % 3],
-    images: product.images?.nodes?.map(i => i.url).filter(Boolean).length 
-      ? product.images.nodes.map(i => i.url) 
-      : (fallback.images || [fallback.image]),
+    image: product.featuredImage?.url || rawImages[0] || fallback.image,
+    images: rawImages.length ? rawImages : (fallback.images || [fallback.image]),
     trustClaims: fallback.trustClaims || [],
     highlights: fallback.highlights || [],
-    packOptions: (fallback.packOptions || []).map(opt => ({
-      ...opt,
-      variantId: activeVariantId,
-    })),
+    packOptions: buildPackOptions(liveUnitPrice, liveUnitMrp, activeVariantId),
     ingredients: fallback.ingredients,
     allergenInfo: fallback.allergenInfo,
     shelfLife: fallback.shelfLife,
     origin: fallback.origin,
     manufacturingInfo: fallback.manufacturingInfo,
-    variants: product.variants?.nodes?.map(v => ({
-      id: v.id,
-      title: v.title,
-      price: v.price?.amount,
-      currencyCode: v.price?.currencyCode || 'INR',
-      variantId: v.id,
-      availableForSale: v.availableForSale ?? true
-    })) || (fallback.variants || []).map(v => ({
-      ...v,
+    variants: buildPackOptions(liveUnitPrice, liveUnitMrp, activeVariantId).map(opt => ({
+      id: `${product.handle || fallback.id}-${opt.id}`,
+      title: `${opt.title} (${opt.weight})`,
+      price: String(opt.price),
+      mrp: String(opt.mrp),
+      currencyCode: variant?.price?.currencyCode || 'INR',
       variantId: activeVariantId,
-    }))
+      packCount: opt.packCount,
+      availableForSale: variant?.availableForSale ?? true,
+    })),
   };
 }
 

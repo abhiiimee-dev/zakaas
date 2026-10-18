@@ -1,0 +1,120 @@
+/* ZAKAAS motion layer — transform/opacity only, short, eased. */
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-base: 420ms;
+  --dur-slow: 700ms;
+}
+
+/* Scroll reveals (only when JS flagged html.motion-ready) */
+.motion-ready [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  transition-delay: calc(var(--reveal-i, 0) * 70ms);
+  will-change: opacity, transform;
+}
+.motion-ready [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* Image reveal: gentle settle inside its frame */
+.motion-ready .gift-teaser-media[data-reveal] img,
+.motion-ready .community-card[data-reveal] img {
+  transform: scale(1.06);
+  transition: transform 1100ms var(--ease-out);
+}
+.motion-ready .gift-teaser-media.is-revealed img,
+.motion-ready .community-card.is-revealed img {
+  transform: scale(1);
+}
+
+/* Hero entrance — one calm sequence on load */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-content > * {
+    animation: zkRise 800ms var(--ease-out) both;
+  }
+  .hero-content > :nth-child(2) { animation-delay: 90ms; }
+  .hero-content > :nth-child(3) { animation-delay: 180ms; }
+  .hero-content > :nth-child(4) { animation-delay: 270ms; }
+  .hero-content > :nth-child(5) { animation-delay: 360ms; }
+  .hero-meta { animation: zkFade 900ms var(--ease-out) 500ms both; }
+}
+@keyframes zkRise {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes zkFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Route transition: soft fade-in of the page */
+.page-home {
+  animation: zkFade 360ms var(--ease-out) both;
+}
+
+/* Header */
+.site-header { transition: box-shadow var(--dur-base) var(--ease-out); }
+.site-header.is-scrolled { box-shadow: 0 6px 18px -12px rgba(23, 23, 20, 0.45); }
+
+/* Nav underline draws in on hover */
+.site-header nav a { position: relative; }
+.site-header nav a:not(.is-active)::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.site-header nav a:not(.is-active):hover::after,
+.site-header nav a:not(.is-active):focus-visible::after { transform: scaleX(1); }
+
+/* Product card: image lifts, title underline */
+.zakaas-anti-card .anti-pouch-img {
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.zakaas-anti-card:hover .anti-pouch-img { transform: scale(1.03); }
+
+/* CTA feedback: tactile press + arrow nudge */
+.hero-button, .hero-button-ghost, .gift-teaser-cta, .b2b-strip-link,
+.product-buy-now-btn, .pdp-buy-now-btn, .add-box-to-bag-btn {
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease;
+}
+.hero-button:active, .hero-button-ghost:active, .gift-teaser-cta:active,
+.product-buy-now-btn:active, .pdp-buy-now-btn:active, .add-box-to-bag-btn:active {
+  transform: translateY(1px) scale(0.985);
+}
+.hero-button svg, .hero-button-ghost svg, .gift-teaser-cta svg, .b2b-strip-link svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.hero-button:hover svg, .hero-button-ghost:hover svg,
+.gift-teaser-cta:hover svg, .b2b-strip-link:hover svg { transform: translateX(4px); }
+
+/* Visible focus without motion dependence */
+:focus-visible { outline-offset: 3px; }
+
+/* Reduced motion: strip everything non-essential */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  .reviews-marquee-track { animation: none !important; overflow-x: auto; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+}

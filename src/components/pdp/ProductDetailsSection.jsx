@@ -1,20 +1,25 @@
-export function ProductDetailsSection({ selectedPack }) {
+export function ProductDetailsSection({ product, selectedPack }) {
   const netQty = selectedPack
     ? `${selectedPack.weight} (${selectedPack.title})`
     : '100g (1 PACK)';
 
-  const nutritionTable = [
-    { label: 'Energy', val: '524 kcal' },
-    { label: 'Protein', val: '9.8 g' },
-    { label: 'Carbohydrates', val: '54.2 g' },
-    { label: 'Total Sugars', val: '1.4 g' },
-    { label: 'Added Sugars', val: '0 g' },
-    { label: 'Total Fat', val: '30.1 g' },
-    { label: 'Saturated Fat', val: '6.2 g' },
-    { label: 'Trans Fat', val: '0 g' },
-    { label: 'Dietary Fibre', val: '6.4 g' },
-    { label: 'Sodium', val: '580 mg' }
-  ];
+  const nutritionTable = product?.nutritionFacts?.length
+    ? product.nutritionFacts.map((row) => ({
+        label: row.nutrient || row.label,
+        val: row.value || row.val,
+      }))
+    : [
+        { label: 'Energy', val: '530 kcal' },
+        { label: 'Protein', val: '7.1 g' },
+        { label: 'Total Fat', val: '28.5 g' },
+        { label: 'Saturated Fat', val: '8.2 g' },
+        { label: 'Carbohydrate', val: '60.6 g' },
+        { label: 'Sugars', val: '2.3 g' },
+        { label: 'Dietary Fibre', val: '6 g' },
+        { label: 'Sodium', val: '474 mg' }
+      ];
+
+  const mfg = product?.manufacturingInfo || {};
 
   return (
     <section className="zakaas-product-specs-section" aria-label="Product details and nutrition">
@@ -45,7 +50,8 @@ export function ProductDetailsSection({ selectedPack }) {
           </table>
 
           <p className="specs-nutrition-footnote">
-            Standard laboratory analysis. Prepared with traditional roasted grains, whole spices, and cold-pressed peanut oil without hydrogenated fats.
+            {product?.nutritionFootnote ||
+              'Nutritional values per 100 g approx. as printed on the ZAKAAS product label.'}
           </p>
         </div>
 
@@ -59,16 +65,12 @@ export function ProductDetailsSection({ selectedPack }) {
           <dl className="specs-data-list">
             <div className="data-row">
               <dt>INGREDIENTS</dt>
-              <dd>
-                Roasted Rice flour, Chana dal flour (Bhajan flour), White sesame seeds (Til), Ajwain seeds, Cumin seeds, Red chilli powder, Asafoetida (Hing), Salt, Cold-pressed peanut oil.
-              </dd>
+              <dd>{product?.ingredients}</dd>
             </div>
 
             <div className="data-row">
               <dt>ALLERGEN INFORMATION</dt>
-              <dd>
-                Contains Sesame and Peanuts. Processed in a facility that also handles wheat and tree nuts.
-              </dd>
+              <dd>{product?.allergenInfo}</dd>
             </div>
 
             <div className="data-row">
@@ -79,18 +81,19 @@ export function ProductDetailsSection({ selectedPack }) {
             <div className="data-row">
               <dt>STORAGE & SHELF LIFE</dt>
               <dd>
-                90 Days from packaging date. Store in an airtight container away from heat, moisture, and direct sunlight to maintain crispness.
+                {mfg.storageInstructions || 'Store in a cool, dry place. Keep sealed to maintain freshness.'}{' '}
+                {mfg.shelfLife || product?.shelfLife || 'Refer to MFG. DATE and EXP. DATE printed on the pack.'}
               </dd>
             </div>
 
             <div className="data-row">
               <dt>FOOD CATEGORY</dt>
-              <dd>Ready to Eat Traditional Savouries</dd>
+              <dd>{mfg.foodCategory || 'Ready to Eat Traditional Savouries'}</dd>
             </div>
 
             <div className="data-row">
               <dt>COUNTRY OF ORIGIN</dt>
-              <dd>India</dd>
+              <dd>{mfg.countryOfOrigin || 'India'}</dd>
             </div>
 
             <div className="data-row manufacturer-row">

@@ -1,7 +1,8 @@
 import { ArrowUpRight, Check, ChevronLeft, ChevronRight, Minus, Plus } from 'lucide-react';
 import { useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { products as fallbackProducts } from '../data/products';
+import { products as fallbackProducts, getUnitPrice, getUnitMrp } from '../data/products';
+import { Diya, Kandil } from './DiwaliArt';
 
 const tones = ['terracotta', 'ochre-deep', 'maroon'];
 const crops = ['50% 32%', '35% 65%', '65% 60%'];
@@ -21,10 +22,10 @@ const productPersonalities = {
 };
 
 const productSubtitles = {
-  chakli: 'Slow-roasted multigrain flour with brittle cumin ridges and aromatic ajwain crunch.',
-  bhakarwadi: 'Crisp fried rolls packed with roasted coconut, poppy seeds, and spicy warmth.',
-  shankarpali: 'Golden sweet flaky diamonds handcrafted with pure desi ghee and cardamom.',
-  shankarpada: 'Golden sweet flaky diamonds handcrafted with pure desi ghee and cardamom.'
+  chakli: 'Crisp golden spirals made with wheat flour, white sesame seeds, cumin, and ajwain.',
+  bhakarwadi: 'Crispy layered maida & besan pinwheels rolled with tangy amchur, sesame, fennel, and warm spices.',
+  shankarpali: 'Crisp, golden diamond-cut sweet bites crafted with refined wheat flour and balanced sweetness.',
+  shankarpada: 'Crisp, golden diamond-cut sweet bites crafted with refined wheat flour and balanced sweetness.'
 };
 
 const productFrames = product => {
@@ -108,10 +109,8 @@ function ProductCard({ product, index, onAdd, onFly, cartData }) {
   const personality = productPersonalities[normalizedKey] || product.personality || 'THE CRUNCHY ONE';
   const descriptionText = productSubtitles[normalizedKey] || productSubtitles[product.id] || product.shortDescription || product.line || 'Traditional Maharashtrian snack.';
   const primaryImage = frames[0]?.image || product.image || '/zakaas-chakli.jpg';
-  const unitPrice = Number(product.price) || 150;
-  const unitMrp = (product.mrp && Number(product.mrp) > unitPrice) 
-    ? Number(product.mrp) 
-    : Math.round(unitPrice * 1.25);
+  const unitPrice = getUnitPrice(product);
+  const unitMrp = getUnitMrp(product);
   const toneClass = tones[index % tones.length];
 
   return (
@@ -266,8 +265,25 @@ export function ProductSection({ onAdd, products = fallbackProducts, live = fals
 
   return (
     <section className="products-section zakaas-anti-section" id="shop">
+      {/* Hanging Maharashtrian Akash Kandil Lanterns */}
+      <div className="shop-kandil shop-kandil-left" aria-hidden="true">
+        <Kandil variant="crimson" />
+      </div>
+      <div className="shop-kandil shop-kandil-right" aria-hidden="true">
+        <Kandil variant="gold" />
+      </div>
+
       {/* Editorial Header */}
       <div className="zakaas-anti-header">
+        <div className="diwali-section-crest" aria-hidden="true">
+          <span className="crest-line" />
+          <span className="crest-star">✦</span>
+          <div className="crest-diya"><Diya /></div>
+          <div className="crest-diya crest-diya-center"><Diya /></div>
+          <div className="crest-diya"><Diya /></div>
+          <span className="crest-star">✦</span>
+          <span className="crest-line" />
+        </div>
         <span className="zakaas-anti-brand-label">ZAKAAS {live && '· LIVE FROM SHOPIFY'}</span>
         <h2 className="zakaas-anti-title">TRADITIONAL MAHARASHTRIAN SNACKS</h2>
         <p className="zakaas-anti-tagline">“Timeless recipes. Irresistible flavours.”</p>

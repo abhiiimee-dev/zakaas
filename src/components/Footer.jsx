@@ -1,14 +1,21 @@
 import { Link } from 'react-router-dom';
+import { Diya } from './DiwaliArt';
 
 export function Footer() {
   return (
     <footer className="zakaas-footer">
+      <div className="footer-paithani-border" aria-hidden="true" />
       <div className="footer-main-row">
         <div className="footer-brand-col">
           <Link to="/" aria-label="ZAKAAS Home">
             <img src="/zakaas-logo.png" alt="ZAKAAS" className="footer-logo" />
           </Link>
           <p className="footer-tagline">MAHARASHTRA IN EVERY BITE.</p>
+          <div className="footer-diwali-wish">
+            <span className="footer-diya-mini" aria-hidden="true"><Diya /></span>
+            <span className="gt-deva">॥ शुभ दीपावली ॥</span>
+            <span className="footer-diya-mini" aria-hidden="true"><Diya /></span>
+          </div>
           <div className="footer-coords">
             <small>18.5204° N, 73.8567° E · PUNE & MUMBAI</small>
           </div>
