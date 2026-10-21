@@ -331,9 +331,9 @@ function CustomGiftBoxCard({ isHero = false }) {
     <article className={`art-collection-card theme-gifting ${isHero ? 'is-hero-card' : ''}`} aria-label="Curate custom snack gift box">
       <Link to="/builder" className="card-pack-stage gifting-stage" aria-label="Open Gift Box Builder">
         <div className="gifting-pack-cluster">
-          <img src="/zakaas-chakli.jpg" alt="Chakli" className="gift-thumb-1" />
-          <img src="/zakaas-bhakarwadi.jpg" alt="Bhakarwadi" className="gift-thumb-2" />
-          <img src="/zakaas-shankarpali.jpg" alt="Shankarpada" className="gift-thumb-3" />
+          <img src="/zakaas-chakli.jpg" alt="Chakli" className="gift-thumb-1" loading="lazy" decoding="async" />
+          <img src="/zakaas-bhakarwadi.jpg" alt="Bhakarwadi" className="gift-thumb-2" loading="lazy" decoding="async" />
+          <img src="/zakaas-shankarpali.jpg" alt="Shankarpada" className="gift-thumb-3" loading="lazy" decoding="async" />
         </div>
       </Link>
 

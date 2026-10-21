@@ -8,7 +8,7 @@ export function Footer() {
       <div className="footer-main-row">
         <div className="footer-brand-col">
           <Link to="/" aria-label="ZAKAAS Home">
-            <img src="/zakaas-logo.png" alt="ZAKAAS" className="footer-logo" />
+            <img src="/zakaas-logo.png" alt="ZAKAAS" className="footer-logo" loading="lazy" decoding="async" />
           </Link>
           <p className="footer-tagline">MAHARASHTRA IN EVERY BITE.</p>
           <div className="footer-diwali-wish">

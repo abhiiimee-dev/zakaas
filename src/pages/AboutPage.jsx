@@ -37,7 +37,7 @@ export function AboutPage() {
             </p>
           </div>
           <div className="chapter-image">
-            <img src="/zakaas-home-kitchen.png" alt="Maharashtrian women rolling traditional snacks" />
+            <img src="/zakaas-home-kitchen.png" alt="Maharashtrian women rolling traditional snacks" loading="lazy" decoding="async" />
             <div className="image-caption">HAND-ROLLED SPIRALS &amp; TRADITIONAL MASALAS IN OUR KITCHEN</div>
           </div>
         </div>

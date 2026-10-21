@@ -57,15 +57,15 @@ function ZakaasStandard() {
   ];
   return (
     <section className="zakaas-standard" style={{ backgroundColor: '#ffffff', padding: '56px 24px', borderBottom: '2px solid #1A1815' }}>
-      <div style={{ maxWidth: '1020px', margin: '0 auto' }}>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', color: 'rgba(26,24,21,0.7)', fontWeight: 'bold' }}>03 / THE ZAKAAS STANDARD</span>
-        <h2 style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)', marginTop: '10px', marginBottom: '28px', color: '#1A1815', fontWeight: '800', letterSpacing: '-0.02em' }}>
+      <div className="zakaas-standard-inner" style={{ maxWidth: '1020px', margin: '0 auto' }}>
+        <span className="zakaas-standard-kicker" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', color: 'rgba(26,24,21,0.7)', fontWeight: 'bold' }}>03 / THE ZAKAAS STANDARD</span>
+        <h2 className="zakaas-standard-heading" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)', marginTop: '10px', marginBottom: '28px', color: '#1A1815', fontWeight: '800', letterSpacing: '-0.02em' }}>
           NO SHORTCUTS. <em style={{fontFamily: 'serif', fontStyle: 'italic', fontWeight: 'normal', color: '#1A1815'}}>NO SMALL FEELING.</em>
         </h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: '16px' }}>
+        <div className="zakaas-standard-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: '16px' }}>
           {standards.map((s, i) => (
-            <div key={i} style={{
+            <div key={i} className="zakaas-standard-card" style={{
               backgroundColor: '#fff',
               border: '2px solid #1A1815',
               borderRadius: '10px',
@@ -76,7 +76,7 @@ function ZakaasStandard() {
               flexDirection: 'column',
               alignItems: 'center'
             }}>
-              <div style={{
+              <div className="zakaas-standard-icon" style={{
                 width: '46px',
                 height: '46px',
                 margin: '0 auto 14px auto',
@@ -89,7 +89,7 @@ function ZakaasStandard() {
               }}>
                 {s.icon}
               </div>
-              <h3 style={{ fontSize: '12px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: '#1A1815', margin: 0, letterSpacing: '0.05em' }}>{s.title}</h3>
+              <h3 className="zakaas-standard-title" style={{ fontSize: '12px', fontWeight: '800', fontFamily: 'var(--font-mono)', color: '#1A1815', margin: 0, letterSpacing: '0.05em' }}>{s.title}</h3>
             </div>
           ))}
         </div>
@@ -118,19 +118,19 @@ function GiftTeaser() {
         <figcaption className="gt-deva">फराळ<small>DIWALI FARAL</small></figcaption>
       </figure>
 
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      <div className="gt-content-inner" style={{ position: 'relative', zIndex: 1 }}>
         <p className="gt-greet gt-deva">॥ दिवाळीच्या हार्दिक शुभेच्छा ॥</p>
-        <div style={{ display: 'inline-block', background: 'linear-gradient(to right, #751B15, #D9822B)', color: '#fff', padding: '10px 20px', borderRadius: '4px', fontSize: '13px', fontWeight: 'bold', marginBottom: '32px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', border: '1px solid rgba(255,255,255,0.2)' }}>
+        <div className="gt-promo-badge" style={{ display: 'inline-block', background: 'linear-gradient(to right, #751B15, #D9822B)', color: '#fff', padding: '10px 20px', borderRadius: '4px', fontSize: '13px', fontWeight: 'bold', marginBottom: '32px', boxShadow: '0 4px 12px rgba(0,0,0,0.15)', border: '1px solid rgba(255,255,255,0.2)' }}>
           CELEBRATION SPECIAL: AUTOMATIC {ACTIVE_GIFT_DISCOUNT.percent}% OFF 3 &amp; 6 PACK GIFT BOXES AT CHECKOUT
         </div>
         <h2 id="gift-teaser-title" className="gt-royal-heading">
           <span className="gt-royal-top">Create a Perfect</span>
           <em className="gt-royal-main">Maharashtrian Gift Box</em>
         </h2>
-        <p style={{ fontSize: '18px', maxWidth: '650px', margin: '0 auto 40px auto', color: 'rgba(26, 24, 21, 0.85)', lineHeight: '1.6' }}>
+        <p className="gt-desc" style={{ fontSize: '18px', maxWidth: '650px', margin: '0 auto 40px auto', color: 'rgba(26, 24, 21, 0.85)', lineHeight: '1.6' }}>
           Curate a 3-pack Trio or 6-pack Grand gift box (₹{UNIT_PRICE} per 100g pouch + ₹{GIFT_PACKAGING_PRICE} gift box &amp; card) and enjoy an automatic {ACTIVE_GIFT_DISCOUNT.percent}% bundle discount applied across the entire box at Shopify checkout.
         </p>
-        <Link to="/builder" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', padding: '18px 36px', backgroundColor: '#1A1815', color: '#fff', textDecoration: 'none', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', transition: 'transform 0.2s', boxShadow: '0 4px 0 rgba(0,0,0,0.2)' }}>
+        <Link to="/builder" className="gt-build-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: '12px', padding: '18px 36px', backgroundColor: '#1A1815', color: '#fff', textDecoration: 'none', fontSize: '14px', fontWeight: 'bold', borderRadius: '4px', transition: 'transform 0.2s', boxShadow: '0 4px 0 rgba(0,0,0,0.2)' }}>
           BUILD A BOX <ArrowUpRight size={16} />
         </Link>
         <p className="gt-faral">DIWALI FARAL · 3 OR 6 PACK CURATIONS</p>

@@ -59,11 +59,29 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* Mobile Navigation */
 .mobile-nav { display: none; }
 @media (max-width: 800px) {
-  .site-header { height: 64px; padding: 0 18px; mix-blend-mode: normal; background: var(--charcoal); color: var(--khadi); }
+  .site-header { height: 58px; padding: 0 14px; mix-blend-mode: normal; background: var(--charcoal); color: var(--khadi); }
   .site-header nav, .account-button { display: none; }
-  .header-menu { display: block; color: var(--khadi); }
-  .brand-mark img { width: 78px; height: 50px; }
-  .header-actions { gap: 12px; }
+  .header-menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 6px;
+    color: var(--khadi);
+  }
+  .brand-mark { display: inline-flex; align-items: center; min-height: 40px; }
+  .brand-mark img { width: 72px; height: 45px; }
+  .header-actions { gap: 6px; }
+  .header-actions button {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bag-button { padding: 6px 8px; }
   .mobile-nav {
     display: flex;
     flex-direction: column;
@@ -73,7 +91,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
     z-index: 99;
     background: var(--clay);
     color: var(--khadi);
-    padding: 90px 25px 35px;
+    padding: 76px 20px 28px;
     clip-path: inset(0 0 100% 0);
     transition: clip-path 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -82,14 +100,25 @@ button { font: inherit; color: inherit; cursor: pointer; }
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 28px;
+    font-size: clamp(20px, 5.5vw, 24px);
     font-weight: 800;
-    letter-spacing: -0.05em;
-    padding: 10px 0;
+    letter-spacing: -0.03em;
+    padding: 12px 0;
+    min-height: 48px;
     border-bottom: 1px solid rgba(242, 234, 216, 0.2);
   }
-  .mobile-nav-links i { font: 10px 'DM Mono'; font-style: normal; opacity: 0.8; }
-  .mobile-tagline { font: 11px 'DM Mono'; letter-spacing: 1px; margin: 20px 0 0; }
+  .mobile-nav-links i { font: 11px 'DM Mono'; font-style: normal; opacity: 0.8; }
+  .mobile-nav-support { display: flex; gap: 18px; flex-wrap: wrap; }
+  .mobile-nav-support a {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 8px 4px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .mobile-tagline { font: 11px 'DM Mono'; letter-spacing: 1px; margin: 14px 0 0; }
 }
 
 /* Hero & General Homepage */
@@ -5453,4 +5482,1105 @@ button { font: inherit; color: inherit; cursor: pointer; }
     gap: 24px 16px;
   }
 }
+
+/* ==========================================================================
+   SITE-WIDE MOBILE & TABLET RESPONSIVENESS SYSTEM
+   Compact, editorial, proportional mobile UI across all routes & viewports
+   ========================================================================== */
+
+/* Tablet & Mobile Shared Refinements (<= 900px) */
+@media (max-width: 900px) {
+  .about-chapter,
+  .about-map-story,
+  .about-craft,
+  .about-cta {
+    padding: 56px 5vw;
+  }
+  .city-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .craft-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 28px;
+  }
+  .b2b-solutions,
+  .b2b-form-section {
+    padding: 60px 5vw;
+  }
+  .b2b-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+/* Mobile Experience Overhaul (<= 768px) */
+@media (max-width: 768px) {
+  /* Global horizontal overflow guard & top header offset alignment (58px header) */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  .page-collections,
+  .page-about,
+  .page-faq,
+  .page-contact,
+  .page-policies,
+  .page-cart,
+  .page-builder,
+  .gb {
+    padding-top: 58px !important;
+  }
+
+  /* Subtle fairy lights on mobile so they don't crowd the hero */
+  .dd-wrap {
+    top: 58px !important;
+    height: 40px;
+  }
+  .dd-swags {
+    transform: scale(0.72);
+    transform-origin: top center;
+    opacity: 0.78;
+  }
+
+  /* Global Kicker & Button Touch-Target Refinement */
+  .kicker {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    margin: 0 0 10px;
+  }
+  .hero-button,
+  .light-button {
+    min-height: 44px;
+    padding: 11px 18px;
+    font-size: 12.5px;
+    gap: 8px;
+  }
+
+  /* 01. Home Hero: Split-stage layout so copy never overlaps the pouches */
+  .hero-film {
+    height: auto !important;
+    min-height: 0 !important;
+    background: #17110D;
+    display: flex;
+    flex-direction: column;
+    padding-top: 58px;
+  }
+  .hero-wash {
+    display: none !important;
+  }
+  .hero-content {
+    order: 1;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    max-width: 100% !important;
+    padding: 22px 18px 18px;
+    z-index: 3;
+    background: linear-gradient(180deg, #17110D 0%, #1F1610 100%);
+  }
+  .hero-kicker {
+    font-size: 9.5px !important;
+    letter-spacing: 1.2px !important;
+    margin-bottom: 6px !important;
+    opacity: 0.85;
+  }
+  .hero-content h1 {
+    font-size: clamp(26px, 7.2vw, 33px) !important;
+    line-height: 1.07 !important;
+    letter-spacing: -0.025em !important;
+    margin: 0 !important;
+  }
+  .hero-content h1 span,
+  .hero-content h1 em {
+    display: block !important;
+  }
+  .hero-subline {
+    font-size: 13.5px !important;
+    line-height: 1.46 !important;
+    margin: 8px 0 14px !important;
+    max-width: 36ch !important;
+    opacity: 0.9 !important;
+  }
+  .hero-cta-group {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px !important;
+    width: 100%;
+  }
+  .hero-cta-group .hero-button,
+  .hero-cta-group .hero-button-ghost {
+    width: 100%;
+    justify-content: center;
+    padding: 11px 10px !important;
+    font-size: 11.5px !important;
+    min-height: 44px !important;
+    box-sizing: border-box;
+    gap: 6px !important;
+  }
+  .hero-mono-footer {
+    margin-top: 12px !important;
+    font-size: 10px !important;
+    opacity: 0.78 !important;
+  }
+  .hero-film > img {
+    order: 2;
+    position: relative !important;
+    width: 100% !important;
+    height: 235px !important;
+    object-fit: cover !important;
+    object-position: 82% center !important;
+    display: block;
+    animation: none !important;
+    border-top: 1px solid rgba(246, 239, 226, 0.12);
+  }
+  .hero-meta {
+    order: 3;
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    padding: 9px 18px;
+    background: #120D0A;
+    font-size: 9px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* 02. Home Product Section: Compact header & proportional cards */
+  .zakaas-anti-section {
+    padding: 36px 16px 32px !important;
+  }
+  .zakaas-anti-header {
+    margin-bottom: 12px !important;
+  }
+  .diwali-section-crest {
+    gap: 8px !important;
+    margin-bottom: 6px !important;
+    transform: scale(0.82);
+  }
+  .zakaas-anti-brand-label {
+    font-size: 9.5px !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 4px !important;
+  }
+  .zakaas-anti-title {
+    font-size: clamp(22px, 6vw, 26px) !important;
+    line-height: 1.12 !important;
+    margin-bottom: 6px !important;
+  }
+  .zakaas-anti-tagline {
+    font-size: 13.5px !important;
+    margin-bottom: 8px !important;
+  }
+  .zakaas-anti-link {
+    min-height: 38px;
+    padding: 6px 4px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px !important;
+  }
+  .zakaas-anti-grid {
+    max-width: 350px !important;
+    margin: 28px auto 16px !important;
+    gap: 30px !important;
+    padding: 0 !important;
+  }
+  .anti-pouch-stage {
+    margin-top: -20px !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 12px !important;
+  }
+  .anti-pouch-float-box {
+    width: min(100%, 170px) !important;
+    max-height: 200px !important;
+    aspect-ratio: 4 / 4.5 !important;
+  }
+  .anti-carousel-btn {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .anti-pouch-shadow {
+    height: 8px !important;
+    margin-top: 5px !important;
+  }
+  .anti-card-content {
+    padding: 10px 16px 16px !important;
+  }
+  .anti-product-personality {
+    font-size: 9.5px !important;
+    margin-bottom: 2px !important;
+  }
+  .anti-product-name {
+    font-size: 19px !important;
+    margin-bottom: 4px !important;
+  }
+  .anti-product-summary {
+    font-size: 12.5px !important;
+    line-height: 1.42 !important;
+    margin-bottom: 10px !important;
+  }
+  .anti-price-row {
+    padding-top: 8px !important;
+    margin-bottom: 10px !important;
+  }
+  .anti-current-price {
+    font-size: 18px !important;
+  }
+  .zakaas-anti-footer {
+    margin-top: 20px !important;
+    gap: 6px 10px !important;
+    font-size: 9.5px !important;
+    letter-spacing: 1px !important;
+  }
+
+  /* 03. Zakaas Standard: Clean 2x2 grid on phone */
+  .zakaas-standard {
+    padding: 34px 16px !important;
+  }
+  .zakaas-standard-kicker {
+    font-size: 10px !important;
+  }
+  .zakaas-standard-heading {
+    font-size: clamp(20px, 5.6vw, 24px) !important;
+    margin-top: 6px !important;
+    margin-bottom: 16px !important;
+    line-height: 1.14 !important;
+  }
+  .zakaas-standard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .zakaas-standard-card {
+    padding: 14px 10px !important;
+    border-width: 1.5px !important;
+    border-radius: 8px !important;
+    box-shadow: 3px 3px 0 #1A1815 !important;
+  }
+  .zakaas-standard-icon {
+    width: 36px !important;
+    height: 36px !important;
+    margin-bottom: 8px !important;
+    border-radius: 9px !important;
+  }
+  .zakaas-standard-title {
+    font-size: 10.5px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* 04. Gift Teaser: Compact vertical padding and proportional typography */
+  .gift-teaser {
+    padding: 46px 16px 40px !important;
+  }
+  .gt-toran {
+    height: 32px !important;
+    background-size: 48px 32px, 48px 32px, 48px 14px, 48px 20px, 100% 2px !important;
+    background-position: 0 -8px, 24px -8px, 0 0, 0 0, 0 0 !important;
+  }
+  .gt-greet {
+    font-size: 15px !important;
+    margin-bottom: 8px !important;
+  }
+  .gt-promo-badge {
+    font-size: 10px !important;
+    padding: 7px 12px !important;
+    margin-bottom: 14px !important;
+    line-height: 1.35 !important;
+  }
+  .gt-royal-heading {
+    margin-bottom: 12px !important;
+  }
+  .gt-royal-top {
+    font-size: 20px !important;
+  }
+  .gt-royal-main {
+    font-size: clamp(24px, 6.5vw, 28px) !important;
+    padding-bottom: 10px !important;
+  }
+  .gt-desc {
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 18px !important;
+  }
+  .gt-build-btn {
+    padding: 12px 22px !important;
+    font-size: 12.5px !important;
+    min-height: 44px;
+  }
+  .gt-faral {
+    margin-top: 12px !important;
+    font-size: 9.5px !important;
+    letter-spacing: 1.5px !important;
+  }
+
+  /* 05. Story Film: Beat story-pan.css min-height & prevent letter collision */
+  .story-film {
+    height: 300px !important;
+    min-height: 0 !important;
+    padding: 0 18px !important;
+  }
+  .story-single-copy {
+    left: 18px !important;
+    right: 18px !important;
+    bottom: 24px !important;
+    max-width: none !important;
+  }
+  .story-single-copy .kicker {
+    font-size: 10px !important;
+    margin-bottom: 6px !important;
+  }
+  .story-single-copy h2 {
+    font-size: clamp(26px, 7.2vw, 33px) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.025em !important;
+  }
+  .story-single-copy h2 em {
+    letter-spacing: -0.025em !important;
+  }
+  .story-pullquote {
+    font-size: 13px !important;
+    line-height: 1.42 !important;
+    margin: 8px auto 12px !important;
+    max-width: 32ch !important;
+  }
+
+  /* 06. Reviews Section: Compact header & cards on mobile */
+  .reviews-section {
+    padding: 40px 0 38px !important;
+  }
+  .reviews-header {
+    margin-bottom: 18px !important;
+    gap: 10px !important;
+  }
+  .reviews-deva-pill {
+    font-size: 11.5px !important;
+  }
+  .reviews-heading-top {
+    font-size: 21px !important;
+  }
+  .reviews-heading-em {
+    font-size: 26px !important;
+  }
+  .reviews-header-badge {
+    padding: 8px 12px !important;
+    gap: 8px !important;
+  }
+  .reviews-rating-val {
+    font-size: 12px !important;
+  }
+  .reviews-rating-count {
+    font-size: 9.5px !important;
+  }
+  .review-card.text-only {
+    width: 230px !important;
+    min-height: 185px !important;
+    padding: 14px !important;
+  }
+  .review-card.has-photo {
+    width: 245px !important;
+    min-height: 225px !important;
+  }
+  .review-photo-col {
+    height: 110px !important;
+  }
+  .review-content-col {
+    padding: 12px 14px !important;
+  }
+  .review-card.has-photo .review-quote,
+  .review-card.text-only .review-quote {
+    font-size: 13px !important;
+    line-height: 1.38 !important;
+  }
+
+  /* 07. Community Reels: Compact horizontal swipe row */
+  .community-section {
+    padding: 38px 16px 42px !important;
+    overflow: hidden;
+  }
+  .community-header {
+    margin-bottom: 18px !important;
+    gap: 12px !important;
+  }
+  .community-deva-pill {
+    font-size: 11.5px !important;
+  }
+  .community-heading-top {
+    font-size: 21px !important;
+  }
+  .community-heading-em {
+    font-size: 26px !important;
+  }
+  .community-subline {
+    font-size: 13px !important;
+  }
+  .community-insta-btn {
+    padding: 10px 14px !important;
+    font-size: 11px !important;
+    min-height: 40px;
+  }
+  .community-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    gap: 12px !important;
+    padding-bottom: 8px !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .community-card {
+    flex: 0 0 235px !important;
+    scroll-snap-align: start;
+    box-shadow: 4px 4px 0 var(--charcoal) !important;
+  }
+  .community-card-info {
+    padding: 12px 14px !important;
+  }
+  .community-post-title {
+    font-size: 16px !important;
+    margin-bottom: 4px !important;
+  }
+  .community-post-desc {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* 08. B2B Strip on Home */
+  .b2b-strip-premium {
+    padding: 34px 16px !important;
+  }
+  .b2b-strip-card {
+    padding: 22px 18px !important;
+    gap: 16px !important;
+  }
+  .b2b-strip-left h2 {
+    font-size: clamp(22px, 6vw, 26px) !important;
+    margin: 8px 0 !important;
+  }
+  .b2b-strip-left p {
+    font-size: 13.5px !important;
+    margin-bottom: 16px !important;
+  }
+  .b2b-strip-right {
+    font-size: 1rem !important;
+    gap: 8px 14px !important;
+  }
+
+  /* 09. Collections / Shop Page */
+  .collections-shop-hero {
+    padding: 26px 18px 22px !important;
+  }
+  .shop-hero-inner {
+    gap: 20px !important;
+  }
+  .shop-hero-eyebrow {
+    font-size: 10px !important;
+    margin-bottom: 8px !important;
+  }
+  .shop-hero-copy h1 {
+    font-size: clamp(27px, 7.2vw, 34px) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.025em !important;
+    margin-bottom: 10px !important;
+  }
+  .shop-hero-desc {
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 16px !important;
+  }
+  .shop-hero-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px !important;
+    width: 100%;
+  }
+  .shop-hero-browse-btn,
+  .shop-hero-gift-btn {
+    min-height: 44px !important;
+    padding: 10px 10px !important;
+    font-size: 11px !important;
+    justify-content: center;
+    width: 100%;
+  }
+  .shop-hero-stage {
+    max-width: 290px !important;
+    margin: 0 auto !important;
+  }
+  .hero-stage-pack {
+    max-width: 82px !important;
+  }
+  .collections-toolbar-section {
+    top: 58px !important;
+    padding: 10px 16px !important;
+    overflow: hidden;
+  }
+  .toolbar-container {
+    gap: 8px !important;
+  }
+  .category-tabs {
+    gap: 6px !important;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+  .category-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .category-tab {
+    min-height: 38px !important;
+    padding: 7px 12px !important;
+    font-size: 12px !important;
+    flex-shrink: 0;
+  }
+  .sort-wrap select {
+    min-height: 38px !important;
+    font-size: 12.5px !important;
+  }
+  .collections-grid-wrap {
+    padding: 24px 16px 48px !important;
+    min-height: 0 !important;
+  }
+  .collections-grid {
+    gap: 18px !important;
+  }
+  .card-pack-stage {
+    aspect-ratio: 4 / 3.4 !important;
+    max-height: 225px !important;
+    padding: 12px !important;
+  }
+  .card-pack-img {
+    object-fit: contain !important;
+  }
+  .gifting-pack-cluster {
+    height: 160px !important;
+  }
+  .card-body-content {
+    padding: 16px !important;
+    gap: 14px !important;
+  }
+  .card-product-title {
+    font-size: 20px !important;
+  }
+  .card-inline-price {
+    font-size: 17px !important;
+  }
+  .card-flavor-description {
+    font-size: 13.5px !important;
+    line-height: 1.46 !important;
+  }
+  .card-controls-stack {
+    padding-top: 12px !important;
+    gap: 10px !important;
+  }
+  .pack-selector-pill {
+    min-height: 38px !important;
+  }
+  .card-add-btn,
+  .gifting-launch-btn {
+    min-height: 44px !important;
+    padding: 11px 16px !important;
+    font-size: 12.5px !important;
+  }
+
+  /* 10. About Page: Fix heading clipping, vertical collision & huge 110px paddings */
+  .about-hero {
+    height: auto !important;
+    min-height: 310px !important;
+    padding: 44px 18px 36px !important;
+  }
+  .about-hero-content {
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .about-hero-content h1 {
+    font-size: clamp(26px, 7.2vw, 35px) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.025em !important;
+    overflow-wrap: break-word;
+  }
+  .about-hero-lede {
+    font-size: 14px !important;
+    line-height: 1.52 !important;
+    margin-top: 12px !important;
+  }
+  .about-chapter,
+  .about-map-story,
+  .about-craft,
+  .about-cta {
+    padding: 38px 18px !important;
+  }
+  .chapter-grid {
+    gap: 22px !important;
+  }
+  .chapter-copy h2,
+  .map-story-content h2,
+  .craft-container h2,
+  .about-cta h2 {
+    font-size: clamp(23px, 6.2vw, 29px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.025em !important;
+    margin: 0 0 14px !important;
+  }
+  .chapter-copy p {
+    font-size: 14px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 12px !important;
+  }
+  .chapter-image img {
+    height: 230px !important;
+  }
+  .city-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px 14px !important;
+    margin-top: 20px !important;
+  }
+  .city-pillar {
+    padding-left: 12px !important;
+  }
+  .city-pillar b {
+    font-size: 16px !important;
+    margin-bottom: 4px !important;
+  }
+  .city-pillar p {
+    font-size: 12.5px !important;
+    line-height: 1.45 !important;
+  }
+  .craft-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-top: 20px !important;
+  }
+  .craft-grid article {
+    padding: 18px 16px !important;
+  }
+  .craft-grid article h3 {
+    font-size: 17px !important;
+    margin-bottom: 6px !important;
+    letter-spacing: -0.02em !important;
+  }
+  .craft-grid article p {
+    font-size: 13px !important;
+    line-height: 1.48 !important;
+  }
+  .cta-btn-group {
+    gap: 10px !important;
+  }
+
+  /* 11. B2B / Corporate Page */
+  .b2b-hero {
+    min-height: 0 !important;
+    padding: 78px 18px 36px !important;
+  }
+  .b2b-hero-kicker-row {
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+  .b2b-deva-pill {
+    font-size: 12px !important;
+    padding: 3px 10px !important;
+  }
+  .b2b-title-top {
+    font-size: clamp(22px, 6vw, 28px) !important;
+    line-height: 1.08 !important;
+  }
+  .b2b-title-em {
+    font-size: clamp(27px, 7.2vw, 34px) !important;
+    line-height: 1.06 !important;
+  }
+  .b2b-hero-lede {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin: 12px 0 18px !important;
+  }
+  .b2b-hero-actions {
+    gap: 12px !important;
+  }
+  .b2b-solutions {
+    padding: 38px 18px 34px !important;
+  }
+  .b2b-section-head {
+    margin-bottom: 20px !important;
+  }
+  .b2b-sec-heading span {
+    font-size: clamp(20px, 5.5vw, 25px) !important;
+  }
+  .b2b-sec-heading em {
+    font-size: clamp(24px, 6.4vw, 30px) !important;
+  }
+  .b2b-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+  .b2b-card {
+    padding: 16px 14px !important;
+  }
+  .b2b-card-top {
+    padding-bottom: 8px !important;
+    margin-bottom: 8px !important;
+  }
+  .b2b-card h3 {
+    font-size: 17px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 6px !important;
+  }
+  .b2b-card p {
+    font-size: 12.5px !important;
+    line-height: 1.45 !important;
+  }
+  .b2b-form-section {
+    padding: 38px 18px 44px !important;
+  }
+  .b2b-form-container {
+    gap: 24px !important;
+  }
+  .b2b-quote-heading span {
+    font-size: clamp(22px, 6vw, 27px) !important;
+  }
+  .b2b-quote-heading em {
+    font-size: clamp(25px, 6.8vw, 31px) !important;
+  }
+  .b2b-intro-desc {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 16px !important;
+  }
+  .b2b-perks-list {
+    gap: 10px !important;
+    margin-bottom: 16px !important;
+  }
+  .b2b-perk-item {
+    padding: 11px 12px !important;
+    gap: 10px !important;
+  }
+  .b2b-intro-rangoli-card {
+    padding: 12px 14px !important;
+    gap: 12px !important;
+  }
+  .b2b-mini-rangoli {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .b2b-form.zakaas-form {
+    padding: 20px 16px 24px !important;
+  }
+  .b2b-form-title {
+    font-size: clamp(22px, 6vw, 27px) !important;
+    line-height: 1.1 !important;
+  }
+
+  /* 12. Gift Box Builder (/builder) — Fix 320px overflow & compact steps */
+  .gb-hero {
+    padding: 26px 18px 22px !important;
+  }
+  .gb-hero-inner {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 14px !important;
+  }
+  .gb-hero h1 {
+    font-size: clamp(27px, 7.2vw, 34px) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.025em !important;
+  }
+  .gb-hero-sub {
+    font-size: 13.5px !important;
+    line-height: 1.48 !important;
+    margin-top: 8px !important;
+  }
+  .gb-hero-badge {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    padding: 10px 14px !important;
+    width: 100%;
+  }
+  .gb-hero-diya {
+    width: 34px !important;
+    height: 28px !important;
+    margin-bottom: 0 !important;
+    flex-shrink: 0;
+  }
+  .gb-hero-diya .gt-diya {
+    width: 34px !important;
+  }
+  .gb-hero-badge .gt-deva {
+    font-size: 16px !important;
+  }
+  .gb-main {
+    padding: 18px 14px 44px !important;
+  }
+  .gb-layout {
+    gap: 20px !important;
+  }
+  .gb-panel {
+    padding: 16px 14px !important;
+    gap: 18px !important;
+    overflow: hidden;
+  }
+  .gb-step-section {
+    gap: 18px !important;
+  }
+  .gb-main-heading {
+    font-size: clamp(21px, 5.8vw, 25px) !important;
+  }
+  .gb-product {
+    grid-template-columns: 52px minmax(0, 1fr) auto !important;
+    gap: 10px !important;
+    padding: 10px !important;
+  }
+  .gb-product-img {
+    width: 52px !important;
+  }
+  .gb-product-meta {
+    min-width: 0;
+  }
+  .gb-product-name {
+    font-size: 15px !important;
+  }
+  .gb-stepper {
+    gap: 2px !important;
+    padding: 2px !important;
+    min-height: 38px !important;
+  }
+  .gb-stepper button {
+    width: 32px !important;
+    height: 34px !important;
+    min-width: 32px !important;
+    min-height: 34px !important;
+  }
+  .gb-stepper span {
+    min-width: 20px !important;
+    font-size: 12px !important;
+  }
+  .gb-themes,
+  .gb-names {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .gb-action-area {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 12px !important;
+    padding-top: 16px !important;
+  }
+  .gb-back,
+  .gb-next {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px !important;
+    padding: 12px 18px !important;
+    font-size: 13px !important;
+  }
+  .gb-preview {
+    padding: 16px 14px !important;
+  }
+  .gb-lid-brand {
+    font-size: clamp(22px, 6vw, 26px) !important;
+  }
+
+  /* 13. FAQ, Contact, Policies, Cart Heroes & Containers */
+  .faq-hero,
+  .contact-hero,
+  .policies-hero,
+  .cart-page-hero,
+  .builder-hero {
+    padding: 26px 18px 22px !important;
+  }
+  .faq-hero h1,
+  .contact-hero h1,
+  .policies-hero h1,
+  .cart-page-hero h1,
+  .builder-hero h1 {
+    font-size: clamp(26px, 7.2vw, 34px) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.025em !important;
+  }
+  .faq-intro,
+  .contact-intro,
+  .policies-intro,
+  .cart-page-intro,
+  .builder-intro {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin-top: 10px !important;
+  }
+  .faq-main-container,
+  .contact-container,
+  .policies-content-container,
+  .cart-page-container,
+  .builder-container {
+    padding: 28px 18px 44px !important;
+    gap: 24px !important;
+    min-height: 0 !important;
+  }
+  .faq-category-block {
+    margin-bottom: 24px !important;
+  }
+  .faq-accordion-header {
+    padding: 14px 16px !important;
+    min-height: 48px;
+  }
+  .faq-q-text {
+    font-size: 14px !important;
+    line-height: 1.38 !important;
+  }
+  .faq-accordion-content p {
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+  }
+  .faq-contact-card {
+    padding: 24px 18px !important;
+    margin-top: 28px !important;
+  }
+  .faq-contact-card h3 {
+    font-size: 20px !important;
+  }
+  .contact-form-wrap {
+    padding: 20px 16px !important;
+  }
+  .contact-form-wrap h3 {
+    font-size: 20px !important;
+    margin-bottom: 16px !important;
+  }
+  .info-card {
+    padding: 18px 16px !important;
+  }
+  .contact-quote-card {
+    padding: 20px 18px !important;
+  }
+  .contact-quote-card p {
+    font-size: 18px !important;
+  }
+  .policies-tabs-nav {
+    padding: 10px 16px !important;
+    max-width: 100vw;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .policies-tabs-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .policy-nav-btn {
+    min-height: 38px;
+    padding: 8px 12px !important;
+    flex-shrink: 0;
+  }
+  .policy-block {
+    padding: 20px 16px !important;
+  }
+  .policy-block h2 {
+    font-size: 20px !important;
+    margin-bottom: 12px !important;
+    padding-bottom: 8px !important;
+    letter-spacing: -0.03em !important;
+  }
+  .empty-cart-state {
+    padding: 36px 16px !important;
+  }
+  .empty-bag-icon {
+    width: 48px !important;
+    height: 48px !important;
+    margin-bottom: 14px !important;
+  }
+  .empty-cart-state h2 {
+    font-size: clamp(20px, 5.8vw, 24px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.025em !important;
+  }
+  .empty-cart-state p {
+    font-size: 14px !important;
+    margin-bottom: 20px !important;
+  }
+  .cart-table-head {
+    display: none !important;
+  }
+  .cart-page-item {
+    grid-template-columns: 1fr auto !important;
+    gap: 12px !important;
+    padding: 16px 0 !important;
+  }
+  .cart-item-info img {
+    width: 64px !important;
+    height: 72px !important;
+  }
+  .cart-item-info h3 {
+    font-size: 16px !important;
+  }
+  .cart-item-price-col {
+    grid-column: 2;
+    text-align: right;
+  }
+  .cart-summary-card {
+    padding: 20px 16px !important;
+  }
+  .cart-head,
+  .cart-items,
+  .cart-foot {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  /* 14. Footer: Compact & touch-friendly on mobile */
+  .zakaas-footer {
+    padding: 40px 18px 28px !important;
+    gap: 28px !important;
+  }
+  .footer-main-row {
+    gap: 28px !important;
+  }
+  .footer-logo {
+    width: 112px !important;
+  }
+  .footer-col a {
+    padding: 5px 0;
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer-socials a {
+    padding: 6px 4px;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* Small Phones (<= 360px: 320px–360px viewports) */
+@media (max-width: 360px) {
+  .hero-cta-group,
+  .shop-hero-actions {
+    grid-template-columns: 1fr !important;
+  }
+  .city-pillars,
+  .b2b-grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+  .gb-product {
+    grid-template-columns: 42px minmax(0, 1fr) auto !important;
+    gap: 8px !important;
+    padding: 8px !important;
+  }
+  .gb-product-img {
+    width: 42px !important;
+  }
+  .gb-product-name {
+    font-size: 13.5px !important;
+  }
+  .gb-stepper button {
+    width: 28px !important;
+    height: 30px !important;
+    min-width: 28px !important;
+    min-height: 30px !important;
+  }
+  .gb-stepper span {
+    min-width: 18px !important;
+  }
+}
+
+
 

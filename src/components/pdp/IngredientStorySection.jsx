@@ -319,9 +319,74 @@ export function IngredientStorySection() {
           }
         }
         @media (max-width: 600px) {
+          .zakaas-ingredients-composition {
+            padding: 36px 16px 38px;
+          }
+          .ingredients-header {
+            margin-bottom: 22px;
+          }
+          .ingredients-title {
+            font-size: clamp(22px, 6vw, 26px);
+          }
+          .ingredients-intro {
+            font-size: 13.5px;
+          }
+          .ingredients-cards-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px 10px;
+          }
+          .ingredient-open-card {
+            padding: 14px 10px 12px;
+            box-shadow: 3px 3px 0 var(--charcoal, #1A1815);
+          }
+          .ingredient-card-topbar {
+            width: 26px;
+            height: 26px;
+            font-size: 12px;
+            top: -12px;
+            left: 10px;
+          }
+          .ingredient-open-image-wrap {
+            height: 76px;
+            padding: 6px;
+            margin: 2px 0 8px;
+          }
+          .ingredient-open-img {
+            max-height: 64px;
+          }
+          .ingredient-meta-block {
+            padding-bottom: 7px;
+            margin-bottom: 8px;
+          }
+          .ingredient-role-tag {
+            font-size: 8px;
+            padding: 1px 5px;
+            margin-bottom: 4px;
+          }
+          .ingredient-heading-title {
+            font-size: 15px;
+          }
+          .ingredient-native-label {
+            font-size: 11.5px;
+          }
+          .ingredient-nutritional-pointers {
+            gap: 6px;
+          }
+          .nutritional-pointer-item {
+            gap: 5px;
+          }
+          .pointer-icon {
+            width: 14px;
+            height: 14px;
+          }
+          .pointer-text-group {
+            font-size: 11px;
+            line-height: 1.32;
+          }
+        }
+        @media (max-width: 345px) {
           .ingredients-cards-grid {
             grid-template-columns: 1fr;
-            gap: 20px;
           }
         }
       `}</style>
